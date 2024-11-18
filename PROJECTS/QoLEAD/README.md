@@ -137,5 +137,13 @@ huggingface_embeddings = HuggingFaceBgeEmbeddings(
                                                     model_kwargs=model_kwargs,
                                                     encode_kwargs=encode_kwargs,
 )
-
 ```
+
+### Retrieval System for vector embeddings using FAISS
+
+FAISS [Facebook AI Similarity Search](https://python.langchain.com/docs/integrations/vectorstores/faiss/) developed by Facebook AI Research, is a widely acclaimed open-source library for efficient similarity search and clustering. </br> 
+
+It can handle large-scale vector datasets at high speeds and has a low memory usage.
+Faiss supports both CPU and GPU acceleration, making it [suitable for a wide range of applications](https://shayan-fazeli.medium.com/faiss-a-quick-tutorial-to-efficient-similarity-search-595850e08473), from recommendation systems to image similarity searches.
+
+
