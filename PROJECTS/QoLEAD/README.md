@@ -25,8 +25,11 @@ Add these line to your notebook:
 !pip install -U ipykernel jupyter ipywidgets numpy pandas shutup PyPDF2
 
 # ===> NLP packages needed for LangChain + Huggingface platforms
-!pip install -U sentence_transformers langchain_community fais-cpu 
-```
+!pip install -U transformers sentence_transformers langchain_community fais-cpu 
+!pip install -U torch torchvision torchaudio 
+
+# When GPU available use: [requires Python 3.9 or later](https://pytorch.org/)
+!pip install -U torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
 ### Library Configuration
 List of all imports to make the code work
