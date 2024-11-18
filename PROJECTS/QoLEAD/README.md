@@ -14,30 +14,56 @@ The here presented code is based on the following references
 
 
 ### RAG explained 
-Retrieval-Augmented Generation (RAG) revolutionizes text generation by bridging the gap between factual accuracy and creative language. By dynamically accessing and incorporating relevant information, RAG models can generate text that is not only well-written but also grounded in real-world knowledge.
+Retrieval-Augmented Generation (RAG) revolutionizes text generation by bridging the gap between factual accuracy and creative language. By dynamically accessing and incorporating relevant information, RAG algorithms can generate text that is not only well-written but also grounded in real-world knowledge.
 
 
-# Example headings
+### Library installation
 
-## Sample Section
+Add these line to your notebook:
+```python
+# ===> general Data Science packages 
+!pip install -U ipykernel jupyter ipywidgets numpy pandas shutup PyPDF2
 
-## This'll  be a _Helpful_ Section About the Greek Letter Θ!
-A heading containing characters not allowed in fragments, UTF-8 characters, two consecutive spaces between the first and second words, and formatting.
+# ===> NLP packages needed for LangChain + Huggingface platforms
+!pip install -U sentence_transformers langchain_community fais-cpu 
+```
 
-## This heading is not unique in the file
+### Library Configuration
+List of all imports to make the code work
+```python
+import os
+from urllib.request import urlretrieve
+import numpy as np
+from langchain_community.embeddings import HuggingFaceBgeEmbeddings
+from langchain_community.llms import HuggingFacePipeline
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFDirectoryLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import FAISS
+from langchain.chains import RetrievalQA
+from langchain.prompts import PromptTemplate
+```
 
-TEXT 1
+### Document preparation
+PDF documents must be locally available and split in smaller chunks for a LLM to use them as a knowledge base.
 
-## This heading is not unique in the file
+Documents should be:
 
-TEXT 2
+* large enough to contain enough information to answer a question, and
+* small enough to fit into the LLM prompt: Mistral-7B-v0.1 input tokens limited to 4096 tokens
+* small enough to fit into the embeddings model: BAAI/bge-small-en-v1.5: input tokens limited to 512 tokens (roughly 2000 characters. Note: 1 token ~ 4 characters).
 
-# Links to the example headings above
 
-Link to the sample section: [Link Text](#sample-section).
+```python
+# Load pdf files in the local directory
+loader = PyPDFDirectoryLoader("./us_census/")
 
-Link to the helpful section: [Link Text](#thisll--be-a-helpful-section-about-the-greek-letter-Θ).
+docs_before_split = loader.load()
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size = 700,
+    chunk_overlap  = 50,
+)
+docs_after_split = text_splitter.split_documents(docs_before_split)
 
-Link to the first non-unique section: [Link Text](#this-heading-is-not-unique-in-the-file).
-
-Link to the second non-unique section: [Link Text](#this-heading-is-not-unique-in-the-file-1).
+docs_after_split[0]
+```
