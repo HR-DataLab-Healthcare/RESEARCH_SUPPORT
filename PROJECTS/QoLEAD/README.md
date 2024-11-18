@@ -6,6 +6,7 @@ In collaboration with [CAPRI](https://www.maastrichtuniversity.nl/research/care-
 The here presented code is based on the following references
 * [Retrieval-Augmented Generation (RAG) with open-source Hugging Face LLMs using LangChain](https://medium.com/@jiangan0808/retrieval-augmented-generation-rag-with-open-source-hugging-face-llms-using-langchain-bd618371be9d)
 * [Advanced RAG: Extracting Complex PDFs containing tables & Text Using LlamaParse](https://aksdesai1998.medium.com/advanced-rag-extracting-complex-pdfs-containing-tables-text-using-llamaparse-48b61693da58)
+* [State-of-art retrieval-augmented LLM: bge-large-en-v1.5](https://medium.com/@marketing_novita.ai/state-of-art-retrieval-augmented-llm-bge-large-en-v1-5-4cd5abbcbf0a)
 * [PyPDF](https://api.python.langchain.com/en/latest/document_loaders/langchain_community.document_loaders.pdf.PyPDFLoader.html)
 * [Question Answering (QA) quickstart](https://python.langchain.com/v0.1/docs/use_cases/question_answering/quickstart/)
 * [Vectorstores](https://python.langchain.com/docs/integrations/vectorstores/lancedb/)
@@ -32,8 +33,8 @@ Add these line to your notebook:
 !pip install -U torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
 ### Library Configuration
-List of all imports to make the code work
-```python
+List of all imports needed to make the code work
+
 import os
 from urllib.request import urlretrieve
 import numpy as np
@@ -46,24 +47,44 @@ from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 ```
+</br> 
+
+### Create a map to store and load PDF files locally
+
+```python
+import os
+# Download documents to local directory (here called LAWTON)
+os.makedirs("LAWTON", exist_ok=True)
+
+
+# load all PDFs that are stored in the local-direcory
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFDirectoryLoader
+loader = PyPDFDirectoryLoader("./LAWTON/")
+```
+
 
 ### Document preparation
 PDF documents must be locally available and split in smaller chunks for a LLM to use them as a knowledge base.
 
 Documents should be:
 
-* large enough to contain enough information to answer a question, and
-* small enough to fit into the LLM prompt: Mistral-7B-v0.1 input tokens limited to 4096 tokens
-* small enough to fit into the embeddings model: BAAI/bge-small-en-v1.5: input tokens limited to 512 tokens (roughly 2000 characters. Note: 1 token ~ 4 characters).
+* Large enough to contain enough tokens to answer a question truthfully.
+* Small enough to fit into the LLM prompt: Mistral-7B-v0.1 input tokens limited to 4096 tokens
+* Small enough to fit into the embeddings model: BAAI/bge-large-en-v1.5: input tokens limited to 512 tokens (roughly 2000 characters. Note: 1 token ~ 4 characters). Note however, set truncation=True to increase to the maximum number of input tokens allowed.
 
 
 ```python
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFDirectoryLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
 # Load pdf files in the local directory
-loader = PyPDFDirectoryLoader("./us_census/")
+loader = PyPDFDirectoryLoader("./LAWTON")
 
 docs_before_split = loader.load()
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size = 700,
+    chunk_size = 900,
     chunk_overlap  = 50,
 )
 docs_after_split = text_splitter.split_documents(docs_before_split)
