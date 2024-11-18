@@ -96,9 +96,9 @@ docs_after_split[0]
 ### Text Embeddings with Hugging Face models
 At the time of writing (nov 2024), 213 text embeddings models for English are available on the Massive Text Embedding Benchmark [MTEB](https://huggingface.co/spaces/mteb/leaderboard). See also [2023 paper on MTEB](https://aclanthology.org/2023.eacl-main.148.pdf). Also [Models trained on Dutch vocabulary](https://huggingface.co/GroNLP/gpt2-small-dutch-embeddings) are available.
 
-The **BAAI/bge-lage-en-v1.5** model is the 50th  on MTEB leaderboard with max tokens: 512 tokens, embedding dimensions: 384 and model size: 0.13GB
+The **bge-large-en-v1.5** model is the 44th  on MTEB leaderboard with max tokens equalling 512 tokens when "truncation": is set "True"  (Model Size: 335 Million Parameters; Memory Usage: 1.25 GB, fp32).
 
-To use, you should have the [sentence_transformers](https://api.python.langchain.com/en/latest/embeddings/langchain_community.embeddings.huggingface.HuggingFaceBgeEmbeddings.html#langchain-community-embeddings-huggingface-huggingfacebgeembeddings.) python package installed. To use Nomic, make sure the version of sentence_transformers >= 2.3.0.
+To use, you should have the [sentence_transformers](https://api.python.langchain.com/en/latest/embeddings/langchain_community.embeddings.huggingface.HuggingFaceBgeEmbeddings.html#langchain-community-embeddings-huggingface-huggingfacebgeembeddings.) python package installed. 
 
 
 ```python
