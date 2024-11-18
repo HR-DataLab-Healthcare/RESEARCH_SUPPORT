@@ -75,12 +75,7 @@ Documents should be:
 
 
 ```python
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-
-# Load pdf files in the local directory
-loader = PyPDFDirectoryLoader("./LAWTON")
 
 docs_before_split = loader.load()
 text_splitter = RecursiveCharacterTextSplitter(
