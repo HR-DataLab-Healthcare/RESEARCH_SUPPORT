@@ -96,9 +96,17 @@ docs_after_split[0]
 ### Text Embeddings with Hugging Face models
 At the time of writing (nov 2024), 213 text embeddings models for English are available on the Massive Text Embedding Benchmark [MTEB](https://huggingface.co/spaces/mteb/leaderboard). See also [2023 paper on MTEB](https://aclanthology.org/2023.eacl-main.148.pdf). Also [Models trained on Dutch vocabulary](https://huggingface.co/GroNLP/gpt2-small-dutch-embeddings) are available.
 
-The **bge-large-en-v1.5** model is the 44th  on MTEB leaderboard with max tokens equalling 512 tokens when "truncation": is set "True"  (Model Size: 335 Million Parameters; Memory Usage: 1.25 GB, fp32).
+The **"Alibaba-NLP/gte-large-en-v1.5"** model is the 18th  on MTEB leaderboard. Key characteristics are:
 
-To use, you should have the [sentence_transformers](https://api.python.langchain.com/en/latest/embeddings/langchain_community.embeddings.huggingface.HuggingFaceBgeEmbeddings.html#langchain-community-embeddings-huggingface-huggingfacebgeembeddings.) python package installed. 
+* Language: English
+* Model Size: 434
+* Max Sequence Length: 8192
+* Dimension: 1024
+
+These numbers indicate that the model can handle long pieces of text (up to 8192 tokens) and produces embeddings with 1024 dimensions. This makes it perfect for tasks like text retrieval, question answering, and more. </br> </br>
+The gte-large-en-v1.5 model, developed by the Institute for Intelligent Computing, Alibaba Group, is a powerful tool for natural language processing tasks. It’s a type of Text Embeddings model, which means it’s great at understanding the meaning of text.
+
+To use it locally, the [sentence_transformers](https://api.python.langchain.com/en/latest/embeddings/langchain_community.embeddings.huggingface.HuggingFaceBgeEmbeddings.html#langchain-community-embeddings-huggingface-huggingfacebgeembeddings.) python package needs to be installed. 
 
 
 ```python
@@ -115,10 +123,8 @@ from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 ### EMBEDDING models
 # https://python.langchain.com/docs/integrations/text_embedding/
 
-model_name = "BAAI/bge-large-en-v1.5"
-#model_name = "BAAI/bge-small-en-v1.5"
-#model_name ="jinaai/jina-embeddings-v3"
 
+model_name = "Alibaba-NLP/gte-large-en-v1.5"
 
 model_kwargs = {'device': 'cuda', # use: 'cuda' for GPU use, else use:  'cpu' 
                 'trust_remote_code':True
