@@ -120,9 +120,6 @@ display(torch.cuda.is_available())
 ### ===> takes about 60 seconds to complete the process
 
 from langchain_community.embeddings import HuggingFaceBgeEmbeddings
-### EMBEDDING models
-# https://python.langchain.com/docs/integrations/text_embedding/
-
 
 model_name = "Alibaba-NLP/gte-large-en-v1.5"
 
