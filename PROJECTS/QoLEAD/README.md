@@ -1,9 +1,17 @@
-## RESEARCH_SUPPORT
+## QoLEAD LLMs-based secure and Reliable WORKFLOW
 We zijn een cross-functioneel Agile team. Bestaande uit  datawetenschappers + Tech support. 
 
+In collaboration with [CAPRI](https://www.maastrichtuniversity.nl/research/care-and-public-health-research-institute) we develop and maintain a LLMs-based workflow that allows researchers to process & analyze  text documents reliably and securely.  The code needed to implement the workflow can be downloaded from [Qolead workfow code](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/QoLEAD/code) and is explained below.</br></br>
 
-### Supported Healthcare  Projects
+The here presented code is based on the following references
+* [Retrieval-Augmented Generation (RAG) with open-source Hugging Face LLMs using LangChain](https://medium.com/@jiangan0808/retrieval-augmented-generation-rag-with-open-source-hugging-face-llms-using-langchain-bd618371be9d)
+* [Advanced RAG: Extracting Complex PDFs containing tables & Text Using LlamaParse](https://aksdesai1998.medium.com/advanced-rag-extracting-complex-pdfs-containing-tables-text-using-llamaparse-48b61693da58)
+* [PyPDF](https://api.python.langchain.com/en/latest/document_loaders/langchain_community.document_loaders.pdf.PyPDFLoader.html)
+* [Question Answering (QA) quickstart](https://python.langchain.com/v0.1/docs/use_cases/question_answering/quickstart/)
+* [Vectorstores](https://python.langchain.com/docs/integrations/vectorstores/lancedb/)
+* [Vectorstores](https://python.langchain.com/v0.1/docs/modules/data_connection/vectorstores/)
+* [Chat Openai](https://python.langchain.com/docs/integrations/chat/azure_chat_openai/)
 
-* QoLEAD- Quality of life by using AI in dementia </br>
-[JAIN](https://www.jainprojects.com/qolead/) coalition is the founder of the [QoLEAD](https://qolead.nl/project-details/) program (Quality of life by using AI in dementia), which has been honored within the Knowledge and Innovation Covenant (KIC) for the call ‘Living with Dementia’. </br></br>
- Currently, in collaboration with [CAPRI](https://www.maastrichtuniversity.nl/research/care-and-public-health-research-institute) we develop and maintain a LLMs-based workflow that allows researchers to process & analyze  text documents reliably and securely.  The code needed for implement the workflow can be downloaded from [Qolead workfow code](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/QoLEAD/code).
+
+### RAG explained 
+Retrieval-Augmented Generation (RAG) revolutionizes text generation by bridging the gap between factual accuracy and creative language. By dynamically accessing and incorporating relevant information, RAG models can generate text that is not only well-written but also grounded in real-world knowledge.
