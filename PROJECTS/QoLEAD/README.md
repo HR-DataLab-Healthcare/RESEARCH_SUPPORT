@@ -67,3 +67,48 @@ docs_after_split = text_splitter.split_documents(docs_before_split)
 
 docs_after_split[0]
 ```
+
+
+### Text Embeddings with Hugging Face models
+At the time of writing (nov 2024), 213 text embeddings models for English are available on the Massive Text Embedding Benchmark [MTEB](https://huggingface.co/spaces/mteb/leaderboard). See also [2023 paper on MTEB](https://aclanthology.org/2023.eacl-main.148.pdf). Also [Models trained on Dutch vocabulary](https://huggingface.co/GroNLP/gpt2-small-dutch-embeddings) are available.
+
+The **BAAI/bge-lage-en-v1.5** model is the 50th  on MTEB leaderboard with max tokens: 512 tokens, embedding dimensions: 384 and model size: 0.13GB
+
+To use, you should have the [sentence_transformers](https://api.python.langchain.com/en/latest/embeddings/langchain_community.embeddings.huggingface.HuggingFaceBgeEmbeddings.html#langchain-community-embeddings-huggingface-huggingfacebgeembeddings.) python package installed. To use Nomic, make sure the version of sentence_transformers >= 2.3.0.
+
+
+```python
+import torch
+from torch import cuda, bfloat16
+from transformers import AutoTokenizer, AutoModel
+
+device = f'cuda:{cuda.current_device()}' if cuda.is_available() else 'cpu'
+display(torch.cuda.is_available())
+
+### ===> takes about 60 seconds to complete the process
+
+from langchain_community.embeddings import HuggingFaceBgeEmbeddings
+### EMBEDDING models
+# https://python.langchain.com/docs/integrations/text_embedding/
+
+model_name = "BAAI/bge-large-en-v1.5"
+#model_name = "BAAI/bge-small-en-v1.5"
+#model_name ="jinaai/jina-embeddings-v3"
+
+
+model_kwargs = {'device': 'cuda', # use: 'cuda' for GPU use, else use:  'cpu' 
+                'trust_remote_code':True
+                } 
+
+encode_kwargs = {'normalize_embeddings': True,
+                 'truncate':True # truncate the input to the maximum length the model can handle
+                 }  
+
+### Create the embeddings object
+huggingface_embeddings = HuggingFaceBgeEmbeddings(
+                                                    model_name=model_name,
+                                                    model_kwargs=model_kwargs,
+                                                    encode_kwargs=encode_kwargs,
+)
+
+```
