@@ -26,11 +26,11 @@ micromamba  create --name qolead-env python=3.12 ipykernel jupyter ipywidgets nu
 
 Add these line to your notebook:
 ```python
-# ===> general Data Science packages 
+# ===> general Data Science packages
 !pip install -U ipykernel jupyter ipywidgets numpy pandas PyPDF2
 
 # ===> NLP packages needed for LangChain + Huggingface platforms
-!pip install -U transformers sentence_transformers langchain_community fais-cpu 
+!pip install -U transformers sentence_transformers langchain_community faiss-cpu 
 !pip install -U torch torchvision torchaudio 
 
 # When GPU available use: [requires Python 3.9 or later](https://pytorch.org/)
