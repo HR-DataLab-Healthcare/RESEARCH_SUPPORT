@@ -17,13 +17,17 @@ The here presented code is based on the following references
 ### RAG explained 
 Retrieval-Augmented Generation (RAG) revolutionizes text generation by bridging the gap between factual accuracy and creative language. By dynamically accessing and incorporating relevant information, RAG algorithms can generate text that is not only well-written but also grounded in real-world knowledge.
 
+### Create ENV
+```powershell
+micromamba  create --name qolead-env python=3.12 ipykernel jupyter ipywidgets numpy pandas PyPDF2
+```
 
 ### Library installation
 
 Add these line to your notebook:
 ```python
 # ===> general Data Science packages 
-!pip install -U ipykernel jupyter ipywidgets numpy pandas shutup PyPDF2
+!pip install -U ipykernel jupyter ipywidgets numpy pandas PyPDF2
 
 # ===> NLP packages needed for LangChain + Huggingface platforms
 !pip install -U transformers sentence_transformers langchain_community fais-cpu 
