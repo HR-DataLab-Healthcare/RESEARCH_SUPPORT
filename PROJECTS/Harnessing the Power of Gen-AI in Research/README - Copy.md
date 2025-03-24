@@ -12,7 +12,7 @@ The integration of generative AI in healthcare is rapidly transforming the indus
 
 By reducing technical barriers, these tools allow healthcare specialists to focus on their domain expertise rather than complex coding. This information technolgy-driven shift is already accelerating the development of AI-driven solutions in hospitals and research institutions.
 
-Two notable examples of information technology tools that can build LLM-based workflows are *AutoGen* and *Flowise*. 
+Two notable examples of tools that can build LLM-based workflows are *AutoGen* and *Flowise*. 
 
 * AutoGen, developed by Microsoft, enables the creation of multi-agent systems where AI agents collaborate to solve complex tasks, offering enhanced data analysis, automation of routine processes, and seamless integration with existing cloud computing platforms such as Azure or SURF research Cloud. 
 
