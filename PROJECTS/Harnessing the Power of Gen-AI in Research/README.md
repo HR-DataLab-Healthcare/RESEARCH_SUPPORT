@@ -1,5 +1,22 @@
-## QoLEAD LLMs-based secure and Reliable WORKFLOW
-We zijn een cross-functioneel Agile team. Bestaande uit  datawetenschappers + Tech support. 
+## Harnessing the Power of Gen-AI in Research
+
+
+
+We are a cross-functional Agile team. Consisting of data scientists + Tech support.
+Our team exists of 5 members that itertively define, build, test, and deploy tool-chain workflows for specifiec Data Scince Use Cases.
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
+
 
 In collaboration with [CAPRI](https://www.maastrichtuniversity.nl/research/care-and-public-health-research-institute) we develop and maintain a LLMs-based workflow that allows researchers to process & analyze  text documents reliably and securely.  The code needed to implement the workflow can be downloaded from [Qolead workfow code](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/QoLEAD/code) and is explained below.</br></br>
 
