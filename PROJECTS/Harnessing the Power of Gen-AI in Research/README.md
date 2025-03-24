@@ -14,11 +14,11 @@ By reducing technical barriers, these tools allow healthcare specialists to focu
 
 Two notable examples of tools that can build LLM-based workflows are *AutoGen* and *Flowise*. 
 
-* AutoGen, developed by Microsoft, enables the creation of multi-agent systems where AI agents collaborate to solve complex tasks, offering enhanced data analysis, automation of routine processes, and seamless integration with existing healthcare systems. 
+* AutoGen, developed by Microsoft, enables the creation of multi-agent systems where AI agents collaborate to solve complex tasks, offering enhanced data analysis, automation of routine processes, and seamless integration with existing cloud computing platforms such as Azure or SURF research Cloud. 
 
 * Flowise provides a low-code/no-code visual interface for building LLM applications, featuring a drag-and-drop builder, pre-built components, and integration capabilities with various AI models and third-party platforms. 
 
-Both tools significantly reduce the technical barriers for healthcare specialists and other domain experts, allowing them to harness the power of AI for tasks such as clinical documentation, diagnostic support, and research automation without requiring deep programming expertise. These innovations are paving the way for more accessible and widespread adoption of AI technologies in healthcare settings.
+Both tools significantly reduce the technical barriers for healthcare specialists and other domain experts, allowing them to harness the power of AI for complex tasks such as clinical documentation, diagnostic support, and research automation without requiring deep programming expertise. These innovations are paving the way for more accessible and widespread adoption of AI technologies in healthcare settings.
 
 #
 #
