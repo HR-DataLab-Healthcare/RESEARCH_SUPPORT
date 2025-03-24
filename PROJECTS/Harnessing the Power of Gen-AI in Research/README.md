@@ -35,25 +35,16 @@ Thus endpoints represent a managed infrastructure solution that allows users to 
 
 
 
- 
+ ![alt text](image-1.png)
 
  
  
- , Flowise enables low-code visual building of LLM chains, and Ollama facilitates local LLM running. Security is addressed through api-keys en and   Infrastructure security is bolstered by Aqua CNAPP for cloud-native protection, Vault for secrets management, and Garak for vulnerability scanning. The ecosystem is completed with monitoring solutions like CalypsoAI for API call auditing and integration with CI/CD pipelines using GitOps principles. This comprehensive setup ensures a balance between flexibility and security, addressing the majority of OWASP LLM risks while providing a robust framework for developing and deploying LLM workflows in a controlled, auditable environment.
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
+https://huggingface.co/docs/inference-endpoints/en/index.
 
 
+# Hugging Face Space + Azure OpenAI implementation of RAG using Flowise componeny
 
-In collaboration with [CAPRI](https://www.maastrichtuniversity.nl/research/care-and-public-health-research-institute) we develop and maintain a LLMs-based workflow that allows researchers to process & analyze  text documents reliably and securely.  The code needed to implement the workflow can be downloaded from [Qolead workfow code](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/QoLEAD/code) and is explained below.</br></br>
+We developed and maintain a LLMs-based Hugging-face space workflow that allows researchers to process & analyze  text documents reliably and securely.  The code needed to implement the workflow can be downloaded from [Qolead workfow code](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/QoLEAD/code) and is explained below.</br></br>
 
 The here presented code is based on the following references
 * [Retrieval-Augmented Generation (RAG) with open-source Hugging Face LLMs using LangChain](https://medium.com/@jiangan0808/retrieval-augmented-generation-rag-with-open-source-hugging-face-llms-using-langchain-bd618371be9d)
