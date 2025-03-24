@@ -2,7 +2,7 @@
 
 We are a cross-functional Agile team. Consisting of data scientists + Tech support.
 Our team exists of 5 members that itertively define, build, test, and deploy tool-chain workflows for *Healtcare Data Science Use Cases*.
-Here we present a Gen-AI approach that allows Healthcare specilatists to perfom innovative research with Large Language Models. 
+Here we present a Gen-AI approach that allows Healthcare specilatists to perfom innovative research with custom-made Large Language Models workflows. 
 
 
 
@@ -12,7 +12,7 @@ The integration of generative AI in healthcare is rapidly transforming the indus
 
 By reducing technical barriers, these tools allow healthcare specialists to focus on their domain expertise rather than complex coding. This information technolgy-driven shift is already accelerating the development of AI-driven solutions in hospitals and research institutions.
 
-Two notable examples of information technology tools that can build LLM-based workflows are *AutoGen* and *Flowise*. 
+Two notable examples of information technology tools that can help to build LLM-based workflows are *AutoGen* and *Flowise*. 
 
 * AutoGen, developed by Microsoft, enables the creation of multi-agent systems where AI agents collaborate to solve complex tasks, offering enhanced data analysis, automation of routine processes, and seamless integration with existing cloud computing platforms such as Azure or SURF research Cloud. 
 
@@ -20,6 +20,15 @@ Two notable examples of information technology tools that can build LLM-based wo
 
 Both tools significantly reduce the technical barriers for healthcare specialists and other domain experts, allowing them to harness the power of AI for complex tasks such as clinical documentation, diagnostic support, and research automation without requiring deep programming expertise. These innovations are paving the way for more accessible and widespread adoption of AI technologies in healthcare settings.
 
+
+## How to construct a secure LLM-workflow building Ecosysten
+
+
+To construct a secure, containerized LLM workflow ecosystem, you need a layered approach combining orchestration, security, and specialized LLM tools. Below is a framework based on industry best practices and tools.
+
+![alt text](image.png)
+
+In addition to AutoGen and Flowise, several other tools and frameworks have emerged to facilitate AI development and deployment in healthcare and other domains. Chainlit offers a user interface for building conversational AI applications, while Ollama simplifies the process of running large language models locally. Hugging Face provides a comprehensive ecosystem for natural language processing, including pre-trained models and datasets. LangChain focuses on developing applications powered by language models, offering a range of tools for prompt management and chain creation. Azure's AI services integrate with Microsoft's cloud platform, providing scalable solutions for machine learning and cognitive services. PyTorch and TensorFlow are widely-used open-source machine learning libraries, each with its own strengths in deep learning model development and deployment. These tools, along with AutoGen and Flowise, form a diverse ecosystem that caters to various aspects of AI development, from model creation and training to deployment and interaction. This enables healthcare professionals and researchers to leverage AI capabilities more effectively.
 #
 #
 #
