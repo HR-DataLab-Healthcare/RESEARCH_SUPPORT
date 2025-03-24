@@ -21,14 +21,25 @@ Two notable examples of information technology tools that can help to build LLM-
 Both tools significantly reduce the technical barriers for healthcare specialists and other domain experts, allowing them to harness the power of AI for complex tasks such as clinical documentation, diagnostic support, and research automation without requiring deep programming expertise. These innovations are paving the way for more accessible and widespread adoption of AI technologies in healthcare settings.
 
 
-## How to construct a secure LLM-workflow building Ecosysten
+## How to construct and Deploy a secure LLM-workflow building Ecosysten
 
-
-To construct a secure, containerized LLM workflow ecosystem, you need a layered approach combining orchestration, security, and specialized LLM tools. Below is a framework based on industry best practices and tools.
+To construct a secure, containerized LLM workflow ecosystem, you need a layered approach combining orchestration and specialized LLM toolchains. Below is shown a framework based on industry best practices.
 
 ![alt text](image.png)
 
-In addition to AutoGen and Flowise, several other tools and frameworks have emerged to facilitate AI development and deployment in healthcare and other domains. Chainlit offers a user interface for building conversational AI applications, while Ollama simplifies the process of running large language models locally. Hugging Face provides a comprehensive ecosystem for natural language processing, including pre-trained models and datasets. LangChain focuses on developing applications powered by language models, offering a range of tools for prompt management and chain creation. Azure's AI services integrate with Microsoft's cloud platform, providing scalable solutions for machine learning and cognitive services. PyTorch and TensorFlow are widely-used open-source machine learning libraries, each with its own strengths in deep learning model development and deployment. These tools, along with AutoGen and Flowise, form a diverse ecosystem that caters to various aspects of AI development, from model creation and training to deployment and interaction. This enables healthcare professionals and researchers to leverage AI capabilities more effectively.
+At its core (Warehousing + Compute layers), Docker can provide the containerization foundation, while tools like Flowise or Autogen can be used to orchestrate the entire workflow (Software Architecure level). For open-source LLM deployments in particular, the Hugging Face Transformers platform offers an LLM Repository combined with Inference Endpoints (Deployment level). 
+
+
+When using an Inference Endpoint, the huggingface platform creates a specialized version of the model that's ready to be used, either based on the model you choose or a custom-made package you provide such as Flowise or AutoGen. It is kept separate from the original model files, which is crucial for ensuring security by preventing unauthorized access or tampering, and reliability by maintaining consistent performance without unexpected changes or breaks. 
+Thus endpoints represent a managed infrastructure solution that allows users to deploy and run machine learning models in a secure and scalable environment, allowing users to focus on deploying and using their models without worrying about the technical details of hosting and maintenance 
+
+
+
+ 
+
+ 
+ 
+ , Flowise enables low-code visual building of LLM chains, and Ollama facilitates local LLM running. Security is addressed through api-keys en and   Infrastructure security is bolstered by Aqua CNAPP for cloud-native protection, Vault for secrets management, and Garak for vulnerability scanning. The ecosystem is completed with monitoring solutions like CalypsoAI for API call auditing and integration with CI/CD pipelines using GitOps principles. This comprehensive setup ensures a balance between flexibility and security, addressing the majority of OWASP LLM risks while providing a robust framework for developing and deploying LLM workflows in a controlled, auditable environment.
 #
 #
 #
