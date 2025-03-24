@@ -1,9 +1,11 @@
-## Harnessing the Power of Gen-AI in Research
+## Multi-Agent Collaboration for Complex Tasks
 
 
 
 We are a cross-functional Agile team. Consisting of data scientists + Tech support.
-Our team exists of 5 members that itertively define, build, test, and deploy tool-chain workflows for specifiec Data Scince Use Cases.
+Our team exists of 5 members that itertively define, build, test, and deploy tool-chain workflows for *Healtcare Data Science Use Cases*.
+
+Here we present a Gen-AI approach that allows Healthcare specilatists to perfom innovative research with Large Language Models  
 
 #
 #
