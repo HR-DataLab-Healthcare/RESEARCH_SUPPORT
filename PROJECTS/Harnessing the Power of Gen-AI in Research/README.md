@@ -20,7 +20,7 @@ The integration of generative AI in healthcare is rapidly transforming the indus
 | Development Environments | Replit | • Browser-based IDE<br>• LLM API experimentation<br>• Collaborative coding<br>• Rapid prototyping | Developers, Beginners, AI Enthusiasts |
 
 <br> 
-By reducing technical barriers, rapid prototyping tools like *Flowise* and *Vertex AI* allow healthcare professionals to focus on their domain expertise rather than solving complex coding problems. This paves the way for more accessible and widespread adoption of Geneartive AI in healthcare.
+By reducing technical barriers, rapid prototyping tools like "Flowise"  and "Vertex AI allow healthcare professionals to focus on their domain expertise rather than solving complex coding problems. This paves the way for more accessible and widespread adoption of Geneartive AI in healthcare.
 
 <br> 
 
