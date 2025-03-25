@@ -6,7 +6,7 @@ Here we present a Gen-AI approach that allows Healthcare specilatists to perfom 
 
 
 
-## Rapid-prototyping
+## State-of-the-Art AI developmen aproaches: from code-centric frameworks for building complex multi-agent systems
 
 The integration of generative AI in healthcare is rapidly transforming the industry, enabling medical professionals to leverage advanced AI capabilities without extensive coding expertise. Today, rapid prototyping tools offer intuitive user interfaces along with custom components that allow to solve complex medical tasks, including automated clinical documentation, diagnostic support, and large-scale data analysis.
 
