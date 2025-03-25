@@ -8,11 +8,11 @@ Here we present a Gen-AI approach that allows Healthcare specilatists to perfom 
 
 ## Multi-Agent Collaboration for Complex Tasks
 
-The integration of generative AI in healthcare is rapidly transforming the industry, enabling medical professionals to leverage advanced AI capabilities without extensive programming expertise. These emerging platforms offer intuitive, user interfaces along with custome-made components, facilitating the creation of sophisticated Large Language Models (LLMs) workflows for various applications, including automated clinical documentation, diagnostic support, and large-scale data analysis.
+The integration of generative AI in healthcare is rapidly transforming the industry, enabling medical professionals to leverage advanced AI capabilities without extensive programming expertise. These rapid prototyping tools offer intuitive, user interfaces along with custome-made components, facilitating the creation of sophisticated Large Language Models (LLMs) workflows for various applications, including automated clinical documentation, diagnostic support, and large-scale data analysis.
 
 By reducing technical barriers, these tools allow healthcare specialists to focus on their domain expertise rather than complex coding. This information technolgy-driven shift is already accelerating the development of AI-driven solutions in hospitals and research institutions.
 
-Two notable examples of information technology tools that can help to build LLM-based workflows are *AutoGen* and *Flowise*. 
+Two notable examples of low-code tools that can help to build LLM-based workflows are *AutoGen* and *Flowise*. 
 
 * AutoGen, developed by Microsoft, enables the creation of multi-agent systems where AI agents collaborate to solve complex tasks, offering enhanced data analysis, automation of routine processes, and seamless integration with existing cloud computing platforms such as Azure or SURF research Cloud. 
 
