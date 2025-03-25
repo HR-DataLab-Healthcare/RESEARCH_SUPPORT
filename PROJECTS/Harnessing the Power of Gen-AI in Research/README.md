@@ -15,9 +15,12 @@ The integration of generative AI in healthcare is rapidly transforming the indus
 |------|-------|-----------------|-----------------|
 | Multi-Agent Frameworks | AutoGen, CrewAI, LangGraph | • Complex AI agent systems<br>• Collaborative workflows<br>• Stateful interactions | Developers, AI Engineers |
 | Low-Code/No-Code Solutions | Flowise, n8n | • Visual interfaces<br>• Drag-and-drop functionality<br>• Workflow automation<br>• LLM integration | Beginners, Non-Developers, Rapid Prototypers, System Integrators, Healthcare Professionals (for Flowise) |
-| LLM Application Frameworks | LangChain, LlamaIndex | • External data source integration<br>• Specialized indexing and querying<br>• Versatile LLM application development | Developers, AI Engineers, Data Scientists |
+| LLM Application Frameworks | Hugging Face, Ollama, LangChain, LlamaIndex | • External data source integration<br>• Specialized indexing and querying<br>• Versatile LLM application development | Developers, AI Engineers, Data Scientists |
 | Comprehensive Platforms | Vertex AI | • End-to-end machine learning platform<br>• Model building, deployment, and scaling<br>• Data labeling and training tools | Machine Learning Engineers, Data Scientists, Medical Professionals (for healthcare applications) |
 | Development Environments | Replit | • Browser-based IDE<br>• LLM API experimentation<br>• Collaborative coding<br>• Rapid prototyping | Developers, Beginners, AI Enthusiasts |
+
+<br> 
+The tools as described above represent a spectrum of approaches to AI development, ranging from code-centric frameworks for building complex multi-agent systems (AutoGen, LangChain, LangGraph, CrewAI) to visual, low-code/no-code platforms for rapid prototyping and workflow creation (Flowise, n8n). Specialized libraries like LlamaIndex focus on data augmentation for LLMs, while comprehensive platforms like Vertex AI offer end-to-end machine learning solutions. Replit provides a versatile online IDE, enabling developers to easily build and test AI applications. The diverse range of tools reflects the evolving landscape of AI development, catering to both experienced developers and those seeking accessible, user-friendly solutions.
 
 <br> 
 By reducing technical barriers, rapid prototyping tools like "Flowise"  and "Vertex AI" allow healthcare professionals to focus on their domain expertise rather than solving complex coding problems. This paves the way for more accessible and widespread adoption of Generative AI in healthcare.
