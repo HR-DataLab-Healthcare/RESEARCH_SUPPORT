@@ -11,18 +11,16 @@ Here we present a Gen-AI approach that allows Healthcare specilatists to perfom 
 The integration of generative AI in healthcare is rapidly transforming the industry, enabling medical professionals to leverage advanced AI capabilities without extensive coding expertise. Today, rapid prototyping tools offer intuitive user interfaces along with custom components that facilitate the creation of sophisticated Large Language Models (LLMs) workflows for various applications, including automated clinical documentation, diagnostic support, and large-scale data analysis.
 
 
-![alt text](image-3.png)
+| Type | Tools | Key Features | Target Audience |
+|------|-------|--------------|-----------------|
+| Multi-Agent Frameworks | AutoGen, CrewAI, LangGraph | • Complex AI agent systems<br>• Collaborative workflows<br>• Stateful interactions | Developers, AI Engineers |
+| Low-Code/No-Code Solutions | Flowise, n8n | • Visual interfaces<br>• Drag-and-drop functionality<br>• Workflow automation<br>• LLM integration | Beginners, Non-Developers, Rapid Prototypers, System Integrators, Healthcare Professionals (for Flowise) |
+| LLM Application Frameworks | LangChain, LlamaIndex | • External data source integration<br>• Specialized indexing and querying<br>• Versatile LLM application development | Developers, AI Engineers, Data Scientists |
+| Comprehensive Platforms | Vertex AI | • End-to-end machine learning platform<br>• Model building, deployment, and scaling<br>• Data labeling and training tools | Machine Learning Engineers, Data Scientists, Medical Professionals (for healthcare applications) |
+| Development Environments | Replit | • Browser-based IDE<br>• LLM API experimentation<br>• Collaborative coding<br>• Rapid prototyping | Developers, Beginners, AI Enthusiasts |
 
 
-By reducing technical barriers, these tools allow healthcare specialists to focus on their domain expertise rather than complex coding. This information technolgy-driven shift is already accelerating the development of AI-driven solutions in hospitals and research institutions.
-
-Two notable examples of low-code tools that can help to build LLM-based workflows are *AutoGen* and *Flowise*. 
-
-* AutoGen, developed by Microsoft, enables the creation of multi-agent systems where AI agents collaborate to solve complex tasks, offering enhanced data analysis, automation of routine processes, and seamless integration with existing cloud computing platforms such as Azure or SURF research Cloud. 
-
-* Flowise provides a low-code/no-code visual interface for building LLM applications, featuring a drag-and-drop builder, pre-built components, and integration capabilities with various AI models and third-party platforms. 
-
-Both tools significantly reduce the technical barriers for healthcare specialists and other domain experts, allowing them to harness the power of AI for complex tasks such as clinical documentation, diagnostic support, and research automation without requiring deep programming expertise. These innovations are paving the way for more accessible and widespread adoption of AI technologies in healthcare settings.
+By reducing technical barriers, rapid prototyping tools like flowise and Vertex AI allow healthcare specialists to focus on their domain expertise rather than complex coding. This information technolgy-driven shift is already accelerating the development of AI-driven solutions in hospitals and research institutions. These innovations are paving the way for more accessible and widespread adoption of AI technologies in healthcare settings.
 
 
 ## How to construct and Deploy a secure LLM-workflow building Ecosysten
