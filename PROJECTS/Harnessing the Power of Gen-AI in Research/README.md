@@ -8,7 +8,7 @@ Here we present a Gen-AI approach that allows Healthcare specilatists to perfom 
 
 ## Multi-Agent Collaboration for Complex Tasks
 
-The integration of generative AI in healthcare is rapidly transforming the industry, enabling medical professionals to leverage advanced AI capabilities without extensive coding expertise. Today, rapid prototyping tools offer intuitive user interfaces along with custom components that facilitate the creation of sophisticated multi-agent workflows for to solve complex tasks, including automated clinical documentation, diagnostic support, and large-scale data analysis.
+The integration of generative AI in healthcare is rapidly transforming the industry, enabling medical professionals to leverage advanced AI capabilities without extensive coding expertise. Today, rapid prototyping tools offer intuitive user interfaces along with custom components that facilitate the creation of sophisticated multi-agent workflows for solving complex tasks, including automated clinical documentation, diagnostic support, and large-scale data analysis.
 
 
 | Type | Tools | Key Features | Target Audience |
