@@ -6,7 +6,7 @@ Here we present a Gen-AI approach that allows Healthcare specilatists to perfom 
 
 
 
-## Multi-Agent Collaboration for Complex Tasks
+## Rapid-prototyping
 
 The integration of generative AI in healthcare is rapidly transforming the industry, enabling medical professionals to leverage advanced AI capabilities without extensive coding expertise. Today, rapid prototyping tools offer intuitive user interfaces along with custom components that allow to solve complex medical tasks, including automated clinical documentation, diagnostic support, and large-scale data analysis.
 
@@ -19,9 +19,10 @@ The integration of generative AI in healthcare is rapidly transforming the indus
 | Comprehensive Platforms | Vertex AI | • End-to-end machine learning platform<br>• Model building, deployment, and scaling<br>• Data labeling and training tools | Machine Learning Engineers, Data Scientists, Medical Professionals (for healthcare applications) |
 | Development Environments | Replit | • Browser-based IDE<br>• LLM API experimentation<br>• Collaborative coding<br>• Rapid prototyping | Developers, Beginners, AI Enthusiasts |
 
+<br> 
+By reducing technical barriers, rapid prototyping tools like *Flowise* and *Vertex AI* allow healthcare professionals to focus on their domain expertise rather than solving complex coding problems. This paves the way for more accessible and widespread adoption of Geneartive AI in healthcare.
 
-By reducing technical barriers, rapid prototyping tools like flowise and Vertex AI allow healthcare specialists to focus on their domain expertise rather than complex coding. This information technolgy-driven shift is already accelerating the development of AI-driven solutions in hospitals and research institutions. These innovations are paving the way for more accessible and widespread adoption of AI technologies in healthcare settings.
-
+<br> 
 
 ## How to construct and Deploy a secure LLM-workflow building Ecosysten
 
