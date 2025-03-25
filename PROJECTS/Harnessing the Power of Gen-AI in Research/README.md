@@ -23,7 +23,7 @@ The integration of generative AI in healthcare is rapidly transforming the indus
 The tools as described above represent a spectrum of approaches to AI development, ranging from code-centric frameworks for building complex multi-agent systems (AutoGen, LangChain, LangGraph, CrewAI) to visual, low-code/no-code platforms for rapid prototyping and workflow creation (Flowise, n8n). Specialized libraries like LlamaIndex focus on data augmentation for LLMs, while comprehensive platforms like Vertex AI offer end-to-end machine learning solutions. Replit provides a versatile online IDE, enabling developers to easily build and test AI applications. The diverse range of tools reflects the evolving landscape of AI development, catering to both experienced developers and those seeking accessible, user-friendly solutions.
 
 <br> 
-By reducing technical barriers, rapid prototyping tools like "Flowise"  and "Vertex AI" allow healthcare professionals to focus on their domain expertise rather than solving complex coding problems. This paves the way for more accessible and widespread adoption of Generative AI in healthcare.
+By reducing technical barriers, rapid prototyping tools like "Flowise" allow healthcare professionals to focus on their domain expertise rather than solving complex coding problems. This paves the way for more accessible and widespread adoption of Generative AI in healthcare research.
 
 <br> 
 
