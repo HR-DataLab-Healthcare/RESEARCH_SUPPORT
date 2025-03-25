@@ -11,8 +11,8 @@ Here we present a Gen-AI approach that allows Healthcare specilatists to perfom 
 The integration of generative AI in healthcare is rapidly transforming the industry, enabling medical professionals to leverage advanced AI capabilities without extensive coding expertise. Today, rapid prototyping tools offer intuitive user interfaces along with custom components that allow to solve complex medical tasks, including automated clinical documentation, diagnostic support, and large-scale data analysis.
 
 
-| Type | Tools | Key Features | Target Audience |
-|------|-------|--------------|-----------------|
+| Type | Tools | Key Features    | Target Audience |
+|------|-------|-----------------|-----------------|
 | Multi-Agent Frameworks | AutoGen, CrewAI, LangGraph | • Complex AI agent systems<br>• Collaborative workflows<br>• Stateful interactions | Developers, AI Engineers |
 | Low-Code/No-Code Solutions | Flowise, n8n | • Visual interfaces<br>• Drag-and-drop functionality<br>• Workflow automation<br>• LLM integration | Beginners, Non-Developers, Rapid Prototypers, System Integrators, Healthcare Professionals (for Flowise) |
 | LLM Application Frameworks | LangChain, LlamaIndex | • External data source integration<br>• Specialized indexing and querying<br>• Versatile LLM application development | Developers, AI Engineers, Data Scientists |
@@ -20,7 +20,7 @@ The integration of generative AI in healthcare is rapidly transforming the indus
 | Development Environments | Replit | • Browser-based IDE<br>• LLM API experimentation<br>• Collaborative coding<br>• Rapid prototyping | Developers, Beginners, AI Enthusiasts |
 
 <br> 
-By reducing technical barriers, rapid prototyping tools like "Flowise"  and "Vertex AI" allow healthcare professionals to focus on their domain expertise rather than solving complex coding problems. This paves the way for more accessible and widespread adoption of Geneartive AI in healthcare.
+By reducing technical barriers, rapid prototyping tools like "Flowise"  and "Vertex AI" allow healthcare professionals to focus on their domain expertise rather than solving complex coding problems. This paves the way for more accessible and widespread adoption of Generative AI in healthcare.
 
 <br> 
 
