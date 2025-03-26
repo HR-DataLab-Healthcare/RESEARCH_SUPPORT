@@ -80,18 +80,10 @@ and the goals of the nurse using this system. <br> <br>
 
 ![alt text](image-5.png)
 
-Als a demo video is available: <br> <br>  <video controls src="RAG-vid-test3 1.mp4" title="Title"></video>
+Als a demo video is available: <br> <br>  <video controls src="./VIDEO/RAG-vid-test3 1.mp4" title="Title"></video>
 
 
 
-[![Gen-AI Research Video](assets/thumbnail.png)](https://github.com/HR-DataLab-Healthcare/PROJECTS/Harnessing%20the%20Power%20of%20Gen-AI%20in%20Research/VIDEO/RAG-vid-test3%201.mp4)
-
-
-Markdown
-
-<video src="https://github.com/HR-DataLab-Healthcare/PROJECTS/raw/main/Harnessing%20the%20Power%20of%20Gen-AI%20in%20Research/VIDEO/RAG-vid-test3%201.mp4" controls>
-  Your browser does not support the video tag.
-</video>
 
 
 
