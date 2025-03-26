@@ -84,8 +84,17 @@ Als a demo video is available: <br> <br>  <video controls src="RAG-vid-test3 1.m
 
 
 
-<!-- Alternatively, a more explicit link: -->
-[Watch the video](https://github.com/HR-DataLab-Healthcare/PROJECTS/Harnessing%20the%20Power%20of%20Gen-AI%20in%20Research/VIDEO/RAG-vid-test3%201.mp4)
+[![Gen-AI Research Video](assets/thumbnail.png)](https://github.com/HR-DataLab-Healthcare/PROJECTS/Harnessing%20the%20Power%20of%20Gen-AI%20in%20Research/VIDEO/RAG-vid-test3%201.mp4)
+
+
+Markdown
+
+<video src="https://github.com/HR-DataLab-Healthcare/PROJECTS/raw/main/Harnessing%20the%20Power%20of%20Gen-AI%20in%20Research/VIDEO/RAG-vid-test3%201.mp4" controls>
+  Your browser does not support the video tag.
+</video>
+
+
+
 
 
 Here’s a detailed description of each step shown in the image, emphasizing its relevance to clinical reasoning using NANDA International Taxonomy II:
