@@ -80,7 +80,7 @@ and the goals of the nurse using this system. <br> <br>
 
 ![alt text](image-5.png)
 
-A [demo video](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Harnessing%20the%20Power%20of%20Gen-AI%20in%20Research/VIDEO/RAG-vid-test3%201.mp4) is available <br> <br>  
+A [demo video](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Harnessing%20the%20Power%20of%20Gen-AI%20in%20Research/VIDEO/) is available <br> <br>  
 
 
 Here’s a detailed description of each step shown in the image, emphasizing its relevance to clinical reasoning using NANDA International Taxonomy II:
