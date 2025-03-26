@@ -45,7 +45,7 @@ When using an Inference Endpoint, the huggingface platform creates a specialized
 <br> 
 
 <img align="left" width="450" height="250" src="image-1.png">
- It is kept separate from the original model files, which is crucial for ensuring security by preventing unauthorized access or tampering, and reliability by maintaining consistent performance without unexpected changes or breaks. 
+ It is kept separate from the original LLM, which is crucial for ensuring security by preventing unauthorized access or tampering, and reliability by maintaining consistent performance without unexpected changes or breaks. 
 Thus endpoints represent a managed infrastructure solution that allows users to deploy and run machine learning models in a secure and scalable environment, allowing users to focus on deploying and using their models without worrying about the technical details of hosting and maintenance 
 
 https://huggingface.co/docs/inference-endpoints/en/index.
