@@ -80,6 +80,8 @@ and the goals of the nurse using this system. <br> <br>
 
 ![alt text](image-5.png)
 
+Als a demo video is available: <br> <br>  <video controls src="RAG-vid-test3 1.mp4" title="Title"></video>
+
 Here’s a detailed description of each step shown in the image, emphasizing its relevance to clinical reasoning using NANDA International Taxonomy II:
 
 1. Recruiter Character Test
