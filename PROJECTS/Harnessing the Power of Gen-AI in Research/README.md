@@ -143,7 +143,7 @@ as described below: <br> <br>
 
 ```
 
-The entire workflow is designed to support the experienced nurse in synthesizing key insights from patient interactions efficiently. By utilizing NANDA International's structured approach, the nurse can categorize patient information accurately, leading to better clinical reasoning and patient outcomes. Each step ensures that the nurse has the tools necessary to interpret, analyze, and apply patient data effectively while adhering to established nursing diagnoses standards.
+The entire workflow is designed to support the experienced nurse in synthesizing key insights from patient interactions efficiently. By utilizing NANDA International's structured approach, the nurse can categorize patient information accurately, leading to better clinical reasoning and patient outcomes. Each component ensures that the nurse has the tools necessary to interpret, analyze, and apply patient data effectively while adhering to established nursing diagnoses standards.
 
 #
 #
