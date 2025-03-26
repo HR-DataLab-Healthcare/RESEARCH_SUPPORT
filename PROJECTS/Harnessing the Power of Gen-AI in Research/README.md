@@ -6,192 +6,121 @@ Here we present a Gen-AI approach that allows Healthcare specilatists to perfom 
 
 
 
-## State-of-the-Art AI developmen aproaches: from code-centric frameworks for building complex multi-agent systems
+## Building  user-centered intelligent multi-agent systems for information retrieval 
 
-The integration of generative AI in healthcare is rapidly transforming the industry, enabling medical professionals to leverage advanced AI capabilities without extensive coding expertise. Today, rapid prototyping tools offer intuitive user interfaces along with custom components that allow to solve complex medical tasks, including automated clinical documentation, diagnostic support, and large-scale data analysis.
+The integration of generative AI in healthcare is rapidly transforming the industry, enabling medical professionals to leverage advanced AI capabilities without extensive coding expertise. Today, rapid prototyping tools offer intuitive user interfaces along with custom-made components that allow to solve complex medical tasks, including automated clinical documentation, diagnostic support, and large-scale data analysis.
 
 
 | Type | Tools | Key Features    | Target Audience |
 |------|-------|-----------------|-----------------|
 | Multi-Agent Frameworks | AutoGen, CrewAI, LangGraph | • Complex AI agent systems<br>• Collaborative workflows<br>• Stateful interactions | Developers, AI Engineers |
 | Low-Code/No-Code Solutions | Flowise, n8n | • Visual interfaces<br>• Drag-and-drop functionality<br>• Workflow automation<br>• LLM integration | Beginners, Non-Developers, Rapid Prototypers, System Integrators, Healthcare Professionals (for Flowise) |
-| LLM Application Frameworks | Hugging Face, Ollama, LangChain, LlamaIndex | • External data source integration<br>• Specialized indexing and querying<br>• Versatile LLM application development | Developers, AI Engineers, Data Scientists |
+| LLM Application Frameworks | Hugging Face, Ollama, LangChain, Ollama | • External data source integration<br>• Specialized indexing and querying<br>• Versatile LLM application development | Developers, AI Engineers, Data Scientists |
 | Comprehensive Platforms | Vertex AI | • End-to-end machine learning platform<br>• Model building, deployment, and scaling<br>• Data labeling and training tools | Machine Learning Engineers, Data Scientists, Medical Professionals (for healthcare applications) |
 | Development Environments | Replit | • Browser-based IDE<br>• LLM API experimentation<br>• Collaborative coding<br>• Rapid prototyping | Developers, Beginners, AI Enthusiasts |
 
 <br> 
-The tools as described above represent a spectrum of approaches to AI development, ranging from code-centric frameworks for building complex multi-agent systems (AutoGen, LangChain, LangGraph, CrewAI) to visual, low-code/no-code platforms for rapid prototyping and workflow creation (Flowise, n8n). Specialized libraries like LlamaIndex focus on data augmentation for LLMs, while comprehensive platforms like Vertex AI offer end-to-end machine learning solutions. Replit provides a versatile online IDE, enabling developers to easily build and test AI applications. The diverse range of tools reflects the evolving landscape of AI development, catering to both experienced developers and those seeking accessible, user-friendly solutions.
+The tools as described above represent a spectrum of approaches to AI development, ranging from code-centric frameworks for building complex multi-agent systems to visual, low-code/no-code platforms for rapid prototyping and workflow creation. The diverse range of tools reflects the evolving ecosystem of AI development, catering to both experienced developers and those seeking accessible, user-friendly solutions.
 
 <br> 
 By reducing technical barriers, rapid prototyping tools like "Flowise" allow healthcare professionals to focus on their domain expertise rather than solving complex coding problems. This paves the way for more accessible and widespread adoption of Generative AI in healthcare research.
 
 <br> 
 
-## How to construct and Deploy a secure LLM-workflow building Ecosysten
+## Deploing Gen-AI for secure and reliable information retrieval
 
-To construct a secure, containerized LLM workflow ecosystem, you need a layered approach combining orchestration and specialized LLM toolchains. Below is shown a framework based on industry best practices.
+To construct a secure, containerized LLM workflow ecosystem, you need a layered approach combining orchestration and specialized LLM toolchains along with Retrieval-Augmented Generation. RAG represents a paradigm shift in generative AI by combining retrieval mechanisms with generation capabilities to produce reliable, context-aware outputs across various domains. Below is shown a generic framework based on Data Science best practices.
 
-![alt text](image.png)
 
+<img align="left" width="450" height="250" src="image.png">
 At its core (Warehousing + Compute layers), Docker can provide the containerization foundation, while tools like Flowise or Autogen can be used to orchestrate the entire workflow (Software Architecure level). For open-source LLM deployments in particular, the Hugging Face Transformers platform offers an LLM Repository combined with Inference Endpoints (Deployment level). 
 
+<br> 
+<br> 
+<br> 
+<br> <br>
 
-When using an Inference Endpoint, the huggingface platform creates a specialized version of the model that's ready to be used, either based on the model you choose or a custom-made package you provide such as Flowise or AutoGen. It is kept separate from the original model files, which is crucial for ensuring security by preventing unauthorized access or tampering, and reliability by maintaining consistent performance without unexpected changes or breaks. 
+When using an Inference Endpoint, the huggingface platform creates a specialized version of the model that's ready to be used, either based on the model you choose or a custom-made package you provide such as Flowise or AutoGen. 
+
+<br> 
+
+<img align="left" width="450" height="250" src="image-1.png">
+ It is kept separate from the original model files, which is crucial for ensuring security by preventing unauthorized access or tampering, and reliability by maintaining consistent performance without unexpected changes or breaks. 
 Thus endpoints represent a managed infrastructure solution that allows users to deploy and run machine learning models in a secure and scalable environment, allowing users to focus on deploying and using their models without worrying about the technical details of hosting and maintenance 
 
-
-
- ![alt text](image-1.png)
-
- 
- 
 https://huggingface.co/docs/inference-endpoints/en/index.
 
+<br>
+<br>
+<br>
 
-# Hugging Face Space + Azure OpenAI implementation of RAG using Flowise componeny
+# Clinical Reasoning for Nurse Specialists
 
-We developed and maintain a LLMs-based Hugging-face space workflow that allows researchers to process & analyze  text documents reliably and securely.  The code needed to implement the workflow can be downloaded from [Qolead workfow code](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/QoLEAD/code) and is explained below.</br></br>
+We developed a multi-agent LLMs-based Hugging-face space Chatbot
+that allows researchers to process and analyze text documents reliably and securely. 
 
-The here presented code is based on the following references
+```C
+The information retrieval workflow is designed with 
+a highly experienced and knowledgeable nurse as the end user. 
+
+The nurses task is to provide a sound clinical reasoning report 
+based on an optimized patient-nurse dialogue transcript.
+
+The clinical reasining must be based upon NANDA International (NANDA-I) Taxonomy II
+By utilizing its structured framework of 
+13 domains, 47 classes, and over 267 nursing diagnosis labels, 
+the taxonomy enables systematic organization and interpretation 
+of patient data derived from nurse-patient dialogues. 
+```
+
+<br>
+
+Shown below is part of the output as produced by the implemented information retrieval workflow 
+and the goals of the nurse using this system. <br> <br> 
+
+![alt text](image-5.png)
+
+Here’s a detailed description of each step shown in the image, emphasizing its relevance to clinical reasoning using NANDA International Taxonomy II:
+
+1. Recruiter Character Test
+Purpose: This step likely assesses the initial characteristics needed for the workflow, ensuring it aligns with the needs of a knowledgeable nurse. It may involve evaluating personal attributes, competencies, or other relevant factors.
+Relevance: This ensures that the user engaging with the system is capable of effectively interpreting and acting on the clinical data provided later in the workflow. <br> <br> 
+2. Azure OpenAI Embedding
+Purpose: This step utilizes Azure’s OpenAI capabilities to embed the input data, converting it into a structured format suitable for processing.
+Relevance: For the nurse, transforming dialogue transcripts into embeddings allows for more efficient retrieval of relevant information later in the workflow. It helps in capturing the context and nuances of patient-nurse dialogues for clinical reasoning. <br> <br> 
+3. PDF Tool
+Purpose: The system processes PDF files, particularly the patient-nurse dialogue transcripts. The nurse would upload the transcript here for analysis.
+Relevance: Extracting data from these transcripts is crucial for the nurse's clinical reasoning task. The tool ensures that the relevant patient information is accessible for interpretation according to NANDA-I standards. <br> <br> 
+4. Memory Vector Store
+Purpose: This component stores the embeddings created from previous steps. It functions as a repository for contextual data.
+Relevance: Accessing stored vectors allows the nurse to quickly retrieve relevant patient information and dialogue context needed to make informed clinical reasoning decisions. <br> <br> 
+5. Retriever Tool
+Purpose: This tool retrieves data from the memory vector store based on the stored embeddings.
+Relevance: The nurse can access specific information derived from past dialogues, ensuring that her clinical reasoning is grounded in actual patient interactions, which aligns with the NANDA-I taxonomy’s structured framework for diagnosis. <br> <br> 
+6. Worker
+Purpose: The worker processes the aggregated information to formulate insights or reports.
+Relevance: This step is critical for synthesizing the knowledge extracted from the dialogue transcripts, allowing the nurse to generate a clinically sound report based on the NANDA-I taxonomy, ensuring structured reasoning and diagnosis. <br> <br> 
+7. Supervisor
+Purpose: The supervisor acts as a checkpoint within the workflow, overseeing the process to ensure quality and adherence to established protocols.
+Relevance: This is essential in healthcare to validate clinical reasoning. The supervisor ensures that the nursing diagnoses generated from the dialogue transcripts are accurate and appropriately aligned with the NANDA-I standards. <br> <br> 
+8. SQLite Agent Memory
+Purpose: This component may be used for efficient data management and retrieval during the workflow.
+Relevance: Storing relevant context and information enables quick access and ensures that the clinical reasoning report leverages all necessary data from previous dialogues.
+Overall Workflow <br> <br> 
+
+
+The entire workflow is designed to support the experienced nurse in synthesizing key insights from patient interactions efficiently. By utilizing NANDA International's structured approach, the nurse can categorize patient information accurately, leading to better clinical reasoning and patient outcomes. Each step ensures that the nurse has the tools necessary to interpret, analyze, and apply patient data effectively while adhering to established nursing diagnoses standards.
+
+
+
+The references for the components used to implement the workflow are provided below.</br></br>
+
 * [Retrieval-Augmented Generation (RAG) with open-source Hugging Face LLMs using LangChain](https://medium.com/@jiangan0808/retrieval-augmented-generation-rag-with-open-source-hugging-face-llms-using-langchain-bd618371be9d)
 * [Advanced RAG: Extracting Complex PDFs containing tables & Text Using LlamaParse](https://aksdesai1998.medium.com/advanced-rag-extracting-complex-pdfs-containing-tables-text-using-llamaparse-48b61693da58)
-* [State-of-art retrieval-augmented LLM: bge-large-en-v1.5](https://medium.com/@marketing_novita.ai/state-of-art-retrieval-augmented-llm-bge-large-en-v1-5-4cd5abbcbf0a)
+* [State-of-art retrieval-augmented LLM](https://medium.com/@marketing_novita.ai/state-of-art-retrieval-augmented-llm-bge-large-en-v1-5-4cd5abbcbf0a)
 * [PyPDF](https://api.python.langchain.com/en/latest/document_loaders/langchain_community.document_loaders.pdf.PyPDFLoader.html)
 * [Question Answering (QA) quickstart](https://python.langchain.com/v0.1/docs/use_cases/question_answering/quickstart/)
-* [Vectorstores](https://python.langchain.com/docs/integrations/vectorstores/lancedb/)
 * [Vectorstores](https://python.langchain.com/v0.1/docs/modules/data_connection/vectorstores/)
 * [Chat Openai](https://python.langchain.com/docs/integrations/chat/azure_chat_openai/)
-
-
-### RAG explained 
-Retrieval-Augmented Generation (RAG) revolutionizes text generation by bridging the gap between factual accuracy and creative language. By dynamically accessing and incorporating relevant information, RAG algorithms can generate text that is not only well-written but also grounded in real-world knowledge.
-
-### Create ENV
-```powershell
-micromamba  create --name qolead-env python=3.12 ipykernel jupyter ipywidgets numpy pandas PyPDF2
-```
-
-### Library installation
-
-Add these line to your notebook:
-```python
-# ===> general Data Science packages
-!pip install -U ipykernel jupyter ipywidgets numpy pandas PyPDF2
-
-# ===> NLP packages needed for LangChain + Huggingface platforms
-!pip install -U transformers sentence_transformers langchain_community faiss-cpu 
-!pip install -U torch torchvision torchaudio 
-
-# When GPU available use: [requires Python 3.9 or later](https://pytorch.org/)
-!pip install -U torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-
-### Library Configuration
-List of all imports needed to make the code work
-
-import os
-from urllib.request import urlretrieve
-import numpy as np
-from langchain_community.embeddings import HuggingFaceBgeEmbeddings
-from langchain_community.llms import HuggingFacePipeline
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.document_loaders import PyPDFDirectoryLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import FAISS
-from langchain.chains import RetrievalQA
-from langchain.prompts import PromptTemplate
-```
-</br> 
-
-### Create a map to store and load PDF files locally
-
-```python
-import os
-# Download documents to local directory (here called LAWTON)
-os.makedirs("LAWTON", exist_ok=True)
-
-
-# load all PDFs that are stored in the local-direcory
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.document_loaders import PyPDFDirectoryLoader
-loader = PyPDFDirectoryLoader("./LAWTON/")
-```
-
-
-### Document preparation
-PDF documents must be locally available and split in smaller chunks for a LLM to use them as a knowledge base.
-
-Documents should be:
-
-* Large enough to contain enough tokens to answer a question truthfully.
-* Small enough to fit into the LLM prompt: Mistral-7B-v0.1 input tokens limited to 4096 tokens
-* Small enough to fit into the embeddings model: BAAI/bge-large-en-v1.5: input tokens limited to 512 tokens (roughly 2000 characters. Note: 1 token ~ 4 characters). Note however, set truncation=True to increase to the maximum number of input tokens allowed.
-
-
-```python
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-
-docs_before_split = loader.load()
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size = 900,
-    chunk_overlap  = 50,
-)
-docs_after_split = text_splitter.split_documents(docs_before_split)
-
-docs_after_split[0]
-```
-
-
-### Text Embeddings with Hugging Face models
-At the time of writing (nov 2024), 213 text embeddings models for English are available on the Massive Text Embedding Benchmark [MTEB](https://huggingface.co/spaces/mteb/leaderboard). See also [2023 paper on MTEB](https://aclanthology.org/2023.eacl-main.148.pdf). Also [Models trained on Dutch vocabulary](https://huggingface.co/GroNLP/gpt2-small-dutch-embeddings) are available.
-
-The **"Alibaba-NLP/gte-large-en-v1.5"** model is the 18th  on MTEB leaderboard. Key characteristics are:
-
-* Language: English
-* Model Size: 434
-* Max Sequence Length: 8192
-* Dimension: 1024
-
-These numbers indicate that the model can handle long pieces of text (up to 8192 tokens) and produces embeddings with 1024 dimensions. This makes it perfect for tasks like text retrieval, question answering, and more. </br> </br>
-The gte-large-en-v1.5 model, developed by the Institute for Intelligent Computing, Alibaba Group, is a powerful tool for natural language processing tasks. It’s a type of Text Embeddings model, which means it’s great at understanding the meaning of text.
-
-To use it locally, the [sentence_transformers](https://api.python.langchain.com/en/latest/embeddings/langchain_community.embeddings.huggingface.HuggingFaceBgeEmbeddings.html#langchain-community-embeddings-huggingface-huggingfacebgeembeddings.) python package needs to be installed. 
-
-
-```python
-import torch
-from torch import cuda, bfloat16
-from transformers import AutoTokenizer, AutoModel
-
-device = f'cuda:{cuda.current_device()}' if cuda.is_available() else 'cpu'
-display(torch.cuda.is_available())
-
-### ===> takes about 60 seconds to complete the process
-
-from langchain_community.embeddings import HuggingFaceBgeEmbeddings
-
-model_name = "Alibaba-NLP/gte-large-en-v1.5"
-
-model_kwargs = {'device': 'cuda', # use: 'cuda' for GPU use, else use:  'cpu' 
-                'trust_remote_code':True
-                } 
-
-encode_kwargs = {'normalize_embeddings': True,
-                 'truncate':True # truncate the input to the maximum length the model can handle
-                 }  
-
-### Create the embeddings object
-huggingface_embeddings = HuggingFaceBgeEmbeddings(
-                                                    model_name=model_name,
-                                                    model_kwargs=model_kwargs,
-                                                    encode_kwargs=encode_kwargs,
-)
-```
-
-### Retrieval System for vector embeddings using FAISS
-
-FAISS [Facebook AI Similarity Search](https://python.langchain.com/docs/integrations/vectorstores/faiss/) developed by Facebook AI Research, is a widely acclaimed open-source library for efficient similarity search and clustering. </br> 
-
-It can handle large-scale vector datasets at high speeds and has a low memory usage.
-Faiss supports both CPU and GPU acceleration, making it [suitable for a wide range of applications](https://shayan-fazeli.medium.com/faiss-a-quick-tutorial-to-efficient-similarity-search-595850e08473), from recommendation systems to image similarity searches.
 
 
