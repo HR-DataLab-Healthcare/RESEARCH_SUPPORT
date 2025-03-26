@@ -64,9 +64,9 @@ The information retrieval workflow is designed with
 a highly experienced and knowledgeable nurse as the end user. 
 
 The nurses task is to provide a sound clinical reasoning report 
-based on an optimized patient-nurse dialogue transcript.
+based on an patient-nurse dialogue transcript.
 
-The clinical reasining must be based upon NANDA International (NANDA-I) Taxonomy II
+The clinical reasoning must be based upon NANDA International (NANDA-I) Taxonomy II
 By utilizing its structured framework of 
 13 domains, 47 classes, and over 267 nursing diagnosis labels, 
 the taxonomy enables systematic organization and interpretation 
