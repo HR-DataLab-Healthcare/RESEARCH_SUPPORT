@@ -38,7 +38,7 @@ At its core (Warehousing + Compute layers), Docker can provide the containerizat
 <br> 
 <br> 
 <br> 
-<br> <br>
+<br> <br> <br> 
 
 When using an Inference Endpoint, the huggingface platform creates a specialized version of the model that's ready to be used, either based on the model you choose or a custom-made package you provide such as Flowise or AutoGen. 
 
