@@ -27,7 +27,7 @@ By reducing technical barriers, rapid prototyping tools like "Flowise" allow hea
 
 <br> 
 
-## Deploing Gen-AI for secure and reliable information retrieval
+## Secure and reliable information retrieval with Gen-AI
 
 To construct a secure, containerized Large Language Models  (LLM) workflow ecosystem, you need a layered approach combining orchestration and specialized LLM toolchains along with Retrieval-Augmented Generation. RAG represents a paradigm shift in generative AI by combining retrieval mechanisms with generation capabilities to produce reliable, context-aware outputs across various domains. Below is shown a generic framework based on Data Science best practices.
 
