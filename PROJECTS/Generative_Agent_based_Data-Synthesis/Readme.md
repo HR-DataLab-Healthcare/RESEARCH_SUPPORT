@@ -3,8 +3,13 @@
 # *Privacy, Linguistic & Informational Preserving Synthesis of Clinical Data Through Generative Agents*
 
 
+## Introduction
 
+  This repository is a step-by-step guide to the Python code in the accompanying Jupyter Notebook, supplementing the paper "Privacy, Linguistic & Information Preserving Synthesis of Clinical Data Through Generative Agents" (Frontiers in AI).
 
+  The overall aim is to process real-world PDF clinical notes, pseudonymize them for privacy, generate realistic synthetic notes based on these examples, and evaluate the quality and similarity of the synthetic data using various benchmarks.
+
+  The process is broken down into several stages, leveraging the International Classification of Functioning (ICF) model, KNGF low back pain guidelines, and Azure OpenAI's GPT models for different tasks.
 
 ### User-Friendly Synthetic EHR Generation Workflow
 ```mermaid 
@@ -32,15 +37,7 @@ graph TD
   end
   
   ```  
-  <details>
-  <summary><h2>1. Introduction</h2></summary>
-
-  This repository is a step-by-step guide to the Python code in the accompanying Jupyter Notebook, supplementing the paper "Privacy, Linguistic & Information Preserving Synthesis of Clinical Data Through Generative Agents" (Frontiers in AI).
-
-  The overall aim is to process real-world PDF clinical notes, pseudonymize them for privacy, generate realistic synthetic notes based on these examples, and evaluate the quality and similarity of the synthetic data using various benchmarks.
-
-  The process is broken down into several stages, leveraging the International Classification of Functioning (ICF) model, KNGF low back pain guidelines, and Azure OpenAI's GPT models for different tasks.
-
+  
   **Prerequisites:**
 
   * Python installed with necessary libraries (openai, fitz, sacrebleu, bert\_score, numpy, glob, os, time, json, math, collections). You might need to install these using pip install \-r requirements.txt if you have a requirements file, or individually:  
