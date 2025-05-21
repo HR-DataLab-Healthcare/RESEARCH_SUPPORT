@@ -14,7 +14,7 @@ flowchart LR
 
 graph TD  
 
-  subgraph 
+  subgraph "      "
     A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
     B --> C[Store in Data Warehouse]  
     C --> D[Compute Resources Setup: Cloud & Local]  
