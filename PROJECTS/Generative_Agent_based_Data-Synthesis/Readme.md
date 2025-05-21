@@ -222,25 +222,105 @@ graph TD
   <details>
   <summary><h2><strong>Stage 4: Synthetic Data Generation</strong></h2></summary>
 
-  Using the pseudonymized real data as examples and guided by detailed prompts, this stage generates entirely new, artificial patient records for low back pain.
+Using the pseudonymized real data as examples and guided by detailed prompts, this stage generates entirely new, artificial patient records for low back pain.
 
-  * **Purpose:** To create a dataset of synthetic physiotherapeutic EHR records that are realistic, follow clinical guidelines (KNGF low back pain), adhere to the ICF model, and mimic the structure and style of the real, pseudonymized data, but represent entirely new patient cases.  
-  * **Key Code Components:**  
-    * load\_pseudonymized\_examples(directory\_path): Reads content from the individual pseudo\_\*.md files to be included as examples in the AI generation prompt.  
-    * generate\_synthetic\_record(client, example\_markdown\_content, record\_number): Constructs a detailed user prompt combining the Worker persona, specific instructions (ICF, KNGF, SOEP format, goal formulation, low back pain focus), and the loaded examples. Sends this to Azure OpenAI (using the client object and AZURE\_OPENAI\_DEPLOYMENT\_NAME) to generate a new, unique record.  
-    * save\_synthetic\_record(synthetic\_content, output\_dir, record\_number): Saves the generated synthetic record to an individual file in a new directory.  
-  * **Inputs:**  
-    * Individual pseudonymized Markdown files (pseudo\_\*.md) from the directory specified by PSEUDO\_MD\_DIRECTORY\_PATH (which is set to reuse the original PDF\_DIRECTORY\_PATH in the provided code).  
-    * Azure OpenAI API configuration and initialized client object.  
-    * Detailed AI prompts defining the structure and clinical requirements for synthetic data (Supervisor and Worker prompts conceptually translated into the system and user messages).  
-  * **Outputs:**  
-    * Individual synthetic Markdown files (synthetic\_patient\_\*.md) created in a new output directory specified by SYNTHETIC\_OUTPUT\_DIR.  
-  * **Configuration:**  
-    * PSEUDO\_MD\_DIRECTORY\_PATH: The source directory for pseudonymized example data.  
-    * SYNTHETIC\_OUTPUT\_DIR: The output directory where synthetic data will be saved.  
-    * NUM\_SYNTHETIC\_RECORDS\_TO\_GENERATE: Controls how many synthetic files to create.  
-    * Azure OpenAI endpoint, key, deployment name (AZURE\_OPENAI\_DEPLOYMENT\_NAME for generation), and API version.  
-    * System and user prompts for the generation task. A higher temperature (0.8) is used here to encourage creativity and variation in the generated content.
+### Code Structure and Functionality
+
+1.  **Imports:**
+    *   `os`: For interacting with the operating system, primarily for path manipulation and directory checks.
+    *   `fitz` (PyMuPDF): Although imported, it's not used in the generation logic itself (likely a remnant from previous PDF processing steps).
+    *   `openai.AzureOpenAI`: The core library for interacting with the Azure OpenAI service.
+    *   `glob`: Used for finding files matching a specific pattern (e.g., `pseudo_*.md`).
+
+2.  **Configuration:**
+    *   **Azure Credentials:** [`AZURE_OPENAI_ENDPOINT`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb), [`AZURE_OPENAI_API_KEY`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb), [`AZURE_OPENAI_DEPLOYMENT_NAME`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb), [`API_VERSION`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb) are defined to connect to the Azure service.
+    *   **Directory Paths:**
+        *   [`PSEUDO_MD_DIRECTORY_PATH`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb): Specifies the location of the pseudonymized Markdown files (`pseudo_*.md`) used as examples.
+        *   [`SYNTHETIC_OUTPUT_DIR`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb): Defines the directory where the generated synthetic Markdown files will be saved.
+    *   **Generation Control:**
+        *   [`NUM_SYNTHETIC_RECORDS_TO_GENERATE`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb): Sets the number of synthetic EPDs to create.
+
+3.  **Azure OpenAI Client Initialization:**
+    *   An instance of the [`AzureOpenAI`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb) client is created using the specified credentials and API version. This [`client`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb) object is used for all subsequent API calls.
+
+
+4.  **Helper Functions:**
+    *   [`load_pseudonymized_examples(directory_path)`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb):
+        *   Finds all files matching `pseudo_*.md` in the given `directory_path`.
+        *   Reads the content of each found file.
+        *   Formats the combined content with clear separators (`--- BEGIN VOORBEELD DOSSIER: ... ---`, `--- EINDE VOORBEELD DOSSIER ---`) to help the AI distinguish individual examples.
+        *   Returns a single string containing all example content, or an empty string with a warning if no examples are found.
+    *   [`generate_synthetic_record(client, example_markdown_content, record_number)`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb):
+        *   **Prompts:** This function defines two key prompts to guide the AI, simulating a Supervisor-Worker interaction:
+            *   **`system_prompt` (Supervisor Instructions):** Sets the AI's core **persona** and **overall task**. It instructs the AI to act as an **experienced physiotherapist** generating realistic Dutch EPDs. It establishes the **context** (using anonymized info, expert guidance), **methodology** (applying ICF framework, following KNGF low back pain guidelines), and a crucial **constraint** (produce *only* the requested patient dossier). This acts like a high-level directive from a supervisor.
+            *   **`user_prompt` (Worker Instructions):** Provides the **specific, detailed, step-by-step instructions** for the *current* generation task. This acts like the specific work order given to the worker. It details:
+                *   **Task Focus:** Generate *one* complete, realistic EPD *only* for low back pain (acute, subacute, or chronic). Explicitly forbids other conditions.
+                *   **Required Structure and Content (in order):**
+                    1.  **Anamnese Summary:** Specifies content (history, impact, coping, context), style (narrative, professional Dutch), and requirement (classify pain duration).
+                    2.  **ICF-based Diagnosis:** Lists all mandatory components (impairments, limitations, restrictions, personal/environmental factors, risk factors, reformulated help request).
+                    3.  **Treatment Goals:** Mandates SMART, patient-centered, functional goals (what the patient wants to do), clarifies role of clinical scores (support, not the goal itself), and requires a target date.
+                    4.  **Treatment Plan:** Requires description of interventions and rationale, based on KNGF guidelines and goals.
+                    5.  **SOEP Progress Notes:** Sets quantity (3-8 notes), format (full SOEP per session), and content requirements (show progression/changes, clinical reasoning).
+                    6.  **Language/Style:** Demands professional Dutch, expansion of abbreviations, and realistic tone matching examples.
+                *   **Example Guidance:** Injects the `example_markdown_content` as a reference for structure, style, and detail, while explicitly demanding a **new and unique** case.
+                *   **Output Specification:** Instructs the AI to generate *only* the dossier content, starting with the anamnese and ending precisely with the word "FINISH". Re-emphasizes adherence to *all* instructions.
+        *   **API Call:** Calls the `client.chat.completions.create` method with the system ("Supervisor") and user ("Worker") prompts, the specified model ([`AZURE_OPENAI_DEPLOYMENT_NAME`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb)), a higher `temperature` (0.8) for creativity, and sufficient `max_tokens` (8000).
+        *   **Error Handling:** Catches potential API errors and returns the generated text content or `None` on failure.
+    *   [`save_synthetic_record(synthetic_content, output_dir, record_number)`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb):
+        *   Ensures the specified `output_dir` exists, creating it if necessary.
+        *   Constructs a filename like `synthetic_patient_001.md` (using zero-padding for sorting).
+        *   Writes the provided `synthetic_content` to the file using UTF-8 encoding.
+        *   Handles potential file writing errors.
+
+    *   [`load_pseudonymized_examples(directory_path)`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb):
+        *   Finds all files matching `pseudo_*.md` in the given `directory_path`.
+        *   Reads the content of each found file.
+        *   Formats the combined content with clear separators (`--- BEGIN VOORBEELD DOSSIER: ... ---`, `--- EINDE VOORBEELD DOSSIER ---`) to help the AI distinguish individual examples.
+        *   Returns a single string containing all example content, or an empty string with a warning if no examples are found.
+    *   [`generate_synthetic_record(client, example_markdown_content, record_number)`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb):
+        *   **Prompts:** This function defines two key prompts to guide the AI:
+            *   **`system_prompt`**: Sets the AI's persona and overall task. It instructs the AI to act as a physiotherapist generating realistic Dutch EPDs based on anonymized information and expert guidance, specifically using the ICF framework and KNGF guidelines for low back pain, and to only output the requested dossier.
+            *   **`user_prompt`**: Provides detailed instructions for generating *one* specific EPD. It specifies:
+                *   **Condition Focus:** Generate only for acute, subacute, or chronic low back pain.
+                *   **Required Sections (in order):**
+                    1.  **Anamnese Summary:** Concise narrative of history, impact, coping, context; professional Dutch; specify duration (acute/subacute/chronic).
+                    2.  **ICF-based Diagnosis:** Include impairments, activity limitations, participation restrictions, personal factors, environmental factors, risk/prognostic factors, and a reformulation of the patient's request for help.
+                    3.  **Treatment Goals:** SMART, patient-centered, functional goals (what the patient wants to do again); clinical scores (PSK, NRS, ODI) can be used as criteria but aren't the goal itself; specify target date.
+                    4.  **Treatment Plan:** Describe interventions (manual therapy, exercise, education, etc.) and rationale, based on KNGF guidelines and goals.
+                    5.  **SOEP Progress Notes:** 3 to 8 separate notes (one per session) using the full SOEP format (Subjective, Objective, Evaluation, Plan); show realistic progression/stagnation/adjustments over time.
+                    6.  **Language/Style:** Professional, natural Dutch; expand common abbreviations (PSK, LWK); realistic and varied tone matching examples.
+                *   **Example Usage:** Explicitly includes the loaded `example_markdown_content` as a reference for structure, style, language, and detail, while demanding a completely new and unique case.
+                *   **Output Format:** Generate *only* the dossier content, starting with the anamnese and ending precisely with the word "FINISH". Ensure all requested parts and instructions are followed.
+        *   **API Call:** Calls the `client.chat.completions.create` method with the system and user prompts, the specified model ([`AZURE_OPENAI_DEPLOYMENT_NAME`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb)), a higher `temperature` (0.8) for creativity, and sufficient `max_tokens` (8000) for a potentially long record.
+        *   **Error Handling:** Catches potential API errors and returns the generated text content or `None` on failure.
+    *   [`save_synthetic_record(synthetic_content, output_dir, record_number)`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb):
+        *   Ensures the specified `output_dir` exists, creating it if necessary.
+        *   Constructs a filename like `synthetic_patient_001.md` (using zero-padding for sorting).
+        *   Writes the provided `synthetic_content` to the file using UTF-8 encoding.
+        *   Handles potential file writing errors.
+
+
+5.  **Main Execution Logic (`if __name__ == "__main__":`)**
+    *   Prints a starting message.
+    *   Checks if the [`PSEUDO_MD_DIRECTORY_PATH`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb) exists; exits with an error if not.
+    *   Calls [`load_pseudonymized_examples`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb) to get the example content. Issues a warning if no examples are loaded but continues execution.
+    *   Enters a loop that runs [`NUM_SYNTHETIC_RECORDS_TO_GENERATE`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb) times.
+    *   Inside the loop, for each record:
+        *   Calls [`generate_synthetic_record`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb) to get the synthetic content.
+        *   If generation is successful:
+            *   Performs a basic check to see if the content ends with "FINISH" (as requested in the prompt) and warns if not.
+            *   Calls [`save_synthetic_record`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb) to save the content to a file.
+        *   If generation fails, it skips saving.
+    *   Prints a completion message after the loop finishes.
+
+### Inputs and Outputs
+
+*   **Inputs:**
+    *   Pseudonymized Markdown files (`pseudo_*.md`) located in [`PSEUDO_MD_DIRECTORY_PATH`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb).
+    *   Azure OpenAI service credentials and configuration.
+*   **Outputs:**
+    *   Synthetic Markdown files (`synthetic_patient_*.md`) saved in [`SYNTHETIC_OUTPUT_DIR`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb).
+    *   Progress messages printed to the console during execution.
   </details>
 
 #
