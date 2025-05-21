@@ -116,25 +116,81 @@ graph TD
 
 #
 
-  <details>
-  <summary><h2><strong>Stage 2: Pseudonymization</strong></h2></summary>
+<details>
+  <summary><h2><strong>Stage 2: AI-Powered Pseudonymization of Markdown Content</strong></h2></summary>
 
-  To protect patient privacy and create a safe dataset for further use (like example data for generation), this stage identifies and replaces personal identifiers in the Markdown files.
+  This stage is critical for protecting patient privacy. It processes the Markdown files generated in Stage 1 to identify and replace personal identifiers, specifically names, with realistic-sounding pseudonyms. This creates a safer dataset for subsequent tasks, such as training generative models or sharing example data, while aiming to preserve the original document structure and all other content.
 
-  * **Purpose:** To replace privacy-sensitive information, specifically person names (patients, doctors, staff, etc.), with realistic-sounding pseudonyms while strictly preserving the original Markdown structure and content otherwise, using an AI model.  
-  * **Key Code Components:**  
-    * pseudonymize\_markdown(markdown\_content, pdf\_filename): A function that sends the Markdown text (generated in Stage 1\) to Azure OpenAI (using the client object and AZURE\_OPENAI\_DEPLOYMENT\_NAME) with a strict system prompt instructing the model *only* to replace names and retain Markdown formatting.  
-    * save\_single\_markdown\_file(markdown\_content, output\_path): Reused helper function to save the pseudonymized Markdown content to a new file.  
-  * **Inputs:**  
-    * Individual Markdown files (\*.md) generated in Stage 1\.  
-    * Azure OpenAI API configuration and initialized client object.  
-  * **Outputs:**  
-    * Individual pseudonymized Markdown files (pseudo\_\[original\_filename\].md) created within the PDF\_DIRECTORY\_PATH.  
-  * **Configuration:**  
-    * Azure OpenAI endpoint, key, deployment name (AZURE\_OPENAI\_DEPLOYMENT\_NAME), and API version.  
-    * PSEUDO\_SYSTEM\_MESSAGE\_CONTENT: A crucial system prompt that strictly limits the AI's action to name replacement and markdown preservation.  
-    * PRIVACY\_CATEGORIES (optional list, mainly for context).
-  </details>
+  *   **Purpose:** To automatically replace privacy-sensitive information, focusing on person names (e.g., patients, doctors, staff, family members), with plausible, fabricated pseudonyms. This process is performed using an Azure OpenAI model, with strict instructions to *only* modify names and meticulously preserve the original Markdown formatting and all other textual content.
+
+  *   **Key Code Components:**
+      *   **`pseudonymize_markdown(markdown_content, pdf_filename)`**:
+          *   **Library Used:** `openai` (for Azure OpenAI).
+          *   **Functionality:**
+              *   Accepts the `markdown_content` (from Stage 1) and the original `pdf_filename` (for logging/context) as input.
+              *   Returns `None` if the input `markdown_content` is empty.
+              *   Constructs a `pseudo_user_prompt` that combines the input `markdown_content` with explicit instructions to replace only person names and maintain Markdown integrity.
+              *   **AI Model Invocation (Azure OpenAI):**
+                  *   Uses the same initialized `client` object and `AZURE_OPENAI_DEPLOYMENT_NAME` (e.g., "GPT4.1") as in Stage 1.
+                  *   Sends a chat completion request with:
+                      *   The `PSEUDO_SYSTEM_MESSAGE_CONTENT` (see Configuration below) which strictly defines the AI's role and constraints.
+                      *   The constructed `pseudo_user_prompt` containing the actual Markdown text and task instructions.
+                      *   `temperature` set to `0.2` to encourage deterministic and rule-abiding output.
+                      *   `max_tokens` set to `24000` (or a similar appropriate value) to handle the full document.
+                  *   Extracts the pseudonymized Markdown text from the AI's response.
+                  *   Includes error handling for the API call, printing an error message and returning `None` if pseudonymization fails.
+      *   **`save_single_markdown_file(markdown_content, output_path)`**:
+          *   This is the same helper function reused from Stage 1.
+          *   It saves the pseudonymized Markdown content to a new file, typically prefixed with "pseudo_".
+
+  *   **Inputs:**
+      *   Individual Markdown files (`[original_filename].md`) generated in Stage 1, located in `PDF_DIRECTORY_PATH`.
+      *   Azure OpenAI Service Configuration:
+          *   `AZURE_OPENAI_ENDPOINT`: The endpoint URL for your Azure OpenAI service.
+          *   `AZURE_OPENAI_DEPLOYMENT_NAME`: The specific deployment name of your model (e.g., "GPT4.1").
+          *   `API_VERSION`: The API version for the Azure OpenAI service.
+          *   *(API Key is configured in the environment or client initialization but not detailed here for security).*
+      *   An initialized `AzureOpenAI` client object.
+
+  *   **Outputs:**
+      *   Individual pseudonymized Markdown files.
+      *   Naming convention: `pseudo_[original_filename_without_extension].md` (e.g., `pseudo_report1.md`).
+      *   These files are saved within the same `PDF_DIRECTORY_PATH`.
+
+  *   **Configuration Variables Used:**
+      *   `PDF_DIRECTORY_PATH`: Path to the directory containing the Markdown files.
+      *   Azure OpenAI parameters: `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_DEPLOYMENT_NAME`, `API_VERSION`.
+      *   **`PSEUDO_SYSTEM_MESSAGE_CONTENT`**:
+          ```
+          "Vervang in de aangeleverde tekst uitsluitend de persoonsnamen (zoals patiëntnamen, namen van artsen, medewerkers, familieleden, etc.) door realistische, verzonnen pseudoniemen. Zorg ervoor dat de originele markdown opmaak van de tekst volledig behouden blijft. Geef als antwoord *alleen* de aangepaste tekst terug, zonder enige uitleg of extra commentaar."
+          ```
+          *(Translation: "In the provided text, replace only personal names (such as patient names, names of doctors, employees, family members, etc.) with realistic, fabricated pseudonyms. Ensure that the original markdown formatting of the text is fully preserved. Return *only* the modified text as the answer, without any explanation or extra commentary.")*
+      *   **`PRIVACY_CATEGORIES`** (primarily for contextual understanding and potential future use in prompt refinement, though the current system prompt is highly specific to names):
+          ```python
+          PRIVACY_CATEGORIES = [
+              "Persoonsnamen (patiënt, arts, etc.)",
+              "Adressen",
+              "Telefoonnummers",
+              "E-mailadressen",
+              "Geboortedata",
+              "Burgerservicenummer (BSN) of andere ID-nummers",
+              "Medische klachten, symptomen of diagnoses",
+              "Medische behandelingen, medicatie of procedures",
+              "Verzekeringsgegevens",
+              "Financiële gegevens",
+              "Andere direct identificeerbare persoonlijke informatie"
+          ]
+          ```
+
+  *   **Workflow Summary:**
+      The main script iterates through each Markdown file (produced in Stage 1) found in `PDF_DIRECTORY_PATH`. For each Markdown file:
+      1.  The content of the Markdown file is read.
+      2.  This content is passed to the `pseudonymize_markdown` function.
+      3.  If the AI successfully returns pseudonymized content:
+          *   The `save_single_markdown_file` function saves this modified content to a new file, prefixed with `pseudo_`.
+      4.  Progress and any errors encountered during the API call or file operations are logged to the console.
+      5.  The script also collects all pseudonymized content to later create a combined pseudonymized Markdown file.
+</details>
 
 #
 
