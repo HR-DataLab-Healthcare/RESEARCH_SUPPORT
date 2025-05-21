@@ -195,10 +195,7 @@ graph TD
 
 <img align="right" width="240" height="240" src="./FIGs/OUPUT_1%2B2.png">
 
-
-
 #
-
 
   <details>
   <summary><h2><strong>Stage 3: Combining Markdown Files (Optional)</strong></h2></summary>
