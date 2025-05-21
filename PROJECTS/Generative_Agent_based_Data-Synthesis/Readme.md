@@ -9,7 +9,7 @@
 
   The overall aim is to process real-world PDF clinical notes, pseudonymize them for privacy, generate realistic synthetic notes based on these examples, and evaluate the quality and similarity of the synthetic data using various benchmarks.
 
-  The process is broken down into several stages, leveraging the International Classification of Functioning (ICF) model, KNGF low back pain guidelines, and Azure OpenAI's GPT models for different tasks.
+  The process is broken down into several stages, as shown in the flow diagram below.
 
 ### User-Friendly Synthetic EHR Generation Workflow
 ```mermaid 
@@ -37,15 +37,7 @@ graph TD
   end
   
   ```  
-  
-  **Prerequisites:**
-
-  * Python installed with necessary libraries (openai, fitz, sacrebleu, bert\_score, numpy, glob, os, time, json, math, collections). You might need to install these using pip install \-r requirements.txt if you have a requirements file, or individually:  
-    pip install openai PyMuPDF sacrebleu bert-score numpy
-
-  * Access to an Azure OpenAI endpoint with deployment(s) for a suitable model (e.g., gpt-4 for conversion, pseudonymization, generation, and qualitative comparison).  
-  * Your Azure OpenAI configuration details (AZURE\_OPENAI\_ENDPOINT, AZURE\_OPENAI\_API\_KEY, AZURE\_OPENAI\_DEPLOYMENT\_NAME, API\_VERSION) set up correctly (e.g., as environment variables or defined at the beginning of your notebook/script).  
-  * Original PDF files located in the specified input directory (PDF\_DIRECTORY\_PATH).
+#
   </details>
 
   <details>
@@ -69,6 +61,8 @@ graph TD
     * The convert\_text\_to\_markdown function uses specific system and user prompts to guide the AI's formatting task.
   </details>
 
+#
+
   <details>
   <summary><h2><strong>Stage 2: Pseudonymization</strong></h2></summary>
 
@@ -89,6 +83,9 @@ graph TD
     * PRIVACY\_CATEGORIES (optional list, mainly for context).
   </details>
 
+#
+
+
   <details>
   <summary><h2><strong>Stage 3: Combining Markdown Files (Optional)</strong></h2></summary>
 
@@ -107,6 +104,9 @@ graph TD
 
   *Note: The main execution block in the initial script handles the looping through files, calling the extraction/conversion/pseudonymization functions, appending content to lists (all\_markdown\_content, all\_pseudonymized\_content), and finally joining and saving the combined content.*
   </details>
+
+#
+
 
   <details>
   <summary><h2><strong>Stage 4: Synthetic Data Generation</strong></h2></summary>
@@ -131,6 +131,9 @@ graph TD
     * Azure OpenAI endpoint, key, deployment name (AZURE\_OPENAI\_DEPLOYMENT\_NAME for generation), and API version.  
     * System and user prompts for the generation task. A higher temperature (0.8) is used here to encourage creativity and variation in the generated content.
   </details>
+
+#
+
 
   <details>
   <summary><h2><strong>Stage 5: Synthetic Data Evaluation</strong></h2></summary>
@@ -172,6 +175,9 @@ graph TD
 
   This guide provides a structured overview of the code's functionality across the different stages of processing, generating, and evaluating the physiotherapeutic EHR data. Refer to the code cells in the notebook for the specific implementation details of each function and the main execution flow.
   </details>
+
+#
+
 
 
 </span>
