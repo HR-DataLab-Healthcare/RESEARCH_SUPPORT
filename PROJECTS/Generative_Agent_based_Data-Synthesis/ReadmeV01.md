@@ -42,75 +42,23 @@ graph TD
 
   <details>
   <summary><h2><strong>Stage 1: PDF Text Extraction and Markdown Conversion</strong></h2></summary>
-    This initial stage is crucial for transforming raw PDF documents into a structured Markdown format. This conversion makes the textual content more amenable to subsequent processing, such as pseudonymization and analysis. The process leverages an AI model for intelligent structuring of the extracted text.
 
-    **Purpose:** To systematically extract all readable text content from a collection of PDF files and then convert this raw text into well-structured Markdown. The conversion aims to preserve or infer document elements like headings, lists, and paragraphs, utilizing the capabilities of an Azure OpenAI GPT-4.1 model.
+  This initial stage focuses on converting the raw PDF documents into a structured text format (Markdown) that is easier to process in subsequent steps.
 
-    **Key Code Components:**
-
-    1.  **`extract_text_from_pdf(pdf_path)`**:
-        *   **Library Used:** `PyMuPDF (fitz)`
-        *   **Functionality:**
-            *   Opens a PDF file specified by `pdf_path`.
-            *   Iterates through each page of the PDF.
-            *   Extracts plain text from each page using `page.get_text("text")`.
-            *   Concatenates the text from all pages, adding a double newline (`\n\n`) as a separator between page contents.
-            *   Includes basic error handling to catch and report issues during PDF reading, returning `None` if an error occurs.
-
-    2.  **`convert_text_to_markdown(text_content, pdf_filename)`**:
-        *   **Library Used:** `openai` (for Azure OpenAI)
-        *   **Functionality:**
-            *   Takes the raw `text_content` (extracted from a PDF) and the original `pdf_filename` (for context in prompts) as input.
-            *   If `text_content` is empty, it returns `None`.
-            *   Constructs a request to the Azure OpenAI API using the initialized `client` object.
-            *   **AI Model Invocation:**
-                *   Uses the deployment specified by `AZURE_OPENAI_DEPLOYMENT_NAME` (e.g., "GPT4.1").
-                *   Sends a chat completion request with:
-                    *   A `system_prompt` instructing the AI to act as an assistant specialized in converting raw text to well-structured Markdown, emphasizing retention of meaning, structure, and technical details without adding conversational fluff.
-                    *   A `user_prompt` that includes the `text_content` and `pdf_filename`, asking the AI to convert the text to Markdown, paying attention to potential structural elements (headings, lists, paragraphs) and to output *only* the Markdown content.
-                    *   `temperature` is set to `0.2` for more deterministic and factual output.
-                    *   `max_tokens` is set to `24000` to accommodate potentially large documents.
-            *   Extracts the AI-generated Markdown from the API response.
-            *   Includes error handling for the API call, printing an error message and returning `None` if the conversion fails.
-
-    3.  **`save_single_markdown_file(markdown_content, output_path)`**:
-        *   **Library Used:** `os` (for path manipulation, though file I/O is standard Python)
-        *   **Functionality:**
-            *   A utility function that takes the generated `markdown_content` string and an `output_path`.
-            *   Writes the `markdown_content` to the specified `output_path` using UTF-8 encoding.
-            *   Includes basic error handling for file writing operations.
-
-    **Inputs:**
-
-    *   A collection of original PDF files located in the directory specified by the `PDF_DIRECTORY_PATH` variable.
-    *   Azure OpenAI Service Configuration:
-        *   `AZURE_OPENAI_ENDPOINT`: The endpoint URL for your Azure OpenAI service.
-        *   `AZURE_OPENAI_API_KEY`: Your Azure OpenAI API key (Note: This is a sensitive credential and should be managed securely, not hardcoded directly for production or shared repositories).
-        *   `AZURE_OPENAI_DEPLOYMENT_NAME`: The specific deployment name of your model in Azure OpenAI Studio (e.g., "GPT4.1").
-        *   `API_VERSION`: The API version for the Azure OpenAI service (e.g., "2024-12-01-preview").
-    *   An initialized `AzureOpenAI` client object, configured with the above credentials.
-
-    **Outputs:**
-
-    *   Individual Markdown files, where each file corresponds to an input PDF.
-    *   These Markdown files are named `[original_filename_without_extension].md` (e.g., `report1.pdf` becomes `report1.md`).
-    *   The output Markdown files are saved directly within the `PDF_DIRECTORY_PATH`.
-
-    **Configuration Variables Used:**
-
-    *   `PDF_DIRECTORY_PATH`: String specifying the absolute or relative path to the directory containing the input PDF files.
-    *   `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_DEPLOYMENT_NAME`, `API_VERSION`: As described under "Inputs".
-    *   Prompts within `convert_text_to_markdown`:
-        *   `system_prompt`: Defines the AI's role and general output requirements.
-        *   `user_prompt`: Provides the specific text and instructions for the conversion task.
-
-    **Workflow Summary:**
-
-    The main execution block iterates through each PDF file found in `PDF_DIRECTORY_PATH`. For each PDF:
-    1.  Text is extracted using `extract_text_from_pdf`.
-    2.  If text extraction is successful, the text is passed to `convert_text_to_markdown`.
-    3.  If Markdown conversion is successful, the resulting Markdown content is saved as an individual `.md` file using `save_single_markdown_file`.
-    4.  Progress and any errors are logged to the console.
+  * **Purpose:** To extract readable text content from PDF files and convert it into a structured Markdown format, preserving headings, lists, and paragraphs where possible, using an AI model.  
+  * **Key Code Components:**  
+    * extract\_text\_from\_pdf(pdf\_path): A function that reads text content from each page of a given PDF file using the PyMuPDF library (fitz).  
+    * convert\_text\_to\_markdown(text\_content, pdf\_filename): A function that sends the extracted raw text to Azure OpenAI (using the client object and the specified AZURE\_OPENAI\_DEPLOYMENT\_NAME) with a prompt instructing the model to format the text as Markdown.    
+    * save\_single\_markdown\_file(markdown\_content, output\_path): A helper function to save the resulting Markdown content string to an individual file.  
+  * **Inputs:**  
+    * Original PDF files from the directory specified by PDF\_DIRECTORY\_PATH.  
+    * Azure OpenAI API configuration and initialized client object.  
+  * **Outputs:**  
+    * Individual Markdown files (\[original\_filename\].md) created within the PDF\_DIRECTORY\_PATH.  
+  * **Configuration:**  
+    * PDF\_DIRECTORY\_PATH: Specifies the file path where the input PDFs are located.  
+    * Azure OpenAI endpoint, key, deployment name (using AZURE\_OPENAI\_DEPLOYMENT\_NAME for the Markdown conversion task), and API version.  
+    * The convert\_text\_to\_markdown function uses specific system and user prompts to guide the AI's formatting task.
   </details>
 
 #
@@ -233,8 +181,6 @@ graph TD
 **REFERENCES**
 
 #
-
-## Stage 1: PDF Text Extraction and AI-Powered Markdown Conversion
 
 
 </span>
