@@ -293,7 +293,7 @@ graph TD
 
 #
 
-## Stage 1: PDF Text Extraction and AI-Powered Markdown Conversion
+
 
 
 </span>
