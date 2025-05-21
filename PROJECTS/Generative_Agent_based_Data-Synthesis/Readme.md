@@ -5,10 +5,11 @@
 
 
 ```mermaid 
-
 flowchart LR
     id1(User-Friendly Synthetic EHR Generation Workflow)
-    
+```   
+  
+```mermaid 
 graph TD  
   subgraph "      "
     A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
