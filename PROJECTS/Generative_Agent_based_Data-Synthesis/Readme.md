@@ -193,7 +193,9 @@ graph TD
 </details>
 
 
-<img align="right" width="240" height="240" src=".\FIGs\OUTPUT_1+2.png">
+<img align="right" width="240" height="240" src="./FIGs/OUPUT_1%2B2.png">
+
+
 
 #
 
