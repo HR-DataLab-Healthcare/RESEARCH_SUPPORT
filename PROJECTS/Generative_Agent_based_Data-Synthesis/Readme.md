@@ -6,8 +6,8 @@
 
 graph TD  
 
-  subgraph User-Friendly Synthetic EHR Generation Workflow </br>
-
+  subgraph User-Friendly Synthetic EHR Generation Workflow
+  %%
     A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
     B --> C[Store in Data Warehouse]  
     C --> D[Compute Resources Setup: Cloud & Local]  
