@@ -2,61 +2,32 @@
 
 # *Privacy, Linguistic & Informational Preserving Synthesis of Clinical Data Through Generative Agents*
 
+  ```mermaid 
 
+graph TD  
 
-
-
-```mermaid
-flowchart LR
-    id1(Keten van 3 'gedachten')
-```
-
-```mermaid
-
-flowchart TD
-   
-
-    prompt --> information01
-    prompt --> information02
-    prompt --> information03
-   information01 -->integration
-   information02 -->integration
-   information03 -->integration
-   integration --> external_knowledge
-   external_knowledge --> answer
-   internal_knowledge --> answer
-   internal_knowledge --> external_knowledge
-   external_knowledge --> internal_knowledge
-```
-
-
-
-
-graph TD
-
-subgraph User-Friendly Synthetic EHR Generation Workflow  
-A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
-B --> C[Store in Data Warehouse]  
-C --> D[Compute Resources Setup: Cloud & Local]  
-D --> E[Toolchain Setup: Docker, Flowise, Hugging Face Spaces]  
-E --> F[Multi-Agent Workflow Orchestration]  
-F --> G[Supervisor Agent]  
-F --> H[Worker Agent]  
-G --> I[Prompt Engineering: Clinical Guidelines & Standards]  
-H --> I  
-I --> J[Generative AI Model: GPT-4.1]  
-J --> K[Generate Synthetic EHR]  
-K --> L[Validate Synthetic EHR Realism & Clinical Accuracy]  
-L --> M[Deploy Synthetic EHR Application via Secure API Endpoint]  
-end  
- 
-subgraph Iterative Refinement & Evaluation  
-K --> N[Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier Metrics]  
-N --> O[Expert Human Validation]  
-O --> K  
-end  
-
-```
+  subgraph User-Friendly Synthetic EHR Generation Workflow  
+    A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
+    B --> C[Store in Data Warehouse]  
+    C --> D[Compute Resources Setup: Cloud & Local]  
+    D --> E[Toolchain Setup: Docker, Flowise, Hugging Face Spaces]  
+    E --> F[Multi-Agent Workflow Orchestration]  
+    F --> G[Supervisor Agent]  
+    F --> H[Worker Agent]  
+    G --> I[Prompt Engineering: Clinical Guidelines & Standards]  
+    H --> I  
+    I --> J[Generative AI Model: GPT-4.1]  
+    J --> K[Generate Synthetic EHR]  
+    K --> L[Validate Synthetic EHR Realism & Clinical Accuracy]  
+    L --> M[Deploy Synthetic EHR Application via Secure API Endpoint]  
+  end  
+  subgraph Iterative Refinement & Evaluation  
+    K --> N[Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier Metrics]  
+    N --> O[Expert Human Validation]  
+    O --> K  
+  end
+  
+  ```  
 
 
 ## 1. Introduction
