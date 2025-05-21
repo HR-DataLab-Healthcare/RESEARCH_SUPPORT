@@ -323,6 +323,9 @@ Using the pseudonymized real data as examples and guided by detailed prompts, th
     *   Progress messages printed to the console during execution.
   </details>
 
+
+![alt text](image.png)
+
 #
 
 
