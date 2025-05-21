@@ -1,13 +1,35 @@
-<span style="font-size: 12px;">
+<span style="font-size: 13px;">
 
-# **Jupyter Notebook Companion Guide: Generating and Evaluating Synthetic Physiotherapeutic EHRs for Low Back Pain**
+# *Privacy, Linguistic & Informational Preserving Synthesis of Clinical Data Through Generative Agents*
+
+graph TD
+subgraph User-Friendly Synthetic EHR Generation Workflow  
+A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
+B --> C[Store in Data Warehouse]  
+C --> D[Compute Resources Setup: Cloud & Local]  
+D --> E[Toolchain Setup: Docker, Flowise, Hugging Face Spaces]  
+E --> F[Multi-Agent Workflow Orchestration]  
+F --> G[Supervisor Agent]  
+F --> H[Worker Agent]  
+G --> I[Prompt Engineering: Clinical Guidelines & Standards]  
+H --> I  
+I --> J[Generative AI Model: GPT-4.1]  
+J --> K[Generate Synthetic EHR]  
+K --> L[Validate Synthetic EHR Realism & Clinical Accuracy]  
+L --> M[Deploy Synthetic EHR Application via Secure API Endpoint]  
+end  
+ 
+subgraph Iterative Refinement & Evaluation  
+K --> N[Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier Metrics]  
+N --> O[Expert Human Validation]  
+O --> K  
+end  
 
 
-This repository contains supplementary material to the paper *"Privacy, Linguistic & Information Preserving Synthesis of Clinical Data Through Generative Agents"* , 
-which has been published by the journal: Frontiers in  AI journal and can be found here. If you want to reference this work, please cite the following paper:
+## 1. Introduction
+This repository is a step-by-step guide to the Python code in the accompanying Jupyter Notebook, supplementing the paper "Privacy, Linguistic & Information Preserving Synthesis of Clinical Data Through Generative Agents" (Frontiers in AI).
 
-The readme document serves as a step-by-step guide to the Python code provided in the accompanying Jupyter Notebook cells.
-The overall project aims to process real-world PDF clinical notes, pseudonymize them for privacy, generate realistic synthetic notes based on these examples, and evaluate the quality and similarity of the synthetic data using various benchmarks.
+The overall aim is to process real-world PDF clinical notes, pseudonymize them for privacy, generate realistic synthetic notes based on these examples, and evaluate the quality and similarity of the synthetic data using various benchmarks.
 
 The process is broken down into several stages, leveraging the International Classification of Functioning (ICF) model, KNGF low back pain guidelines, and Azure OpenAI's GPT models for different tasks.
 
