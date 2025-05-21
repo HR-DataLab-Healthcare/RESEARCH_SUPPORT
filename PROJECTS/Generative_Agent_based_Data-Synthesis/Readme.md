@@ -4,15 +4,13 @@
 
 
 
-```mermaid 
-flowchart LR
-    id1(User-Friendly Synthetic EHR Generation Workflow)
-```   
-  
-```mermaid 
+```python 
 
 User-Friendly Synthetic EHR Generation Workflow
 
+```   
+  
+```mermaid 
 
 graph TD  
   subgraph "      "
