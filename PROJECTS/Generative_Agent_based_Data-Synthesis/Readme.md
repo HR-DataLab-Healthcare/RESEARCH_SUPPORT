@@ -322,7 +322,7 @@ Using the pseudonymized real data as examples and guided by detailed prompts, th
     *   Progress messages printed to the console during execution.
   </details>
 
-<img align="right" width="240" height="240" src="./FIGs/OUPUT_3%2.png">
+<img align="right" width="240" height="240" src="./FIGs/OUPUT_3%2B4.png">
 
 
 
