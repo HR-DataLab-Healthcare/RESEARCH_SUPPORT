@@ -7,7 +7,7 @@
 graph TD  
 
   subgraph User-Friendly Synthetic EHR Generation Workflow
-  dummy[" "]  %% Invisible node for possible spacing  
+    dummy[" "]  %% Invisible node for possible spacing  
     A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
     B --> C[Store in Data Warehouse]  
     C --> D[Compute Resources Setup: Cloud & Local]  
