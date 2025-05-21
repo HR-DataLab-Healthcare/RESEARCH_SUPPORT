@@ -192,6 +192,8 @@ graph TD
       5.  The script also collects all pseudonymized content to later create a combined pseudonymized Markdown file.
 </details>
 
+![OUTPUT Stage 1 + Stage 2 code](image.png)
+
 #
 
 
