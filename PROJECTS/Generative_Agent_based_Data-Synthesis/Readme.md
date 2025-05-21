@@ -3,17 +3,12 @@
 # *Privacy, Linguistic & Informational Preserving Synthesis of Clinical Data Through Generative Agents*
 
 
-```mermaid
+
+```mermaid 
+
 flowchart LR
     id1(User-Friendly Synthetic EHR Generation Workflow)
-```
-
-
-
-  ```mermaid 
-
 graph TD  
-
   subgraph "      "
     A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
     B --> C[Store in Data Warehouse]  
