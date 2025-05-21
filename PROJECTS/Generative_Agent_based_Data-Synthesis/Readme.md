@@ -2,7 +2,38 @@
 
 # *Privacy, Linguistic & Informational Preserving Synthesis of Clinical Data Through Generative Agents*
 
+
+
+
+
+```mermaid
+flowchart LR
+    id1(Keten van 3 'gedachten')
+```
+
+```mermaid
+
+flowchart TD
+   
+
+    prompt --> information01
+    prompt --> information02
+    prompt --> information03
+   information01 -->integration
+   information02 -->integration
+   information03 -->integration
+   integration --> external_knowledge
+   external_knowledge --> answer
+   internal_knowledge --> answer
+   internal_knowledge --> external_knowledge
+   external_knowledge --> internal_knowledge
+```
+
+
+
+
 graph TD
+
 subgraph User-Friendly Synthetic EHR Generation Workflow  
 A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
 B --> C[Store in Data Warehouse]  
@@ -24,6 +55,8 @@ K --> N[Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier 
 N --> O[Expert Human Validation]  
 O --> K  
 end  
+
+```
 
 
 ## 1. Introduction
