@@ -49,9 +49,10 @@ stateDiagram-v2
     Toolchain --> Orchestrate
     Orchestrate --> Supervisor
     Supervisor --> Worker
-    Supervisor --> Prompt
+    Prompt  --> Supervisor
     Worker  --> Supervisor
-    Prompt --> Model
+    %%Prompt --> Model
+    Supervisor --> Model
     Model --> Generate
     Generate --> Validate
     Validate --> Deploy
@@ -78,21 +79,7 @@ stateDiagram-v2
     state "Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier Metrics" as Quantitative
     state "Expert Human Validation" as Expert
 
-
-
   ```
-
-
-
-
-
-
-
-
-
-
-
-
 #
   </details>
 
