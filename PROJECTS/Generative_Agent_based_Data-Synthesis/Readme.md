@@ -401,6 +401,59 @@ Using the pseudonymized real data as examples and guided by detailed prompts, th
   <details>
   <summary><h2><strong>Stage 5: Synthetic Data Evaluation</strong></h2></summary>
 
+
+```mermaid 
+stateDiagram-v2
+    Initialize_Evaluation: Load API configs, paths, evaluation parameters
+
+    Initialize_Evaluation --> Load_Data_For_Evaluation
+    Load_Data_For_Evaluation: Load pseudonymized and synthetic MD files
+    Load_Data_For_Evaluation --> Calculate_Avg_Doc_Length
+
+    Calculate_Avg_Doc_Length: Calculate for both corpora
+    Calculate_Avg_Doc_Length --> Calculate_Shannon_Entropy
+
+    Calculate_Shannon_Entropy: Calculate char/word entropy for both corpora
+    Calculate_Shannon_Entropy --> Calculate_Avg_Bigram_PMI
+
+    Calculate_Avg_Bigram_PMI: Calculate for both corpora
+    Calculate_Avg_Bigram_PMI --> Calculate_JSD
+
+    Calculate_JSD: Calculate JSD for word distributions
+    Calculate_JSD --> Calculate_Corpus_BLEU
+
+    Calculate_Corpus_BLEU: Calculate BLEU (synthetic vs. pseudo)
+    Calculate_Corpus_BLEU --> Calculate_Corpus_BERTScore
+
+    Calculate_Corpus_BERTScore: Calculate P, R, F1 (synthetic vs. pseudo)
+    Calculate_Corpus_BERTScore --> Evaluate_Classifier_Performance
+
+    Evaluate_Classifier_Performance: Train classifier, get AUC/AUPRC
+    Evaluate_Classifier_Performance --> Perform_GPT4_Qualitative_Comparison
+
+    Perform_GPT4_Qualitative_Comparison: Select pairs, send to GPT-4, get ratings
+    state Perform_GPT4_Qualitative_Comparison {
+        direction LR
+        [*] --> Select_Document_Pairs
+        Select_Document_Pairs --> Send_Pair_To_GPT4 : [Pairs remaining]
+        Send_Pair_To_GPT4: Call compare_docs_with_gpt4()
+        Send_Pair_To_GPT4 --> Collect_GPT4_Feedback
+        Collect_GPT4_Feedback --> Select_Document_Pairs
+        Select_Document_Pairs --> [*] : [All pairs evaluated]
+    }
+    Perform_GPT4_Qualitative_Comparison --> Aggregate_And_Report_Results
+
+    Aggregate_And_Report_Results: Compile all benchmark and GPT-4 results
+    Aggregate_And_Report_Results --> Print_Results_To_Console
+    Print_Results_To_Console --> Save_Results_To_JSON : [Optional]
+    Save_Results_To_JSON --> End_Evaluation
+    Print_Results_To_Console --> End_Evaluation
+
+    End_Evaluation --> [*]
+```
+
+  
+
   This final stage assesses the quality and similarity of the generated synthetic data compared to the pseudonymized real data using a combination of quantitative benchmarks and a qualitative AI-based review.
 
   * **Purpose:** To provide metrics and descriptions that indicate how well the synthetic data captures the linguistic, structural, and clinical characteristics of the real-world pseudonymized data.
