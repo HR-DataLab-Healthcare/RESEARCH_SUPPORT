@@ -293,6 +293,10 @@
 
 Using the pseudonymized real data as examples and guided by detailed prompts, this stage generates entirely new, artificial patient records for low back pain.
 
+```mermaid
+
+```
+
 ### Code Structure and Functionality
 
 1.  **Imports:**
