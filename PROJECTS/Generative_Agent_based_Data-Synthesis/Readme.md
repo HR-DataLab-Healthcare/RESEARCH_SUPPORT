@@ -14,36 +14,11 @@
   <details>
   <summary><h2><strong>User-Friendly Synthetic EHR Generation Workflow</strong></h2></summary>
 
-  ```mermaid 
-    
-    graph TD  
-      subgraph "      "
-        A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
-        B --> C[Store in Data Warehouse]  
-        C --> D[Compute Resources Setup: Cloud & Local]  
-        D --> E[Toolchain Setup: Docker, Flowise, Hugging Face Spaces]  
-        E --> F[Multi-Agent Workflow Orchestration]  
-        F --> G[Supervisor Agent]  
-        F --> H[Worker Agent]  
-        G --> I[Prompt Engineering: Clinical Guidelines & Standards]  
-        H --> I  
-        I --> J[Generative AI Model: GPT-4.1]  
-        J --> K[Generate Synthetic EHR]  
-        K --> L[Validate Synthetic EHR Realism & Clinical Accuracy]  
-        L --> M[Deploy Synthetic EHR Application via Secure API Endpoint]  
-      end  
-      subgraph Iterative Refinement & Evaluation  
-        K --> N[Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier Metrics]  
-        N --> O[Expert Human Validation]  
-        O --> K  
-      end
-      
-  ```
+
     
   ```mermaid 
     
-    stateDiagram-v2
-        [*] --> Collect
+  stateDiagram-v2
         Collect --> Pseudonymize
         Pseudonymize --> Store
         Store --> Compute
@@ -85,57 +60,59 @@
 </details>
 
 #
-  <details>
-  <summary><h2><strong>Stage 1: PDF Text Extraction and Markdown Conversion</strong></h2></summary>
 
-   ```mermaid 
+<details>
+<summary><h2><strong>Stage 1: PDF Text Extraction and Markdown Conversion</strong></h2></summary>
 
-    stateDiagram-v2
-    Initialize_Process: Initialize Azure OpenAI client and paths
+ ```mermaid 
 
-    Initialize_Process --> Find_PDFs_In_Directory
-    Find_PDFs_In_Directory: Scan PDF_DIRECTORY_PATH
+  stateDiagram-v2
+  Initialize_Process: Initialize Azure OpenAI client and paths
 
-    Find_PDFs_In_Directory --> Process_Next_PDF_Decision
-    state Process_Next_PDF_Decision <<choice>>
-    Process_Next_PDF_Decision --> Extract_Text_From_PDF : [PDF available]
-    Process_Next_PDF_Decision --> End_Process : [No more PDFs]
+  Initialize_Process --> Find_PDFs_In_Directory
+  Find_PDFs_In_Directory: Scan PDF_DIRECTORY_PATH
 
-    Extract_Text_From_PDF: Call extract_text_from_pdf()
-    Extract_Text_From_PDF --> Text_Extraction_Check
-    state Text_Extraction_Check <<choice>>
-    Text_Extraction_Check --> Convert_Text_To_Markdown : [Extraction Succeeded]
-    Text_Extraction_Check --> Log_Extraction_Error : [Extraction Failed]
+  Find_PDFs_In_Directory --> Process_Next_PDF_Decision
+  state Process_Next_PDF_Decision <<choice>>
+  Process_Next_PDF_Decision --> Extract_Text_From_PDF : [PDF available]
+  Process_Next_PDF_Decision --> End_Process : [No more PDFs]
 
-    Log_Extraction_Error: Log PDF reading error
-    Log_Extraction_Error --> Process_Next_PDF_Decision
+  Extract_Text_From_PDF: Call extract_text_from_pdf()
+  Extract_Text_From_PDF --> Text_Extraction_Check
+  state Text_Extraction_Check <<choice>>
+  Text_Extraction_Check --> Convert_Text_To_Markdown : [Extraction Succeeded]
+  Text_Extraction_Check --> Log_Extraction_Error : [Extraction Failed]
 
-    Convert_Text_To_Markdown: Call convert_text_to_markdown()
-    Convert_Text_To_Markdown --> Markdown_Conversion_Check
-    state Markdown_Conversion_Check <<choice>>
-    Markdown_Conversion_Check --> Save_Single_Markdown_File : [Conversion Succeeded]
-    Markdown_Conversion_Check --> Log_Conversion_Error : [Conversion Failed]
+  Log_Extraction_Error: Log PDF reading error
+  Log_Extraction_Error --> Process_Next_PDF_Decision
 
-    Log_Conversion_Error: Log API or conversion error
-    Log_Conversion_Error --> Process_Next_PDF_Decision
+  Convert_Text_To_Markdown: Call convert_text_to_markdown()
+  Convert_Text_To_Markdown --> Markdown_Conversion_Check
+  state Markdown_Conversion_Check <<choice>>
+  Markdown_Conversion_Check --> Save_Single_Markdown_File : [Conversion Succeeded]
+  Markdown_Conversion_Check --> Log_Conversion_Error : [Conversion Failed]
 
-    Save_Single_Markdown_File: Call save_single_markdown_file()
-    Save_Single_Markdown_File --> File_Save_Check
-    state File_Save_Check <<choice>>
-    File_Save_Check --> Log_Success : [Save Succeeded]
-    File_Save_Check --> Log_Save_Error : [Save Failed]
+  Log_Conversion_Error: Log API or conversion error
+  Log_Conversion_Error --> Process_Next_PDF_Decision
 
-    Log_Save_Error: Log file writing error
-    Log_Save_Error --> Process_Next_PDF_Decision
+  Save_Single_Markdown_File: Call save_single_markdown_file()
+  Save_Single_Markdown_File --> File_Save_Check
+  state File_Save_Check <<choice>>
+  File_Save_Check --> Log_Success : [Save Succeeded]
+  File_Save_Check --> Log_Save_Error : [Save Failed]
 
-    Log_Success: Log successful processing for the PDF
-    Log_Success --> Process_Next_PDF_Decision
+  Log_Save_Error: Log file writing error
+  Log_Save_Error --> Process_Next_PDF_Decision
 
-    End_Process --> [*]
-  
-   ```
+  Log_Success: Log successful processing for the PDF
+  Log_Success --> Process_Next_PDF_Decision
 
-  This initial stage is crucial for transforming raw PDF documents into a structured Markdown format. This conversion makes the textual content more amenable to subsequent processing, such as pseudonymization and analysis. The process leverages an AI model for intelligent structuring of the extracted text.
+  End_Process --> [*]
+
+ ```
+
+
+  Shown is the prosessing needed for transforming raw PDF documents into a structured Markdown format. This conversion makes the textual content more amenable to subsequent processing, such as pseudonymization and analysis. The process leverages an AI model for intelligent structuring of the extracted text.
 
   **Purpose:** To systematically extract all readable text content from a collection of PDF files and then convert this raw text into well-structured Markdown. The conversion aims to preserve or infer document elements like headings, lists, and paragraphs, utilizing the capabilities of an Azure OpenAI GPT-4.1 model.
 
