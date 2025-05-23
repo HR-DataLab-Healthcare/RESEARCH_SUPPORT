@@ -294,6 +294,52 @@
 Using the pseudonymized real data as examples and guided by detailed prompts, this stage generates entirely new, artificial patient records for low back pain.
 
 ```mermaid
+stateDiagram-v2
+    Initialize_Script: Configure Azure Client, Paths, NUM_SYNTHETIC_RECORDS
+
+    Initialize_Script --> Check_Pseudonymized_Directory
+    state Check_Pseudonymized_Directory <<choice>>
+        Check_Pseudonymized_Directory --> Load_Pseudonymized_Examples : [PSEUDO_MD_DIRECTORY_PATH Exists]
+        Check_Pseudonymized_Directory --> Error_Exit_No_Directory : [Path Not Found]
+        Error_Exit_No_Directory --> [*]
+
+    Load_Pseudonymized_Examples: Call load_pseudonymized_examples()
+    Load_Pseudonymized_Examples --> Example_Content_Available_Check
+    state Example_Content_Available_Check <<choice>>
+        Example_Content_Available_Check --> Begin_Generation_Loop : [Examples Loaded or Warning Issued if Empty]
+
+    Begin_Generation_Loop: Loop record_num from 1 to NUM_SYNTHETIC_RECORDS_TO_GENERATE
+
+    Begin_Generation_Loop --> Generate_Single_Record : [record_num <= NUM_SYNTHETIC_RECORDS]
+    Begin_Generation_Loop --> Finalize_Process : [All records attempted]
+
+    Generate_Single_Record: Call generate_synthetic_record(client, loaded_examples, record_num)
+    Generate_Single_Record --> Generation_Outcome
+    state Generation_Outcome <<choice>>
+        Generation_Outcome --> Validate_Generated_Content : [Generation Succeeded (content returned)]
+        Generation_Outcome --> Log_Generation_Failure : [Generation Failed (None returned)]
+
+    Log_Generation_Failure: Print error for current record
+    Log_Generation_Failure --> Begin_Generation_Loop
+
+
+    Validate_Generated_Content: Check if generated content ends with "FINISH"
+    Validate_Generated_Content --> Save_Synthetic_Record : [Validation OK or Warning Issued]
+
+    Save_Synthetic_Record: Call save_synthetic_record(content, output_dir, record_num)
+    Save_Synthetic_Record --> Save_Outcome
+    state Save_Outcome <<choice>>
+        Save_Outcome --> Log_Save_Success : [Save Succeeded]
+        Save_Outcome --> Log_Save_Failure : [Save Failed]
+
+    Log_Save_Success: Print success for current record
+    Log_Save_Success --> Begin_Generation_Loop
+
+    Log_Save_Failure: Print error for current record save
+    Log_Save_Failure --> Begin_Generation_Loop
+
+    Finalize_Process: Print overall completion message
+    Finalize_Process --> [*]
 
 ```
 
