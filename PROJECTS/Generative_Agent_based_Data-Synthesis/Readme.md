@@ -252,13 +252,14 @@
           ```
 
   *   **Workflow Summary:**
-      The main script iterates through each Markdown file (produced in Stage 1) found in `PDF_DIRECTORY_PATH`. For each Markdown file:
-      1.  The content of the Markdown file is read.
-      2.  This content is passed to the `pseudonymize_markdown` function.
-      3.  If the AI successfully returns pseudonymized content:
-          *   The `save_single_markdown_file` function saves this modified content to a new file, prefixed with `pseudo_`.
-      4.  Progress and any errors encountered during the API call or file operations are logged to the console.
-      5.  The script also collects all pseudonymized content to later create a combined pseudonymized Markdown file.
+    
+  The main script iterates through each Markdown file (produced in Stage 1) found in `PDF_DIRECTORY_PATH`. For each Markdown file:
+  1.  The content of the Markdown file is read.
+  2.  This content is passed to the `pseudonymize_markdown` function.
+  3.  If the AI successfully returns pseudonymized content:
+      *   The `save_single_markdown_file` function saves this modified content to a new file, prefixed with `pseudo_`.
+  4.  Progress and any errors encountered during the API call or file operations are logged to the console.
+  5.  The script also collects all pseudonymized content to later create a combined pseudonymized Markdown file.
 </details>
 
 <img align="right" width="240" height="240" src="./FIGs/OUPUT_1%2B2.png">
