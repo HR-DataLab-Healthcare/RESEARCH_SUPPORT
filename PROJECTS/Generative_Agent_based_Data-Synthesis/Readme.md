@@ -11,80 +11,129 @@
 
   The process is broken down into several stages, as shown in the flow diagram below.
 
-### User-Friendly Synthetic EHR Generation Workflow
-```mermaid 
+  <details>
+  <summary><h2><strong>User-Friendly Synthetic EHR Generation Workflow</strong></h2></summary>
 
-graph TD  
-  subgraph "      "
-    A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
-    B --> C[Store in Data Warehouse]  
-    C --> D[Compute Resources Setup: Cloud & Local]  
-    D --> E[Toolchain Setup: Docker, Flowise, Hugging Face Spaces]  
-    E --> F[Multi-Agent Workflow Orchestration]  
-    F --> G[Supervisor Agent]  
-    F --> H[Worker Agent]  
-    G --> I[Prompt Engineering: Clinical Guidelines & Standards]  
-    H --> I  
-    I --> J[Generative AI Model: GPT-4.1]  
-    J --> K[Generate Synthetic EHR]  
-    K --> L[Validate Synthetic EHR Realism & Clinical Accuracy]  
-    L --> M[Deploy Synthetic EHR Application via Secure API Endpoint]  
-  end  
-  subgraph Iterative Refinement & Evaluation  
-    K --> N[Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier Metrics]  
-    N --> O[Expert Human Validation]  
-    O --> K  
-  end
-  
+  ```mermaid 
+    
+    graph TD  
+      subgraph "      "
+        A[Collect Real EHR Samples] --> B[Pseudonymization of EHR Samples]  
+        B --> C[Store in Data Warehouse]  
+        C --> D[Compute Resources Setup: Cloud & Local]  
+        D --> E[Toolchain Setup: Docker, Flowise, Hugging Face Spaces]  
+        E --> F[Multi-Agent Workflow Orchestration]  
+        F --> G[Supervisor Agent]  
+        F --> H[Worker Agent]  
+        G --> I[Prompt Engineering: Clinical Guidelines & Standards]  
+        H --> I  
+        I --> J[Generative AI Model: GPT-4.1]  
+        J --> K[Generate Synthetic EHR]  
+        K --> L[Validate Synthetic EHR Realism & Clinical Accuracy]  
+        L --> M[Deploy Synthetic EHR Application via Secure API Endpoint]  
+      end  
+      subgraph Iterative Refinement & Evaluation  
+        K --> N[Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier Metrics]  
+        N --> O[Expert Human Validation]  
+        O --> K  
+      end
+      
   ```
-
-```mermaid 
-
-stateDiagram-v2
-    [*] --> Collect
-    Collect --> Pseudonymize
-    Pseudonymize --> Store
-    Store --> Compute
-    Compute --> Toolchain
-    Toolchain --> Orchestrate
-    Orchestrate --> Supervisor
-    Supervisor --> Worker
-    Prompt  --> Supervisor
-    Worker  --> Supervisor
-    %%Prompt --> Model
-    Supervisor --> Model
-    Model --> Generate
-    Generate --> Validate
-    Validate --> Deploy
-
-    %% Iterative Refinement & Evaluation Loop
-    Generate --> Quantitative
-    Quantitative --> Expert
-    Expert --> Generate
-
-    %% State labels for clarity
-    state "Collect Real EHR Samples" as Collect
-    state "Pseudonymization of EHR Samples" as Pseudonymize
-    state "Store in Data Warehouse" as Store
-    state "Compute Resources Setup: Cloud & Local" as Compute
-    state "Toolchain Setup: Docker, Flowise, Hugging Face Spaces" as Toolchain
-    state "Multi-Agent Workflow Orchestration" as Orchestrate
-    state "Supervisor Agent" as Supervisor
-    state "Worker Agent" as Worker
-    state "Prompt Engineering: Clinical Guidelines & Standards" as Prompt
-    state "Generative AI Model: GPT-4.1" as Model
-    state "Generate Synthetic EHR" as Generate
-    state "Validate Synthetic EHR Realism & Clinical Accuracy" as Validate
-    state "Deploy Synthetic EHR Application via Secure API Endpoint" as Deploy
-    state "Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier Metrics" as Quantitative
-    state "Expert Human Validation" as Expert
-
+    
+  ```mermaid 
+    
+    stateDiagram-v2
+        [*] --> Collect
+        Collect --> Pseudonymize
+        Pseudonymize --> Store
+        Store --> Compute
+        Compute --> Toolchain
+        Toolchain --> Orchestrate
+        Orchestrate --> Supervisor
+        Supervisor --> Worker
+        Prompt  --> Supervisor
+        Worker  --> Supervisor
+        %%Prompt --> Model
+        Supervisor --> Model
+        Model --> Generate
+        Generate --> Validate
+        Validate --> Deploy
+    
+        %% Iterative Refinement & Evaluation Loop
+        Generate --> Quantitative
+        Quantitative --> Expert
+        Expert --> Generate
+    
+        %% State labels for clarity
+        state "Collect Real EHR Samples" as Collect
+        state "Pseudonymization of EHR Samples" as Pseudonymize
+        state "Store in Data Warehouse" as Store
+        state "Compute Resources Setup: Cloud & Local" as Compute
+        state "Toolchain Setup: Docker, Flowise, Hugging Face Spaces" as Toolchain
+        state "Multi-Agent Workflow Orchestration" as Orchestrate
+        state "Supervisor Agent" as Supervisor
+        state "Worker Agent" as Worker
+        state "Prompt Engineering: Clinical Guidelines & Standards" as Prompt
+        state "Generative AI Model: GPT-4.1" as Model
+        state "Generate Synthetic EHR" as Generate
+        state "Validate Synthetic EHR Realism & Clinical Accuracy" as Validate
+        state "Deploy Synthetic EHR Application via Secure API Endpoint" as Deploy
+        state "Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier Metrics" as Quantitative
+        state "Expert Human Validation" as Expert
+    
   ```
+</details>
+
 #
-  </details>
-
   <details>
   <summary><h2><strong>Stage 1: PDF Text Extraction and Markdown Conversion</strong></h2></summary>
+
+   ```mermaid 
+
+    stateDiagram-v2
+    Initialize_Process: Initialize Azure OpenAI client and paths
+
+    Initialize_Process --> Find_PDFs_In_Directory
+    Find_PDFs_In_Directory: Scan PDF_DIRECTORY_PATH
+
+    Find_PDFs_In_Directory --> Process_Next_PDF_Decision
+    state Process_Next_PDF_Decision <<choice>>
+    Process_Next_PDF_Decision --> Extract_Text_From_PDF : [PDF available]
+    Process_Next_PDF_Decision --> End_Process : [No more PDFs]
+
+    Extract_Text_From_PDF: Call extract_text_from_pdf()
+    Extract_Text_From_PDF --> Text_Extraction_Check
+    state Text_Extraction_Check <<choice>>
+    Text_Extraction_Check --> Convert_Text_To_Markdown : [Extraction Succeeded]
+    Text_Extraction_Check --> Log_Extraction_Error : [Extraction Failed]
+
+    Log_Extraction_Error: Log PDF reading error
+    Log_Extraction_Error --> Process_Next_PDF_Decision
+
+    Convert_Text_To_Markdown: Call convert_text_to_markdown()
+    Convert_Text_To_Markdown --> Markdown_Conversion_Check
+    state Markdown_Conversion_Check <<choice>>
+    Markdown_Conversion_Check --> Save_Single_Markdown_File : [Conversion Succeeded]
+    Markdown_Conversion_Check --> Log_Conversion_Error : [Conversion Failed]
+
+    Log_Conversion_Error: Log API or conversion error
+    Log_Conversion_Error --> Process_Next_PDF_Decision
+
+    Save_Single_Markdown_File: Call save_single_markdown_file()
+    Save_Single_Markdown_File --> File_Save_Check
+    state File_Save_Check <<choice>>
+    File_Save_Check --> Log_Success : [Save Succeeded]
+    File_Save_Check --> Log_Save_Error : [Save Failed]
+
+    Log_Save_Error: Log file writing error
+    Log_Save_Error --> Process_Next_PDF_Decision
+
+    Log_Success: Log successful processing for the PDF
+    Log_Success --> Process_Next_PDF_Decision
+
+    End_Process --> [*]
+  
+   ```
 
   This initial stage is crucial for transforming raw PDF documents into a structured Markdown format. This conversion makes the textual content more amenable to subsequent processing, such as pseudonymization and analysis. The process leverages an AI model for intelligent structuring of the extracted text.
 
