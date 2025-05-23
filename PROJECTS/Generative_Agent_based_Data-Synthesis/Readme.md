@@ -36,7 +36,63 @@ graph TD
     O --> K  
   end
   
-  ```  
+  ```
+
+```mermaid 
+
+stateDiagram-v2
+    [*] --> Collect
+    Collect --> Pseudonymize
+    Pseudonymize --> Store
+    Store --> Compute
+    Compute --> Toolchain
+    Toolchain --> Orchestrate
+    Orchestrate --> Supervisor
+    Supervisor --> Worker
+    Supervisor --> Prompt
+    Worker  --> Supervisor
+    Prompt --> Model
+    Model --> Generate
+    Generate --> Validate
+    Validate --> Deploy
+
+    %% Iterative Refinement & Evaluation Loop
+    Generate --> Quantitative
+    Quantitative --> Expert
+    Expert --> Generate
+
+    %% State labels for clarity
+    state "Collect Real EHR Samples" as Collect
+    state "Pseudonymization of EHR Samples" as Pseudonymize
+    state "Store in Data Warehouse" as Store
+    state "Compute Resources Setup: Cloud & Local" as Compute
+    state "Toolchain Setup: Docker, Flowise, Hugging Face Spaces" as Toolchain
+    state "Multi-Agent Workflow Orchestration" as Orchestrate
+    state "Supervisor Agent" as Supervisor
+    state "Worker Agent" as Worker
+    state "Prompt Engineering: Clinical Guidelines & Standards" as Prompt
+    state "Generative AI Model: GPT-4.1" as Model
+    state "Generate Synthetic EHR" as Generate
+    state "Validate Synthetic EHR Realism & Clinical Accuracy" as Validate
+    state "Deploy Synthetic EHR Application via Secure API Endpoint" as Deploy
+    state "Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier Metrics" as Quantitative
+    state "Expert Human Validation" as Expert
+
+
+
+  ```
+
+
+
+
+
+
+
+
+
+
+
+
 #
   </details>
 
