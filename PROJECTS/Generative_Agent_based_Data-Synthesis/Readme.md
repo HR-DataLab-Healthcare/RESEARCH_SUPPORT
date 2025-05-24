@@ -301,7 +301,56 @@ stateDiagram-v2
   <details>
   <summary><h2><strong>Synthetic Data Generation</strong></h2></summary>
 
+```mermaid
 
+stateDiagram-v2
+    Initialize_Script: Configure Azure Client, Paths, NUM_SYNTHETIC_RECORDS
+
+    Initialize_Script --> Check_Pseudonymized_Directory
+    state Check_Pseudonymized_Directory <<choice>>
+        Check_Pseudonymized_Directory --> Load_Pseudonymized_Examples : [PSEUDO_MD_DIRECTORY_PATH Exists]
+        Check_Pseudonymized_Directory --> Error_Exit_No_Directory : [Path Not Found]
+        Error_Exit_No_Directory --> [*]
+
+    Load_Pseudonymized_Examples: Call load_pseudonymized_examples()
+    Load_Pseudonymized_Examples --> Example_Content_Available_Check
+    state Example_Content_Available_Check <<choice>>
+        Example_Content_Available_Check --> Begin_Generation_Loop : [Examples Loaded or Warning Issued if Empty]
+
+    Begin_Generation_Loop: Loop record_num from 1 to NUM_SYNTHETIC_RECORDS_TO_GENERATE
+
+    Begin_Generation_Loop --> Generate_Single_Record : [record_num <= NUM_SYNTHETIC_RECORDS]
+    Begin_Generation_Loop --> Finalize_Process : [All records attempted]
+
+    Generate_Single_Record: Call generate_synthetic_record(client, loaded_examples, record_num)
+    Generate_Single_Record --> Generation_Outcome
+    state Generation_Outcome <<choice>>
+        Generation_Outcome --> Validate_Generated_Content : [Generation Succeeded (content returned)]
+        Generation_Outcome --> Log_Generation_Failure : [Generation Failed (None returned)]
+
+    Log_Generation_Failure: Print error for current record
+    Log_Generation_Failure --> Begin_Generation_Loop
+
+
+    Validate_Generated_Content: Check if generated content ends with "FINISH"
+    Validate_Generated_Content --> Save_Synthetic_Record : [Validation OK or Warning Issued]
+
+    Save_Synthetic_Record: Call save_synthetic_record(content, output_dir, record_num)
+    Save_Synthetic_Record --> Save_Outcome
+    state Save_Outcome <<choice>>
+        Save_Outcome --> Log_Save_Success : [Save Succeeded]
+        Save_Outcome --> Log_Save_Failure : [Save Failed]
+
+    Log_Save_Success: Print success for current record
+    Log_Save_Success --> Begin_Generation_Loop
+
+    Log_Save_Failure: Print error for current record save
+    Log_Save_Failure --> Begin_Generation_Loop
+
+    Finalize_Process: Print overall completion message
+    Finalize_Process --> [*]
+
+```
 
 <br>
 
@@ -443,57 +492,7 @@ This **iterative, collaborative interaction** ensures that synthetic dossiers ar
   <details>
   <summary><h2><strong>Comparative Analysis of Synthetic vs Genuine EHRs</strong></h2></summary>
 
-```mermaid
 
-stateDiagram-v2
-    Initialize_Evaluation: Load API configs, paths, evaluation parameters
-
-    Initialize_Evaluation --> Load_Data_For_Evaluation
-    Load_Data_For_Evaluation: Load pseudonymized and synthetic MD files
-    Load_Data_For_Evaluation --> Calculate_Avg_Doc_Length
-
-    Calculate_Avg_Doc_Length: Calculate for both corpora
-    Calculate_Avg_Doc_Length --> Calculate_Shannon_Entropy
-
-    Calculate_Shannon_Entropy: Calculate char/word entropy for both corpora
-    Calculate_Shannon_Entropy --> Calculate_Avg_Bigram_PMI
-
-    Calculate_Avg_Bigram_PMI: Calculate for both corpora
-    Calculate_Avg_Bigram_PMI --> Calculate_JSD
-
-    Calculate_JSD: Calculate JSD for word distributions
-    Calculate_JSD --> Calculate_Corpus_BLEU
-
-    Calculate_Corpus_BLEU: Calculate BLEU (synthetic vs. pseudo)
-    Calculate_Corpus_BLEU --> Calculate_Corpus_BERTScore
-
-    Calculate_Corpus_BERTScore: Calculate P, R, F1 (synthetic vs. pseudo)
-    Calculate_Corpus_BERTScore --> Evaluate_Classifier_Performance
-
-    Evaluate_Classifier_Performance: Train classifier, get AUC/AUPRC
-    Evaluate_Classifier_Performance --> Perform_GPT4_Qualitative_Comparison
-
-    Perform_GPT4_Qualitative_Comparison: Select pairs, send to GPT-4, get ratings
-    state Perform_GPT4_Qualitative_Comparison {
-        direction LR
-        [*] --> Select_Document_Pairs
-        Select_Document_Pairs --> Send_Pair_To_GPT4 : [Pairs remaining]
-        Send_Pair_To_GPT4: Call compare_docs_with_gpt4()
-        Send_Pair_To_GPT4 --> Collect_GPT4_Feedback
-        Collect_GPT4_Feedback --> Select_Document_Pairs
-        Select_Document_Pairs --> [*] : [All pairs evaluated]
-    }
-    Perform_GPT4_Qualitative_Comparison --> Aggregate_And_Report_Results
-
-    Aggregate_And_Report_Results: Compile all benchmark and GPT-4 results
-    Aggregate_And_Report_Results --> Print_Results_To_Console
-    Print_Results_To_Console --> Save_Results_To_JSON : [Optional]
-    Save_Results_To_JSON --> End_Evaluation
-    Print_Results_To_Console --> End_Evaluation
-
-    End_Evaluation --> [*]
-
-```
 
 <br>
 
