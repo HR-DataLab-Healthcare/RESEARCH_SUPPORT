@@ -352,7 +352,8 @@ stateDiagram-v2
 ```
 
 <br>
-Shown is the workflow needed for generating synthetic EHRs, which uses a two-tiered prompting strategy *—Supervisor prompts set overall structure and standards, while Worker prompts provide case-specific instructions—* directing GPT-4.1 to produce consistent, realistic, and anonymized patient records for research and development without risking exposure of real patient information.
+
+Shown is the workflow needed for generating synthetic EHRs. It uses a two-tiered prompting strategy:  *Supervisor prompts set overall structure and standards*, while *Worker prompts provide case-specific instructions*.  In doing so, the GPT-4.1 LLM is directed to produce synthetic EHRs that are not only realistic and coherent but also consistently formatted and effectively anonymized. This approach is designed to create valuable data for research and development purposes without compromising the privacy of real patient information.
 
 ### Supervisor vs Worker layered prompting:
 
