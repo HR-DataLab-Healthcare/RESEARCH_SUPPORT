@@ -352,7 +352,7 @@ stateDiagram-v2
 ```
 
 <br>
-  Shown is the workflow needed for generating synthetic EHRs. It employs a two-tiered prompting strategy—Supervisor ---*(system-level guidance)* for overall structure and standards, and Worker *(case-specific instructions)* for genuine dossier detail--- for directing GPT-4.1 to produce consistently formatted, realistic, and anonymized patient records for research and development, without compromising real patient data.The purpose of stage 4 is to securely generate realistic, anonymized patient records that support research, development, or testing, without exposing any real patient information.  
+Shown is the workflow needed for generating synthetic EHRs, which uses a two-tiered prompting strategy—*Supervisor prompts set overall structure and standards, while Worker prompts provide case-specific instructions*—directing GPT-4.1 to produce consistent, realistic, and anonymized patient records for research and development without risking exposure of real patient information.
 
 ### Supervisor vs Worker layered prompting:
 
