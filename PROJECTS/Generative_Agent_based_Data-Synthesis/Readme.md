@@ -546,6 +546,7 @@ stateDiagram-v2
 
 <br>
 
+
   Show is the workflow needed to assesses the quality and similarity of the generated synthetic data compared to the pseudonymized real data using a combination of quantitative benchmarks and a qualitative AI-based review.
 
   * **Purpose:** 
