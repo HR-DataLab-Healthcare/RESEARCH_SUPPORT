@@ -351,7 +351,8 @@ stateDiagram-v2
 
 ```
 
-  The shown workflow for generating synthetic EHRs uses a two-tiered prompting strategy—Supervisor (system-level guidance) for overall structure and standards, and Worker (case-specific instructions) for dossier details—directing GPT-4.1 to produce consistently formatted, realistic, and anonymized patient records for research and development, without compromising real patient data.The purpose of stage 4 is to securely generate realistic, anonymized patient records that support research, development, or testing, without exposing any real patient information.  
+<br>
+  Shown is the workflow for generating synthetic EHRs uses a two-tiered prompting strategy—Supervisor (system-level guidance) for overall structure and standards, and Worker (case-specific instructions) for dossier details—directing GPT-4.1 to produce consistently formatted, realistic, and anonymized patient records for research and development, without compromising real patient data.The purpose of stage 4 is to securely generate realistic, anonymized patient records that support research, development, or testing, without exposing any real patient information.  
 
 ### Supervisor vs Worker layered prompting:
 
@@ -490,7 +491,7 @@ This **iterative, collaborative interaction** ensures that synthetic dossiers ar
 
 
   <details>
-  <summary><h2><strong>Stage 5: Synthetic Data Evaluation</strong></h2></summary>
+  <summary><h2><strong>Synthetic Data Evaluation</strong></h2></summary>
 
 ```mermaid 
 stateDiagram-v2
@@ -541,8 +542,8 @@ stateDiagram-v2
 
     End_Evaluation --> [*]
 ```
-
-  This final stage assesses the quality and similarity of the generated synthetic data compared to the pseudonymized real data using a combination of quantitative benchmarks and a qualitative AI-based review.
+<br>
+  Show is the forkflow neede to assesses the quality and similarity of the generated synthetic data compared to the pseudonymized real data using a combination of quantitative benchmarks and a qualitative AI-based review.
 
   * **Purpose:** To provide metrics and descriptions that indicate how well the synthetic data captures the linguistic, structural, and clinical characteristics of the real-world pseudonymized data.
   * **Key Code Components:**
