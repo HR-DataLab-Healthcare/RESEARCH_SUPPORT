@@ -301,39 +301,7 @@ stateDiagram-v2
   <details>
   <summary><h2><strong>Synthetic Data Generation</strong></h2></summary>
 
-Stage 4 of the EPD processing pipeline is built around the `generate_synthetic_record` function, which uses a `two-tiered prompting strategy—Supervisor (system prompt) and Worker (user prompt)—`to direct the GPT-4.1 large language model (LLM) in producing high-quality, structured dossiers. The Supervisor establishes the model’s overarching role, domain norms, and key rules, while the Worker delivers detailed, record-specific instructions for each dossier. This layered approach ensures outputs are both consistently formatted and uniquely tailored to each case. The purpose of stage 4 is to securely generate realistic, anonymized patient records that support research, development, or testing, without exposing any real patient information.  
-
-### Supervisor vs Worker layered prompting:
-
-1.  **Supervisor Instructions (`system_prompt`):**
-    *   This prompt sets the **overall context and persona** for the LLM. It's like a high-level directive from a supervisor to an expert worker.
-    *   It instructs the LLM to act as an "experienced physiotherapist" tasked with generating "realistic, complete, and coherent Electronic Patient Dossiers (EPDs) in Dutch."
-    *   It establishes the **methodology** (ICF framework, KNGF guidelines for low back pain) and **constraints** (use anonymized information, expert guidance).
-    *   Crucially, it includes the instruction: "**Produce ONLY the requested patient dossier and nothing else.**" This primes the LLM to focus solely on the EPD generation.
-
-2.  **Worker Instructions (`user_prompt`):**
-    *   This prompt provides the **specific, detailed, step-by-step instructions** for the *current* generation task. It's akin to a detailed work order given to the worker by the supervisor.
-    *   It reiterates the task (generate *one* EPD for low back pain) and provides a comprehensive list of **required sections and their content** (Anamnese, ICF Diagnosis, Treatment Goals, Treatment Plan, SOEP Notes).
-    *   It specifies **language, style, and formatting requirements** (professional Dutch, expand abbreviations, realistic tone).
-    *   It incorporates the `example_markdown_content` to provide concrete examples of structure and quality, while explicitly demanding a **new and unique** case.  
-
-### Interaction with the LLM 
-
-- Both the `system_prompt` (Supervisor) and `user_prompt` (Worker) are sent to the Azure OpenAI GPT-4.1 model in each API call.  
-    - The `system_prompt` defines the model's role and core behavior.  
-    - The `user_prompt` gives specific, task-oriented instructions for the current dossier. 
-
-- LLM responds by reconciling both roles The model reads the Supervisor’s persistent context and the Worker’s current, task-specific instructions. It combines these to produce output that meets overall standards *and* immediate requirements.
-
-- *loop for each dossier:* For each new dossier, the Worker’s prompt can be refreshed or customized, while the Supervisor’s rules persist. This ensures that every record is unique but still adheres to clinical and structural consistency.
-
-- *"FINISH" signals collaborative task completion:* The dossier must end with the "FINISH" string, confirming that the LLM has followed Supervisor and Worker instructions all the way through.  
-  
-This **iterative, collaborative interaction** ensures that synthetic dossiers are both reliably structured (thanks to the Supervisor) and tailored to the specific requirements or examples of each record (thanks to the Worker), ending only when all steps are *FINISH*ed.  
-
-## Synthetic Data Generation (`EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb`)
-
-```mermaid
+  ```mermaid
 stateDiagram-v2
     Initialize_Script: Configure Azure Client, Paths, NUM_SYNTHETIC_RECORDS
 
@@ -382,6 +350,38 @@ stateDiagram-v2
     Finalize_Process --> [*]
 
 ```
+
+  The shown workflow for generating synthetic EHRs uses a two-tiered prompting strategy—Supervisor (system-level guidance) for overall structure and standards, and Worker (case-specific instructions) for dossier details—directing GPT-4.1 to produce consistently formatted, realistic, and anonymized patient records for research and development, without compromising real patient data.The purpose of stage 4 is to securely generate realistic, anonymized patient records that support research, development, or testing, without exposing any real patient information.  
+
+### Supervisor vs Worker layered prompting:
+
+1.  **Supervisor Instructions (`system_prompt`):**
+    *   This prompt sets the **overall context and persona** for the LLM. It's like a high-level directive from a supervisor to an expert worker.
+    *   It instructs the LLM to act as an "experienced physiotherapist" tasked with generating "realistic, complete, and coherent Electronic Patient Dossiers (EPDs) in Dutch."
+    *   It establishes the **methodology** (ICF framework, KNGF guidelines for low back pain) and **constraints** (use anonymized information, expert guidance).
+    *   Crucially, it includes the instruction: "**Produce ONLY the requested patient dossier and nothing else.**" This primes the LLM to focus solely on the EPD generation.
+
+2.  **Worker Instructions (`user_prompt`):**
+    *   This prompt provides the **specific, detailed, step-by-step instructions** for the *current* generation task. It's akin to a detailed work order given to the worker by the supervisor.
+    *   It reiterates the task (generate *one* EPD for low back pain) and provides a comprehensive list of **required sections and their content** (Anamnese, ICF Diagnosis, Treatment Goals, Treatment Plan, SOEP Notes).
+    *   It specifies **language, style, and formatting requirements** (professional Dutch, expand abbreviations, realistic tone).
+    *   It incorporates the `example_markdown_content` to provide concrete examples of structure and quality, while explicitly demanding a **new and unique** case.  
+
+### Interaction with the LLM 
+
+- Both the `system_prompt` (Supervisor) and `user_prompt` (Worker) are sent to the Azure OpenAI GPT-4.1 model in each API call.  
+    - The `system_prompt` defines the model's role and core behavior.  
+    - The `user_prompt` gives specific, task-oriented instructions for the current dossier. 
+
+- LLM responds by reconciling both roles The model reads the Supervisor’s persistent context and the Worker’s current, task-specific instructions. It combines these to produce output that meets overall standards *and* immediate requirements.
+
+- *loop for each dossier:* For each new dossier, the Worker’s prompt can be refreshed or customized, while the Supervisor’s rules persist. This ensures that every record is unique but still adheres to clinical and structural consistency.
+
+- *"FINISH" signals collaborative task completion:* The dossier must end with the "FINISH" string, confirming that the LLM has followed Supervisor and Worker instructions all the way through.  
+  
+This **iterative, collaborative interaction** ensures that synthetic dossiers are both reliably structured (thanks to the Supervisor) and tailored to the specific requirements or examples of each record (thanks to the Worker), ending only when all steps are *FINISH*ed.  
+
+#
 
 ### Code Structure and Functionality
 
@@ -492,7 +492,6 @@ stateDiagram-v2
   <details>
   <summary><h2><strong>Stage 5: Synthetic Data Evaluation</strong></h2></summary>
 
-
 ```mermaid 
 stateDiagram-v2
     Initialize_Evaluation: Load API configs, paths, evaluation parameters
@@ -542,8 +541,6 @@ stateDiagram-v2
 
     End_Evaluation --> [*]
 ```
-
-  
 
   This final stage assesses the quality and similarity of the generated synthetic data compared to the pseudonymized real data using a combination of quantitative benchmarks and a qualitative AI-based review.
 
