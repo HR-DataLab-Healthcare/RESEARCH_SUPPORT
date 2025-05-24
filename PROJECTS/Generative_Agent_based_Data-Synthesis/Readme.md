@@ -68,7 +68,7 @@ To facilitate understanding and reproducibility, each workflow is accompanied by
 
   * **Key Code Components:**
 
-    1.  **`extract_text_from_pdf(pdf_path)`**:
+    *  **`extract_text_from_pdf(pdf_path)`**:
         *   **Library Used:** `PyMuPDF (fitz)`
         *   **Functionality:**
             *   Opens a PDF file specified by `pdf_path`.
@@ -77,7 +77,7 @@ To facilitate understanding and reproducibility, each workflow is accompanied by
             *   Concatenates the text from all pages, adding a double newline (`\n\n`) as a separator between page contents.
             *   Includes basic error handling to catch and report issues during PDF reading, returning `None` if an error occurs.
 
-    2.  **`convert_text_to_markdown(text_content, pdf_filename)`**:
+    *  **`convert_text_to_markdown(text_content, pdf_filename)`**:
         *   **Library Used:** `openai` (for Azure OpenAI)
         *   **Functionality:**
             *   Takes the raw `text_content` (extracted from a PDF) and the original `pdf_filename` (for context in prompts) as input.
@@ -93,7 +93,7 @@ To facilitate understanding and reproducibility, each workflow is accompanied by
             *   Extracts the AI-generated Markdown from the API response.
             *   Includes error handling for the API call, printing an error message and returning `None` if the conversion fails.
 
-    3.  **`save_single_markdown_file(markdown_content, output_path)`**:
+    *  **`save_single_markdown_file(markdown_content, output_path)`**:
         *   **Library Used:** `os` (for path manipulation, though file I/O is standard Python)
         *   **Functionality:**
             *   A utility function that takes the generated `markdown_content` string and an `output_path`.
