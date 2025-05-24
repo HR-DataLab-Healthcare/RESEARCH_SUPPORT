@@ -301,7 +301,8 @@ stateDiagram-v2
   <details>
   <summary><h2><strong>Synthetic Data Generation</strong></h2></summary>
 
-  ```mermaid
+```mermaid
+
 stateDiagram-v2
     Initialize_Script: Configure Azure Client, Paths, NUM_SYNTHETIC_RECORDS
 
@@ -540,7 +541,7 @@ stateDiagram-v2
     Print_Results_To_Console --> End_Evaluation
 
     End_Evaluation --> [*]
-    
+
 ```
 
 <br>
