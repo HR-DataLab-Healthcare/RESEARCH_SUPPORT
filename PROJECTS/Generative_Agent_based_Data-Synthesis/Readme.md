@@ -64,7 +64,9 @@ To facilitate understanding and reproducibility, each workflow is accompanied by
 
   Shown is the prosessing needed for transforming raw PDF documents into a structured Markdown format. This conversion makes the textual content more amenable to subsequent processing, such as pseudonymization and analysis. The process leverages an AI model for intelligent structuring of the extracted text.
 
-  * **Purpose:** To systematically extract all readable text content from a collection of PDF files and then convert this raw text into well-structured Markdown. The conversion aims to preserve or infer document elements like headings, lists, and paragraphs, utilizing the capabilities of an Azure OpenAI GPT-4.1 model.
+  * **Purpose:** 
+    *   To systematically extract all readable text content from a collection of PDF files and then convert this raw text into well-structured Markdown. 
+    *   The conversion aims to preserve or infer document elements like headings, lists, and paragraphs, utilizing the capabilities of an Azure OpenAI GPT-4.1 model.
 
   * **Key Code Components:**
 
@@ -124,13 +126,15 @@ To facilitate understanding and reproducibility, each workflow is accompanied by
       *   `system_prompt`: Defines the AI's role and general output requirements.
       *   `user_prompt`: Provides the specific text and instructions for the conversion task.
 
-  **Workflow Summary:**
+* **Workflow Summary:**
 
-  The main execution block iterates through each PDF file found in `PDF_DIRECTORY_PATH`. For each PDF:
-  1.  Text is extracted using `extract_text_from_pdf`.
-  2.  If text extraction is successful, the text is passed to `convert_text_to_markdown`.
-  3.  If Markdown conversion is successful, the resulting Markdown content is saved as an individual `.md` file using `save_single_markdown_file`.
-  4.  Progress and any errors are logged to the console.
+    * The main execution block iterates through each PDF file found in `PDF_DIRECTORY_PATH`. 
+    * For each PDF:
+        - Text is extracted using `extract_text_from_pdf`.
+        - If text extraction is successful, the text is passed to `convert_text_to_markdown`.
+        - If Markdown conversion is successful, the resulting Markdown content is saved as an individual `.md` file using `save_single_markdown_file`.
+        -Progress and any errors are logged to the console.
+
   </details>
 
 #
@@ -138,9 +142,11 @@ To facilitate understanding and reproducibility, each workflow is accompanied by
 <details>
   <summary><h2><strong>Pseudonymization of Markdown Content</strong></h2></summary>
 
-  This stage is critical for protecting patient privacy. It processes the Markdown files generated in Stage 1 to identify and replace personal identifiers, specifically names, with realistic-sounding pseudonyms. This creates a safer dataset for subsequent tasks, such as training generative models or sharing example data, while aiming to preserve the original document structure and all other content.
+  Shown is the workflow needed to protect patient privacy. It utilizes Markdown files to identify and replace personal identifiers, specifically names, with realistic-sounding pseudonyms. This creates a safer dataset for subsequent tasks, such as training generative models or sharing example data, while aiming to preserve the original document structure and all other content.
 
-  *   **Purpose:** To automatically replace privacy-sensitive information, focusing on person names (e.g., patients, doctors, staff, family members), with plausible, fabricated pseudonyms. This process is performed using an Azure OpenAI model, with strict instructions to *only* modify names and meticulously preserve the original Markdown formatting and all other textual content.
+  *   **Purpose:**
+    * To automatically replace privacy-sensitive information, focusing on person names (e.g., patients, doctors, staff, family members), with plausible, fabricated pseudonyms. 
+    * This process is performed using an Azure OpenAI model, with strict instructions to *only* modify names and meticulously preserve the original Markdown formatting and all other textual content.
 
   *   **Key Code Components:**
       *   **`pseudonymize_markdown(markdown_content, pdf_filename)`**:
@@ -201,15 +207,16 @@ To facilitate understanding and reproducibility, each workflow is accompanied by
           ]
           ```
 
-  *   **Workflow Summary:**
+*  **Workflow Summary:**
     
-  The main script iterates through each Markdown file (produced in Stage 1) found in `PDF_DIRECTORY_PATH`. For each Markdown file:
-  1.  The content of the Markdown file is read.
-  2.  This content is passed to the `pseudonymize_markdown` function.
-  3.  If the AI successfully returns pseudonymized content:
-      *   The `save_single_markdown_file` function saves this modified content to a new file, prefixed with `pseudo_`.
-  4.  Progress and any errors encountered during the API call or file operations are logged to the console.
-  5.  The script also collects all pseudonymized content to later create a combined pseudonymized Markdown file.
+    * The main script iterates through each Markdown file (produced in Stage 1) found in `PDF_DIRECTORY_PATH`. 
+    * For each Markdown file:
+        - The content of the Markdown file is read.
+        - This content is passed to the `pseudonymize_markdown` function.
+        - If the AI successfully returns pseudonymized content:
+        The `save_single_markdown_file` function saves this modified content to a new file, prefixed with `pseudo_`.
+        - Progress and any errors encountered during the API call or file operations are logged to the console.
+        - The script also collects all pseudonymized content to later create a combined pseudonymized Markdown file.
 </details>
 
 <img align="right" width="240" height="240" src="./FIGs/OUPUT_1%2B2.png">
