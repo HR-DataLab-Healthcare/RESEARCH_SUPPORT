@@ -142,6 +142,56 @@ To facilitate understanding and reproducibility, each workflow is accompanied by
 <details>
   <summary><h2><strong>Pseudonymization of Markdown Content</strong></h2></summary>
 
+
+ ```mermaid 
+
+stateDiagram-v2
+    Initialize_Process: Initialize Script & Azure OpenAI Client
+    Initialize_Process --> Find_Markdown_Files
+
+    Find_Markdown_Files: Scan PDF_DIRECTORY_PATH for .md files (from Stage 1)
+    Find_Markdown_Files --> Process_Next_Markdown_Decision
+    state Process_Next_Markdown_Decision <<choice>>
+        Process_Next_Markdown_Decision --> Read_Markdown_Content : [Markdown file available]
+        Process_Next_Markdown_Decision --> End_Pseudonymization_Process : [No more Markdown files]
+
+    Read_Markdown_Content: Read content of current Markdown file
+    Read_Markdown_Content --> Call_Pseudonymize_Markdown
+
+    Call_Pseudonymize_Markdown: pseudonymize_markdown(content, filename)
+    Call_Pseudonymize_Markdown --> Pseudonymization_Check
+    state Pseudonymization_Check <<choice>>
+        Pseudonymization_Check --> Save_Pseudonymized_File : [AI returns pseudonymized content]
+        Pseudonymization_Check --> Log_Pseudonymization_Error : [AI fails or content empty]
+
+    Log_Pseudonymization_Error: Log API error or empty content
+    Log_Pseudonymization_Error --> Collect_Content_For_Combined_File_Error_Path
+    Collect_Content_For_Combined_File_Error_Path: (No content to add)
+    Collect_Content_For_Combined_File_Error_Path --> Process_Next_Markdown_Decision
+
+    Save_Pseudonymized_File: save_single_markdown_file(pseudo_content, output_path)
+    Save_Pseudonymized_File --> File_Save_Check
+    state File_Save_Check <<choice>>
+        File_Save_Check --> Log_Save_Success : [Save Succeeded]
+        File_Save_Check --> Log_Save_Error : [Save Failed]
+
+    Log_Save_Error: Log file writing error
+    Log_Save_Error --> Collect_Content_For_Combined_File_Save_Error_Path
+    Collect_Content_For_Combined_File_Save_Error_Path: (No content to add)
+    Collect_Content_For_Combined_File_Save_Error_Path --> Process_Next_Markdown_Decision
+
+    Log_Save_Success: Log successful pseudonymization and save
+    Log_Save_Success --> Collect_Content_For_Combined_File
+    Collect_Content_For_Combined_File: Add pseudonymized content to list for combined file
+    Collect_Content_For_Combined_File --> Process_Next_Markdown_Decision
+
+    End_Pseudonymization_Process: (Individual files processed, combined file creation follows)
+    End_Pseudonymization_Process --> [*]
+
+ ```
+
+
+
   Shown is the workflow needed to protect patient privacy. It utilizes Markdown files to identify and replace personal identifiers, specifically names, with realistic-sounding pseudonyms. This creates a safer dataset for subsequent tasks, such as training generative models or sharing example data, while aiming to preserve the original document structure and all other content.
 
   *   **Purpose:**
