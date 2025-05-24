@@ -491,7 +491,8 @@ This **iterative, collaborative interaction** ensures that synthetic dossiers ar
   <details>
   <summary><h2><strong>Comparative Analysis of Synthetic vs Genuine EHRs</strong></h2></summary>
 
-```mermaid 
+```mermaid
+
 stateDiagram-v2
     Initialize_Evaluation: Load API configs, paths, evaluation parameters
 
@@ -539,6 +540,7 @@ stateDiagram-v2
     Print_Results_To_Console --> End_Evaluation
 
     End_Evaluation --> [*]
+    
 ```
 
 <br>
