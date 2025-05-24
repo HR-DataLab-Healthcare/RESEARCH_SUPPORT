@@ -2,67 +2,17 @@
 
 # *Privacy, Linguistic & Informational Preserving Synthesis of Clinical Data Through Generative Agents*
 
-
-## Introduction
-
-  This repository is a step-by-step guide to the Python code in the accompanying Jupyter Notebook, supplementing the paper "Privacy, Linguistic & Information Preserving Synthesis of Clinical Data Through Generative Agents" (Frontiers in AI).
-
-  The overall aim is to process real-world PDF clinical notes, pseudonymize them for privacy, generate realistic synthetic notes based on these examples, and evaluate the quality and similarity of the synthetic data using various benchmarks.
-
-  The process is broken down into several stages, as shown in the flow diagram below.
-
-  <details>
-  <summary><h2><strong>User-Friendly Synthetic EHR Generation Workflow</strong></h2></summary>
+Here we provide detailed insight into the followed scientific methododology and applied numerical algorithms, complementing the paper *"Privacy, Linguistic & Information Preserving Synthesis of Clinical Data Through Generative Agents"* **(Frontiers in AI)**. You can find the accompanying Jupyter Notebooks in the [`CODE` directory of this repository](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE).
 
 
-    
-  ```mermaid 
-    
-  stateDiagram-v2
-        Collect --> Pseudonymize
-        Pseudonymize --> Store
-        Store --> Compute
-        Compute --> Toolchain
-        Toolchain --> Orchestrate
-        Orchestrate --> Supervisor
-        Supervisor --> Worker
-        Prompt  --> Supervisor
-        Worker  --> Supervisor
-        %%Prompt --> Model
-        Supervisor --> Model
-        Model --> Generate
-        Generate --> Validate
-        Validate --> Deploy
-    
-        %% Iterative Refinement & Evaluation Loop
-        Generate --> Quantitative
-        Quantitative --> Expert
-        Expert --> Generate
-    
-        %% State labels for clarity
-        state "Collect Real EHR Samples" as Collect
-        state "Pseudonymization of EHR Samples" as Pseudonymize
-        state "Store in Data Warehouse" as Store
-        state "Compute Resources Setup: Cloud & Local" as Compute
-        state "Toolchain Setup: Docker, Flowise, Hugging Face Spaces" as Toolchain
-        state "Multi-Agent Workflow Orchestration" as Orchestrate
-        state "Supervisor Agent" as Supervisor
-        state "Worker Agent" as Worker
-        state "Prompt Engineering: Clinical Guidelines & Standards" as Prompt
-        state "Generative AI Model: GPT-4.1" as Model
-        state "Generate Synthetic EHR" as Generate
-        state "Validate Synthetic EHR Realism & Clinical Accuracy" as Validate
-        state "Deploy Synthetic EHR Application via Secure API Endpoint" as Deploy
-        state "Quantitative Assessment: Entropy, JSD, PMI, BLEU, BERTScore, Classifier Metrics" as Quantitative
-        state "Expert Human Validation" as Expert
-    
-  ```
-</details>
+The data pipeline at the core of our publication is grounded in *computational thinking*, systematically dissecting the complex challenge of clinical data synthesis into a sequence of stagesworkflows. We start with the ingestion of real-world PDF clinical notes, followed by rigorous data pseudonymization to safeguard patient privacy. We then proceed to the generation of realistic synthetic clinical notes, leveraging advanced large language model (LLM) techniques. We conclude with a thorough evaluation of the generated data, assessing both quality and fidelity against multiple benchmarks.
+
+To facilitate understanding and reproducibility, each workflow is accompanied by a flow diagram that clarifies the progression and interconnections within the overall data pipeline. This structured approach enables readers not only to follow the logic behind our methodology, but also to readily adapt or extend the source code for a variety of new research applications. 
 
 #
 
 <details>
-<summary><h2><strong>Stage 1: PDF Text Extraction and Markdown Conversion</strong></h2></summary>
+<summary><h2><strong>PDF Text Extraction and Markdown Conversion</strong></h2></summary>
 
  ```mermaid 
 
@@ -186,7 +136,7 @@
 #
 
 <details>
-  <summary><h2><strong>Stage 2: AI-Powered Pseudonymization of Markdown Content</strong></h2></summary>
+  <summary><h2><strong>Pseudonymization of Markdown Content</strong></h2></summary>
 
   This stage is critical for protecting patient privacy. It processes the Markdown files generated in Stage 1 to identify and replace personal identifiers, specifically names, with realistic-sounding pseudonyms. This creates a safer dataset for subsequent tasks, such as training generative models or sharing example data, while aiming to preserve the original document structure and all other content.
 
@@ -267,7 +217,7 @@
 #
 
   <details>
-  <summary><h2><strong>Stage 3: Combining Markdown Files (Optional)</strong></h2></summary>
+  <summary><h2><strong>Combining Markdown Files</strong></h2></summary>
 
   This stage is primarily for creating single files containing the processed data, which can be useful for reviewing the entire dataset or for simple corpus loading, although the subsequent stages load individual files.
 
@@ -289,7 +239,7 @@
 
 
   <details>
-  <summary><h2><strong>Stage 4: Synthetic Data Generation – Functionality and Purpose </strong></h2></summary>
+  <summary><h2><strong>Synthetic Data Generation</strong></h2></summary>
 
 Stage 4 of the EPD processing pipeline is built around the `generate_synthetic_record` function, which uses a `two-tiered prompting strategy—Supervisor (system prompt) and Worker (user prompt)—`to direct the GPT-4.1 large language model (LLM) in producing high-quality, structured dossiers. The Supervisor establishes the model’s overarching role, domain norms, and key rules, while the Worker delivers detailed, record-specific instructions for each dossier. This layered approach ensures outputs are both consistently formatted and uniquely tailored to each case. The purpose of stage 4 is to securely generate realistic, anonymized patient records that support research, development, or testing, without exposing any real patient information.  
 
