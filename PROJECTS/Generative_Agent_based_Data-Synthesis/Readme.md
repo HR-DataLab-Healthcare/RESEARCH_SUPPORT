@@ -492,7 +492,7 @@ This **iterative, collaborative interaction** ensures that synthetic dossiers ar
 
 
   <details>
-  <summary><h2><strong>Synthetic Data Evaluation</strong></h2></summary>
+  <summary><h2><strong>Comparative Analysis of Synthetic vs Genuine EHRs</strong></h2></summary>
 
 ```mermaid 
 stateDiagram-v2
@@ -544,9 +544,12 @@ stateDiagram-v2
     End_Evaluation --> [*]
 ```
 <br>
-  Show is the forkflow neede to assesses the quality and similarity of the generated synthetic data compared to the pseudonymized real data using a combination of quantitative benchmarks and a qualitative AI-based review.
 
-  * **Purpose:** To provide metrics and descriptions that indicate how well the synthetic data captures the linguistic, structural, and clinical characteristics of the real-world pseudonymized data.
+  Show is the workflow needed to assesses the quality and similarity of the generated synthetic data compared to the pseudonymized real data using a combination of quantitative benchmarks and a qualitative AI-based review.
+
+  * **Purpose:** 
+    * To provide metrics and descriptions that indicate how well the synthetic data captures the linguistic, structural, and clinical characteristics of the real-world pseudonymized data.
+
   * **Key Code Components:**
     * `load_file_content(filepath)`: Helper function to load content for evaluation.
     * `calculate_entropy(text, unit)`: Calculates Shannon's Entropy (character and word level).
