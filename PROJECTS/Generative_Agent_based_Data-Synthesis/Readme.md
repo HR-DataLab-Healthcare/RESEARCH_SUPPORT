@@ -198,12 +198,12 @@ stateDiagram-v2
 
   *   **Key Code Components:**
       *   **`pseudonymize_markdown(markdown_content, pdf_filename)`**:
-      
+
   *  **Purpose:**
     * To automatically replace privacy-sensitive information, focusing on person names (e.g., patients, doctors, staff, family members), with plausible, fabricated pseudonyms. 
     * This process is performed using an Azure OpenAI model, with strict instructions to *only* modify names and meticulously preserve the original Markdown formatting and all other textual content.
 
-  *   **Key Code Components:**
+  *   **kkkKey Code Components:**
       *   **`pseudonymize_markdown(markdown_content, pdf_filename)`**:
           *   **Library Used:** `openai` (for Azure OpenAI).
           *   **Functionality:**
