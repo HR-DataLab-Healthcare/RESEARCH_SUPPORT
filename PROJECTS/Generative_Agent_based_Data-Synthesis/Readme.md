@@ -291,7 +291,7 @@
   <details>
   <summary><h2><strong>Stage 4: Synthetic Data Generation – Functionality and Purpose </strong></h2></summary>
 
-Stage 4 of the EPD processing pipeline is is built around the `generate_synthetic_record` function, which uses a `two-tiered prompting strategy—Supervisor (system prompt) and Worker (user prompt)—`to direct the GPT-4.1 large language model (LLM) in producing high-quality, structured dossiers. The Supervisor establishes the model’s overarching role, domain norms, and key rules, while the Worker delivers detailed, record-specific instructions for each dossier. This layered approach ensures outputs are both consistently formatted and uniquely tailored to each case. The purpose of stage 4 is to securely generate realistic, anonymized patient records that support research, development, or testing, without exposing any real patient information.  
+Stage 4 of the EPD processing pipeline is built around the `generate_synthetic_record` function, which uses a `two-tiered prompting strategy—Supervisor (system prompt) and Worker (user prompt)—`to direct the GPT-4.1 large language model (LLM) in producing high-quality, structured dossiers. The Supervisor establishes the model’s overarching role, domain norms, and key rules, while the Worker delivers detailed, record-specific instructions for each dossier. This layered approach ensures outputs are both consistently formatted and uniquely tailored to each case. The purpose of stage 4 is to securely generate realistic, anonymized patient records that support research, development, or testing, without exposing any real patient information.  
 
 ### Supervisor vs Worker layered prompting:
 
