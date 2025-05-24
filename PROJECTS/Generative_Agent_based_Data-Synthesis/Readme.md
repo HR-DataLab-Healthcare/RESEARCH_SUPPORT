@@ -213,7 +213,7 @@ To facilitate understanding and reproducibility, each workflow is accompanied by
     * For each Markdown file:
         - The content of the Markdown file is read.
         - This content is passed to the `pseudonymize_markdown` function.
-        - If the AI successfully returns pseudonymized content:
+        - If the AI successfully returns pseudonymized content: <br>
         The `save_single_markdown_file` function saves this modified content to a new file, prefixed with `pseudo_`.
         - Progress and any errors encountered during the API call or file operations are logged to the console.
         - The script also collects all pseudonymized content to later create a combined pseudonymized Markdown file.
