@@ -483,117 +483,70 @@ Shown is the workflow needed for generating synthetic EHRs. It uses a two-tiered
 
 <br>
 
-
-<span style="font-size: 12px;">
-
-
 ```mermaid
 
 stateDiagram-v2
-    [*] --> EvaluationMetricsSuite
-
-    note right of EvaluationMetricsSuite
-        Overview of evaluation metrics implemented in the script.
-        Each path represents one type of analysis performed
-        by the corresponding Python function.
+    [*] --> Initialize
+    Initialize --> Load_Files
+    note right of Load_Files
+        File loading protocol:
+        1. glob.glob pattern matching
+        2. Content validation checks
+        3. Encoding normalization
     end note
-
-    EvaluationMetricsSuite --> Metric_ShannonEntropy : calculate_entropy
-    Metric_ShannonEntropy: **Shannon Entropy**\nCalculates Shannon's entropy to quantify<br>uncertainty or information content.
-
-    EvaluationMetricsSuite --> Metric_AvgBigramPMI : calculate_avg_bigram_pmi
-    Metric_AvgBigramPMI: **Average Bigram PMI**\nCalculates average Pointwise Mutual Information<br>to measure strength of word associations.
-
-    EvaluationMetricsSuite --> Metric_JSD : calculate_kl_divergence
-    Metric_JSD: **Jensen-Shannon Divergence (JSD)**\nMeasures distributional similarity between<br>two text corpora.
-
-    EvaluationMetricsSuite --> Metric_CorpusBLEU : calculate_corpus_bleu
-    Metric_CorpusBLEU: **Corpus BLEU Score**\nMeasures surface-level similarity (n-gram overlap)<br>to gauge novelty vs. direct copying.
-
-    EvaluationMetricsSuite --> Metric_BERTScore : calculate_corpus_bertscore
-    Metric_BERTScore: **BERTScore (Precision, Recall, F1)**\nMeasures semantic similarity using<br>contextual word embeddings.
-
-    EvaluationMetricsSuite --> Metric_ClassifierDiscriminability : evaluate_classifier_performance
-    Metric_ClassifierDiscriminability: **Classifier Discriminability**\nTests how easily an ML classifier can<br>distinguish real from synthetic data (realism).
-
-    EvaluationMetricsSuite --> Metric_LLMQualitativeComparison : compare_docs_with_gpt4
-    Metric_LLMQualitativeComparison: **LLM-based Qualitative Comparison**\nUses GPT-4 to assess similarity on structure,<br>style, clinical patterns, and realism.
-
-    Metric_ShannonEntropy --> EvaluationResults
-    Metric_AvgBigramPMI --> EvaluationResults
-    Metric_JSD --> EvaluationResults
-    Metric_CorpusBLEU --> EvaluationResults
-    Metric_BERTScore --> EvaluationResults
-    Metric_ClassifierDiscriminability --> EvaluationResults
-    Metric_LLMQualitativeComparison --> EvaluationResults
-
-    EvaluationResults --> [*]
-
+    
+    Load_Files --> Check_Benchmarks
+    Check_Benchmarks --> Concatenate_Texts : "Run"
+    Check_Benchmarks --> Setup_GPT4 : "Skip"
+    
+    Concatenate_Texts --> Calc_Entropy
+    Calc_Entropy --> Calc_Length
+    Calc_Length --> Calc_PMI
+    Calc_PMI --> Calc_JSD
+    Calc_JSD --> Calc_BLEU
+    note right of Calc_BLEU
+        BLEU Score Parameters:
+        - N-gram weights: 0.25 uniform
+        - Smoothing: Method2
+        - Auto reweighting: Enabled
+    end note
+    
+    Calc_BLEU --> Calc_BERTScore
+    note right of Calc_BERTScore
+        BERTScore Configuration:
+        - Model: roberta-large
+        - Baseline: Wikipedia 2018
+        - idf_weighting: Enabled
+    end note
+    
+    Calc_BERTScore --> Eval_Classifier
+    Eval_Classifier --> Store_Benchmarks
+    Store_Benchmarks --> Setup_GPT4
+    
+    Setup_GPT4 --> Check_GPT4
+    Check_GPT4 --> Select_Files : "Ready"
+    Check_GPT4 --> Skip_GPT4 : "Skip"
+    
+    Select_Files --> Loop_Start
+    Loop_Start --> Select_Pair
+    Select_Pair --> Load_Pair
+    Load_Pair --> Call_GPT4
+    Call_GPT4 --> Store_Result
+    Store_Result --> Add_Delay
+    Add_Delay --> Check_More : "Continue"
+    Add_Delay --> Print_Summary : "Complete"
+    
+    Print_Summary --> Generate_Report
+    Skip_GPT4 --> Generate_Report
+    
+    Generate_Report --> Display_Benchmarks
+    Display_Benchmarks --> Display_GPT4
+    Display_GPT4 --> Save_Results
+    Save_Results --> Finalize
+    Finalize --> [*]
 ```
 
-<br><br>
-
-
-
-
-
-```mermaid
-
-stateDiagram-v2
-    [*] --> EvaluationMetricsSuite
-
-    EvaluationMetricsSuite --> Metric_ShannonEntropy : calculate_entropy
-    Metric_ShannonEntropy: **Shannon Entropy**\nCalculates Shannon's entropy to quantify<br>uncertainty or information content.
-
-    EvaluationMetricsSuite --> Metric_AvgBigramPMI : calculate_avg_bigram_pmi
-    Metric_AvgBigramPMI: **Average Bigram PMI**\nCalculates average Pointwise Mutual Information<br>to measure strength of word associations.
-
-    EvaluationMetricsSuite --> Metric_JSD : calculate_kl_divergence
-    Metric_JSD: **Jensen-Shannon Divergence (JSD)**\nMeasures distributional similarity between<br>two text corpora.
-
-    EvaluationMetricsSuite --> Metric_CorpusBLEU : calculate_corpus_bleu
-    Metric_CorpusBLEU: **Corpus BLEU Score**\nMeasures surface-level similarity (n-gram overlap)<br>to gauge novelty vs. direct copying.
-
-    EvaluationMetricsSuite --> Metric_BERTScore : calculate_corpus_bertscore
-    Metric_BERTScore: **BERTScore (Precision, Recall, F1)**\nMeasures semantic similarity using<br>contextual word embeddings.
-
-    EvaluationMetricsSuite --> Metric_ClassifierDiscriminability : evaluate_classifier_performance
-    Metric_ClassifierDiscriminability: **Classifier Discriminability**\nTests how easily an ML classifier can<br>distinguish real from synthetic data (realism).
-
-    EvaluationMetricsSuite --> Metric_LLMQualitativeComparison : compare_docs_with_gpt4
-    Metric_LLMQualitativeComparison: **LLM-based Qualitative Comparison**\nUses GPT-4 to assess similarity on structure,<br>style, clinical patterns, and realism.
-
-    Metric_ShannonEntropy --> EvaluationResults
-    Metric_AvgBigramPMI --> EvaluationResults
-    Metric_JSD --> EvaluationResults
-    Metric_CorpusBLEU --> EvaluationResults
-    Metric_BERTScore --> EvaluationResults
-    Metric_ClassifierDiscriminability --> EvaluationResults
-    Metric_LLMQualitativeComparison --> EvaluationResults
-
-    EvaluationResults --> [*]
-
-
-```
-
-<br><br>
-
-
-
-
-| Metric, Purpose, & Parameters | Calculation Steps | Evaluation Significance |
-|----------------------------------------------|-------------------|-------------------------|
-| **Metric:** `calculate_entropy(text, unit)`<br>**Purpose:** Calculates Shannon's entropy to quantify the uncertainty or information content of a given text corpus (character or word level).<br>**Parameters:**<br>- `text` (str): input corpus<br>- `unit` (str): token type (`'char'` or `'word'`) | 1. Tokenize text into characters or words<br>2. Count token frequencies<br>3. Compute token probabilities<br>4. Compute entropy:<br>$H(X) = -\sum_{i=1}^{n}P(x_i)\log_2P(x_i)$ | Measures linguistic diversity and predictability; entropy close to real data indicates realistic complexity. Low entropy implies simplistic/repetitive text, high entropy may suggest unnatural complexity. |
-| **Metric:** `calculate_avg_bigram_pmi(text, min_freq)`<br>**Purpose:** Calculates average Pointwise Mutual Information (PMI) of word bigrams to measure the strength of word associations in the text.<br>**Parameters:**<br>- `text` (str): input corpus<br>- `min_freq` (int): minimum frequency threshold for bigrams (default `3`) | 1. Tokenize text into words (lowercased)<br>2. Count frequencies for words and bigrams<br>3. For bigrams meeting `min_freq`, calculate probabilities:<br>$PMI(w_1,w_2)=\log_2\frac{P(w_1,w_2)}{P(w_1)P(w_2)}$<br>4. Compute average PMI across all qualifying bigrams | Indicates realistic word collocations and phrase structures; synthetic PMI close to real data suggests natural language generation; significantly lower PMI indicates random or unnatural word pairings. |
-| **Metric:** **Jensen-Shannon Divergence (JSD)** via `calculate_kl_divergence`<br>**Purpose:** Measures distributional similarity between two text corpora, quantifying how similar the statistical patterns (of words or characters) are between synthetic and real data.<br>**Parameters:**<br>- `text1` (str): First text corpus (e.g., pseudonymized text) <br> - `text2` (str): Second text corpus (e.g., synthetic text) <br> - `unit` (str): 'char' or 'word', determines tokenization method | 1. Tokenize both texts by character or word, per `unit`. <br> 2. Compute token probability distributions for both texts ($P$, $Q$) with smoothing; build over their combined vocabulary. <br> 3. Calculate Kullback-Leibler divergences: $KL(P \| Q)$ and $KL(Q \| P)$ using `scipy.stats.entropy`. <br> 4. Compute JSD: $JSD(P \| Q) = 0.5 \times (KL(P \| Q) + KL(Q \| P))$ | - **Low JSD ($0$):** Distributions are identical; synthetic data mimics language patterns of real data.<br>- **High JSD:** Greater divergence between synthetic and real word/character usage; less similar. |
-| **Metric:** **Corpus BLEU Score** via `calculate_corpus_bleu`<br>**Purpose:** Measures surface-level similarity (n-gram overlap) between synthetic corpus and set of reference texts; helps gauge novelty vs. direct copying.<br>**Parameters:**<br>- `synthetic_contents` (list of str): List of synthetic documents. <br> - `pseudo_contents_list` (list of str): List of reference (pseudonymized) documents; all are references for each synthetic document. | - Uses `sacrebleu.corpus_bleu`. <br> - Computes overlap of 1–4 word n-grams between each synthetic doc and all reference docs. <br> - Applies brevity penalty if synthetic text is much shorter. <br> - Score ranges from $0$ to $100$ (or $0$ to $1$ if not scaled). | - **High BLEU:** Synthetic text closely matches references, indicating low novelty and possible privacy risk.<br>- **Low BLEU:** Synthetic text has higher novelty; less n-gram overlap with reference data. (Desirable for synthetic data) |
-| **Metric:** **BERTScore (Precision, Recall, F1)** via `calculate_corpus_bertscore`<br>**Purpose:** Measures semantic similarity between synthetic and reference texts by comparing contextual word embeddings from a pre-trained BERT model. Captures similarity in meaning, not just surface-level overlaps.<br>**Parameters:**<br>- `synthetic_contents` (list of str): Synthetic documents.<br> - `pseudo_contents_list` (list of str): Reference documents.<br> - `lang` (str): Language code (e.g., 'nl' for Dutch), specifies BERT model used. | 1. Generate contextual token embeddings for each sentence in both synthetic and reference sets.<br>2. Compute pairwise cosine similarity between candidate and reference token embeddings.<br>3. Greedy matching of tokens for maximum alignment.<br>4. Calculate **Precision** (average max similarity for synthetic tokens), **Recall** (average max similarity for reference tokens), and **F1** (harmonic mean of P/R).<br>5. Return mean corpus-level scores. | - **Higher F1:** Indicates higher semantic similarity; synthetic text conveys meanings similar to the real data.<br>- Meaningful even if wording diverges.<br>- Useful for assessing whether generated data is relevant and meaningful. |
-| **Metric:** **Classifier Discriminability** via `evaluate_classifier_performance`<br>**Purpose:** Tests how easily a ML classifier (Logistic Regression on TF-IDF) can distinguish real (pseudonymized) from synthetic data. Indicates the "realism" of synthetic data.<br>**Parameters:**<br>- `pseudo_contents` (list of str): Pseudonymized (real) documents.<br>- `synthetic_contents` (list of str): Synthetic documents.<br>- `test_size` (float): Test set proportion.<br>- `random_state` (int): Seed for reproducibility.<br>- `max_features` (int): Maximum TF-IDF features. | 1. Label real data as class 0 and synthetic data as class 1.<br>2. Split into training/test sets.<br>3. Create pipeline: `TfidfVectorizer` + `LogisticRegression`.<br>4. Train on train set.<br>5. Predict probabilities on test set.<br>6. Compute ROC AUC and AUPRC. | - **AUC/AUPRC ≈ 0.5:** Classifier can't distinguish; synthetic is very realistic.<br>- **AUC/AUPRC ≈ 1.0:** Classifier easily separates classes; unrealistic synthetic data.<br>- Good indication of "machine-discernibility."<br>- Lower values are desirable for synthetic data quality. |
-| **Metric:** **LLM-based Qualitative Comparison** via `compare_docs_with_gpt4`<br>**Purpose:** Uses GPT-4 (via Azure OpenAI) to assess the similarity of a pseudonymized and a synthetic document on structure, style, clinical patterns, and realism—in a qualitative, "expert" manner.<br>**Parameters:**<br>- `client`: Initialized Azure OpenAI client.<br>- `pseudo_content` (str): Pseudonymized document content.<br>- `synthetic_content` (str): Synthetic document content.<br>- `pseudo_filename` (str): Filename for pseudonymized document (for prompt context).<br>- `synthetic_filename` (str): Filename for synthetic document. | 1. Builds a system prompt specifying the AI's expert clinical role.<br>2. User prompt provides both documents and asks for comparison (structure, style, clinical patterns, realism, SOEP template adherence), explicitly *not* on details but on overall template, style, plausibility.<br>3. Sends prompts to Azure OpenAI API (GPT-4).<br>4. Parses the returned text for both a rich qualitative description and a categorical rating (Laag/Matig/Hoog). | - **Adds Human-like Judgment:** Captures subtleties like cohesion, realism, and clinical plausibility beyond numbers.<br>- **Contextualizes Quantitative Results:** Explains underlying causes of scores.<br>- **Clear Ratings:** Categorical (Laag/Matig/Hoog) summary quickly indicates perceived similarity.<br>- **Faithful to Real-World Use:** Mimics human expert review, providing holistic and contextual feedback. |
-
-</span>
-
-Shown is an tabelized overview of metrics used to assesses the quality and similarity of the generated synthetic EHRs compared to the pseudonymized real-world EHRs using a combination of quantitative benchmarks and a qualitative AI-based review.
+Shown is the workflow used to assesses the quality and similarity of the generated synthetic EHRs compared to the pseudonymized real-world EHRs using a combination of quantitative benchmarks and a qualitative AI-based review.
 
   * **Purpose:** 
     * To provide metrics and descriptions that indicate how well the synthetic data captures the linguistic, structural, and clinical characteristics of the real-world pseudonymized data.
@@ -653,6 +606,69 @@ Shown is an tabelized overview of metrics used to assesses the quality and simil
 **REFERENCES**
 
 #
+
+
+
+
+
+
+
+<span style="font-size: 12px;">
+
+<br><br>
+
+
+```mermaid
+
+stateDiagram-v2
+
+    Evaulation_Framework --> Metric_ShannonEntropy : calculate_entropy
+    Metric_ShannonEntropy: **Shannon Entropy**\nCalculates Shannon's entropy to quantify<br>uncertainty or information content.
+
+    Evaulation_Framework --> Metric_AvgBigramPMI : calculate_avg_bigram_pmi
+    Metric_AvgBigramPMI: **Average Bigram PMI**\nCalculates average Pointwise Mutual Information<br>to measure strength of word associations.
+
+    Evaulation_Framework --> Metric_JSD : calculate_kl_divergence
+    Metric_JSD: **Jensen-Shannon Divergence (JSD)**\nMeasures distributional similarity between<br>two text corpora.
+
+    Evaulation_Framework --> Metric_CorpusBLEU : calculate_corpus_bleu
+    Metric_CorpusBLEU: **Corpus BLEU Score**\nMeasures surface-level similarity (n-gram overlap)<br>to gauge novelty vs. direct copying.
+
+    Evaulation_Framework --> Metric_BERTScore : calculate_corpus_bertscore
+    Metric_BERTScore: **BERTScore (Precision, Recall, F1)**\nMeasures semantic similarity using<br>contextual word embeddings.
+
+    Evaulation_Framework --> Metric_ClassifierDiscriminability : evaluate_classifier_performance
+    Metric_ClassifierDiscriminability: **Classifier Discriminability**\nTests how easily an ML classifier can<br>distinguish real from synthetic data (realism).
+
+    Evaulation_Framework --> Metric_LLMQualitativeComparison : compare_docs_with_gpt4
+    Metric_LLMQualitativeComparison: **LLM-based Qualitative Comparison**\nUses GPT-4 to assess similarity on structure,<br>style, clinical patterns, and realism.
+
+    Metric_ShannonEntropy --> EvaluationResults
+    Metric_AvgBigramPMI --> EvaluationResults
+    Metric_JSD --> EvaluationResults
+    Metric_CorpusBLEU --> EvaluationResults
+    Metric_BERTScore --> EvaluationResults
+    Metric_ClassifierDiscriminability --> EvaluationResults
+    Metric_LLMQualitativeComparison --> EvaluationResults
+
+```
+
+<br><br>
+
+
+
+
+| Benchmark Characterization | Computational Steps  | Evaluation Significance & interpretation |
+|-------------------------|---------------------------------|------------------------------------------|
+| **Metric:** `calculate_entropy(text, unit)`<br><br>**Purpose:** Calculates Shannon's entropy to quantify the uncertainty or information content of a given text corpus (character or word level).<br><br>**Parameters:**<br>- `text` (str): input corpus<br>- `unit` (str): token type (`'char'` or `'word'`) | 1. Tokenize text into characters or words<br>2. Count token frequencies<br>3. Compute token probabilities<br>4. Compute entropy:<br>$H(X) = -\sum_{i=1}^{n}P(x_i)\log_2P(x_i)$ | Measures linguistic diversity and predictability; <br> Entropy close to real data indicates realistic complexity. <br> Low entropy implies simplistic/repetitive text, high entropy may suggest unnatural complexity. |
+| **Metric:** `calculate_avg_bigram_pmi(text, min_freq)`<br><br>**Purpose:** Calculates average Pointwise Mutual Information (PMI) of word bigrams to measure the strength of word associations in the text.<br><br>**Parameters:**<br>- `text` (str): input corpus<br>- `min_freq` (int): minimum frequency threshold for bigrams (default `3`) | 1. Tokenize text into words (lowercased)<br>2. Count frequencies for words and bigrams<br>3. For bigrams meeting `min_freq`, calculate probabilities:<br>$PMI(w_1,w_2)=\log_2\frac{P(w_1,w_2)}{P(w_1)P(w_2)}$<br>4. Compute average PMI across all qualifying bigrams | Indicates realistic word collocations and phrase structures; synthetic PMI close to real data suggests natural language generation; significantly lower PMI indicates random or unnatural word pairings. |
+| **Metric:** **Jensen-Shannon Divergence (JSD)** via `calculate_kl_divergence`<br><br>**Purpose:** Measures distributional similarity between two text corpora, quantifying how similar the statistical patterns (of words or characters) are between synthetic and real data.<br><br>**Parameters:**<br>- `text1` (str): First text corpus (e.g., pseudonymized text) <br> - `text2` (str): Second text corpus (e.g., synthetic text) <br> - `unit` (str): 'char' or 'word', determines tokenization method | 1. Tokenize both texts by character or word, per `unit`. <br> 2. Compute token probability distributions for both texts ($P$, $Q$) with smoothing; build over their combined vocabulary. <br> 3. Calculate Kullback-Leibler divergences: $KL(P \| Q)$ and $KL(Q \| P)$ using `scipy.stats.entropy`. <br> 4. Compute JSD: $JSD(P \| Q) = 0.5 \times (KL(P \| Q) + KL(Q \| P))$ | - **Low JSD ($0$):** Distributions are identical; synthetic data mimics language patterns of real data.<br>- **High JSD:** Greater divergence between synthetic and real word/character usage; less similar. |
+| **Metric:** **Corpus BLEU Score** via `calculate_corpus_bleu`<br><br>**Purpose:** Measures surface-level similarity (n-gram overlap) between synthetic corpus and set of reference texts; helps gauge novelty vs. direct copying.<br><br>**Parameters:**<br>- `synthetic_contents` (list of str): List of synthetic documents. <br> - `pseudo_contents_list` (list of str): List of reference (pseudonymized) documents; all are references for each synthetic document. | - Uses `sacrebleu.corpus_bleu`. <br> - Computes overlap of 1–4 word n-grams between each synthetic doc and all reference docs. <br> - Applies brevity penalty if synthetic text is much shorter. <br> - Score ranges from $0$ to $100$ (or $0$ to $1$ if not scaled). | - **High BLEU:** Synthetic text closely matches references, indicating low novelty and possible privacy risk.<br>- **Low BLEU:** Synthetic text has higher novelty; less n-gram overlap with reference data. (Desirable for synthetic data) |
+| **Metric:** **BERTScore (Precision, Recall, F1)** via `calculate_corpus_bertscore`<br><br>**Purpose:** Measures semantic similarity between synthetic and reference texts by comparing contextual word embeddings from a pre-trained BERT model. Captures similarity in meaning, not just surface-level overlaps.<br><br>**Parameters:**<br>- `synthetic_contents` (list of str): Synthetic documents.<br> - `pseudo_contents_list` (list of str): Reference documents.<br> - `lang` (str): Language code (e.g., 'nl' for Dutch), specifies BERT model used. | 1. Generate contextual token embeddings for each sentence in both synthetic and reference sets.<br>2. Compute pairwise cosine similarity between candidate and reference token embeddings.<br>3. Greedy matching of tokens for maximum alignment.<br>4. Calculate **Precision** (average max similarity for synthetic tokens), **Recall** (average max similarity for reference tokens), and **F1** (harmonic mean of P/R).<br>5. Return mean corpus-level scores. | - **Higher F1:** Indicates higher semantic similarity; synthetic text conveys meanings similar to the real data.<br>- Meaningful even if wording diverges.<br>- Useful for assessing whether generated data is relevant and meaningful. |
+| **Metric:** **Classifier Discriminability** via `evaluate_classifier_performance`<br><br>**Purpose:** Tests how easily a ML classifier (Logistic Regression on TF-IDF) can distinguish real (pseudonymized) from synthetic data. Indicates the "realism" of synthetic data.<br><br>**Parameters:**<br>- `pseudo_contents` (list of str): Pseudonymized (real) documents.<br>- `synthetic_contents` (list of str): Synthetic documents.<br>- `test_size` (float): Test set proportion.<br>- `random_state` (int): Seed for reproducibility.<br>- `max_features` (int): Maximum TF-IDF features. | 1. Label real data as class 0 and synthetic data as class 1.<br>2. Split into training/test sets.<br>3. Create pipeline: `TfidfVectorizer` + `LogisticRegression`.<br>4. Train on train set.<br>5. Predict probabilities on test set.<br>6. Compute ROC AUC and AUPRC. | - **AUC/AUPRC ≈ 0.5:** Classifier can't distinguish; synthetic is very realistic.<br>- **AUC/AUPRC ≈ 1.0:** Classifier easily separates classes; unrealistic synthetic data.<br>- Good indication of "machine-discernibility."<br>- Lower values are desirable for synthetic data quality. |
+| **Metric:** **LLM-based Qualitative Comparison** via `compare_docs_with_gpt4`<br><br>**Purpose:** Uses GPT-4 (via Azure OpenAI) to assess the similarity of a pseudonymized and a synthetic document on structure, style, clinical patterns, and realism—in a qualitative, "expert" manner.<br><br>**Parameters:**<br>- `client`: Initialized Azure OpenAI client.<br>- `pseudo_content` (str): Pseudonymized document content.<br>- `synthetic_content` (str): Synthetic document content.<br>- `pseudo_filename` (str): Filename for pseudonymized document (for prompt context).<br>- `synthetic_filename` (str): Filename for synthetic document. | 1. Builds a system prompt specifying the AI's expert clinical role.<br>2. User prompt provides both documents and asks for comparison (structure, style, clinical patterns, realism, SOEP template adherence), explicitly *not* on details but on overall template, style, plausibility.<br>3. Sends prompts to Azure OpenAI API (GPT-4).<br>4. Parses the returned text for both a rich qualitative description and a categorical rating (Laag/Matig/Hoog). | - **Adds Human-like Judgment:** Captures subtleties like cohesion, realism, and clinical plausibility beyond numbers.<br>- **Contextualizes Quantitative Results:** Explains underlying causes of scores.<br>- **Clear Ratings:** Categorical (Laag/Matig/Hoog) summary quickly indicates perceived similarity.<br>- **Faithful to Real-World Use:** Mimics human expert review, providing holistic and contextual feedback. |
+
+</span>
 
 
 
