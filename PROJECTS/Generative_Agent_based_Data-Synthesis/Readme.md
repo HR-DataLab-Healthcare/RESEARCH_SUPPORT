@@ -513,8 +513,8 @@ stateDiagram-v2
     Calc_BLEU --> Calc_BERTScore
     note right of Calc_BERTScore
         BERTScore Configuration:
-        - Model: roberta-large
-        - Baseline: Wikipedia 2018
+        - lang: nl
+        - Model: GroNLP/bert-base-dutch-cased
         - idf_weighting: Enabled
     end note
     
@@ -664,6 +664,8 @@ It details the computational steps and interpretative significance of each metri
 #
 
 **REFERENCES**
+
+* https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation
 
 #
 
