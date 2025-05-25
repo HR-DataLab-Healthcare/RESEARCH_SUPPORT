@@ -62,7 +62,7 @@ To facilitate understanding and reproducibility, each workflow is accompanied by
  ```
 
 
-  Shown is the prosessing needed for transforming raw PDF documents into a structured Markdown format. This conversion makes the textual content more amenable to subsequent processing, such as pseudonymization and analysis. The process leverages an AI model for intelligent structuring of the extracted text.
+  Shown is the flow used for transforming raw PDF documents into a structured Markdown format. This conversion makes the textual content more amenable to subsequent processing, such as pseudonymization and analysis. The process leverages an AI model for intelligent structuring of the extracted text.
 
   * **Purpose:** 
     *   To systematically extract all readable text content from a collection of PDF files and then convert this raw text into well-structured Markdown. 
@@ -192,7 +192,7 @@ stateDiagram-v2
 
 <br> 
 
-  Shown is the workflow needed to protect patient privacy. It utilizes Markdown files to identify and replace personal identifiers, specifically names, with realistic-sounding pseudonyms. This creates a safer dataset for subsequent tasks, such as training generative models or sharing example data, while aiming to preserve the original document structure and all other content.
+  Shown is the workflow used to protect patient privacy. It utilizes Markdown files to identify and replace personal identifiers, specifically names, with realistic-sounding pseudonyms. This creates a safer dataset for subsequent tasks, such as training generative models or sharing example data, while aiming to preserve the original document structure and all other content.
 
   *  **Purpose:**
         * To automatically replace privacy-sensitive information, focusing on person names (e.g., patients, doctors, staff, family members), with plausible, fabricated pseudonyms. 
@@ -276,7 +276,7 @@ stateDiagram-v2
   <details>
   <summary><h2><strong>Combining Markdown Files</strong></h2></summary>
 
-  Shown is the workflow needed for creating single files comprising all processed data, which can be useful for reviewing the entire dataset or for simple corpus loading.
+  Described is the workflow used for creating single files comprising all processed data, which can be useful for reviewing the entire dataset or for simple corpus loading.
 
   * **Purpose:**
 
@@ -353,7 +353,7 @@ stateDiagram-v2
 
 <br>
 
-Shown is the workflow needed for generating synthetic EHRs. It uses a two-tiered prompting strategy:  *Supervisor prompts set overall structure and standards*, while *Worker prompts provide case-specific instructions*.  In doing so, the GPT-4.1 LLM is directed to produce synthetic EHRs that are not only realistic and coherent but also consistently formatted and effectively anonymized. This approach is designed to create valuable data for research and development purposes without compromising the privacy of real patient information.
+Shown is the workflow used to generate synthetic EHRs. It uses a two-tiered prompting strategy:  *Supervisor prompts set overall structure and standards*, while *Worker prompts provide case-specific instructions*.  In doing so, the GPT-4.1 LLM is directed to produce synthetic EHRs that are not only realistic and coherent but also consistently formatted and effectively anonymized. This approach is designed to create valuable data for research and development purposes without compromising the privacy of real patient information.
 
 
 
@@ -599,7 +599,7 @@ Shown is the workflow used to assesses the quality and similarity of the generat
 #
 
 <details>
-  <summary><h2><strong>Benchmark Characterisation Overview</strong></h2></summary>
+  <summary><h2><strong>Benchmark Overview</strong></h2></summary>
 
 
   <br><br>
@@ -640,10 +640,13 @@ stateDiagram-v2
 
 ```
 
-<br><br>
+<br>
 
+Shown is an overview of the metrics used that make up the Benchmark Evalutation Framework. 
+The table entails our benchmarking framework for assessing the realism and utility of synthetic clinical corpora relative to pseudonymized reference data.
+It details the computational steps and interpretative significance of each metric. Together, these metrics enable comprehensive, nuanced measurement of fluency, diversity, fidelity, novelty, and clinical plausibility in synthetic text generation.
 
-
+<br>
 
 | Benchmark Characterization | Computational Steps  | Evaluation Significance & interpretation |
 |-------------------------|---------------------------------|------------------------------------------|
