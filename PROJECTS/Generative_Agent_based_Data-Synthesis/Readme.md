@@ -668,14 +668,114 @@ It details the computational steps and interpretative significance of each metri
 
 #
 
+PROMPT
+derive  a mermaid stateDiagram-v2 from the image content 
+make sure all the visiable components are accounted for  + described 
+provide it in markdown syntax
+
+```mermaid
+
+stateDiagram-v2  
+    %% Document Loading & Splitting  
+    PDFFile: PDF File  
+    RCTextSplitter: Recursive Character Text Splitter  
+    PDFFile --> RCTextSplitter: Document  
+  
+    %% Embedding Creation  
+    AzureEmbeddings: Azure OpenAI Embeddings  
+    RCTextSplitter --> AzureEmbeddings: Document  
+  
+    %% Vector Store for Retrieval  
+    InMemoryVS: In-Memory Vector Store  
+    AzureEmbeddings --> InMemoryVS: Embeddings  
+    RCTextSplitter --> InMemoryVS: Document  
+  
+    %% Chat Interaction (LLM Agent)  
+    AzureChatOpenAI: Azure ChatOpenAI  
+    InMemoryVS --> AzureChatOpenAI: Memory Retriever  
+  
+    %% Agent Memory  
+    SQLiteAgentMemory: SQLite Agent Memory  
+    AzureChatOpenAI --> SQLiteAgentMemory: Output  
+  
+    %% Orchestration/Supervision  
+    Supervisor: Supervisor  
+    SQLiteAgentMemory --> Supervisor: Agent Memory  
+    AzureChatOpenAI --> Supervisor: Tool Calling Chat Model  
+  
+    %% Worker (Action Executor)  
+    Worker: Worker  
+    Supervisor --> Worker: Output (Supervisor)  
+    Supervisor --> Worker: Tool Calling Chat Model  
+  
+    %% Output to User  
+    Worker --> [*]: Final Response  
+  
+    %% Notes  
+    note right of PDFFile : Loads\ndocuments  
+    note right of RCTextSplitter : Splits\ntext into chunks  
+    note right of AzureEmbeddings : Creates\nvector embeddings  
+    note right of InMemoryVS : Stores\nembeddings for retrieval  
+    note right of AzureChatOpenAI : Calls LLM for\nconversation/QA tasks  
+    note right of SQLiteAgentMemory : Persists\nagent memory/state  
+    note right of Supervisor : Orchestrates\ntool/agent usage  
+    note right of Worker : Executes\nfinal actions  
 
 
+```
 
+ADIITIONAL PROMPT
 
+make sure the relationship between supervisor and worker is recirocal
+it represents a iterative process that only ends when the supervisor has determined  that the worker is FINISHED
 
+```mermaid
 
+stateDiagram-v2  
+    %% Document Loading & Splitting  
+    PDFFile: PDF File  
+    RCTextSplitter: Recursive Character Text Splitter  
+    PDFFile --> RCTextSplitter: Document  
+  
+    %% Embedding Creation  
+    AzureEmbeddings: Azure OpenAI Embeddings  
+    RCTextSplitter --> AzureEmbeddings: Document  
+  
+    %% Vector Store for Retrieval  
+    InMemoryVS: In-Memory Vector Store  
+    AzureEmbeddings --> InMemoryVS: Embeddings  
+    RCTextSplitter --> InMemoryVS: Document  
+  
+    %% Chat Interaction (LLM Agent)  
+    AzureChatOpenAI: Azure ChatOpenAI  
+    InMemoryVS --> AzureChatOpenAI: Memory Retriever  
+  
+    %% Agent Memory  
+    SQLiteAgentMemory: SQLite Agent Memory  
+    AzureChatOpenAI --> SQLiteAgentMemory: Output  
+  
+    %% Orchestration/Supervision  
+    Supervisor: Supervisor  
+    SQLiteAgentMemory --> Supervisor: Agent Memory  
+    AzureChatOpenAI --> Supervisor: Tool Calling Chat Model  
+  
+    %% Worker (Action Executor)  
+    Worker: Worker  
+    Supervisor --> Worker: Task Assignment  
+    Worker --> Supervisor: Completion/Report  
+  
+    %% Iterative Supervisor-Worker Loop  
+    state IterationLoop {  
+      Supervisor <--> Worker: Iterate until FINISHED  
+    }  
+  
+    %% Output to User  
+    Supervisor --> [*]: FINISHED  
+  
+    %% Notes  
+    note right of Supervisor: Orchestrates\n& manages stopping condition  
+    note right of Worker: Executes\ntasks & reports status  
 
-
-
+```
 
 
