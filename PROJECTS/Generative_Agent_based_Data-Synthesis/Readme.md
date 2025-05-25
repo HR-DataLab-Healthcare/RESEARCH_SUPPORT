@@ -487,40 +487,37 @@ Shown is the workflow needed for generating synthetic EHRs. It uses a two-tiered
 <span style="font-size: 12px;">
 
 
-
 ```mermaid
 
 stateDiagram-v2
-    [*] --> SelectEvaluationMetric
+    [*] --> EvaluationMetricsSuite
 
-    state SelectEvaluationMetric 
-        note right of SelectEvaluationMetric
-            Choose a metric to evaluate synthetic text quality.
-            Each path represents applying one of the metrics
-            detailed in the overview table.
-        end note
+    note right of EvaluationMetricsSuite
+        Overview of evaluation metrics implemented in the script.
+        Each path represents one type of analysis performed
+        by the corresponding Python function.
+    end note
 
-        SelectEvaluationMetric --> Metric_ShannonEntropy : calculate_entropy
-        Metric_ShannonEntropy: **Shannon Entropy**\nCalculates Shannon's entropy to quantify<br>uncertainty or information content.
+    EvaluationMetricsSuite --> Metric_ShannonEntropy : calculate_entropy
+    Metric_ShannonEntropy: **Shannon Entropy**\nCalculates Shannon's entropy to quantify<br>uncertainty or information content.
 
-        SelectEvaluationMetric --> Metric_AvgBigramPMI : calculate_avg_bigram_pmi
-        Metric_AvgBigramPMI: **Average Bigram PMI**\nCalculates average Pointwise Mutual Information<br>to measure strength of word associations.
+    EvaluationMetricsSuite --> Metric_AvgBigramPMI : calculate_avg_bigram_pmi
+    Metric_AvgBigramPMI: **Average Bigram PMI**\nCalculates average Pointwise Mutual Information<br>to measure strength of word associations.
 
-        SelectEvaluationMetric --> Metric_JSD : calculate_kl_divergence
-        Metric_JSD: **Jensen-Shannon Divergence (JSD)**\nMeasures distributional similarity between<br>two text corpora.
+    EvaluationMetricsSuite --> Metric_JSD : calculate_kl_divergence
+    Metric_JSD: **Jensen-Shannon Divergence (JSD)**\nMeasures distributional similarity between<br>two text corpora.
 
-        SelectEvaluationMetric --> Metric_CorpusBLEU : calculate_corpus_bleu
-        Metric_CorpusBLEU: **Corpus BLEU Score**\nMeasures surface-level similarity (n-gram overlap)<br>to gauge novelty vs. direct copying.
+    EvaluationMetricsSuite --> Metric_CorpusBLEU : calculate_corpus_bleu
+    Metric_CorpusBLEU: **Corpus BLEU Score**\nMeasures surface-level similarity (n-gram overlap)<br>to gauge novelty vs. direct copying.
 
-        SelectEvaluationMetric --> Metric_BERTScore : calculate_corpus_bertscore
-        Metric_BERTScore: **BERTScore (Precision, Recall, F1)**\nMeasures semantic similarity using<br>contextual word embeddings.
+    EvaluationMetricsSuite --> Metric_BERTScore : calculate_corpus_bertscore
+    Metric_BERTScore: **BERTScore (Precision, Recall, F1)**\nMeasures semantic similarity using<br>contextual word embeddings.
 
-        SelectEvaluationMetric --> Metric_ClassifierDiscriminability : evaluate_classifier_performance
-        Metric_ClassifierDiscriminability: **Classifier Discriminability**\nTests how easily an ML classifier can<br>distinguish real from synthetic data (realism).
+    EvaluationMetricsSuite --> Metric_ClassifierDiscriminability : evaluate_classifier_performance
+    Metric_ClassifierDiscriminability: **Classifier Discriminability**\nTests how easily an ML classifier can<br>distinguish real from synthetic data (realism).
 
-        SelectEvaluationMetric --> Metric_LLMQualitativeComparison : compare_docs_with_gpt4
-        Metric_LLMQualitativeComparison: **LLM-based Qualitative Comparison**\nUses GPT-4 to assess similarity on structure,<br>style, clinical patterns, and realism.
-    
+    EvaluationMetricsSuite --> Metric_LLMQualitativeComparison : compare_docs_with_gpt4
+    Metric_LLMQualitativeComparison: **LLM-based Qualitative Comparison**\nUses GPT-4 to assess similarity on structure,<br>style, clinical patterns, and realism.
 
     Metric_ShannonEntropy --> EvaluationResults
     Metric_AvgBigramPMI --> EvaluationResults
@@ -533,7 +530,56 @@ stateDiagram-v2
     EvaluationResults --> [*]
 
 ```
-<br> <br>
+
+<br><br>
+
+
+
+
+
+```mermaid
+
+stateDiagram-v2
+    [*] --> EvaluationMetricsSuite
+
+    EvaluationMetricsSuite --> Metric_ShannonEntropy : calculate_entropy
+    Metric_ShannonEntropy: **Shannon Entropy**\nCalculates Shannon's entropy to quantify<br>uncertainty or information content.
+
+    EvaluationMetricsSuite --> Metric_AvgBigramPMI : calculate_avg_bigram_pmi
+    Metric_AvgBigramPMI: **Average Bigram PMI**\nCalculates average Pointwise Mutual Information<br>to measure strength of word associations.
+
+    EvaluationMetricsSuite --> Metric_JSD : calculate_kl_divergence
+    Metric_JSD: **Jensen-Shannon Divergence (JSD)**\nMeasures distributional similarity between<br>two text corpora.
+
+    EvaluationMetricsSuite --> Metric_CorpusBLEU : calculate_corpus_bleu
+    Metric_CorpusBLEU: **Corpus BLEU Score**\nMeasures surface-level similarity (n-gram overlap)<br>to gauge novelty vs. direct copying.
+
+    EvaluationMetricsSuite --> Metric_BERTScore : calculate_corpus_bertscore
+    Metric_BERTScore: **BERTScore (Precision, Recall, F1)**\nMeasures semantic similarity using<br>contextual word embeddings.
+
+    EvaluationMetricsSuite --> Metric_ClassifierDiscriminability : evaluate_classifier_performance
+    Metric_ClassifierDiscriminability: **Classifier Discriminability**\nTests how easily an ML classifier can<br>distinguish real from synthetic data (realism).
+
+    EvaluationMetricsSuite --> Metric_LLMQualitativeComparison : compare_docs_with_gpt4
+    Metric_LLMQualitativeComparison: **LLM-based Qualitative Comparison**\nUses GPT-4 to assess similarity on structure,<br>style, clinical patterns, and realism.
+
+    Metric_ShannonEntropy --> EvaluationResults
+    Metric_AvgBigramPMI --> EvaluationResults
+    Metric_JSD --> EvaluationResults
+    Metric_CorpusBLEU --> EvaluationResults
+    Metric_BERTScore --> EvaluationResults
+    Metric_ClassifierDiscriminability --> EvaluationResults
+    Metric_LLMQualitativeComparison --> EvaluationResults
+
+    EvaluationResults --> [*]
+
+
+```
+
+<br><br>
+
+
+
 
 | Metric, Purpose, & Parameters | Calculation Steps | Evaluation Significance |
 |----------------------------------------------|-------------------|-------------------------|
