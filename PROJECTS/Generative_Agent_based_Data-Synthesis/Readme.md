@@ -757,7 +757,7 @@ stateDiagram-v2
     %% Orchestration/Supervision  
     Supervisor: Supervisor  
     SQLiteAgentMemory --> Supervisor: Agent Memory  
-    AzureChatOpenAI --> Supervisor: Tool Calling Chat Model  
+    AzureChatOpenAI --> Supervisor: Flowise Calling LLM GPT4.1  
   
     %% Worker (Action Executor)  
     Worker: Worker  
@@ -773,8 +773,8 @@ stateDiagram-v2
     Supervisor --> [*]: FINISHED  
   
     %% Notes  
-    note right of Supervisor: Orchestrates\n& manages stopping condition  
-    note right of Worker: Executes\ntasks & reports status  
+    note right of Supervisor: Orchestrates & manages stopping condition  
+    note right of Worker: Executes prompted tasks & reports status  
 
 ```
 
