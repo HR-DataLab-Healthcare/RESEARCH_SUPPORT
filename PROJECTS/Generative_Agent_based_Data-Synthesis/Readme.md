@@ -761,12 +761,12 @@ stateDiagram-v2
   
     %% Worker (Action Executor)  
     Worker: Worker  
-    Supervisor --> Worker: Task Assignment  
+    %% Supervisor --> Worker: Task Assignment Until FINISHED 
     Worker --> Supervisor: Completion/Report  
   
     %% Iterative Supervisor-Worker Loop  
     state IterationLoop {  
-      Supervisor <--> Worker: Iterate until FINISHED  
+      Supervisor --> Worker:   Task Assignment Until FINISHED 
     }  
   
     %% Output to User  
