@@ -737,3 +737,7 @@ stateDiagram-v2
 
 $$\mathrm{CE}(p, y)=\begin{cases}-\log(p)&\text{if }y=1 \\ \\ -\log(1-p)&\text{otherwise.}\end{cases}$$
 
+$$
+\displaystyle\sum_{k=3}^5 k^2=3^2 + 4^2 + 5^2 =50
+$$
+
