@@ -790,3 +790,23 @@ note right of Supervisor
 
 
 ```
+
+
+
+| Metric                                                | Pseudonymized Value    | Synthetic Value      | Mann-Whitney U (stat, p-value) | Statistical/Practical Interpretation                     |  
+|-------------------------------------------------------|-----------------------|---------------------|-------------------------------|----------------------------------------------------------|  
+| Corpus Shannon Entropy (Character)                    | 4.8565                | 4.6936              | -                             | Pseudo > Synth (more character diversity)                |  
+| Corpus Shannon Entropy (Word)                         | 9.3543                | 9.9799              | -                             | Synth > Pseudo (more word diversity)                     |  
+| Mean Per-Document Shannon Entropy (Character)         | 4.8449                | 4.6846              | 260.00, 0.0000                | Pseudo > Synth, significant difference                   |  
+| Mean Per-Document Shannon Entropy (Word)              | 8.3075                | 8.6939              |   0.00, 0.0000                | Synth > Pseudo, significant difference                   |  
+| JSD (Word Dist. between Corpora)                      | -                     | 0.3770              | -                             | Moderate divergence in word distribution                 |  
+| Mean Per-Doc JSD (Word-level) vs Combined Corpus      | 0.2297                | 0.2618              |  12.00, 0.0000                | Synth more divergent, significant difference             |  
+| Corpus Average Bigram PMI (min_freq=3)                | 6.9187                | 5.9833              | -                             | Pseudo > Synth (stronger word pair associations)         |  
+| Mean Per-Document Bigram PMI (min_freq=3)             | 6.4007                | 6.2604              | 161.00, 0.2611                | Not statistically significant (p > 0.05)                 |  
+| Average Document Length (Characters)                  | 13,370.15             | 9,412.25            | -                             | Pseudonymized docs much longer                           |  
+| BLEU Score (Synthetic vs All Pseudonymized)           | -                     | 4.6179              | -                             | Very low n-gram overlap (low surface similarity)         |  
+| BERT Score (Synthetic vs All Pseudonymized) - Prec.   | -                     | 0.6447              | -                             | Moderate semantic/textual similarity                     |  
+| BERT Score (Synthetic vs All Pseudonymized) - Recall  | -                     | 0.6556              | -                             |                                                          |  
+| BERT Score (Synthetic vs All Pseudonymized) - F1      | -                     | 0.6499              | -                             |                                                          |  
+| Classifier AUC (Pseudo vs Synthetic)                  | -                     | 1.0000              | -                             | Perfectly distinguishes; lower is better for synthetic   |  
+| Classifier AUPRC (Pseudo vs Synthetic)                | -                     | 1.0000              | -                             | Perfectly distinguishes; lower is better for synthetic   |  
