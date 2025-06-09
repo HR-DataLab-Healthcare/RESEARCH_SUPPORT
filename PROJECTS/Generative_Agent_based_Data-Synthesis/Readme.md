@@ -2,7 +2,7 @@
 
 # *Privacy, Linguistic & Informational Preserving Synthesis of Clinical Data Through Generative Agents*
 
-Here we provide detailed insight into the followed  ---data science + computaional thinking--- and applied numerical algorithms, complementing the paper *"Privacy, Linguistic & Information Preserving Synthesis of Clinical Data Through Generative Agents"* **(Frontiers in AI)**. You can find the accompanying Jupyter Notebooks in the [`CODE` directory of this repository](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE).
+Here we provide detailed insight into the followed and applied numerical algorithms, complementing the paper *"Privacy, Linguistic & Information Preserving Synthesis of Clinical Documentation Through Generative Agents"* **(Frontiers in AI)**. You can find the accompanying Jupyter Notebooks in the [`CODE` directory of this repository](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE).
 
 
 The data pipeline at the core of our publication is grounded in *computational thinking*, systematically dissecting the complex challenge of clinical data synthesis into a sequence of stagesworkflows. We start with the ingestion of real-world PDF clinical notes, followed by rigorous data pseudonymization to safeguard patient privacy. We then proceed to the generation of realistic synthetic clinical notes, leveraging advanced large language model (LLM) techniques. We conclude with a thorough evaluation of the generated data, assessing both quality and fidelity against multiple benchmarks.
@@ -684,7 +684,7 @@ stateDiagram-v2
     %% Vector Store for Retrieval  
     InMemoryVS: In-Memory Vector Store  
     AzureEmbeddings --> InMemoryVS: Embeddings  
-    RCTextSplitter --> InMemoryVS: Document  
+    RCTextSplitter --> InMemoryVS: End-USER Prompt  
   
     %% Chat Interaction (LLM Agent)  
     AzureChatOpenAI: Azure ChatOpenAI  
@@ -717,65 +717,4 @@ stateDiagram-v2
     note right of Worker: Executes prompted tasks & reports status  
 
 ```
-
-
-
-
-
 #
-
-```mermaid
-
-
- stateDiagram-v2
-    [*] --> Supervisor
-    [*] --> PdfFile
-    Supervisor --> Worker: assigns task
-    Worker --> Supervisor: returns result
-    Supervisor --> AzureChatOpenAI: uses LLM
-    Worker --> AzureChatOpenAI: uses LLM
-    Supervisor --> SQLiteAgentMemory: stores state
-    Worker --> SQLiteAgentMemory: stores state
-    Worker --> PdfFile: uses real-world example
-    Worker --> RetrieverTool: retrieves info
-    Worker --> Finish: "FINISH" when done
-    Finish --> Supervisor: notifies completion
-    Supervisor --> Finish: final summarization
-    Finish --> [*]
-
-note right of Supervisor
-      Supervisor Prompt: "You are a senior physiotherapist specializing in low back pain..."
-      Summarization: true
-      Recursion Limit: 10
-      Model: AzureChatOpenAI
-      Agent Memory: SQLiteAgentMemory
-    end note
-
-    note right of Worker
-      Worker Prompt: "You are a physiotherapist (general or specialized) generating synthetic Dutch EHR notes..."
-      Max Iterations: 100
-      Tools: RetrieverTool
-      Supervisor: Supervisor
-    end note
-
-    note right of AzureChatOpenAI
-      Model Name: gpt-4o-mini
-      Temperature: 1
-      Streaming: true
-      Allow Image Uploads: true
-      Image Resolution: high
-      Reasoning Effort: high
-    end note
-
-    note right of PdfFile
-      pdfFile: (user-uploaded PDF)
-    end note
-
-    note right of SQLiteAgentMemory
-      additionalConfig: (optional)
-    end note
-   
-
-
-```
-
