@@ -716,10 +716,12 @@ stateDiagram-v2
 ```
 
   </details>
+
 #
 
 
-**REFERENCES**
+<details>
+  <summary><h2><strong>REFERENCES</strong></h2></summary>
 
 1.	Abdurahman, S., Salkhordeh Ziabari, A., Moore, A. K., Bartels, D. M., & Dehghani, M. (2025). A Primer for Evaluating Large Language Models in Social-Science Research. Advances in Methods and Practices in Psychological Science, 8(2), 25152459251325174. https://doi.org/10.1177/25152459251325174 
 2.	Abhishek, M. K., & Rao, D. R. (2021). Framework to secure docker containers. 2021 Fifth World Conference on Smart Trends in Systems Security and Sustainability (WorldS4), 
@@ -861,6 +863,8 @@ stateDiagram-v2
 138.	Zhou, N., Wu, Q., Wu, Z., Marino, S., & Dinov, I. D. (2022). DataSifterText: Partially Synthetic Text Generation for Sensitive Clinical Notes. Journal of Medical Systems, 46(12), 96. https://doi.org/10.1007/s10916-022-01880-6 
 139.	Zhou, S., Lin, M., Ding, S., Wang, J., Chen, C., Melton, G. B., Zou, J., & Zhang, R. (2025). Explainable differential diagnosis with dual-inference large language models. npj Health Systems, 2(1), 12. https://doi.org/10.1038/s44401-025-00015-6 
 
+  </details>
+  
 #
 
 
