@@ -9,6 +9,8 @@ The data pipeline at the core of our publication is grounded in *computational t
 
 To facilitate understanding and reproducibility, each workflow is accompanied by a flow diagram that clarifies the progression and interconnections within the overall data pipeline. This structured approach enables readers not only to follow the logic behind our methodology, but also to readily adapt or extend the source code for a variety of new research applications. 
 
+We conclude with the flow diagram of our rapid-prototype example of a multi-turn GA-based SHDG workflow as implemented via Flowise.
+
 #
 
 <details>
@@ -478,8 +480,6 @@ Shown is the workflow used to generate synthetic EHRs. It uses a two-tiered prom
   <details>
   <summary><h2><strong>Comparative Analysis of Synthetic vs Genuine EHRs</strong></h2></summary>
 
-
-
 <br>
 
 ```mermaid
@@ -661,12 +661,9 @@ It details the computational steps and interpretative significance of each metri
 
 #
 
-**REFERENCES**
 
-* https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation
-
-#
-
+<details>
+<summary><h2><strong>Multi-turn GA-based SHDG workflow</strong></h2></summary>
 
 
 ```mermaid
@@ -717,4 +714,15 @@ stateDiagram-v2
     note right of Worker: Executes prompted tasks & reports status  
 
 ```
+
+  </details>
 #
+
+
+**REFERENCES**
+
+* https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation
+
+#
+
+
