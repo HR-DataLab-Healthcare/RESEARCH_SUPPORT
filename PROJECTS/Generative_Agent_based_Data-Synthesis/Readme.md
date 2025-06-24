@@ -640,7 +640,7 @@ It details the computational steps and interpretative significance of each metri
 
 
 <details>
-<summary><h2><strong>Multi-turn GA-based SHDG-workflow</strong></h2></summary>
+<summary><h2><strong>GA-assisted SHDG-workflow</strong></h2></summary>
 
 
 ```mermaid
