@@ -4,6 +4,7 @@
 
 Here we provide detailed insight into the followed and applied numerical algorithms, complementing the paper *"Privacy, Linguistic & Information Preserving Synthesis of Clinical Documentation Through Generative Agents"* **(Frontiers in AI)**. You can find the accompanying Jupyter Notebooks in the [`CODE` directory of this repository](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE).
 
+We also provide notebooks used to perfom document level assessment in the [`DESCRIPTOR` directory of this repository](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/DESCRIPTOR)
 
 The data pipeline at the core of our publication is grounded in *computational thinking*, systematically dissecting the complex challenge of clinical data synthesis into a sequence of workflows. We start with the ingestion and conversion of anonymised real-world PDF clinical notes into markdown format (FLOW01), followed by rigorous data pseudonymization (FLOW02) to safeguard patient privacy. We then proceed to the generation of realistic synthetic clinical notes, leveraging advanced large language model (LLM) techniques using promping  alone versus Generative Agent-based (FLOW03) . We conclude with a thorough evaluation of the generated data, assessing both quality and fidelity against multiple benchmarks (FLOW04).
 
