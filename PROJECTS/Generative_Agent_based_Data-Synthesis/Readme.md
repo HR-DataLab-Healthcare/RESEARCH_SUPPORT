@@ -10,7 +10,7 @@ The data pipeline at the core of our publication is grounded in *computational t
 
 To facilitate understanding and reproducibility, each workflow is accompanied by a flow diagram that clarifies the progression and interconnections within the overall data pipeline. This structured approach enables readers not only to follow the logic behind our methodology, but also to readily adapt or extend the source code for a variety of new research applications. 
 
-We conclude with the flow diagram of our rapid-prototype example of a multi-turn GA-based SHDG workflow as implemented via Flowise.
+We conclude with the flow diagram of our modular No-code Proof-of-Concept of a GA-assisted SHDG workflow as implemented via Flowise.
 
 #
 
@@ -698,7 +698,7 @@ stateDiagram-v2
 
 <details>
   <summary><h2><strong>References</strong></h2></summary>
-  
+
 1.	Abdurahman, S., Salkhordeh Ziabari, A., Moore, A.K., Bartels, D.M., and Dehghani, M. (2025). A primer for evaluating large language models in social-science research. Advances in Methods and Practices in Psychological Science 8(2). doi: 10.1177/25152459251325174. 
 2.	Abhishek, M.K., and Rao, D.R. (2021). "Framework to secure docker containers", in: Fifth World Conference on Smart Trends in Systems Security and Sustainability (WorldS4), (London, UK: IEEE), 152-156. doi: 10.1109/WorldS451998.2021.9514041 
 3.	Ait, A., Cánovas Izquierdo, J.L., and Cabot, J. (2025). On the suitability of hugging face hub for empirical studies. Empir. Software Eng. 30(2), 1-48. doi: 10.1007/s10664-024-10608-8. 
