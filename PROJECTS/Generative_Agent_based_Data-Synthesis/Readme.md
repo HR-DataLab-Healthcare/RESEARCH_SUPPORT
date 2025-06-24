@@ -14,7 +14,7 @@ We conclude with the flow diagram of our rapid-prototype example of a multi-turn
 #
 
 <details>
-<summary><h2><strong>PDF Text Extraction and Markdown Conversion</strong></h2></summary>
+<summary><h2><strong>FLOW01: PDF Text Extraction and Markdown Conversion</strong></h2></summary>
 
  ```mermaid 
 
@@ -142,7 +142,7 @@ We conclude with the flow diagram of our rapid-prototype example of a multi-turn
 #
 
 <details>
-  <summary><h2><strong>Pseudonymization of Markdown Content</strong></h2></summary>
+  <summary><h2><strong>FLOW02: Pseudonymization of Markdown Content</strong></h2></summary>
 
 
  ```mermaid 
@@ -276,31 +276,7 @@ stateDiagram-v2
 #
 
   <details>
-  <summary><h2><strong>Combining Markdown Files</strong></h2></summary>
-
-  Described is the workflow used for creating single files comprising all processed data, which can be useful for reviewing the entire dataset or for simple corpus loading.
-
-  * **Purpose:**
-
-    * To concatenate the content of all individual Markdown files (both original converted and pseudonymized) into two single, large Markdown files.  
-
-  * **Key Code Components:**  
-    * save\_combined\_markdown\_to\_file(combined\_markdown\_content, output\_path, file\_description): A helper function to write the combined string to a specified file.  
-  * **Inputs:**  
-    * Individual Markdown files (\*.md and pseudo\_\*.md) from the PDF\_DIRECTORY\_PATH.  
-  * **Outputs:**  
-    * combined\_epds\_markdown.md (all original converted content) saved in the parent directory of PDF\_DIRECTORY\_PATH.  
-    * pseudo\_combined\_epds\_markdown.md (all pseudonymized content) saved in the parent directory of PDF\_DIRECTORY\_PATH.  
-  * **Configuration Variables Used:**  
-    * OUTPUT\_COMBINED\_MD\_FILE\_PATH, OUTPUT\_COMBINED\_PSEUDO\_MD\_FILE\_PATH: Define the output locations and filenames.
-
-  *Note: The main execution block in the initial script handles the looping through files, calling the extraction/conversion/pseudonymization functions, appending content to lists (all\_markdown\_content, all\_pseudonymized\_content), and finally joining and saving the combined content.*
-  </details>
-
-#
-
-  <details>
-  <summary><h2><strong>Synthetic Data Generation</strong></h2></summary>
+  <summary><h2><strong>FLOW03: Synthetic Data Generation</strong></h2></summary>
 
 ```mermaid
 
