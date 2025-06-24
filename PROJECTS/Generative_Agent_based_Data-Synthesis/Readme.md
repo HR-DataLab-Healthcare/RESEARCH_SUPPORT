@@ -454,7 +454,7 @@ Shown is the workflow used to generate synthetic EHRs. It uses a two-tiered prom
 #
 
   <details>
-  <summary><h2><strong>Comparative Analysis of Synthetic vs Genuine EHRs</strong></h2></summary>
+  <summary><h2><strong>FLOW04: Comparative Analysis of Synthetic vs Genuine EHRs</strong></h2></summary>
 
 <br>
 
