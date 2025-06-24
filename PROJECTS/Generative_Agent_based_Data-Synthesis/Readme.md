@@ -10,7 +10,7 @@ The data pipeline at the core of our publication is grounded in *computational t
 
 To facilitate understanding and reproducibility, each workflow is accompanied by a flow diagram that clarifies the progression and interconnections within the overall data pipeline. This structured approach enables readers not only to follow the logic behind our methodology, but also to readily adapt or extend the source code for a variety of new research applications. 
 
-We conclude with the flow diagram of our modular No-code Proof-of-Concept of a GA-assisted SHDG workflow as implemented via Flowise.
+We conclude with the flow diagram of our modular No-code Proof-of-Concept of a GA-assisted SHDG workflow as implemented via [Flowise](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/AGENT-FLOWS/GA-ASSISTED-SHDG.json).
 
 #
 
