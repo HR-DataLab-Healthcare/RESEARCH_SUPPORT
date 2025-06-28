@@ -10,7 +10,7 @@ The data pipeline at the core of our publication is grounded in *computational t
 
 * We then generate realistic synthetic clinical notes by leveraging advanced large language model (LLM) techniques, comparing prompting alone [(FLOW03)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03.ipynb) with a Generative Agent-based approach [(FLOW03_AGENT_BASED)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03_OPENAI_AGENT_VERSION.ipynb). 
 
-* The pipeline concludes with code [(FLOW04)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW04.ipynb) comprising an [evaluation framework for synthetic datasets](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis#quantitative-assessment-of-synthetic-data-quality), assessing their informational and linguistic qualities. The here provided *Benchamrk Table* outlines measures of textual diversity, vocabulary similarity, semantic alignment, and machine discernibility, each with its specific interpretation. Collectively, these metrics enable a holistic evaluation of how well the synthetic corpus replicates the complexity, nuance, and realism of the real clinical text, providing an in-depth view of corpus-level similarity across multiple dimensions.
+* The pipeline concludes with code [(FLOW04)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW04.ipynb) comprising an [evaluation framework for synthetic datasets](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis#quantitative-assessment-of-synthetic-data-quality), assessing their informational and linguistic qualities. The here provided [Benchmark Metrics Overview](#benchmark-metrics-overview) outlines measures of textual diversity, vocabulary similarity, semantic alignment, and machine discernibility, each with its specific interpretation. Collectively, these metrics enable a holistic evaluation of how well the synthetic corpus replicates the complexity, nuance, and realism of the real clinical text, providing an in-depth view of corpus-level similarity across multiple dimensions.
 
 * Additionally, we provide a modular, no-code Proof-of-Concept implemented as a [Flowise-based Agentflow](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/AGENT-FLOWS#readme), offering an hands-on guide how to depoy and interact with this agentflow via Hugging Face Space.
 
@@ -625,12 +625,12 @@ stateDiagram-v2
 
 </details>
 
-
-
 #
 
 <details>
 <summary><h2><strong>Benchmark Table</strong></h2></a></summary>
+
+## Benchmark Metrics Overview
 
 The table entails our benchmarking framework for assessing the realism and utility of synthetic clinical corpora relative to pseudonymized reference data.
 It details the equations, computational steps and interpretative significance of each metric. Together, these metrics enable comprehensive, nuanced measurement of fluency, diversity, fidelity, novelty, and clinical plausibility in synthetic text generation.
@@ -648,8 +648,6 @@ It details the equations, computational steps and interpretative significance of
 | **Metric:** **LLM-based Qualitative Comparison** via `compare_docs_with_gpt4`<br><br>**Purpose:** Uses GPT-4 (via Azure OpenAI) to assess the similarity of a pseudonymized and a synthetic document on structure, style, clinical patterns, and realism—in a qualitative, "expert" manner.<br><br>**Parameters:**<br>- `client`: Initialized Azure OpenAI client.<br>- `pseudo_content` (str): Pseudonymized document content.<br>- `synthetic_content` (str): Synthetic document content.<br>- `pseudo_filename` (str): Filename for pseudonymized document (for prompt context).<br>- `synthetic_filename` (str): Filename for synthetic document. | 1. Builds a system prompt specifying the AI's expert clinical role.<br>2. User prompt provides both documents and asks for comparison (structure, style, clinical patterns, realism, SOEP template adherence), explicitly *not* on details but on overall template, style, plausibility.<br>3. Sends prompts to Azure OpenAI API (GPT-4).<br>4. Parses the returned text for both a rich qualitative description and a categorical rating (Laag/Matig/Hoog). | - **Adds Human-like Judgment:** Captures subtleties like cohesion, realism, and clinical plausibility beyond numbers.<br>- **Contextualizes Quantitative Results:** Explains underlying causes of scores.<br>- **Clear Ratings:** Categorical (Laag/Matig/Hoog) summary quickly indicates perceived similarity.<br>- **Faithful to Real-World Use:** Mimics human expert review, providing holistic and contextual feedback. |
 
 </details>
-
-#
 
 #
 
