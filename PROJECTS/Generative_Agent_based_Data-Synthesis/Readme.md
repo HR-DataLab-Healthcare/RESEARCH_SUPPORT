@@ -636,12 +636,6 @@ It details the equations, computational steps and interpretative significance of
 
 <br>
 
-| Benchmark Characterization | Computational Steps | Evaluation Significance & interpretation |
-|---------------------------|---------------------|------------------------------------------|
-| **Metric:** `calculate_entropy(text, unit)`<br><br>**Purpose:** Calculates Shannon's entropy to quantify the uncertainty or information content of a given text corpus (character or word level).<br><br>**Parameters:**<br>- `text` (str): input corpus<br>- `unit` (str): token type (`'char'` or `'word'`) | 1. Tokenize text into characters or words<br>2. Count token frequencies<br>3. Compute token probabilities<br>4. Compute entropy:<br>$H(X) = -\sum_{i=1}^{n}P(x_i)\log_2P(x_i)$ | - Measures linguistic diversity and predictability;<br>- Entropy close to real data indicates realistic complexity.<br>- Low entropy implies simplistic/repetitive text, high entropy may suggest unnatural complexity. |
-| **Metric:** `calculate_avg_bigram_pmi(text, min_freq)`<br><br>**Purpose:** Calculates average Pointwise Mutual Information (PMI) of word bigrams to measure the strength of word associations in the text.<br><br>**Parameters:**<br>- `text` (str): input corpus<br>- `min_freq` (int): minimum frequency threshold for bigrams (default `3`) | 1. Tokenize text into words (lowercased)<br>2. Count frequencies for words and bigrams<br>3. For bigrams meeting `min_freq`:<br>$PMI(w_1,w_2)=\log_2\frac{P(w_1,w_2)}{P(w_1)P(w_2)}$<br>4. Compute average PMI across all qualifying bigrams | - Indicates realistic word collocations and phrase structures<br>- Synthetic PMI close to real data suggests natural language generation<br>- Significantly lower PMI indicates random or unnatural word pairings. |
-
-
 </details>
 
 #
