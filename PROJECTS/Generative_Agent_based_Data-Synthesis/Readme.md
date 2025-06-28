@@ -628,7 +628,8 @@ stateDiagram-v2
 
 
 <details>
-<summary><h2><strong>Benchmark Table</strong></h2></summary>
+<summary><a href="https://example.com/benchmark-details"><h2><strong>Benchmark Table</strong></h2></a></summary>
+
 
  
 The table entails our benchmarking framework for assessing the realism and utility of synthetic clinical corpora relative to pseudonymized reference data.
