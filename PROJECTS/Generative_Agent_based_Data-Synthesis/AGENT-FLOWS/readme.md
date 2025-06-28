@@ -55,6 +55,10 @@ This guide explains how to deploy Flowise on Hugging Face Spaces.
 
 3.  Click on **Commit file to `main`** and it will start to build your app.
 
-## Done 🎉
+## Done
 
 When the build finishes you can click on the **App** tab to see your app running.
+
+## Acknowledgement
+
+This guide is based on the official Flowise documentation for Hugging Face deployment: [https://docs.flowiseai.com/configuration/deployment/hugging-face](https://docs.flowiseai.com/configuration/deployment/hugging-face)
