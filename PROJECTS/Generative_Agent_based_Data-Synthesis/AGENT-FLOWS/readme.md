@@ -1,8 +1,11 @@
-# Deploying Flowise on Hugging Face
+### Guide to deploy a Flowise Agentflow via Hugging Face Space
 
-This guide explains how to deploy Flowise on Hugging Face Spaces.
+<details>
+<summary>STEP01: Deploying Flowise AgentFlows on Hugging Face</summary>
 
-## Create a new space
+This guide explains how to deploy Flowise on a custom-made Hugging Face Space.
+
+### Create a new space
 
 1.  Sign in to [Hugging Face](https://huggingface.co/login).
 2.  Start creating a [new Space](https://huggingface.co/new-space) with your preferred name.
@@ -10,7 +13,7 @@ This guide explains how to deploy Flowise on Hugging Face Spaces.
 4.  Select **CPU basic ∙ 2 vCPU ∙ 16GB ∙ FREE** as Space hardware.
 5.  Click **Create Space**.
 
-## Set the environment variables
+### Set the environment variables
 
 1.  Go to **Settings** of your new space and find the **Variables and Secrets** section.
 2.  Click on **New variable** and add the name as `PORT` with value `7860`.
@@ -18,7 +21,7 @@ This guide explains how to deploy Flowise on Hugging Face Spaces.
 4.  (Optional) Click on **New secret**.
 5.  (Optional) Fill in with your environment variables, such as database credentials, file paths, etc. You can check for valid fields in the `.env.example` [here](https://github.com/FlowiseAI/Flowise/blob/main/docker/.env.example).
 
-## Create a Dockerfile
+### Create a Dockerfile
 
 1.  At the **files** tab, click on button **+ Add file** and click on **Create a new file** (or **Upload files** if you prefer to).
 2.  Create a file called `Dockerfile` and paste the following:
@@ -55,11 +58,21 @@ This guide explains how to deploy Flowise on Hugging Face Spaces.
 
 3.  Click on **Commit file to `main`** and it will start to build your app.
 
-## Done
-
 When the build finishes you can click on the **App** tab to see your app running.
 
-## Creating Azure OpenAI Credentials
+</details>
+
+<details>
+<summary>STEP02: Deploying an Agentflow</summary>
+
+1.  In your Flowise space, click on **Add New**.
+2.  Click on **Import Chatflow** and upload the [`GA-ASSISTED-SHDG.json`](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/AGENT-FLOWS/GA-ASSISTED-SHDG.json) file from this repository.
+3.  Click on **Save Chatflow**.
+
+</details>
+
+<details>
+<summary>STEP03: Creating Azure OpenAI Credentials</summary>
 
 To use Azure OpenAI models in Flowise, you need to create credentials in the Azure portal.
 
@@ -80,12 +93,12 @@ To use Azure OpenAI models in Flowise, you need to create credentials in the Azu
     *   In Flowise, when you add an Azure OpenAI node, you will be prompted to create a new credential.
     *   Enter the **API Key**, **Endpoint**, and **Deployment Name** you obtained from the Azure portal.
 
-## Deploying an Agentflow
+</details>
 
-1.  In your Flowise space, click on **Add New**.
-2.  Click on **Import Chatflow** and upload the `GA-ASSISTED-SHDG.json` file from this repository.
-3.  Click on **Save Chatflow**.
+#
 
-## Acknowledgement
+<summary>Acknowledgement</summary>
 
 This guide is based on the official Flowise documentation for Hugging Face deployment: [https://docs.flowiseai.com/configuration/deployment/hugging-face](https://docs.flowiseai.com/configuration/deployment/hugging-face)
+
+
