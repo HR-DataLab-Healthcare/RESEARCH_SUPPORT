@@ -10,7 +10,7 @@ The data pipeline at the core of our publication is grounded in *computational t
 
 * We then generate realistic synthetic clinical notes by leveraging advanced large language model (LLM) techniques, comparing prompting alone [(FLOW03)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03.ipynb) with a Generative Agent-based approach [(FLOW03_AGENT_BASED)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03_OPENAI_AGENT_VERSION.ipynb). 
 
-* The pipeline concludes with code [(FLOW04)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW04.ipynb) comprising an [evaluation framework for synthetic datasets](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis#quantitative-assessment-of-synthetic-data-quality), assessing their informational and linguistic qualities. The here provided [Benchamrk Table](https://your-desired-link.com/benchmark-table-details) outlines measures of textual diversity, vocabulary similarity, semantic alignment, and machine discernibility, each with its specific interpretation. Collectively, these metrics enable a holistic evaluation of how well the synthetic corpus replicates the complexity, nuance, and realism of the real clinical text, providing an in-depth view of corpus-level similarity across multiple dimensions.
+* The pipeline concludes with code [(FLOW04)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW04.ipynb) comprising an [evaluation framework for synthetic datasets](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis#quantitative-assessment-of-synthetic-data-quality), assessing their informational and linguistic qualities. The here provided *Benchamrk Table* outlines measures of textual diversity, vocabulary similarity, semantic alignment, and machine discernibility, each with its specific interpretation. Collectively, these metrics enable a holistic evaluation of how well the synthetic corpus replicates the complexity, nuance, and realism of the real clinical text, providing an in-depth view of corpus-level similarity across multiple dimensions.
 
 * Additionally, we provide a modular, no-code Proof-of-Concept implemented as a [Flowise-based Agentflow](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/AGENT-FLOWS#readme), offering an hands-on guide how to depoy and interact with this agentflow via Hugging Face Space.
 
@@ -630,7 +630,7 @@ stateDiagram-v2
 #
 
 <details>
-<summary><a href="https://your-desired-link.com/benchmark-table-details"><h2><strong>Benchmark Table</strong></h2></a></summary>
+<summary><h2><strong>Benchmark Table</strong></h2></a></summary>
 
 The table entails our benchmarking framework for assessing the realism and utility of synthetic clinical corpora relative to pseudonymized reference data.
 It details the equations, computational steps and interpretative significance of each metric. Together, these metrics enable comprehensive, nuanced measurement of fluency, diversity, fidelity, novelty, and clinical plausibility in synthetic text generation.
