@@ -10,14 +10,12 @@ The data pipeline at the core of our publication is grounded in *computational t
 
 * We then generate realistic synthetic clinical notes by leveraging advanced large language model (LLM) techniques, comparing prompting alone [(FLOW03)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03.ipynb) with a Generative Agent-based approach [(FLOW03_AGENT_BASED)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03_OPENAI_AGENT_VERSION.ipynb). 
 
-* The pipeline concludes with code [(FLOW04)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW04.ipynb) comprising an [evaluation framework for synthetic datasets](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis#quantitative-assessment-of-synthetic-data-quality), assessing their informational and linguistic qualities. The here provided [Benchmark Metrics Overview](#benchmark-metrics-overview) outlines measures of textual diversity, vocabulary similarity, semantic alignment, and machine discernibility, each with its specific interpretation. Collectively, these metrics enable a holistic evaluation of how well the synthetic corpus replicates the complexity, nuance, and realism of the real clinical text, providing an in-depth view of corpus-level similarity across multiple dimensions.
+* The pipeline concludes with code [(FLOW04)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW04.ipynb). Our [Benchmark Metrics Overview](#benchmark-metrics-overview) outlines measures of textual diversity, vocabulary similarity, semantic alignment, and machine discernibility, each with its specific interpretation. Collectively, these metrics enable a holistic evaluation of how well the synthetic corpus replicates the complexity, nuance, and realism of the real clinical text, providing an in-depth view of corpus-level similarity across multiple dimensions.
 
 * Additionally, we provide a modular, no-code Proof-of-Concept implemented as a [Flowise-based Agentflow](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/AGENT-FLOWS#readme), offering an hands-on guide how to depoy and interact with this agentflow via Hugging Face Space.
 
 
 To facilitate understanding and reproducibility, each workflow is accompanied by a flow diagram that clarifies its progression and interconnections. This structured approach enables readers to follow the logic behind our methodology and adapt or extend the source code for new research applications. *
-
-
 
 #
 
@@ -580,11 +578,8 @@ Shown is the workflow used to assesses the quality and similarity of the generat
 
   </details>
 
-
 #
-
-<details>
-<summary><h2><strong>Quantitative Assessment of Synthetic Data Quality</strong></h2></summary>
+## Benchmark Metrics Overview
 
 ```mermaid
 
@@ -623,10 +618,6 @@ stateDiagram-v2
 
 <br>
 
-</details>
-
-#
-## Benchmark Metrics Overview
 
 <details>
 <summary><h2><strong>click to view table</strong></h2></a></summary>
