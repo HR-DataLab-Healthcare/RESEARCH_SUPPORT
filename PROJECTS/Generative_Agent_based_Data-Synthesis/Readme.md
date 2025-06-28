@@ -584,7 +584,6 @@ Shown is the workflow used to assesses the quality and similarity of the generat
 
 #
 
-
 <details>
 <summary><h2><strong>Benchmark Overview</strong></h2></summary>
 
@@ -647,10 +646,8 @@ It details the computational steps and interpretative significance of each metri
 
 #
 
-
 <details>
 <summary><h2><strong>GA-assisted SHDG-workflow</strong></h2></summary>
-
 
 ```mermaid
 
