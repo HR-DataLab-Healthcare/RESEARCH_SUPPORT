@@ -59,6 +59,27 @@ This guide explains how to deploy Flowise on Hugging Face Spaces.
 
 When the build finishes you can click on the **App** tab to see your app running.
 
+## Creating Azure OpenAI Credentials
+
+To use Azure OpenAI models in Flowise, you need to create credentials in the Azure portal.
+
+1.  **Create an Azure Account:** If you don't have one, sign up for a free account on the [Azure website](https://azure.microsoft.com/en-us/free/).
+2.  **Create an Azure OpenAI Resource:**
+    *   In the Azure portal, search for "Azure OpenAI" and create a new resource.
+    *   Choose your subscription, resource group, region, and a unique name for your resource.
+    *   Select a pricing tier.
+3.  **Get API Key and Endpoint:**
+    *   Once the resource is deployed, go to the **Keys and Endpoint** section.
+    *   Copy the **Key 1** (or Key 2) and the **Endpoint** URL.
+4.  **Deploy a Model:**
+    *   Go to the **Model deployments** section in your Azure OpenAI resource.
+    *   Click on **Create** and select a model to deploy (e.g., `gpt-35-turbo`).
+    *   Give your deployment a name. This will be your **Deployment Name**.
+
+5.  **Use Credentials in Flowise:**
+    *   In Flowise, when you add an Azure OpenAI node, you will be prompted to create a new credential.
+    *   Enter the **API Key**, **Endpoint**, and **Deployment Name** you obtained from the Azure portal.
+
 ## Deploying an Agentflow
 
 1.  In your Flowise space, click on **Add New**.
