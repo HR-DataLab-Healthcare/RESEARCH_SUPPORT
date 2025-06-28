@@ -636,6 +636,11 @@ It details the equations, computational steps and interpretative significance of
 
 <br>
 
+
+| Benchmark Characterization | Computational Steps | Evaluation Significance & interpretation |
+|---------------------------|---------------------|------------------------------------------|
+
+
 </details>
 
 #
