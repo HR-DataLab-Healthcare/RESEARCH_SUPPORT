@@ -95,9 +95,11 @@ To use Azure OpenAI models in Flowise, you need to create credentials in the Azu
 
 </details>
 
-#
+### References
 
-<summary>Acknowledgement</summary>
+* Jeong, C. (2025). Beyond text: Implementing multimodal large language model-powered multi-agent systems using a no-code platform. J Intell Inf Syst. doi: [10.13088/jiis.2025.31.1.191](https://arxiv.org/abs/2501.00750).
+
+### Acknowledgements
 
 This guide is based on the official Flowise documentation for Hugging Face deployment: [https://docs.flowiseai.com/configuration/deployment/hugging-face](https://docs.flowiseai.com/configuration/deployment/hugging-face)
 
