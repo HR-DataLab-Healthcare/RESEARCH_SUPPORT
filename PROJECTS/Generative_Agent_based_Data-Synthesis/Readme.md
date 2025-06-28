@@ -639,7 +639,7 @@ It details the equations, computational steps and interpretative significance of
 
 | Benchmark Characterization | Computational Steps | Evaluation Significance & interpretation |
 |---------------------------|---------------------|------------------------------------------|
-| **Metric:** `calculate_entropy(text, unit)`<br><br>**Purpose:** Calculates Shannon's entropy to quantify the uncertainty or information content of a given text corpus (character or word level).<br><br>**Parameters:**<br>- `text` (str): input corpus<br>- `unit` (str): token type (`'char'` or `'word'`) | 1. Tokenize text into characters or words<br>2. Count token frequencies<br>3. Compute token probabilities<br>4. Compute entropy:<br>$H(X) = -\sum_{i=1}^{n}P(x_i)\log_2P(x_i)$ | - Measures linguistic diversity and predictability;<br>- Entropy close to real data indicates realistic complexity.<br>- Low entropy implies simplistic/repetitive text, high entropy may suggest unnatural complexity. |
+| **Metric:** `calculate_entropy(text, unit)`<br><br>**Purpose:** Calculates Shannon's entropy to quantify the uncertainty or information content of a given text corpus (character or word level).<br><br>**Parameters:**<br>- `text` (str): input corpus<br>- `unit` (str): token type (`'char'` or `'word'`) | 1. Tokenize text into characters or words<br>2. Count token frequencies<br>3. Compute token probabilities<br>4. Compute entropy:<br> $H(X) = -\sum_{i=1}^{n}P(x_i)\log_2P(x_i)$ | - Measures linguistic diversity and predictability;<br>- Entropy close to real data indicates realistic complexity.<br>- Low entropy implies simplistic/repetitive text, high entropy may suggest unnatural complexity. |
 
 </details>
 
