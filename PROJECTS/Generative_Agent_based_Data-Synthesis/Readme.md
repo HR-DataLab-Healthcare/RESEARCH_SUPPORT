@@ -588,15 +588,6 @@ Shown is the workflow used to assesses the quality and similarity of the generat
 <details>
 <summary><h2><strong>Benchmark Overview</strong></h2></summary>
 
-</details>
-
-
-
-<details>
-<summary><h2><strong></strong></h2></summary>
-
-
-
 ```mermaid
 
 stateDiagram-v2
@@ -633,6 +624,16 @@ stateDiagram-v2
 ```
 
 <br>
+
+</details>
+
+
+
+<details>
+<summary><h2><strong></strong></h2></summary>
+
+
+
 
 Shown is an overview of the metrics used that make up the Benchmark Evalutation Framework. 
 The table entails our benchmarking framework for assessing the realism and utility of synthetic clinical corpora relative to pseudonymized reference data.
