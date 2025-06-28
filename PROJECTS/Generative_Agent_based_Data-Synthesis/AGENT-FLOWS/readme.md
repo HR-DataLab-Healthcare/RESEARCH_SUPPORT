@@ -97,7 +97,9 @@ To use Azure OpenAI models in Flowise, you need to create credentials in the Azu
 
 ### References
 
-* Jeong, C. (2025). Beyond text: Implementing multimodal large language model-powered multi-agent systems using a no-code platform. J Intell Inf Syst. doi: [10.13088/jiis.2025.31.1.191](https://arxiv.org/abs/2501.00750).
+
+
+Jeong, C. (2025). Beyond text: Implementing multimodal large language model-powered multi-agent systems using a no-code platform. J Intell Inf Syst. doi: [10.13088/jiis.2025.31.1.191](https://arxiv.org/pdf/2501.00750v2).
 
 ### Acknowledgements
 
