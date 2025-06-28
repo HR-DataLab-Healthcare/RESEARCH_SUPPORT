@@ -59,6 +59,12 @@ This guide explains how to deploy Flowise on Hugging Face Spaces.
 
 When the build finishes you can click on the **App** tab to see your app running.
 
+## Deploying an Agentflow
+
+1.  In your Flowise space, click on **Add New**.
+2.  Click on **Import Chatflow** and upload the `GA-ASSISTED-SHDG.json` file from this repository.
+3.  Click on **Save Chatflow**.
+
 ## Acknowledgement
 
 This guide is based on the official Flowise documentation for Hugging Face deployment: [https://docs.flowiseai.com/configuration/deployment/hugging-face](https://docs.flowiseai.com/configuration/deployment/hugging-face)
