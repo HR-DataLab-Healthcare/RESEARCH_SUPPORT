@@ -626,11 +626,10 @@ stateDiagram-v2
 </details>
 
 #
+## Benchmark Metrics Overview
 
 <details>
-<summary><h2><strong>Benchmark Table</strong></h2></a></summary>
-
-## Benchmark Metrics Overview
+<summary><h2><strong>Benchmark Metrics Overview</strong></h2></a></summary>
 
 The table entails our benchmarking framework for assessing the realism and utility of synthetic clinical corpora relative to pseudonymized reference data.
 It details the equations, computational steps and interpretative significance of each metric. Together, these metrics enable comprehensive, nuanced measurement of fluency, diversity, fidelity, novelty, and clinical plausibility in synthetic text generation.
