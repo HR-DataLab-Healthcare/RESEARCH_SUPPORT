@@ -4,11 +4,22 @@
 
 This repository provides a detailed overview of the numerical algorithms used in our paper, *"Privacy, Linguistic & Information Preserving Synthesis of Clinical Documentation Through Generative Agents"* **(Frontiers in AI)**. The accompanying Jupyter Notebooks are available in the [`CODE` directory](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE), which also includes notebooks for performing document-level assessment in the [`DESCRIPTOR` subdirectory](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/DESCRIPTOR).
 
-The data pipeline at the core of our publication is grounded in *computational thinking*, systematically breaking down the complex challenge of clinical data synthesis protocol into a sequence of workflows. The process begins with ingesting and converting anonymized, real-world clinical notes from PDF to Markdown format [(FLOW01)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb), followed by rigorous data pseudonymization to safeguard patient privacy [(FLOW02)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb). We then generate realistic synthetic clinical notes by leveraging advanced large language model (LLM) techniques, comparing prompting alone [(FLOW03)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03.ipynb) with a Generative Agent-based approach [(FLOW03_AGENT_BASED)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03_OPENAI_AGENT_VERSION.ipynb). The pipeline concludes with a thorough evaluation of the generated data, assessing its quality and fidelity against multiple benchmarks [(FLOW04)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW04.ipynb).
+* The data pipeline at the core of our publication is grounded in *computational thinking*, systematically breaking down the complex challenge of clinical data synthesis protocol into a sequence of workflows. 
 
-To facilitate understanding and reproducibility, each workflow is accompanied by a flow diagram that clarifies the progression and interconnections within the overall data pipeline. This structured approach enables readers not only to follow the logic behind our methodology, but also to readily adapt or extend the source code for a variety of new research applications. 
+* The process begins with ingesting and converting anonymized, real-world clinical notes from PDF to Markdown format [(FLOW01)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb), followed by rigorous data pseudonymization to safeguard patient privacy [(FLOW02)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb). 
 
-We conclude with the flow diagram of our modular No-code Proof-of-Concept of a GA-assisted SHDG workflow as implemented via [Flowise based Agentflow](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/AGENT-FLOWS/GA-ASSISTED-SHDG.json).
+* We then generate realistic synthetic clinical notes by leveraging advanced large language model (LLM) techniques, comparing prompting alone [(FLOW03)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03.ipynb) with a Generative Agent-based approach [(FLOW03_AGENT_BASED)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03_OPENAI_AGENT_VERSION.ipynb). 
+
+* The pipeline concludes with a thorough evaluation of the generated data, assessing its quality and fidelity against multiple benchmarks [(FLOW04)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW04.ipynb). 
+
+* This final evaluation, detailed in the [Comparative Analysis of Synthetic vs. Genuine EHRs](#flow04-comparative-analysis-of-synthetic-vs-genuine-ehrs) section, is crucial for validating the utility of the synthetic data for research and development purposes.
+
+Additionally, we provide a modular, no-code Proof-of-Concept implemented as a [Flowise-based Agentflow](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/AGENT-FLOWS#readme), offering an hands-on guide how to depoy and interact with this agentflow via Hugging Face Space.
+
+
+To facilitate understanding and reproducibility, each workflow is accompanied by a flow diagram that clarifies its progression and interconnections. This structured approach enables readers to follow the logic behind our methodology and adapt or extend the source code for new research applications. *
+
+
 
 #
 
@@ -382,7 +393,7 @@ Shown is the workflow used to generate synthetic EHRs. It uses a two-tiered prom
                     4.  **Treatment Plan:** Requires description of interventions and rationale, based on KNGF guidelines and goals.
                     5.  **SOEP Progress Notes:** Sets quantity (3-8 notes), format (full SOEP per session), and content requirements (show progression/changes, clinical reasoning).
                     6.  **Language/Style:** Demands professional Dutch, expansion of abbreviations, and realistic tone matching examples.
-                *   **Example Guidance:** Injects the `example_markdown_content` as a reference for structure, style, and detail, while explicitly demanding a **new and unique** case.
+                *   **Example Guidance:** Injects the `example_markdown_content` as a reference for structure, style, and detail, while explicitly demanding a **new and unique** case.  
                 *   **Output Specification:** Instructs the AI to generate *only* the dossier content, starting with the anamnese and ending precisely with the word "FINISH". Re-emphasizes adherence to *all* instructions.
         *   **API Call:** Calls the `client.chat.completions.create` method with the system ("Supervisor") and user ("Worker") prompts, the specified model ([`AZURE_OPENAI_DEPLOYMENT_NAME`](d:\OneDrive%20-%20Hogeschool%20Rotterdam\1_CURRENT_CODE\DE_IDENTIFY\EPD_DATA_SYNTHESIZER_GPT4.1_V01.ipynb)), a higher `temperature` (0.8) for creativity, and sufficient `max_tokens` (8000).
         *   **Error Handling:** Catches potential API errors and returns the generated text content or `None` on failure.
@@ -738,7 +749,7 @@ stateDiagram-v2
 38.	Haug, C.J. (2018). Turning the tables - the new european general data protection regulation. N Engl J Med 379(3), 207-209. doi: 10.1056/NEJMp1806637. 
 39.	Hechler, E., Weihrauch, M., and Wu, Y. (2023). "Evolution of data architecture," in Data fabric and data mesh approaches with AI. (Berkeley, CA: Apress), 3-15. doi: 10.1007/978-1-4842-9253-2_1
 40.	Hettiarachchi, I. (2025). Exploring generative AI agents: Architecture, applications, and challenges. Journal of Artificial Intelligence General science (JAIGS) ISSN: 3006-4023 8(1), 105-127. doi: 10.60087/jaigs.v8i1.350. 
-41.	Hoofnagle, C.J., Van Der Sloot, B., and Borgesius, F.Z. (2019). The european union general data protection regulation: What it is and what it means. Information & Communications Technology Law 28(1), 65-98. doi: 10.1080/13600834.2019.1573501. 
+41.	Hoofnagle, C.J., Van Der Sloot, B., and Borgesius, F.Z. (2019). The european union general data protection regulation: What it is and what it means. Information & Communications Technology Law  28(1), 65-98. doi: 10.1080/13600834.2019.1573501. 
 42.	Huerta, E.A., Blaiszik, B., Brinson, L.C., Bouchard, K.E., Diaz, D., Doglioni, C., et al. (2023). Fair for AI: An interdisciplinary and international community building perspective. Sci Data 10(1), 487. doi: 10.1038/s41597-023-02298-6. 
 43.	Hugging-Face (2025). Hugging face spaces (version [latest]) [Online]. Available: https://huggingface.co/spaces [Accessed: May 13 2025].
 44.	Ibrahim, M., Khalil, Y.A., Amirrajab, S., Sun, C., Breeuwer, M., Pluim, J., et al. (2025). Generative AI for synthetic data across multiple medical modalities: A systematic review of recent developments and challenges. Comput. Biol. Med. 189(109834). doi: 10.1016/j.compbiomed.2025.109834. 
