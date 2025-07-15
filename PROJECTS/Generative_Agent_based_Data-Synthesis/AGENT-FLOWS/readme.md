@@ -46,7 +46,7 @@ This guide explains how to deploy Flowise on a custom-made Hugging Face Space.
     ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
     # Install Flowise globally
-    RUN npm install -g flowise
+    RUN npm install -g flowise@2.2.5
 
     # Configure Flowise directories using the ARG
     RUN mkdir -p $LOG_PATH $FLOWISE_PATH/uploads && chmod -R 777 $LOG_PATH $FLOWISE_PATH
