@@ -140,7 +140,7 @@ To facilitate understanding and reproducibility, each workflow is accompanied by
 
   </details>
 
-The process begins with ingesting and converting anonymized, real-world clinical notes from PDF to Markdown format [(FLOW01)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb), followed by rigorous data pseudonymization to safeguard patient privacy [(FLOW02)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb).   
+The our SDHG pipline begins with ingesting and converting anonymized, real-world clinical notes from PDF to Markdown format [(FLOW01)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb), followed by rigorous data pseudonymization to safeguard patient privacy [(FLOW02)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb).   
 #
 
 <details>
