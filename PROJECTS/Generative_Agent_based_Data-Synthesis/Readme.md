@@ -18,6 +18,7 @@ We also provide a modular, no code proof of concept in the form of a Flowise bas
 The accompanying Jupyter Notebooks are available in the [`CODE` directory](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE), including notebooks for performing document-level assessment in the [`DESCRIPTOR` subdirectory](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/DESCRIPTOR).   
 #
 
+click to view statediagram
 <details>
 <summary><h2><strong>FLOW01: PDF Text Extraction and Markdown Conversion</strong></h2></summary> click to view statediagram
 
