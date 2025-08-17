@@ -705,7 +705,7 @@ stateDiagram-v2
 #
 
 <details>
-  <summary><h2><strong>References</strong></h2></summary>
+  <summary><h2><strong>References<br> <sub>click to view</strong></h2></summary>
 
 1.	Abdurahman, S., Salkhordeh Ziabari, A., Moore, A.K., Bartels, D.M., and Dehghani, M. (2025). A primer for evaluating large language models in social-science research. Advances in Methods and Practices in Psychological Science 8(2). doi: 10.1177/25152459251325174. 
 2.	Abhishek, M.K., and Rao, D.R. (2021). "Framework to secure docker containers", in: Fifth World Conference on Smart Trends in Systems Security and Sustainability (WorldS4), (London, UK: IEEE), 152-156. doi: 10.1109/WorldS451998.2021.9514041 
