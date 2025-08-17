@@ -145,7 +145,9 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
 
   </details>
 
-* The SDHG pipline begins with ingesting and converting anonymized, real-world clinical notes from PDF to Markdown format [(FLOW01)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb), followed by rigorous data pseudonymization to safeguard patient privacy [(FLOW02)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb).   
+
+> The SHDG pipline begins with ingesting and converting anonymized, real-world clinical notes from PDF to Markdown format [(FLOW01)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb), followed by rigorous data pseudonymization to safeguard patient privacy [(FLOW02)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb).
+
 #
 
 <details>
@@ -278,7 +280,7 @@ stateDiagram-v2
         - The script also collects all pseudonymized content to later create a combined pseudonymized Markdown file.
 </details>
 
-* We then generate synthetic clinical notes by leveraging advanced large language model (LLM) techniques, comparing source code based on prompting alone [(FLOW03)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03.ipynb) with a Generative Agent-based approach [(FLOW03_AGENT_BASED)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03_OPENAI_AGENT_VERSION.ipynb).     
+> We then generate synthetic clinical notes by leveraging advanced large language model (LLM) techniques, comparing source code based on prompting alone [(FLOW03)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03.ipynb) with a Generative Agent-based approach [(FLOW03_AGENT_BASED)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03_OPENAI_AGENT_VERSION.ipynb).     
   
 <img align="right" width="240" height="240" src="./FIGs/OUPUT_1%2B2.png">
 
@@ -458,7 +460,7 @@ Shown is the workflow used to generate synthetic EHRs. It uses a two-tiered prom
 
   </details>
 
-* The pipeline concludes with a comparative analysis of synthetic versus genuine EHRs [(FLOW04)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW04.ipynb). Our [Benchmark Metrics Overview](#benchmark-metrics-overview) outlines quantitative measures of textual diversity, vocabulary similarity, semantic alignment, and machine discernibility—each with its specific interpretation. Collectively, these metrics enable a holistic evaluation of how well a synthetic corpus obtained through SHDG replicates the complexity, nuance, and realism of real clinical text, providing an in-depth view of corpus-level similarity across multiple dimensions.    
+> The pipeline concludes with a comparative analysis of synthetic versus genuine EHRs [(FLOW04)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW04.ipynb). Our [Benchmark Metrics Overview](#benchmark-metrics-overview) outlines quantitative measures of textual diversity, vocabulary similarity, semantic alignment, and machine discernibility—each with its specific interpretation. Collectively, these metrics enable a holistic evaluation of how well a synthetic corpus obtained through SHDG replicates the complexity, nuance, and realism of real clinical text, providing an in-depth view of corpus-level similarity across multiple dimensions.    
   
 <img align="right" width="240" height="240" src="./FIGs/OUPUT_3%2B4.png">
 
@@ -700,7 +702,7 @@ stateDiagram-v2
 
   </details>
 
-* A proof-of-concept for rapid prototyping is provided as an open-source, modular, no-code example of a [GA-assisted SHDG-workflow](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis#ga-assisted-shdg-workflow) implemented as a [Flowise-based Agentflow](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/AGENT-FLOWS#readme), offering a hands-on guide on how to deploy and interact with this agentflow via Hugging Face Space.  
+> A proof-of-concept for rapid prototyping is provided as an open-source, modular, no-code example of a [GA-assisted SHDG-workflow](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis#ga-assisted-shdg-workflow) implemented as a [Flowise-based Agentflow](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/AGENT-FLOWS#readme), offering a hands-on guide on how to deploy and interact with this agentflow via Hugging Face Space.  
 
 #
 
