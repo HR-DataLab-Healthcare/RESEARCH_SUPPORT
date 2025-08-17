@@ -19,7 +19,7 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
 #
 
 <details>
-<summary><h2><strong>FLOW01: PDF Text Extraction and Markdown Conversion</strong></h2></summary>
+<summary><h2><strong>FLOW01: PDF Text Extraction and Markdown Conversion</strong></h2></summary> click to view statediagram
 
  ```mermaid 
 
