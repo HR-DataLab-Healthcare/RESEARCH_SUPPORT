@@ -145,7 +145,7 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
 
   </details>
 
-The our SDHG pipline begins with ingesting and converting anonymized, real-world clinical notes from PDF to Markdown format [(FLOW01)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb), followed by rigorous data pseudonymization to safeguard patient privacy [(FLOW02)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb).   
+* The SDHG pipline begins with ingesting and converting anonymized, real-world clinical notes from PDF to Markdown format [(FLOW01)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb), followed by rigorous data pseudonymization to safeguard patient privacy [(FLOW02)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW01%2BFLOW02.ipynb).   
 #
 
 <details>
@@ -278,7 +278,7 @@ stateDiagram-v2
         - The script also collects all pseudonymized content to later create a combined pseudonymized Markdown file.
 </details>
 
-We then generate synthetic clinical notes by leveraging advanced large language model (LLM) techniques, comparing source code based on prompting alone [(FLOW03)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03.ipynb) with a Generative Agent-based approach [(FLOW03_AGENT_BASED)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03_OPENAI_AGENT_VERSION.ipynb).     
+* We then generate synthetic clinical notes by leveraging advanced large language model (LLM) techniques, comparing source code based on prompting alone [(FLOW03)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03.ipynb) with a Generative Agent-based approach [(FLOW03_AGENT_BASED)](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/FLOW03_OPENAI_AGENT_VERSION.ipynb).     
   
 <img align="right" width="240" height="240" src="./FIGs/OUPUT_1%2B2.png">
 
