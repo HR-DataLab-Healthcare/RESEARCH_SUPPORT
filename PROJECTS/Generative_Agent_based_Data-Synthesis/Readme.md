@@ -593,25 +593,25 @@ Shown is the workflow used to assesses the quality and similarity of the generat
 stateDiagram-v2
 
     Evaulation_Framework --> Metric_ShannonEntropy : calculate_entropy
-    Metric_ShannonEntropy: **Shannon Entropy**\nCalculates Shannon's entropy to quantify<br>uncertainty or information content.
+    Metric_ShannonEntropy: **Shannon Entropy**  <br> Calculates Shannon's entropy to quantify<br>uncertainty or information content.
 
     Evaulation_Framework --> Metric_AvgBigramPMI : calculate_avg_bigram_pmi
-    Metric_AvgBigramPMI: **Average Bigram PMI**\nCalculates average Pointwise Mutual Information<br>to measure strength of word associations.
+    Metric_AvgBigramPMI: **Average Bigram PMI** Calculates average Pointwise Mutual Information<br>to measure strength of word associations.
 
     Evaulation_Framework --> Metric_JSD : calculate_kl_divergence
-    Metric_JSD: **Jensen-Shannon Divergence (JSD)**\nMeasures distributional similarity between<br>two text corpora.
+    Metric_JSD: **Jensen-Shannon Divergence (JSD)** <br> Measures distributional similarity between<br>two text corpora.
 
     Evaulation_Framework --> Metric_CorpusBLEU : calculate_corpus_bleu
-    Metric_CorpusBLEU: **Corpus BLEU Score**\nMeasures surface-level similarity (n-gram overlap)<br>to gauge novelty vs. direct copying.
+    Metric_CorpusBLEU: **Corpus BLEU Score** <br> Measures surface-level similarity (n-gram overlap)<br>to gauge novelty vs. direct copying.
 
     Evaulation_Framework --> Metric_BERTScore : calculate_corpus_bertscore
-    Metric_BERTScore: **BERTScore (Precision, Recall, F1)**\nMeasures semantic similarity using<br>contextual word embeddings.
+    Metric_BERTScore: **BERTScore (Precision, Recall, F1)** <br> Measures semantic similarity using<br>contextual word embeddings.
 
     Evaulation_Framework --> Metric_ClassifierDiscriminability : evaluate_classifier_performance
-    Metric_ClassifierDiscriminability: **Classifier Discriminability**\nTests how easily an ML classifier can<br>distinguish real from synthetic data (realism).
+    Metric_ClassifierDiscriminability: **Classifier Discriminability** <br> Tests how easily an ML classifier can<br>distinguish real from synthetic data (realism).
 
     Evaulation_Framework --> Metric_LLMQualitativeComparison : compare_docs_with_gpt4
-    Metric_LLMQualitativeComparison: **LLM-based Qualitative Comparison**\nUses GPT-4 to assess similarity on structure,<br>style, clinical patterns, and realism.
+    Metric_LLMQualitativeComparison: **LLM-based Qualitative Comparison** <br> Uses GPT-4 to assess similarity on structure,<br>style, clinical patterns, and realism.
 
     Metric_ShannonEntropy --> EvaluationResults
     Metric_AvgBigramPMI --> EvaluationResults
