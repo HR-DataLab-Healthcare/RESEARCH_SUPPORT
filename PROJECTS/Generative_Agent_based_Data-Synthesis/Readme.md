@@ -77,9 +77,9 @@ stateDiagram-v2
         Params --> [*]
     }
 
-    GA_Synthesis --> Synthetic_Output
+    GA_Synthesis --> Synthetic_Outputt
 
-    state Synthetic_Output {
+    state Synthetic_Outputt {
         [*] --> Out
         Out: Clinically realistic<br>privacy-preserving synthetic EHRs
         Out --> Deployment
@@ -89,7 +89,7 @@ stateDiagram-v2
         Compliance --> [*]
     }
 
-    Synthetic_Output --> Benchmarking
+    Synthetic_Outputt --> Benchmarking
 
     state Benchmarking {
         [*] --> DocMetrics
@@ -105,9 +105,9 @@ stateDiagram-v2
         HumanReview --> [*]
     }
 
-    Benchmarking --> IterativeImprovement
+    Benchmarking --> Iterative_Improvement
 
-    state IterativeImprovement {
+    state Iterative_Improvement {
         [*] --> CoDev
         CoDev: Human experts + GenAI<br>(Gemini, Copilot, Perplexity, AlphaEvolve)
         CoDev --> Refinement
@@ -117,7 +117,7 @@ stateDiagram-v2
         Tuning --> [*]
     }
 
-    IterativeImprovement --> [*]
+    Iterative_Improvement --> [*]
 
 
  ```
