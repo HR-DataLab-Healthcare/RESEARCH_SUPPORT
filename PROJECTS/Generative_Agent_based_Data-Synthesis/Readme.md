@@ -52,9 +52,9 @@ flowchart TD
         B4 --> C1 --> C2 --> C3 --> C4 --> C5
 
         D1[Step 4: GA Synthesis]
-        D2["Multi-Agent Architecture: Supervisor + Worker PTs"]
+        D2["Multi-Agent Architecture: Supervisor + Worker"]
         D3["Retrieval-Augmented Generation (RAG)<br>Vector store + doc chunking"]
-        D4["Parameters: Temp 0.3–0.5"]
+        D4["Parameters Setting: e.g., Temp 0.3–0.5"]
         
         C5 --> D1 --> D2 --> D3 --> D4
 
