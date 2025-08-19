@@ -29,8 +29,8 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
 
 sequenceDiagram
     participant User
-    participant FLOW01 as FLOW01 System
-    participant FLOW02 as FLOW02 System
+    participant FLOW01 as Workflow 01
+    participant FLOW02 as Workflow 02
     participant Repo as Data Repository
     participant Compute as Compute Toolchain
     participant GA as GA Synthesis
@@ -61,13 +61,13 @@ sequenceDiagram
 ```mermaid 
 sequenceDiagram
     participant GA as GA Synthesis
-    participant Deploy as Deployment System
-    participant User
-    participant Benchmark as Benchmarking System
+    participant Deploy as Deployment Platform
+    participant End User
+    participant Benchmark as Benchmarking 
     participant Expert as Human Expert
 
     GA->>Deploy: Send synthetic EHRs for deployment
-    Deploy->>Deploy: Deploy on Hugging Face Spaces / API endpoints
+    Deploy->>Deploy: Deploy on Hugging Face Spaces using Docker + Flowise / API endpoints
     Deploy->>User: Synthetic synthetic EHRs delivered (GDPR + EU AI Act compliant)
 
     Deploy->>Benchmark: Start benchmarking tests
