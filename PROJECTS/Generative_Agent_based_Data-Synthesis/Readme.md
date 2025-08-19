@@ -25,9 +25,9 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
  ```mermaid 
 
 stateDiagram-v2
-    [*] --> DataIngestionPrivacy
+    [*] --> Data_Ingestion_Privacy
 
-    state DataIngestionPrivacy {
+    state Data_Ingestion_Privacy {
         [*] --> Step1
         Step1: Real EHR PDFs (N=13<br>Dutch low back pain cases)
         Step1 --> Step2
@@ -39,9 +39,9 @@ stateDiagram-v2
         Step4 --> [*]
     }
 
-    DataIngestionPrivacy --> Data-Warehousing
+    Data_Ingestion_Privacy --> Data_Warehousing
 
-    state DataWarehousing {
+    state Data_Warehousing {
         [*] --> Repo
         Repo: Store pseudonymized EHRs,<br>guidelines, codebooks in repository
         Repo --> Formats
@@ -51,9 +51,9 @@ stateDiagram-v2
         Purpose --> [*]
     }
 
-    DataWarehousing --> Compute-Toolchain
+    Data_Warehousing --> Compute_Toolchain
 
-    state ComputeToolchain {
+    state Compute_Toolchain {
         [*] --> Hybrid
         Hybrid: Hybrid compute<br>Local + Cloud (Azure GPT-4.1)
         Hybrid --> Tools
@@ -65,9 +65,9 @@ stateDiagram-v2
         LocalLLM --> [*]
     }
 
-    ComputeToolchain --> GA-Development
+    Compute_Toolchain --> GA_Synthesis
 
-    state GASynthesis {
+    state GA_Synthesis {
         [*] --> Agents
         Agents: Multi-Agent Architecture<br>- Supervisor (PT)<br>- Worker (PTs)
         Agents --> RAG
@@ -77,9 +77,9 @@ stateDiagram-v2
         Params --> [*]
     }
 
-    GASynthesis --> Synthetic-Output
+    GA_Synthesis --> Synthetic_Output
 
-    state SyntheticOutput {
+    state Synthetic_Output {
         [*] --> Out
         Out: Clinically realistic<br>privacy-preserving synthetic EHRs
         Out --> Deployment
@@ -89,7 +89,7 @@ stateDiagram-v2
         Compliance --> [*]
     }
 
-    SyntheticOutput --> Benchmarking
+    Synthetic_Output --> Benchmarking
 
     state Benchmarking {
         [*] --> DocMetrics
