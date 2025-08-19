@@ -22,18 +22,20 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
 <details>
 <summary><h2><strong>Privacy-Preserving GA-assisted SHDG Protocol  <br> <sub>click to view — Schematic Overview</strong></h2></summary>
 
- ```mermaid 
+<br>
+* Part 1: Data Ingestion, Warehousing, Compute, and GA Synthesis
+<br>
+
+
+```mermaid
 
 sequenceDiagram
     participant User
-    participant FLOW01 as FLOW01 
-    participant FLOW02 as FLOW02 
+    participant FLOW01 as FLOW01 System
+    participant FLOW02 as FLOW02 System
     participant Repo as Data Repository
     participant Compute as Compute Toolchain
     participant GA as GA Synthesis
-    participant Deploy as Deployment 
-    participant Benchmark as Benchmarking 
-    participant Expert as Human Expert
 
     User->>FLOW01: Upload Real EHR PDFs (N=13 Dutch low back pain cases)
     FLOW01->>User: Convert PDFs to Markdown (Gemini 2.5 Flash + GPT-4.1)
@@ -50,6 +52,19 @@ sequenceDiagram
     Compute->>GA: Trigger GA Synthesis (Multi-Agent Architecture)
     GA->>Repo: Retrieve data chunks for RAG (Vector store + doc chunking)
     GA->>GA: Synthesize synthetic clinical EHRs (Temp 0.3–0.5 parameters)
+```
+
+<br>
+* Part 2: Deployment, Benchmarking, and Iterative Improvement
+<br>
+
+```mermaid 
+sequenceDiagram
+    participant GA as GA Synthesis
+    participant Deploy as Deployment System
+    participant User
+    participant Benchmark as Benchmarking System
+    participant Expert as Human Expert
 
     GA->>Deploy: Send synthetic EHRs for deployment
     Deploy->>Deploy: Deploy on Hugging Face Spaces / API endpoints
