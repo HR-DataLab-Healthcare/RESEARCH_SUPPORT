@@ -26,13 +26,13 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
 
 sequenceDiagram
     participant User
-    participant FLOW01 as FLOW01 System
-    participant FLOW02 as FLOW02 System
+    participant FLOW01 as FLOW01 
+    participant FLOW02 as FLOW02 
     participant Repo as Data Repository
     participant Compute as Compute Toolchain
     participant GA as GA Synthesis
-    participant Deploy as Deployment System
-    participant Benchmark as Benchmarking System
+    participant Deploy as Deployment 
+    participant Benchmark as Benchmarking 
     participant Expert as Human Expert
 
     User->>FLOW01: Upload Real EHR PDFs (N=13 Dutch low back pain cases)
