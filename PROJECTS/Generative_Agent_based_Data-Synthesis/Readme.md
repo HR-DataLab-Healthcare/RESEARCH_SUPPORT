@@ -20,6 +20,112 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
 #
 
 <details>
+<summary><h2><strong>Privacy-Preserving GA-assisted SHDG Protocol — Schematic Overview <br> <sub>click to view statediagram</strong></h2></summary>
+
+ ```mermaid 
+
+stateDiagram-v2
+    [*] --> DataIngestionPrivacy
+
+    state DataIngestionPrivacy {
+        [*] --> Step1
+        Step1: Real EHR PDFs (N=13<br>Dutch low back pain cases)
+        Step1 --> Step2
+        Step2: PDF → Markdown conversion<br>(FLOW01, Gemini 2.5 Flash + GPT-4.1)
+        Step2 --> Step3
+        Step3: Manual anonymization<br>(remove names, SSN, addresses, etc.)
+        Step3 --> Step4
+        Step4: Automated pseudonymization<br>(FLOW02, GPT-4.1 NER + replacement)<br>→ Privacy-compliant pseudonymized EHRs
+        Step4 --> [*]
+    }
+
+    DataIngestionPrivacy --> DataWarehousing
+
+    state DataWarehousing {
+        [*] --> Repo
+        Repo: Store pseudonymized EHRs,<br>guidelines, codebooks in repository
+        Repo --> Formats
+        Formats: Supported formats<br>MD, JSON, CSV, SQL, PDF
+        Formats --> Purpose
+        Purpose: Knowledge base for synthesis<br>+ retrieval grounding
+        Purpose --> [*]
+    }
+
+    DataWarehousing --> ComputeToolchain
+
+    state ComputeToolchain {
+        [*] --> Hybrid
+        Hybrid: Hybrid compute<br>Local + Cloud (Azure GPT-4.1)
+        Hybrid --> Tools
+        Tools: Toolchain<br>Docker, Flowise, Hugging Face Spaces
+        Tools --> API
+        API: Secured inference endpoints<br>(API key privacy control)
+        API --> LocalLLM
+        LocalLLM: Optional local LLM deployment (Ollama)
+        LocalLLM --> [*]
+    }
+
+    ComputeToolchain --> GASynthesis
+
+    state GASynthesis {
+        [*] --> Agents
+        Agents: Multi-Agent Architecture<br>- Supervisor (PT)<br>- Worker (PTs)
+        Agents --> RAG
+        RAG: Retrieval-Augmented Generation (RAG)<br>Vector store + doc chunking
+        RAG --> Params
+        Params: Parameters<br>Temp 0.3–0.5
+        Params --> [*]
+    }
+
+    GASynthesis --> SyntheticOutput
+
+    state SyntheticOutput {
+        [*] --> Out
+        Out: Clinically realistic<br>privacy-preserving synthetic EHRs
+        Out --> Deployment
+        Deployment: Deployment<br>Hugging Face Spaces / API endpoints
+        Deployment --> Compliance
+        Compliance: GDPR + EU AI Act compliance
+        Compliance --> [*]
+    }
+
+    SyntheticOutput --> Benchmarking
+
+    state Benchmarking {
+        [*] --> DocMetrics
+        DocMetrics: Document metrics<br>word count, unique words, length
+        DocMetrics --> CorpusMetrics
+        CorpusMetrics: Corpus-level metrics<br>diversity, similarity, alignment
+        CorpusMetrics --> Discern
+        Discern: Machine discernibility tests
+        Discern --> Output
+        Output: Fidelity scores<br>vs pseudonymized real EHRs
+        Output --> HumanReview
+        HumanReview: Human expert review<br>(realism, coherence, validity)
+        HumanReview --> [*]
+    }
+
+    Benchmarking --> IterativeImprovement
+
+    state IterativeImprovement {
+        [*] --> CoDev
+        CoDev: Human experts + GenAI<br>(Gemini, Copilot, Perplexity, AlphaEvolve)
+        CoDev --> Refinement
+        Refinement: Natural language–driven code refinement
+        Refinement --> Tuning
+        Tuning: Continuous tuning of prompts,<br>RAG data, evaluation metrics
+        Tuning --> [*]
+    }
+
+    IterativeImprovement --> [*]
+
+
+ ```
+
+</details>
+
+#
+<details>
 <summary><h2><strong>FLOW01: PDF Text Extraction and Markdown Conversion <br> <sub>click to view statediagram</strong></h2></summary> 
 
  ```mermaid 
