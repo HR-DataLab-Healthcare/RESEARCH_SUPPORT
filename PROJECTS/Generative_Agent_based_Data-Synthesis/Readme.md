@@ -120,7 +120,58 @@ stateDiagram-v2
     Iterative_Improvement --> [*]
 
 
+
+
+
+
  ```
+
+
+ ```mermaid 
+flowchart TD
+    A[Data Ingestion Privacy] -->|Step 1| B["Real EHR PDFs (N=13\nDutch low back pain cases)"]
+    B -->|Step 2| C["PDF → Markdown conversion\n(FLOW01, Gemini 2.5 Flash + GPT-4.1)"]
+    C -->|Step 3| D["Manual anonymization\n(remove names, SSN, addresses, etc.)"]
+    D -->|Step 4| E["Automated pseudonymization\n(FLOW02, GPT-4.1 NER + replacement)\n→ Privacy-compliant pseudonymized EHRs"]
+
+    E --> F[Data Warehousing]
+    F --> G["Store pseudonymized EHRs,\nguidelines, codebooks in repository"]
+    G --> H["Supported formats: MD, JSON, CSV, SQL, PDF"]
+    H --> I["Knowledge base for synthesis + retrieval grounding"]
+
+    I --> J[Compute Toolchain]
+    J --> K["Hybrid compute: Local + Cloud (Azure GPT-4.1)"]
+    K --> L["Toolchain: Docker, Flowise, Hugging Face Spaces"]
+    L --> M["Secured inference endpoints (API key privacy control)"]
+    M --> N["Optional local LLM deployment (Ollama)"]
+
+    N --> O[GA Synthesis]
+    O --> P["Multi-Agent Architecture: Supervisor + Worker PTs"]
+    P --> Q["Retrieval-Augmented Generation (RAG)\nVector store + doc chunking"]
+    Q --> R["Parameters: Temp 0.3–0.5"]
+
+    R --> S[Synthetic Output]
+    S --> T["Clinically realistic, privacy-preserving synthetic EHRs"]
+    T --> U["Deployment: Hugging Face Spaces / API endpoints"]
+    U --> V["Compliance: GDPR + EU AI Act compliance"]
+
+    V --> W[Benchmarking]
+    W --> X["Document metrics: word count, unique words, length"]
+    X --> Y["Corpus-level metrics: diversity, similarity, alignment"]
+    Y --> Z[Machine discernibility tests]
+    Z --> AA["Fidelity scores vs pseudonymized real EHRs"]
+    AA --> AB["Human expert review: realism, coherence, validity"]
+
+    AB --> AC[Iterative Improvement]
+    AC --> AD["Human experts + GenAI (Gemini, Copilot, Perplexity, AlphaEvolve)"]
+    AD --> AE["Natural language–driven code refinement"]
+    AE --> AF["Continuous tuning of prompts, RAG data, evaluation metrics"]
+
+
+ ```
+
+
+
 
 </details>
 
