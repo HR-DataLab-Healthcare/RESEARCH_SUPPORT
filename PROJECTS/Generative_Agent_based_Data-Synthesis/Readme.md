@@ -16,16 +16,14 @@ To facilitate understanding and reproducibility, we brokedown the GA-assisted SH
 
 We also provide a modular, no-code proof of concept in the form of a Flowise-based [Agentflow](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/AGENT-FLOWS/GA-ASSISTED-SHDG.json), featuring targeted prompt examples for both supervisors and workers. Included is a hands-on guide for responsible deployment and interaction of [GA-assisted SHDG-workflows](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis#ga-assisted-shdg-workflow), implemented through Hugging Face Spaces. This proof of concept is built on open-source digital infrastructure that enables rapid prototyping and controlled sharing of workflows, while API key–secured inference endpoints ensure privacy compliance.
 
-The accompanying Jupyter Notebooks are available in the [`CODE` directory](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE), including notebooks for performing document-level assessment in the [`DESCRIPTOR` subdirectory](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/DESCRIPTOR).   
+The accompanying Jupyter Notebooks are available in the [`CODE` directory](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE), including notebooks for performing document-level assessment in the [`DESCRIPTOR` subdirectory](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/DESCRIPTOR). 
+
 #
 
 <details>
-<summary><h2><strong>Privacy-Preserving GA-assisted SHDG Protocol  <br> <sub>click to view — Schematic Overview</strong></h2></summary>
+<summary><h2><strong>[1] GA-assisted SHDG Protocol <br> <sub>click to view — — Part 1: Data Ingestion, Warehousing, Compute, and GA Synthesis </strong></h2></summary>
 
 <br>
-* Part 1: Data Ingestion, Warehousing, Compute, and GA Synthesis
-<br>
-
 
 ```mermaid
 
@@ -53,9 +51,11 @@ sequenceDiagram
     GA->>Repo: Retrieve data chunks for RAG (Vector store + doc chunking)
     GA->>GA: Synthesize synthetic clinical EHRs (Temp 0.3–0.5 parameters)
 ```
+</details>
 
-<br>
-* Part 2: Deployment, Benchmarking, and Iterative Improvement
+<details>
+<summary><h2><strong>[2] GA-assisted SHDG Protocol  <br> <sub>click to view — — Part 2: Part 2: Deployment, Benchmarking, and Iterative Improvement </strong></h2></summary>
+
 <br>
 
 ```mermaid 
@@ -81,9 +81,8 @@ sequenceDiagram
 
     User->>Expert: Collaborate on iterative improvement (GenAI + human experts)
     Expert->>User: Refine code, tune prompts, update RAG data, evaluate metrics
-
-
  ```
+
 </details>
 
 #
