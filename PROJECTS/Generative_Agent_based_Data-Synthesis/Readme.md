@@ -32,7 +32,7 @@ flowchart TD
         A2["Real EHR PDFs (N=13 Dutch low back pain cases)"]
         A3["PDF → Markdown conversion<br>(FLOW01, Gemini 2.5 Flash + GPT-4.1)"]
         A4["Manual anonymization<br>(remove names, SSN, addresses, etc.)"]
-        A5["Automated pseudonymization<br> Manual<br>(FLOW02, GPT-4.1 NER + replacement)<br>→ Privacy-compliant pseudonymized EHRs"]
+        A5["Automated pseudonymization<br>(FLOW02, GPT-4.1 NER + replacement)<br>→ Privacy-compliant pseudonymized EHRs"]
         
         A1 --> A2 --> A3 --> A4 --> A5
 
