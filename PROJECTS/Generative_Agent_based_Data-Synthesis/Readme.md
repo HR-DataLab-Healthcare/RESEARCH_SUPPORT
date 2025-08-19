@@ -21,7 +21,7 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
 #
 
 <details>
-<summary><h2><strong>[1] GA-assisted SHDG Protocol <br> <sub>click to view — — Part 1: Data Ingestion, Warehousing, Compute, and GA Synthesis </strong></h2></summary>
+<summary><h2><strong>GA-assisted SHDG Protocol: PART02 <br> <sub>click to view — Data Ingestion, Warehousing, Compute, and GA Synthesis </strong></h2></summary>
 
 <br>
 
@@ -54,7 +54,7 @@ sequenceDiagram
 </details>
 
 <details>
-<summary><h2><strong>[2] GA-assisted SHDG Protocol  <br> <sub>click to view — — Part 2: Part 2: Deployment, Benchmarking, and Iterative Improvement </strong></h2></summary>
+<summary><h2><strong>GA-assisted SHDG Protocol: PART02  <br> <sub>click to view — Deployment, Benchmarking, and Iterative Improvement </strong></h2></summary>
 
 <br>
 
