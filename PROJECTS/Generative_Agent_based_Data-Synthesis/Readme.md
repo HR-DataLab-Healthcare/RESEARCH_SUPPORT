@@ -20,47 +20,67 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
 #
 
 <details>
-<summary><h2><strong>Privacy-Preserving GA-assisted SHDG Protocol — Schematic Overview <br> <sub>click to view statediagram</strong></h2></summary>
+<summary><h2><strong>Privacy-Preserving GA-assisted SHDG Protocol  <br> <sub>click to view — Schematic Overview</strong></h2></summary>
 
  ```mermaid 
+
 flowchart TD
-    A[Data Ingestion Privacy] -->|Step 1| B["Real EHR PDFs (N=13<br>Dutch low back pain cases)"]
-    B -->|Step 2| C["PDF → Markdown conversion<br>(FLOW01, Gemini 2.5 Flash + GPT-4.1)"]
-    C -->|Step 3| D["Manual anonymization<br>(remove names, SSN, addresses, etc.)"]
-    D -->|Step 4| E["Automated pseudonymization<br>(FLOW02, GPT-4.1 NER + replacement)<br>→ Privacy-compliant pseudonymized EHRs"]
+    subgraph Protocol [" Start  SHDG Protocol" ]
+        direction TB
 
-    E --> F[Data Warehousing]
-    F --> G["Store pseudonymized EHRs,<br>guidelines, codebooks in repository"]
-    G --> H["Supported formats: MD, JSON, CSV, SQL, PDF"]
-    H --> I["Knowledge base for synthesis + retrieval grounding"]
+        A1[Step 1: Data Ingestion Privacy]
+        A2["Real EHR PDFs (N=13 Dutch low back pain cases)"]
+        A3["PDF → Markdown conversion\n(FLOW01, Gemini 2.5 Flash + GPT-4.1)"]
+        A4["Manual anonymization\n(remove names, SSN, addresses, etc.)"]
+        A5["Automated pseudonymization\n(FLOW02, GPT-4.1 NER + replacement)\n→ Privacy-compliant pseudonymized EHRs"]
+        
+        A1 --> A2 --> A3 --> A4 --> A5
 
-    I --> J[Compute Toolchain]
-    J --> K["Hybrid compute: Local + Cloud (Azure GPT-4.1)"]
-    K --> L["Toolchain: Docker, Flowise, Hugging Face Spaces"]
-    L --> M["Secured inference endpoints (API key privacy control)"]
-    M --> N["Optional local LLM deployment (Ollama)"]
+        B1[Step 2: Data Warehousing]
+        B2["Store pseudonymized EHRs,\nguidelines, codebooks in repository"]
+        B3["Supported formats: MD, JSON, CSV, SQL, PDF"]
+        B4["Knowledge base for synthesis + retrieval grounding"]
+        
+        A5 --> B1 --> B2 --> B3 --> B4
 
-    N --> O[GA Synthesis]
-    O --> P["Multi-Agent Architecture: Supervisor + Worker PTs"]
-    P --> Q["Retrieval-Augmented Generation (RAG)<br>Vector store + doc chunking"]
-    Q --> R["Parameters: Temp 0.3–0.5"]
+        C1[Step 3: Compute Toolchain]
+        C2["Hybrid compute: Local + Cloud (Azure GPT-4.1)"]
+        C3["Toolchain: Docker, Flowise, Hugging Face Spaces"]
+        C4["Secured inference endpoints (API key privacy control)"]
+        C5["Optional local LLM deployment (Ollama)"]
+        
+        B4 --> C1 --> C2 --> C3 --> C4 --> C5
 
-    R --> S[Synthetic Output]
-    S --> T["Clinically realistic, privacy-preserving synthetic EHRs"]
-    T --> U["Deployment: Hugging Face Spaces / API endpoints"]
-    U --> V["Compliance: GDPR + EU AI Act compliance"]
+        D1[Step 4: GA Synthesis]
+        D2["Multi-Agent Architecture: Supervisor + Worker PTs"]
+        D3["Retrieval-Augmented Generation (RAG)\nVector store + doc chunking"]
+        D4["Parameters: Temp 0.3–0.5"]
+        
+        C5 --> D1 --> D2 --> D3 --> D4
 
-    V --> W[Benchmarking]
-    W --> X["Document metrics: word count, unique words, length"]
-    X --> Y["Corpus-level metrics: diversity, similarity, alignment"]
-    Y --> Z[Machine discernibility tests]
-    Z --> AA["Fidelity scores vs pseudonymized real EHRs"]
-    AA --> AB["Human expert review: realism, coherence, validity"]
+        E1[Step 5: Synthetic Output]
+        E2["Clinically realistic, privacy-preserving synthetic EHRs"]
+        E3["Deployment: Hugging Face Spaces / API endpoints"]
+        E4["Compliance: GDPR + EU AI Act compliance"]
 
-    AB --> AC[Iterative Improvement]
-    AC --> AD["Human experts + GenAI (Gemini, Copilot, Perplexity, AlphaEvolve)"]
-    AD --> AE["Natural language–driven code refinement"]
-    AE --> AF["Continuous tuning of prompts, RAG data, evaluation metrics"]
+        D4 --> E1 --> E2 --> E3 --> E4
+
+        F1[Step 6: Benchmarking]
+        F2["Document metrics: word count, unique words, length"]
+        F3["Corpus-level metrics: diversity, similarity, alignment"]
+        F4["Machine discernibility tests"]
+        F5["Fidelity scores vs pseudonymized real EHRs"]
+        F6["Human expert review: realism, coherence, validity"]
+
+        E4 --> F1 --> F2 --> F3 --> F4 --> F5 --> F6
+
+        G1[Step 7: Iterative Improvement]
+        G2["Human experts + GenAI (Gemini, Copilot, Perplexity, AlphaEvolve)"]
+        G3["Natural language–driven code refinement"]
+        G4["Continuous tuning of prompts, RAG data, evaluation metrics"]
+
+        F6 --> G1 --> G2 --> G3 --> G4
+    end
 
 
  ```
