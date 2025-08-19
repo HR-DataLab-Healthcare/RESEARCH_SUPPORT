@@ -24,13 +24,13 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
 
  ```mermaid 
 flowchart TD
-    A[Data Ingestion Privacy] -->|Step 1| B["Real EHR PDFs (N=13\nDutch low back pain cases)"]
-    B -->|Step 2| C["PDF → Markdown conversion\n(FLOW01, Gemini 2.5 Flash + GPT-4.1)"]
-    C -->|Step 3| D["Manual anonymization\n(remove names, SSN, addresses, etc.)"]
-    D -->|Step 4| E["Automated pseudonymization\n(FLOW02, GPT-4.1 NER + replacement)\n→ Privacy-compliant pseudonymized EHRs"]
+    A[Data Ingestion Privacy] -->|Step 1| B["Real EHR PDFs (N=13<br>Dutch low back pain cases)"]
+    B -->|Step 2| C["PDF → Markdown conversion<br>(FLOW01, Gemini 2.5 Flash + GPT-4.1)"]
+    C -->|Step 3| D["Manual anonymization<br>(remove names, SSN, addresses, etc.)"]
+    D -->|Step 4| E["Automated pseudonymization<br>(FLOW02, GPT-4.1 NER + replacement)<br>→ Privacy-compliant pseudonymized EHRs"]
 
     E --> F[Data Warehousing]
-    F --> G["Store pseudonymized EHRs,\nguidelines, codebooks in repository"]
+    F --> G["Store pseudonymized EHRs,<br>guidelines, codebooks in repository"]
     G --> H["Supported formats: MD, JSON, CSV, SQL, PDF"]
     H --> I["Knowledge base for synthesis + retrieval grounding"]
 
@@ -42,7 +42,7 @@ flowchart TD
 
     N --> O[GA Synthesis]
     O --> P["Multi-Agent Architecture: Supervisor + Worker PTs"]
-    P --> Q["Retrieval-Augmented Generation (RAG)\nVector store + doc chunking"]
+    P --> Q["Retrieval-Augmented Generation (RAG)<br>Vector store + doc chunking"]
     Q --> R["Parameters: Temp 0.3–0.5"]
 
     R --> S[Synthetic Output]
@@ -136,7 +136,7 @@ flowchart TD
             *   Opens a PDF file specified by `pdf_path`.
             *   Iterates through each page of the PDF.
             *   Extracts plain text from each page using `page.get_text("text")`.
-            *   Concatenates the text from all pages, adding a double newline (`\n\n`) as a separator between page contents.
+            *   Concatenates the text from all pages, adding a double newline (`<br><br>`) as a separator between page contents.
             *   Includes basic error handling to catch and report issues during PDF reading, returning `None` if an error occurs.
 
     *  **`convert_text_to_markdown(text_content, pdf_filename)`**:
