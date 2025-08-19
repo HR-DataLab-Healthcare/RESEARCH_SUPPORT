@@ -39,7 +39,7 @@ stateDiagram-v2
         Step4 --> [*]
     }
 
-    DataIngestionPrivacy --> DataWarehousing
+    DataIngestionPrivacy --> Data-Warehousing
 
     state DataWarehousing {
         [*] --> Repo
@@ -51,7 +51,7 @@ stateDiagram-v2
         Purpose --> [*]
     }
 
-    DataWarehousing --> ComputeToolchain
+    DataWarehousing --> Compute-Toolchain
 
     state ComputeToolchain {
         [*] --> Hybrid
@@ -65,7 +65,7 @@ stateDiagram-v2
         LocalLLM --> [*]
     }
 
-    ComputeToolchain --> GASynthesis
+    ComputeToolchain --> GA-Development
 
     state GASynthesis {
         [*] --> Agents
@@ -77,7 +77,7 @@ stateDiagram-v2
         Params --> [*]
     }
 
-    GASynthesis --> SyntheticOutput
+    GASynthesis --> Synthetic-Output
 
     state SyntheticOutput {
         [*] --> Out
