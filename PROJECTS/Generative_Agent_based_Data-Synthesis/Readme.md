@@ -24,70 +24,51 @@ The accompanying Jupyter Notebooks are available in the [`CODE` directory](https
 
  ```mermaid 
 
-flowchart TD
-    subgraph Protocol [" Start SHDG Protocol <br>" ]
-        direction TB
+sequenceDiagram
+    participant User
+    participant FLOW01 as FLOW01 System
+    participant FLOW02 as FLOW02 System
+    participant Repo as Data Repository
+    participant Compute as Compute Toolchain
+    participant GA as GA Synthesis
+    participant Deploy as Deployment System
+    participant Benchmark as Benchmarking System
+    participant Expert as Human Expert
 
-        A1[Step 1: Data Ingestion Privacy]
-        A2["Real EHR PDFs (N=13 Dutch low back pain cases)"]
-        A3["PDF → Markdown conversion<br>(FLOW01, Gemini 2.5 Flash + GPT-4.1)"]
-        A4["Manual anonymization<br>(remove names, SSN, addresses, etc.)"]
-        A5["Automated pseudonymization<br>(FLOW02, GPT-4.1 NER + replacement)<br>→ Privacy-compliant pseudonymized EHRs"]
-        
-        A1 --> A2 --> A3 --> A4 --> A5
+    User->>FLOW01: Upload Real EHR PDFs (N=13 Dutch low back pain cases)
+    FLOW01->>User: Convert PDFs to Markdown (Gemini 2.5 Flash + GPT-4.1)
+    User->>User: Manual anonymization (remove names, SSN, addresses, etc.)
+    User->>FLOW02: Submit Markdown for pseudonymization
+    FLOW02->>User: Automated pseudonymization (GPT-4.1 NER + replacement)
+    FLOW02->>Repo: Store privacy-compliant pseudonymized EHRs
 
-        B1[Step 2: Data Warehousing]
-        B2["Store pseudonymized EHRs,<br>guidelines, codebooks in repository"]
-        B3["Supported formats: MD, JSON, CSV, SQL, PDF"]
-        B4["Knowledge base for synthesis + retrieval grounding"]
-        
-        A5 --> B1 --> B2 --> B3 --> B4
+    User->>Repo: Access knowledge base (MD, JSON, CSV, SQL, PDF formats)
+    Repo->>Compute: Provide data for computation (Local + Cloud Azure GPT-4.1)
+    Compute->>Compute: Execute toolchain (Docker, Flowise, Hugging Face Spaces)
+    Compute->>Repo: Secure inference endpoint requests (API key privacy control)
 
-        C1[Step 3: Compute Toolchain]
-        C2["Hybrid compute: Local + Cloud (Azure GPT-4.1)"]
-        C3["Toolchain: Docker, Flowise, Hugging Face Spaces"]
-        C4["Secured inference endpoints (API key privacy control)"]
-        C5["Optional local LLM deployment (Ollama)"]
-        
-        B4 --> C1 --> C2 --> C3 --> C4 --> C5
+    Compute->>GA: Trigger GA Synthesis (Multi-Agent Architecture)
+    GA->>Repo: Retrieve data chunks for RAG (Vector store + doc chunking)
+    GA->>GA: Synthesize synthetic clinical EHRs (Temp 0.3–0.5 parameters)
 
-        D1[Step 4: GA Synthesis]
-        D2["Multi-Agent Architecture: Supervisor + Worker"]
-        D3["Retrieval-Augmented Generation (RAG)<br>Vector store + doc chunking"]
-        D4["Parameters Setting: e.g., Temp 0.3–0.5"]
-        
-        C5 --> D1 --> D2 --> D3 --> D4
+    GA->>Deploy: Send synthetic EHRs for deployment
+    Deploy->>Deploy: Deploy on Hugging Face Spaces / API endpoints
+    Deploy->>User: Synthetic synthetic EHRs delivered (GDPR + EU AI Act compliant)
 
-        E1[Step 5: Synthetic Output]
-        E2["Clinically realistic, privacy-preserving synthetic EHRs"]
-        E3["Deployment: Hugging Face Spaces / API endpoints"]
-        E4["Compliance: GDPR + EU AI Act compliance"]
+    Deploy->>Benchmark: Start benchmarking tests
+    Benchmark->>Benchmark: Document & corpus metrics calculation
+    Benchmark->>Benchmark: Machine discernibility tests
+    Benchmark->>GA: Provide fidelity scores (vs pseudonymized real EHRs)
+    Benchmark->>Expert: Request human expert review on realism, coherence, validity
 
-        D4 --> E1 --> E2 --> E3 --> E4
+    Expert->>Benchmark: Submit review feedback
+    Benchmark->>User: Return benchmarking results and expert reviews
 
-        F1[Step 6: Benchmarking]
-        F2["Document metrics: word count, unique words, length"]
-        F3["Corpus-level metrics: diversity, similarity, alignment"]
-        F4["Machine discernibility tests"]
-        F5["Fidelity scores vs pseudonymized real EHRs"]
-        F6["Human expert review: realism, coherence, validity"]
-
-        E4 --> F1 --> F2 --> F3 --> F4 --> F5 --> F6
-
-        G1[Step 7: Iterative Improvement]
-        G2["Human experts + GenAI (Gemini, Copilot, Perplexity, AlphaEvolve)"]
-        G3["Natural language–driven code refinement"]
-        G4["Continuous tuning of prompts, RAG data, evaluation metrics"]
-
-        F6 --> G1 --> G2 --> G3 --> G4
-    end
+    User->>Expert: Collaborate on iterative improvement (GenAI + human experts)
+    Expert->>User: Refine code, tune prompts, update RAG data, evaluate metrics
 
 
  ```
-
-
-
-
 </details>
 
 #
@@ -138,6 +119,26 @@ flowchart TD
   Log_Success --> Process_Next_PDF_Decision
 
   End_Process --> [*]
+
+  gantt
+    title Privacy-Preserving GA-assisted SHDG Protocol Timeline
+    dateFormat  YYYY-MM-DD
+    section Data Ingestion
+    Real EHR PDFs                  :done, 2025-01-01, 2025-01-05
+    PDF to Markdown conversion     :done, 2025-01-06, 2025-01-10
+    Manual anonymization           :done, 2025-01-11, 2025-01-15
+    Automated pseudonymization     :done, 2025-01-16, 2025-01-20
+    section Data Warehousing
+    Repository storage             :done, 2025-01-21, 2025-01-25
+    section Compute & Synthesis
+    Hybrid compute setup           :done, 2025-01-26, 2025-01-28
+    Multi-agent GA synthesis       :done, 2025-01-29, 2025-02-05
+    section Outputs & Benchmarking
+    Synthetic output deployment    :done, 2025-02-06, 2025-02-10
+    Benchmarking & review          :done, 2025-02-11, 2025-02-15
+    section Iterative Improvement
+    Co-development & tuning        :active, 2025-02-16, 2025-02-28
+
 
  ```
 
