@@ -30,14 +30,14 @@ flowchart TD
 
         A1[Step 1: Data Ingestion Privacy]
         A2["Real EHR PDFs (N=13 Dutch low back pain cases)"]
-        A3["PDF → Markdown conversion\n(FLOW01, Gemini 2.5 Flash + GPT-4.1)"]
-        A4["Manual anonymization\n(remove names, SSN, addresses, etc.)"]
-        A5["Automated pseudonymization\n(FLOW02, GPT-4.1 NER + replacement)\n→ Privacy-compliant pseudonymized EHRs"]
+        A3["PDF → Markdown conversion<br>(FLOW01, Gemini 2.5 Flash + GPT-4.1)"]
+        A4["Manual anonymization<br>(remove names, SSN, addresses, etc.)"]
+        A5["Automated pseudonymization<br>(FLOW02, GPT-4.1 NER + replacement)<br>→ Privacy-compliant pseudonymized EHRs"]
         
         A1 --> A2 --> A3 --> A4 --> A5
 
         B1[Step 2: Data Warehousing]
-        B2["Store pseudonymized EHRs,\nguidelines, codebooks in repository"]
+        B2["Store pseudonymized EHRs,<br>guidelines, codebooks in repository"]
         B3["Supported formats: MD, JSON, CSV, SQL, PDF"]
         B4["Knowledge base for synthesis + retrieval grounding"]
         
@@ -53,7 +53,7 @@ flowchart TD
 
         D1[Step 4: GA Synthesis]
         D2["Multi-Agent Architecture: Supervisor + Worker PTs"]
-        D3["Retrieval-Augmented Generation (RAG)\nVector store + doc chunking"]
+        D3["Retrieval-Augmented Generation (RAG)<br>Vector store + doc chunking"]
         D4["Parameters: Temp 0.3–0.5"]
         
         C5 --> D1 --> D2 --> D3 --> D4
