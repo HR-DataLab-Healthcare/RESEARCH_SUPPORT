@@ -134,26 +134,6 @@ sequenceDiagram
 
   End_Process --> [*]
 
-  gantt
-    title Privacy-Preserving GA-assisted SHDG Protocol Timeline
-    dateFormat  YYYY-MM-DD
-    section Data Ingestion
-    Real EHR PDFs                  :done, 2025-01-01, 2025-01-05
-    PDF to Markdown conversion     :done, 2025-01-06, 2025-01-10
-    Manual anonymization           :done, 2025-01-11, 2025-01-15
-    Automated pseudonymization     :done, 2025-01-16, 2025-01-20
-    section Data Warehousing
-    Repository storage             :done, 2025-01-21, 2025-01-25
-    section Compute & Synthesis
-    Hybrid compute setup           :done, 2025-01-26, 2025-01-28
-    Multi-agent GA synthesis       :done, 2025-01-29, 2025-02-05
-    section Outputs & Benchmarking
-    Synthetic output deployment    :done, 2025-02-06, 2025-02-10
-    Benchmarking & review          :done, 2025-02-11, 2025-02-15
-    section Iterative Improvement
-    Co-development & tuning        :active, 2025-02-16, 2025-02-28
-
-
  ```
 
 
