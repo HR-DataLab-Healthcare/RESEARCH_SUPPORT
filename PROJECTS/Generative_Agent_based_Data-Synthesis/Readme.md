@@ -35,19 +35,19 @@ sequenceDiagram
     participant Compute as Compute Toolchain
     participant GA as GA Synthesis
 
-    User->>FLOW01: Upload Real EHR PDFs (N=13 Dutch low back pain cases)
-    FLOW01->>User: Convert PDFs to Markdown (Gemini 2.5 Flash + GPT-4.1)
-    User->>User: Manual anonymization (remove names, SSN, addresses, etc.)
+    User->>FLOW01: Upload Real EHR PDFs <br> (N=13 Dutch low back pain cases)
+    FLOW01->>User: Convert PDFs to Markdown <br> [tools: Gemini 2.5 Flash + GPT-4.1]
+    User->>User: Manual anonymization <br>  [remove names, SSN, addresses, etc.]
     User->>FLOW02: Submit Markdown for pseudonymization
-    FLOW02->>User: Automated pseudonymization (GPT-4.1 NER + replacement)
-    FLOW02->>Repo: Store privacy-compliant pseudonymized EHRs
+    FLOW02->>User: Automated pseudonymization <br>  [tools: GPT-4.1 NER + replacement]
+    FLOW02->>Repo: Store privacy-compliant <br> pseudonymized EHRs
 
-    User->>Repo: Access knowledge base (MD, JSON, CSV, SQL, PDF formats)
-    Repo->>Compute: Provide data for computation (Local + Cloud Azure GPT-4.1)
-    Compute->>Compute: Execute toolchain (Docker, Flowise, Hugging Face Spaces)
-    Compute->>Repo: Secure inference endpoint requests (API key privacy control)
+    User->>Repo: Access knowledge base <br> [MD, JSON, CSV, SQL, PDF formats]
+    Repo->>Compute: Provide data for computation <br> [Local + Cloud Azure GPT-4.1]
+    Compute->>Compute: Execute toolchain <br> [Tools: Docker, Flowise, Hugging Face Spaces]
+    Compute->>Repo: Secure inference endpoint requests <br>  [Tools: API key privacy control]
 
-    Compute->>GA: Trigger GA Synthesis (Multi-Agent Architecture)
+    Compute->>GA: Trigger GA Synthesis <br>  [Multi-Agent Architecture]
     GA->>Repo: Retrieve data chunks for RAG (Vector store + doc chunking)
     GA->>GA: Synthesize synthetic clinical EHRs (Temp 0.3–0.5 parameters)
 ```
@@ -68,19 +68,19 @@ sequenceDiagram
 
     GA->>Deploy: Send synthetic EHRs for deployment
     Deploy->>Deploy: Deploy on Hugging Face Spaces using Docker + Flowise / API endpoints
-    Deploy->>User: Synthetic synthetic EHRs delivered (GDPR + EU AI Act compliant)
+    Deploy->>User: Synthetic synthetic EHRs delivered <br> [GDPR + EU AI Act compliant]
 
     Deploy->>Benchmark: Start benchmarking tests
     Benchmark->>Benchmark: Document & corpus metrics calculation
     Benchmark->>Benchmark: Machine discernibility tests
-    Benchmark->>GA: Provide fidelity scores (vs pseudonymized real EHRs)
+    Benchmark->>GA: Provide fidelity scores <br> [pseudonymized  vs real EHRs]
     Benchmark->>Expert: Request human expert review on realism, coherence, validity
 
     Expert->>Benchmark: Submit review feedback
     Benchmark->>User: Return benchmarking results and expert reviews
 
-    User->>Expert: Collaborate on iterative improvement (GenAI + human experts)
-    Expert->>User: Refine code, tune prompts, update RAG data, evaluate metrics
+    User->>Expert: Collaborate on iterative improvement <br> [GenAI + human experts]
+    Expert->>User: Refine code, tune prompts <br>  update RAG data, evaluate metrics
  ```
 
 </details>
