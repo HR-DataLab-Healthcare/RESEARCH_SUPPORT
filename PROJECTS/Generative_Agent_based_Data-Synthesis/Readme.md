@@ -18,11 +18,9 @@ We also provide a modular, no-code proof of concept in the form of a Flowise-bas
 It represents a toolchain implementation to accomodate reproducibility and to encourage non–AI experts, such as healthcare workers, to confidently explore, adapt, and apply these workflows within their own professional contexts.
 This proof of concept is built on open-source digital infrastructure that enables rapid prototyping and controlled sharing of workflows, while API key–secured inference endpoints ensure privacy compliance.
 
-For those interested in how the synthesised EHRs look like, these are added as a set of 160 dossiers in a single PDF document—[Supervisor -Worker-interactions-and-output-dossiers-1-to-160cc..pdf](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/SYNTHETIC-DATASET)—, which serves as an illustrative reference showcasing the output quality, structure, and fidelity of the generated records while ensuring that all content remains fully synthetic and privacy-compliant.
+For those interested in how the synthesised EHRs look like, these are added as a set of 160 dossiers in a single PDF document—[Supervisor -Worker-interactions-and-output-dossiers-1-to-160cc.pdf](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/SYNTHETIC-DATASET)—, which serves as an illustrative reference showcasing the output quality, structure, and fidelity of the generated records while ensuring that all content remains fully synthetic and privacy-compliant.
 
 The accompanying Jupyter Notebooks are available in the [`CODE` directory](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE), including notebooks for performing document-level assessment in the [`DESCRIPTOR` subdirectory](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/PROJECTS/Generative_Agent_based_Data-Synthesis/CODE/DESCRIPTOR).
-
-
 
 #
 
