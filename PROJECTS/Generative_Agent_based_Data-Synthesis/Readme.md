@@ -1,8 +1,6 @@
 <span style="font-size: 13px;">
 
 # *Privacy-, Linguistic-, and Information-Preserving Synthesis of Clinical Documentation through Generative Agents*
-![Visitor Count](https://profile-counter.glitch.me/{robvdw}/count.svg)
-
 
 <p align="center">
   <img width="600" height="300" src="./FIGs/FIG01AB.png">
