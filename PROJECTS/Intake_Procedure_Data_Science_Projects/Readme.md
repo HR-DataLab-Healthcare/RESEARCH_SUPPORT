@@ -1,6 +1,6 @@
 # HR Datalab — Intakeproces Data Science Projecten  
   
-Dit repository bevat de documentatie en procesbeschrijving voor het **intakeproces van Data Science-projecten** binnen het HR Datalab van de Hogeschool Rotterdam.    
+Deze repository bevat de documentatie en procesbeschrijving voor het **intakeproces van Data Science-projecten** binnen het *HR-DataLab HEALTHCARE DOMEIN* van de Hogeschool Rotterdam.    
 Het proces is ontworpen om **inhoudelijke**, **technische**, **juridische** en **compliance-aspecten** in één gestructureerd traject te behandelen.  
   
 ---  
