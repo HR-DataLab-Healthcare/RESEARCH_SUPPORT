@@ -8,7 +8,7 @@
 
 This repository provides a detailed overview of the source code and numerical algorithms used in our research paper, *"Privacy, Linguistic & Information Preserving Synthesis of Clinical Documentation Through Generative Agents"* **(Frontiers in AI)**. 
 
-###  [Watch  6 minute video explaining the main concepts and results discussed in our paper:](https://docent.cmi.hro.nl/willi/GENERATIVE_AGENTS/Synthetic%20Health%20Data%20Generation-small.mp4)
+###  [Watch  6 minute video explaining the main concepts and results discussed in our paper](https://docent.cmi.hro.nl/willi/GENERATIVE_AGENTS/Synthetic%20Health%20Data%20Generation-small.mp4)
 
 We hypothesize that synthetic health data generation (SHDG), leveraging pre-trained large language models (LLMs) instantiated as GAs, could offer a practical solution by creating synthetic patient information that mimics genuine EHRs.
 
