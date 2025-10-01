@@ -10,6 +10,7 @@ This repository provides a detailed overview of the source code and numerical al
 
 ###  [Watch Synthetic Health Data Generation video](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/VIDEOs/Synthetic%20Health%20Data%20Generation-small.gif)
 
+![alt text](<Synthetic Health Data Generation-small.gif>)
 
 We hypothesize that synthetic health data generation (SHDG), leveraging pre-trained large language models (LLMs) instantiated as GAs, could offer a practical solution by creating synthetic patient information that mimics genuine EHRs.
 
