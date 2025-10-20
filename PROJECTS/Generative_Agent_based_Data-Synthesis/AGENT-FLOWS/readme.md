@@ -1,7 +1,7 @@
 ### Guide to deploy a Flowise Agentflow via Hugging Face Space
 
 <details>
-<summary>STEP01: Deploying Flowise AgentFlows on Hugging Face</summary>
+<summary>(Click on to view) STEP01: Deploying Flowise AgentFlows on Hugging Face</summary>
 
 This guide explains how to deploy Flowise on a custom-made Hugging Face Space.
 
@@ -27,8 +27,7 @@ This guide explains how to deploy Flowise on a custom-made Hugging Face Space.
 2.  Create a file called `Dockerfile` and paste the following:
 
     ```Dockerfile
-    FROM node:18-alpine
-
+    FROM node:20-alpine
     USER root
 
     # Arguments that can be passed at build time
@@ -46,7 +45,7 @@ This guide explains how to deploy Flowise on a custom-made Hugging Face Space.
     ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
     # Install Flowise globally
-    RUN npm install -g flowise@2.2.5
+    RUN npm install -g flowise
 
     # Configure Flowise directories using the ARG
     RUN mkdir -p $LOG_PATH $FLOWISE_PATH/uploads && chmod -R 777 $LOG_PATH $FLOWISE_PATH
@@ -63,7 +62,7 @@ When the build finishes you can click on the **App** tab to see your app running
 </details>
 
 <details>
-<summary>STEP02: Deploying an Agentflow</summary>
+<summary>(Click on to view)STEP02: Deploying an Agentflow</summary>
 
 1.  In your Flowise space, click on **Add New**.
 2.  Click on **Import Chatflow** and upload the [`GA-ASSISTED-SHDG.json`](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/Generative_Agent_based_Data-Synthesis/AGENT-FLOWS/GA-ASSISTED-SHDG.json) file from this repository.
@@ -72,7 +71,7 @@ When the build finishes you can click on the **App** tab to see your app running
 </details>
 
 <details>
-<summary>STEP03: Creating Azure OpenAI Credentials</summary>
+<summary>(Click on to view)STEP03: Creating Azure OpenAI Credentials</summary>
 
 To use Azure OpenAI models in Flowise, you need to create credentials in the Azure portal.
 
