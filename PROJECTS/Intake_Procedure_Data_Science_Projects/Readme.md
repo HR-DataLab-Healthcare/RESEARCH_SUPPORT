@@ -120,4 +120,13 @@ J & K & L & M --> N[Besluitvorming: akkoord op projectplan]
 N -->|Akkoord| O[Kick-off project]  
 N -->|Niet akkoord| P[Herziening plan of afwijzing]  
   
-O --> Q[Eind: Projectstart en uitvoering]  
+O --> Q[Eind: Projectstart en uitvoering]
+```
+## REFERENCES
+
+* https://research-and-innovation.ec.europa.eu/research-area/industrial-research-and-innovation/artificial-intelligence-ai-science_en
+
+* https://gdpr.eu/data-protection-impact-assessment-template/
+
+* https://www.hogeschoolrotterdam.nl/voorlichting/begeleiding-en-voorzieningen/bibliotheek/support/research-support/overzicht/
+
