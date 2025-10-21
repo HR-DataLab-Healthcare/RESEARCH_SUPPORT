@@ -19,7 +19,7 @@ Op basis van deze input organiseert HR Datalab een intakegesprek met alle releva
   
 - Vastleggen van de **use-case** en gewenste uitkomst.  
 - Beoordelen van **databeschikbaarheid**, **kwaliteit** en **beveiliging**.  
-- Toetsen aan **wet- en regelgeving** (AVG, METC, NDA/DTA).  
+- Toetsen aan **wet- en regelgeving**  / *Privacy by Design* (AVG, METC, NDA/DTA, DPIA).  
 - Controleren van compliance met **NIS2** en **AI Act**.  
 - Vastleggen van technische en organisatorische randvoorwaarden.  
 - Opstellen van een **Datamanagementplan (DMP)**.  
