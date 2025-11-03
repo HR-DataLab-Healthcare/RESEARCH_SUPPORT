@@ -36,10 +36,16 @@ Na deze workshop kun je:
 ## 🚀 Stappenplan: Chatbot bouwen in Flowise  
   
 ### 1️⃣ Flowise openen  
-- Start Flowise online via:     Space
+- Start Flowise online via:
+<br> HUGGINFACE: https://huggingface.co/spaces/RobFvdw/DATALAB_FLOW01
+![alt text](image.png)
 
-- Klik op **Add New** om een nieuw project te maken.  
+- Klik op **Add New** om een nieuwe flow te maken.  
+![alt text](image-1.png)
 
+- Klik op **paarse icoon** om flow op te slaan met naam AZURE-RAG (ipv *Untitled Chatflow*).
+- Klik op save 
+![alt text](image-2.png)
 ---  
 
 ### 2️⃣ Document Loader toevoegen  
@@ -48,6 +54,8 @@ Na deze workshop kun je:
 - Upload het PDF-bestand dat je als kennisbron wilt gebruiken (bijvoorbeeld je CV).  
 - Zet **Usage** op *One document per file*.  
 
+
+![alt text](image-3.png)
 ---  
 
 ### 3️⃣ Tekst splitsen met Text Splitter  
