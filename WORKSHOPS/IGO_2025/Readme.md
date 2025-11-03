@@ -1,4 +1,6 @@
 # 🤖 Workshop: Bouw je eigen GA-assisted Chatbot met Flowise & Hugging Face Spaces  
+
+<img align="right" width="200" height="200" src="https://avatars.githubusercontent.com/u/115706761?s=400&u=7c6cae892816e172b0b7eef99f2d32adb948c6ad&v=4">
   
 ## 🎯 Over deze workshop  
 In deze hands-on workshop leer je hoe je een **chatbot** bouwt met **Flowise AI** en deze veilig en schaalbaar deployt via **Hugging Face Spaces** en **inference endpoints**.    
@@ -36,6 +38,10 @@ We combineren praktische AI-ontwikkeling met inzichten over **Docker-gebaseerde 
 ### Hugging Face Spaces  
 **Hugging Face Spaces** is een platform om AI-modellen en interactieve applicaties via een webinterface te publiceren.    
 Spaces zijn ideaal voor **demo's** en **experimentele toepassingen** met UI's zoals **Gradio** of **Streamlit**, bijvoorbeeld chatbots of beeldgeneratoren.  
+
+
+<img align="right" width="200" height="200" src="https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/WORKSHOPS/IGO_2025/INFERENCE_ENDPOINTS.png">
+
   
 ### Wat zijn inference endpoints?  
 Inference endpoints zijn **beheerde API-koppelingen** waarmee AI-modellen **in productie** draaien.    
