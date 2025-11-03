@@ -86,6 +86,21 @@ Het `GA-ASSISTED-SHDG.json` bestand bevat een vooraf ingestelde **RAG-chatflow**
 ```
 
   
+## 📦 Stap 2: AgentFlow importeren in Flowise  
+  
+Nadat je **Flowise** draait in **Hugging Face**:  
+  
+1. **Open** je Flowise Space in de browser.  
+2. **Klik** op **Add New** → **Import Chatflow**.  
+3. **Upload** het bestand `GA-ASSISTED-SHDG.json` uit dit repository.  
+4. **Klik** op **Save Chatflow**.  
+5. **Test** je chatbot direct via de ingebouwde chat-interface.  
+  
+💡 **Tip:**    
+Het `GA-ASSISTED-SHDG.json` bestand bevat een vooraf ingestelde **RAG-chatflow** die je kunt aanpassen aan je eigen onderwijscontext.  
+  
+---  
+  
 ## 📦 Stap 3: Azure OpenAI credentials instellen  
   
 Om **Azure OpenAI** modellen (zoals GPT-3.5 of GPT-4) te gebruiken in Flowise:  
