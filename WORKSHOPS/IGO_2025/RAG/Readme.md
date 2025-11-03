@@ -73,34 +73,66 @@ Na deze workshop kun je:
 
 ---  
 
-### 5️⃣ Embeddings toevoegen  
+
+### 5️⃣ Azure OpenAI credentials toevoegen ✅
+Voordat we embeddings en chatmodellen kunnen gebruiken, moeten we Azure OpenAI instellen.
+
+```
+📌 Azure OpenAI account & API key verkrijgen  
+1. Ga naar [Azure Portal](https://portal.azure.com/).  
+2. Maak een nieuwe resource: **Azure OpenAI**.  
+3. Wacht tot de resource is aangemaakt en open deze.  
+4. Ga naar **Keys and Endpoint** in het menu.  
+5. Kopieer:  
+ - **Endpoint URL** (bijv. `https://jouw-resource.openai.azure.com/`)  
+ - **API Key** (Key 1 of Key 2)  
+6. Ga naar **Model deployments** en:  
+ - Deploy **text-embedding-3-large** (deployment name bijv. `embedding-large`)  
+ - Deploy **gpt-4-mini** (deployment name bijv. `gpt4-mini`)  
+
+💡 *Noteer deze deployment names, je hebt ze nodig in Flowise.*  
+
+#### 📌 Instellen in Flowise  
+1. Sleep een **Azure OpenAI Embeddings** node in je flow.  
+2. Vul in:  
+ - **Resource Name**: naam van je Azure OpenAI resource.  
+ - **Deployment Name**: bijvoorbeeld `embedding-large`.  
+ - **Endpoint**: jouw endpoint URL.  
+ - **API Key**: jouw Azure OpenAI API key.  
+3. Verbind deze embeddings node met de **Vector Store**.  
+```
+
+### 6️⃣ Embeddings toevoegen  
+
+We gaan **Azure OpenAI** gebruiken om embeddings te genereren met het **text-embedding-3-large** model. 
+
 - Voeg een **OpenAI Embeddings** node toe.  
 - Vul je **OpenAI API Key** in.  
 - Verbind de **Embedding** node met de **Vector Store**.  
 
 ---  
 
-### 6️⃣ Retrieval Chain opzetten  
+### 7️⃣ Retrieval Chain opzetten  
 - Voeg een **Conversational Retrieval QA Chain** toe.  
 - Verbind de **Vector Store** met de Retrieval Chain.  
 - Deze chain zorgt dat vervolgvragen contextueel beantwoord worden met gebruik van chatgeschiedenis.  
 
 ---  
 
-### 7️⃣ Chatmodel koppelen  
+### 8️⃣ Chatmodel koppelen  
 - Voeg een **ChatOpenAI** node toe.  
 - Selecteer je **OpenAI API Key** en kies het gewenste model (bij voorkeur `gpt-4`, anders `gpt-3.5`).  
 - Verbind de Retrieval Chain met het Chatmodel.  
 
 ---  
 
-### 8️⃣ Database updaten  
+### 9️⃣ Database updaten  
 - Klik op het **Upsert Database**-icoon.  
 - Klik op **Upsert** om de data in de vector store op te slaan.  
 
 ---  
 
-### 9️⃣ Chatbot testen  
+### 🔟 Chatbot testen  
 - Klik op het **chat-icoon** rechtsboven in Flowise.  
 - Stel vragen over de inhoud van je PDF en controleer of de antwoorden correct zijn.  
 
