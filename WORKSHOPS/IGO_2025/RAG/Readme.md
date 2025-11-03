@@ -141,7 +141,7 @@ We gaan **Azure OpenAI** gebruiken om embeddings te genereren met het **text-emb
 ---  
 
 ### 9️⃣ Database updaten  
-- Klik op het **Upsert Database**-icoon.  
+- Klik op het **Upsert Database**-icoon (groen).  
 - Klik op **Upsert** om de data in de vector store op te slaan.  
 
 ---  
@@ -153,6 +153,9 @@ We gaan **Azure OpenAI** gebruiken om embeddings te genereren met het **text-emb
 💡 Voorbeeld:    
 *Vraag:* "Wat is het e-mailadres uit mijn CV?"    
 *Antwoord:* [Chatbot haalt het uit de PDF en geeft het juiste adres.]  
+
+
+![alt text](image-13.png)
 
 ---  
 
