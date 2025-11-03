@@ -65,17 +65,23 @@ Na deze workshop kun je:
 - **Chunk overlap** = aantal tekens overlap om context te behouden.  
 - Verbind de **Document Loader** met de **Text Splitter**.  
 
+![alt text](image-4.png)
+![alt text](image-5.png)
 ---  
 
 ### 4️⃣ Vector Store instellen  
 - Voeg een **In-Memory Vector Store** toe.  
 - Verbind de **Text Splitter** met de **Vector Store**.  
 
----  
+![alt text](image-6.png)
 
+---  
 
 ### 5️⃣ Azure OpenAI credentials toevoegen ✅
 Voordat we embeddings en chatmodellen kunnen gebruiken, moeten we Azure OpenAI instellen.
+
+![alt text](image-8.png)
+![alt text](image-10.png)
 
 ```
 📌 Azure OpenAI account & API key verkrijgen  
@@ -106,9 +112,12 @@ Voordat we embeddings en chatmodellen kunnen gebruiken, moeten we Azure OpenAI i
 
 We gaan **Azure OpenAI** gebruiken om embeddings te genereren met het **text-embedding-3-large** model. 
 
-- Voeg een **OpenAI Embeddings** node toe.  
-- Vul je **OpenAI API Key** in.  
+- Voeg een **AzureOpenAI Embeddings** node toe.  
+- Vul je **modelnaam** in.  
 - Verbind de **Embedding** node met de **Vector Store**.  
+
+![alt text](image-7.png)
+
 
 ---  
 
@@ -117,12 +126,17 @@ We gaan **Azure OpenAI** gebruiken om embeddings te genereren met het **text-emb
 - Verbind de **Vector Store** met de Retrieval Chain.  
 - Deze chain zorgt dat vervolgvragen contextueel beantwoord worden met gebruik van chatgeschiedenis.  
 
+![alt text](image-12.png)
+
 ---  
 
 ### 8️⃣ Chatmodel koppelen  
 - Voeg een **ChatOpenAI** node toe.  
 - Selecteer je **OpenAI API Key** en kies het gewenste model (bij voorkeur `gpt-4`, anders `gpt-3.5`).  
 - Verbind de Retrieval Chain met het Chatmodel.  
+
+
+![alt text](image-11.png)
 
 ---  
 
