@@ -105,6 +105,11 @@ In het onderwijs moet je rekening houden met:
   
 ---  
   
-
-
+## 🚀 Lokale ontwikkeling (optioneel)  
+  
+Wil je eerst lokaal werken?  
+  
+```bash  
+npm install -g flowise  
+npx flowise start  
 
