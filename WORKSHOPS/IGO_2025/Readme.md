@@ -15,12 +15,31 @@ We combineren **technische implementatie** (met Retrieval Augmented Generation e
 ---  
   
 ## 🛠️ Technologieën  
-- **Flowise AI** – Open-source low-code platform voor LLM-applicaties.  
-- **LangChain** – LLM-orchestratie framework.  
-- **Azure OpenAI** – GPT-modellen via Microsoft Azure.  
-- **Node.js** – Voor installatie en runtime.  
-- **Docker** – Voor deployment in Hugging Face Spaces.  
-- **Retrieval Augmented Generation (RAG)** – Voor actuele en contextuele chatbot-antwoorden.  
+  
+- **Flowise AI** – Open-source low-code platform voor het bouwen van LLM-applicaties.  
+- **LangChain** – Framework voor het orkestreren van LLM-componenten en tool-integraties.  
+- **Azure OpenAI** – GPT-modellen via Microsoft Azure met enterprise-grade beveiliging.  
+- **Node.js** – JavaScript runtime voor server-side uitvoering van Flowise.  
+- **Docker** – Containerplatform voor consistente en schaalbare deployments.  
+- **Retrieval Augmented Generation (RAG)** – Techniek om actuele en contextuele antwoorden te genereren op basis van externe kennisbronnen.  
+  
+### 🔹 Uitbreiding: Docker-gebaseerde architectuur & inference endpoints  
+We hebben een **Docker-gebaseerde architectuur** geïmplementeerd om **veilige, reproduceerbare workflows** mogelijk te maken, zowel **on-premises** als in **publieke cloudomgevingen**.    
+Door containerized workflows te deployen via **API key–beveiligde inference endpoints** zorgen we voor:  
+  
+1. **Schaalbare resource-allocatie** – De benodigde compute-capaciteit kan automatisch worden opgeschaald of afgeschaald op basis van de vraag.  
+2. **Consistente prestaties** – Dankzij identieke containeromgevingen wordt het risico op configuratiefouten geminimaliseerd.  
+3. **Robuste toegangscontrole** – Alleen geautoriseerde gebruikers met geldige API-sleutels hebben toegang.  
+4. **Reproduceerbaarheid** – Dezelfde workflow kan zonder aanpassingen draaien op verschillende infrastructuren.  
+  
+**Wat zijn inference endpoints?**    
+Inference endpoints zijn gebruiksvriendelijke API-koppelingen waarmee gebruikers eenvoudig **inputs** (bijvoorbeeld prompts voor het genereren van synthetische EHR-data) kunnen aanleveren en **outputs** terugkrijgen.    
+Dit maakt het mogelijk om **on-demand** gebruik te maken van aangepaste **GA-assisted workflows** zonder dat eindgebruikers worden blootgesteld aan de onderliggende infrastructuur of de complexiteit van de modellen.  
+  
+💡 **Voordelen in deze context:**  
+- Onderwijsinstellingen kunnen AI-workflows veilig delen zonder gevoelige data te exposen.  
+- Docenten en studenten kunnen direct experimenteren met AI-functionaliteiten zonder technische installatie.  
+- Schaalbaar en geschikt voor zowel kleine pilotprojecten als grootschalige implementaties.  
   
 ---  
   
