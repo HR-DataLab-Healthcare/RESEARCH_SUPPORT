@@ -1,163 +1,109 @@
-# Bouw je eigen Chatbot & Deploy via Hugging Face Spaces    
-### Digitale dilemma’s in de klas – Slimme assistent of AI-act valstrik?  
+# 🤖 Workshop: Bouw je eigen GA-assisted Chatbot met Flowise & Hugging Face Spaces  
   
-In dit project leer je hoe je zelf een **functionele chatbot** kunt bouwen met **Flowise AI** en deze kunt **deployen op Hugging Face Spaces**.    
-We combineren **technische implementatie** (met Retrieval Augmented Generation en Azure OpenAI) met **kritische reflectie** op privacy, ethiek en de Europese AI-act.    
-  
----  
-  
-## 🎯 Doel van deze workshop
-- Een werkend **chatbot-prototype** maken dat externe bronnen (zoals PDF's) kan gebruiken.  
-- Leren hoe je **Flowise AgentFlows** kunt deployen op Hugging Face Spaces.  
-- De integratie van **Azure OpenAI** credentials begrijpen.  
-- Bewustwording van **digitale dilemma’s** in het onderwijs, inclusief AI-act compliance.  
+## 🎯 Over deze workshop  
+In deze hands-on workshop leer je hoe je een **chatbot** bouwt met **Flowise AI** en deze veilig en schaalbaar deployt via **Hugging Face Spaces** en **inference endpoints**.    
+We combineren praktische AI-ontwikkeling met inzichten over **Docker-gebaseerde architecturen**, **API-beveiliging** en de **Europese AI-act** in de context van onderwijs en onderzoek.  
   
 ---  
   
-## 🛠️ Technologieën  
-  
-- **Flowise AI** – Open-source low-code platform voor het bouwen van LLM-applicaties.  
-- **LangChain** – Framework voor het orkestreren van LLM-componenten en tool-integraties.  
-- **Azure OpenAI** – GPT-modellen via Microsoft Azure met enterprise-grade beveiliging.  
-- **Node.js** – JavaScript runtime voor server-side uitvoering van Flowise.  
-- **Docker** – Containerplatform voor consistente en schaalbare deployments.  
-- **Retrieval Augmented Generation (RAG)** – Techniek om actuele en contextuele antwoorden te genereren op basis van externe kennisbronnen.  
-  
-###  Docker architectuur & inference endpoints  
-We hebben een **Docker-gebaseerde architectuur** geïmplementeerd om **veilige, reproduceerbare workflows** mogelijk te maken, zowel **on-premises** als in **publieke cloudomgevingen**.    
-Door containerized workflows te deployen via **API key–beveiligde inference endpoints** zorgen we voor:  
-  
-1. **Schaalbare resource-allocatie** – De benodigde compute-capaciteit kan automatisch worden opgeschaald of afgeschaald op basis van de vraag.  
-2. **Consistente prestaties** – Dankzij identieke containeromgevingen wordt het risico op configuratiefouten geminimaliseerd.  
-3. **Robuste toegangscontrole** – Alleen geautoriseerde gebruikers met geldige API-sleutels hebben toegang.  
-4. **Reproduceerbaarheid** – Dezelfde workflow kan zonder aanpassingen draaien op verschillende infrastructuren.  
-  
-**Wat zijn inference endpoints?**    
-Inference endpoints zijn gebruiksvriendelijke API-koppelingen waarmee gebruikers eenvoudig **inputs** (bijvoorbeeld prompts voor het genereren van synthetische EHR-data) kunnen aanleveren en **outputs** terugkrijgen.    
-Dit maakt het mogelijk om **on-demand** gebruik te maken van aangepaste **GA-assisted workflows** zonder dat eindgebruikers worden blootgesteld aan de onderliggende infrastructuur of de complexiteit van de modellen.  
-  
-💡 **Voordelen in deze context:**  
-- Onderwijsinstellingen kunnen AI-workflows veilig delen zonder gevoelige data te exposen.  
-- Docenten en studenten kunnen direct experimenteren met AI-functionaliteiten zonder technische installatie.  
-- Schaalbaar en geschikt voor zowel kleine pilotprojecten als grootschalige implementaties.  
+## 📚 Wat je gaat leren  
+- Hoe je een **Flowise AgentFlow** ontwerpt en test.  
+- Hoe je je chatbot **containeriseert** en deployt via **Hugging Face Spaces**.  
+- Het verschil tussen **Spaces** en **Inference Endpoints**.  
+- Hoe je **Azure OpenAI** integreert voor krachtige LLM-functionaliteit.  
+- Hoe een **Docker-gebaseerde architectuur** zorgt voor veilige, reproduceerbare AI-workflows.  
+- Bewust omgaan met AI in onderwijs, inclusief **privacy, transparantie, bias** en **AI-act compliance**.  
   
 ---  
   
-## 📦 Stap 1: Flowise AgentFlow deployen op Hugging Face Space  
+## 🛠️ Gebruikte technologieën  
   
-### 1.1 Nieuwe Hugging Face Space aanmaken  
+| Technologie | Beschrijving |  
+|-------------|--------------|  
+| **Flowise AI** | Open-source low-code platform om LLM-applicaties visueel te bouwen en te testen. |  
+| **LangChain** | Framework voor het orkestreren van LLM-componenten en integratie met externe tools. |  
+| **Azure OpenAI** | GPT-modellen via Microsoft Azure met enterprise-grade beveiliging en schaalbaarheid. |  
+| **Node.js** | JavaScript runtime omgeving waarop Flowise server-side draait. |  
+| **Docker** | Containerplatform dat zorgt voor consistente en schaalbare deployments van AI-workflows. |  
+| **Retrieval Augmented Generation (RAG)** | Techniek om actuele, contextuele antwoorden te genereren op basis van externe kennisbronnen. |  
+| **Hugging Face Spaces** | Platform voor het publiceren van AI-modellen en interactieve applicaties met een gebruiksvriendelijke webinterface (bv. Gradio of Streamlit), ideaal voor demos, onderwijs en experimenten. |  
+| **Inference Endpoints** | Beheerde, schaalbare en beveiligde API-koppelingen voor het draaien van AI-modellen in productie via REST API-aanroepen, zonder dat gebruikers zelf infrastructuur hoeven te beheren. |  
+  
+---  
+  
+## 🖥️ Inference endpoints & Docker in deze workshop  
+  
+### Hugging Face Spaces  
+**Hugging Face Spaces** is een platform om AI-modellen en interactieve applicaties via een webinterface te publiceren.    
+Spaces zijn ideaal voor **demo's** en **experimentele toepassingen** met UI's zoals **Gradio** of **Streamlit**, bijvoorbeeld chatbots of beeldgeneratoren.  
+  
+### Wat zijn inference endpoints?  
+Inference endpoints zijn **beheerde API-koppelingen** waarmee AI-modellen **in productie** draaien.    
+Ze bieden:  
+- **Schaalbare** en **betrouwbare** toegang tot AI-modellen via REST API.  
+- Automatisch schalende infrastructuur in de cloud.  
+- Geen noodzaak voor eigen serverbeheer.  
+  
+### Spaces vs. inference endpoints  
+- **Spaces** → Interactieve UI voor demo’s en experimenten.  
+- **Inference endpoints** → Geoptimaliseerde API voor productie, zonder UI.  
+- **Flowise via Docker** → Kan inference endpoints aanroepen voor modelinference zonder lokaal hosten.  
+  
+### Waarom Docker?  
+Met een **Docker-gebaseerde architectuur** zorgen we voor:  
+1. **Schaalbare resource-allocatie**    
+2. **Consistente prestaties**    
+3. **Robuuste toegangscontrole**    
+4. **Reproduceerbaarheid**    
+  
+Praktisch betekent dit dat deelnemers via eenvoudige API-aanvragen (bv. prompts voor synthetische data) hun chatbot kunnen aansturen **zonder** de complexiteit van infrastructuur te zien.  
+  
+---  
+  
+## 📦 Workshop stappenplan  
+  
+### Stap 1: Flowise AgentFlow deployen op Hugging Face Space  
 1. Log in op [Hugging Face](https://huggingface.co/).  
-2. Klik op **Create new Space** en geef de Space een naam.  
-3. Selecteer **Docker** als Space SDK en kies **Blank** als template.  
-4. Kies hardware: **CPU basic ∙ 2 vCPU ∙ 16GB ∙ FREE**.  
-5. Klik op **Create Space**.  
+2. Maak een nieuwe **Space** aan (SDK: Docker, template: Blank).  
+3. Stel omgevingsvariabelen in, zoals `PORT=7860`.  
+4. Voeg een `Dockerfile` toe en commit.  
+5. Wacht tot de build klaar is en open je Flowise instance.  
   
-### 1.2 Omgevingsvariabelen instellen  
-1. Ga naar **Settings** → **Variables and Secrets**.  
-2. Klik op **New variable**:  
-   - Name: `PORT`  
-   - Value: `7860`  
-3. Klik op **Save**.  
-4. *(Optioneel)* Voeg extra secrets toe zoals database-credentials, paden, etc. Zie `.env.example` voor geldige velden.  
+### Stap 2: AgentFlow importeren in Flowise  
+1. Open je Flowise Space in de browser.  
+2. Klik op **Add New → Import Chatflow**.  
+3. Upload `GA-ASSISTED-SHDG.json` uit dit repository.  
+4. Klik op **Save Chatflow**.  
+5. Test je chatbot direct in de Flowise UI.  
   
-### 1.3 Dockerfile aanmaken  
-Maak een nieuw bestand `Dockerfile` in de **Files** tab met onderstaande inhoud:  
+💡 *Tip:* Dit JSON-bestand bevat een vooraf ingestelde **RAG-chatflow** die je kunt aanpassen.  
   
-```dockerfile  
-# ====> Node 20 Alpine & Flowise 2.2.5  
-FROM node:20-alpine  
-USER root  
+### Stap 3: Azure OpenAI credentials instellen  
+1. Maak een Azure-account aan en activeer **Azure OpenAI**.  
+2. Maak een nieuwe resource en kopieer **API Key** en **Endpoint URL**.  
+3. Deploy een model (bijv. `gpt-35-turbo`) en noteer de **Deployment Name**.  
+4. Voeg in Flowise een **Azure OpenAI node** toe en vul de gegevens in.  
+5. Sla je chatflow op en test.  
   
-ARG FLOWISE_PATH=/usr/local/lib/node_modules/flowise  
-ARG BASE_PATH=/root/.flowise  
-ARG DATABASE_PATH=$BASE_PATH  
-ARG SECRETKEY_PATH=$BASE_PATH  
-ARG LOG_PATH=$BASE_PATH/logs  
-ARG BLOB_STORAGE_PATH=$BASE_PATH/storage  
-  
-RUN apk add --no-cache git python3 py3-pip make g++ build-base cairo-dev pango-dev chromium  
-ENV PUPPETEER_SKIP_DOWNLOAD=true  
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser  
-  
-RUN npm install -g flowise@2.2.5  
-RUN mkdir -p $LOG_PATH $FLOWISE_PATH/uploads && chmod -R 777 $LOG_PATH $FLOWISE_PATH  
-  
-WORKDIR /data  
-CMD ["npx", "flowise", "start"]
-
-
-
-
-## 📦 Stap 2: AgentFlow importeren in Flowise  
-  
-Nadat je **Flowise** draait in **Hugging Face**:  
-  
-1. **Open** je Flowise Space in de browser.  
-2. **Klik** op **Add New** → **Import Chatflow**.  
-3. **Upload** het bestand `GA-ASSISTED-SHDG.json` uit dit repository.  
-4. **Klik** op **Save Chatflow**.  
-5. **Test** je chatbot direct via de ingebouwde chat-interface.  
-  
-💡 **Tip:**    
-Het `GA-ASSISTED-SHDG.json` bestand bevat een vooraf ingestelde **RAG-chatflow** die je kunt aanpassen aan je eigen onderwijscontext.  
-  
----
-```
-
-  
-## 📦 Stap 2: AgentFlow importeren in Flowise  
-  
-Nadat je **Flowise** draait in **Hugging Face**:  
-  
-1. **Open** je Flowise Space in de browser.  
-2. **Klik** op **Add New** → **Import Chatflow**.  
-3. **Upload** het bestand `GA-ASSISTED-SHDG.json` uit dit repository.  
-4. **Klik** op **Save Chatflow**.  
-5. **Test** je chatbot direct via de ingebouwde chat-interface.  
-  
-💡 **Tip:**    
-Het `GA-ASSISTED-SHDG.json` bestand bevat een vooraf ingestelde **RAG-chatflow** die je kunt aanpassen aan je eigen onderwijscontext.  
-  
----  
-  
-## 📦 Stap 3: Azure OpenAI credentials instellen  
-  
-Om **Azure OpenAI** modellen (zoals GPT-3.5 of GPT-4) te gebruiken in Flowise:  
-  
-1. **Maak** een Azure account aan via [Azure Portal](https://portal.azure.com).  
-2. **Zoek** naar **Azure OpenAI** in de portal en **maak** een nieuwe resource:  
-   - Kies subscription, resource group, regio, naam.  
-   - Selecteer een pricing tier.  
-3. **Na deployment**:  
-   - Ga naar **Keys and Endpoint** en kopieer **API Key** en **Endpoint URL**.  
-4. **Model deployen**:  
-   - Ga naar **Model deployments** → **Create**.  
-   - Kies model (bijv. `gpt-35-turbo`).  
-   - Geef een **Deployment Name** op.  
-5. **In Flowise**:  
-   - Voeg een **Azure OpenAI node** toe in je chatflow.  
-   - Vul **API Key**, **Endpoint** en **Deployment Name** in.  
-  
-💡 **Veiligheidstip:**    
-Gebruik **Variables and Secrets** in Hugging Face om je API keys veilig op te slaan.  
+💡 *Veiligheidstip:* Gebruik **Variables and Secrets** in Hugging Face voor API-sleutels.  
   
 ---  
   
 ## ⚖️ Digitale dilemma’s & AI-act  
   
 In het onderwijs moet je rekening houden met:  
-  
-- **Privacy & AVG** – Minimaliseer het gebruik van persoonsgegevens.  
+- **Privacy & AVG** – Minimaliseer gebruik van persoonsgegevens.  
 - **Transparantie** – Informeer gebruikers dat ze met AI communiceren.  
-- **Bias & betrouwbaarheid** – Beoordeel en test je chatbot op vooroordelen en fouten.  
-- **AI-act compliance** – Houd rekening met de classificatie van AI-systemen en verplichtingen.  
+- **Bias & betrouwbaarheid** – Test je chatbot op vooroordelen.  
+- **AI-act compliance** – Houd rekening met classificatie en verplichtingen.  
   
 ---  
   
 ## 🚀 Lokale ontwikkeling (optioneel)  
   
-Wil je eerst lokaal werken voordat je naar Hugging Face deployt?  
+Wil je eerst lokaal werken?  
   
 ```bash  
 npm install -g flowise  
 npx flowise start  
+
