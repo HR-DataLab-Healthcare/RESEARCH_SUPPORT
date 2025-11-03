@@ -1,67 +1,67 @@
-# Bouw je eigen Chatbot: Digitale Dilemma’s in de Klas – Slimme Assistent of AI-act Valstrik?  
+# Bouw je eigen Chatbot & Deploy via Hugging Face Spaces    
+### Digitale dilemma’s in de klas – Slimme assistent of AI-act valstrik?  
   
-Dit repository bevat alle materialen, instructies en voorbeeldcode voor de interactieve workshop waarin deelnemers leren hoe ze zelf een functionele chatbot kunnen bouwen, testen en inzetten in een onderwijscontext.    
-We combineren technische stappen met kritische reflectie op **privacy**, **ethiek** en de **Europese AI-act**.  
-  
----  
-  
-## 🎯 Doel van de Workshop  
-Aan het einde van deze workshop:  
-- Heb je een **werkend chatbot-prototype** dat gebruik maakt van **Retrieval Augmented Generation (RAG)**.  
-- Begrijp je hoe AI-tools zoals **Flowise AI** en **Large Language Models (LLMs)** technisch werken.  
-- Kun je de kansen én risico’s van AI in het onderwijs benoemen.  
-- Ben je bekend met relevante wet- en regelgeving (AI-act, AVG).  
+In dit project leer je hoe je zelf een **functionele chatbot** kunt bouwen met **Flowise AI** en deze kunt **deployen op Hugging Face Spaces**.    
+We combineren **technische implementatie** (met Retrieval Augmented Generation en Azure OpenAI) met **kritische reflectie** op privacy, ethiek en de Europese AI-act.    
   
 ---  
   
-## 🛠️ Gebruikte Technologieën  
-- **Flowise AI** – Open-source low-code tool voor het bouwen van LLM-applicaties.  
-- **LangChain** – Framework voor LLM-orchestratie.  
-- **OpenAI API** – Voor embeddings en chatmodellen (GPT-3.5 of GPT-4).  
-- **Node.js** en **pnpm** – Voor installatie en lokaal draaien van Flowise.  
-- **RAG** (Retrieval Augmented Generation) – Techniek om externe bronnen (zoals PDF’s) te gebruiken voor accurate antwoorden.  
+## 🎯 Doel van dit project  
+- Een werkend **chatbot-prototype** maken dat externe bronnen (zoals PDF's) kan gebruiken.  
+- Leren hoe je **Flowise AgentFlows** kunt deployen op Hugging Face Spaces.  
+- De integratie van **Azure OpenAI** credentials begrijpen.  
+- Bewustwording van **digitale dilemma’s** in het onderwijs, inclusief AI-act compliance.  
   
 ---  
   
-## 📚 Inhoud  
-1. **Introductie AI in het Onderwijs**  
-   - Wat is een chatbot?  
-   - Toepassingen in lesvoorbereiding, studentenbegeleiding en administratie.  
-   - Privacy en ethiek: wat zegt de AI-act?  
-  
-2. **Technische Basis**  
-   - Installeren van Node.js  
-   - Installeren en starten van Flowise AI  
-   - Basisprincipes van LLM-orchestratie  
-  
-3. **Stap-voor-Stap Chatbot Bouwen**  
-   - **Document Loader** – PDF als externe databron  
-   - **Text Splitter** – Tekst opdelen in betekenisvolle chunks  
-   - **Vector Store** – Tekst opslaan als vectors voor semantisch zoeken  
-   - **Embeddings** – OpenAI embedding API gebruiken  
-   - **Retrieval Chain** – Context behouden bij vervolgvragen  
-   - **Chat Model** – GPT-3.5 of GPT-4 integreren  
-  
-4. **Testen & Uitrollen**  
-   - Lokaal testen via `http://localhost:3000`  
-   - Koppelen aan een website of LMS  
-   - Praktijkcases in de klas  
-  
-5. **Digitale Dilemma’s**  
-   - Data privacy en AVG  
-   - Bias en betrouwbaarheid  
-   - AI-act compliance checklist  
+## 🛠️ Technologieën  
+- **Flowise AI** – Open-source low-code platform voor LLM-applicaties.  
+- **LangChain** – LLM-orchestratie framework.  
+- **Azure OpenAI** – GPT-modellen via Microsoft Azure.  
+- **Node.js** – Voor installatie en runtime.  
+- **Docker** – Voor deployment in Hugging Face Spaces.  
+- **Retrieval Augmented Generation (RAG)** – Voor actuele en contextuele chatbot-antwoorden.  
   
 ---  
   
-## 🚀 Installatie & Starten  
+## 📦 Stap 1: Flowise AgentFlow deployen op Hugging Face Space  
   
-### 1. Vereisten  
-- Node.js (v18+ aanbevolen)  
-- pnpm (package manager)  
-- OpenAI API key  
+### 1.1 Nieuwe Hugging Face Space aanmaken  
+1. Log in op [Hugging Face](https://huggingface.co/).  
+2. Klik op **Create new Space** en geef de Space een naam.  
+3. Selecteer **Docker** als Space SDK en kies **Blank** als template.  
+4. Kies hardware: **CPU basic ∙ 2 vCPU ∙ 16GB ∙ FREE**.  
+5. Klik op **Create Space**.  
   
-### 2. Installatie Flowise AI (snelste manier)  
-```bash  
-npm install -g flowise  
-npx flowise start  
+### 1.2 Omgevingsvariabelen instellen  
+1. Ga naar **Settings** → **Variables and Secrets**.  
+2. Klik op **New variable**:  
+   - Name: `PORT`  
+   - Value: `7860`  
+3. Klik op **Save**.  
+4. *(Optioneel)* Voeg extra secrets toe zoals database-credentials, paden, etc. Zie `.env.example` voor geldige velden.  
+  
+### 1.3 Dockerfile aanmaken  
+Maak een nieuw bestand `Dockerfile` in de **Files** tab met onderstaande inhoud:  
+  
+```dockerfile  
+# ====> Node 20 Alpine & Flowise 2.2.5  
+FROM node:20-alpine  
+USER root  
+  
+ARG FLOWISE_PATH=/usr/local/lib/node_modules/flowise  
+ARG BASE_PATH=/root/.flowise  
+ARG DATABASE_PATH=$BASE_PATH  
+ARG SECRETKEY_PATH=$BASE_PATH  
+ARG LOG_PATH=$BASE_PATH/logs  
+ARG BLOB_STORAGE_PATH=$BASE_PATH/storage  
+  
+RUN apk add --no-cache git python3 py3-pip make g++ build-base cairo-dev pango-dev chromium  
+ENV PUPPETEER_SKIP_DOWNLOAD=true  
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser  
+  
+RUN npm install -g flowise@2.2.5  
+RUN mkdir -p $LOG_PATH $FLOWISE_PATH/uploads && chmod -R 777 $LOG_PATH $FLOWISE_PATH  
+  
+WORKDIR /data  
+CMD ["npx", "flowise", "start"]  
