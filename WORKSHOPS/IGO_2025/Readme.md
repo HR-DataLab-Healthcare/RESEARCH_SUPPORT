@@ -6,7 +6,7 @@ We combineren **technische implementatie** (met Retrieval Augmented Generation e
   
 ---  
   
-## 🎯 Doel van dit project  
+## 🎯 Doel van deze workshop
 - Een werkend **chatbot-prototype** maken dat externe bronnen (zoals PDF's) kan gebruiken.  
 - Leren hoe je **Flowise AgentFlows** kunt deployen op Hugging Face Spaces.  
 - De integratie van **Azure OpenAI** credentials begrijpen.  
@@ -23,7 +23,7 @@ We combineren **technische implementatie** (met Retrieval Augmented Generation e
 - **Docker** – Containerplatform voor consistente en schaalbare deployments.  
 - **Retrieval Augmented Generation (RAG)** – Techniek om actuele en contextuele antwoorden te genereren op basis van externe kennisbronnen.  
   
-### 🔹 Uitbreiding: Docker-gebaseerde architectuur & inference endpoints  
+###  Docker architectuur & inference endpoints  
 We hebben een **Docker-gebaseerde architectuur** geïmplementeerd om **veilige, reproduceerbare workflows** mogelijk te maken, zowel **on-premises** als in **publieke cloudomgevingen**.    
 Door containerized workflows te deployen via **API key–beveiligde inference endpoints** zorgen we voor:  
   
