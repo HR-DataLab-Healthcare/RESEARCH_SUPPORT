@@ -64,4 +64,66 @@ RUN npm install -g flowise@2.2.5
 RUN mkdir -p $LOG_PATH $FLOWISE_PATH/uploads && chmod -R 777 $LOG_PATH $FLOWISE_PATH  
   
 WORKDIR /data  
-CMD ["npx", "flowise", "start"]  
+CMD ["npx", "flowise", "start"]
+
+
+
+
+## 📦 Stap 2: AgentFlow importeren in Flowise  
+  
+Nadat je **Flowise** draait in **Hugging Face**:  
+  
+1. **Open** je Flowise Space in de browser.  
+2. **Klik** op **Add New** → **Import Chatflow**.  
+3. **Upload** het bestand `GA-ASSISTED-SHDG.json` uit dit repository.  
+4. **Klik** op **Save Chatflow**.  
+5. **Test** je chatbot direct via de ingebouwde chat-interface.  
+  
+💡 **Tip:**    
+Het `GA-ASSISTED-SHDG.json` bestand bevat een vooraf ingestelde **RAG-chatflow** die je kunt aanpassen aan je eigen onderwijscontext.  
+  
+---
+```
+
+  
+## 📦 Stap 3: Azure OpenAI credentials instellen  
+  
+Om **Azure OpenAI** modellen (zoals GPT-3.5 of GPT-4) te gebruiken in Flowise:  
+  
+1. **Maak** een Azure account aan via [Azure Portal](https://portal.azure.com).  
+2. **Zoek** naar **Azure OpenAI** in de portal en **maak** een nieuwe resource:  
+   - Kies subscription, resource group, regio, naam.  
+   - Selecteer een pricing tier.  
+3. **Na deployment**:  
+   - Ga naar **Keys and Endpoint** en kopieer **API Key** en **Endpoint URL**.  
+4. **Model deployen**:  
+   - Ga naar **Model deployments** → **Create**.  
+   - Kies model (bijv. `gpt-35-turbo`).  
+   - Geef een **Deployment Name** op.  
+5. **In Flowise**:  
+   - Voeg een **Azure OpenAI node** toe in je chatflow.  
+   - Vul **API Key**, **Endpoint** en **Deployment Name** in.  
+  
+💡 **Veiligheidstip:**    
+Gebruik **Variables and Secrets** in Hugging Face om je API keys veilig op te slaan.  
+  
+---  
+  
+## ⚖️ Digitale dilemma’s & AI-act  
+  
+In het onderwijs moet je rekening houden met:  
+  
+- **Privacy & AVG** – Minimaliseer het gebruik van persoonsgegevens.  
+- **Transparantie** – Informeer gebruikers dat ze met AI communiceren.  
+- **Bias & betrouwbaarheid** – Beoordeel en test je chatbot op vooroordelen en fouten.  
+- **AI-act compliance** – Houd rekening met de classificatie van AI-systemen en verplichtingen.  
+  
+---  
+  
+## 🚀 Lokale ontwikkeling (optioneel)  
+  
+Wil je eerst lokaal werken voordat je naar Hugging Face deployt?  
+  
+```bash  
+npm install -g flowise  
+npx flowise start  
