@@ -49,12 +49,15 @@ If Nginx/Apache:
 
 # Create an empty "real" file:
 sudo touch acme.json
-Set the strict permissions:
+# Set the strict permissions:
 sudo chmod 600 acme.json
 
 # Deploy
 cd ~/flowise-docker
 docker compose up -d
+
+# After UDARING docker-compose.yml 
+docker compose up -d --force-recreate
 ```
 
 ![alt text](SRAM_SRC_WORLFLOW.png)
