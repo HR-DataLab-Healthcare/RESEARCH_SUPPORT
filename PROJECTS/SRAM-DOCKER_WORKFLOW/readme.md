@@ -61,6 +61,8 @@ docker compose up -d --force-recreate
 ```
 
 ![alt text](SRAM_SRC_WORLFLOW.png)
+![alt text](SRAM-security-groups.png)
+
 
 **Access Flowise:** https://docflow.betekenisvolle.src.surf-hosted.nl
 
