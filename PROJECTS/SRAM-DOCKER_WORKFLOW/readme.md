@@ -46,6 +46,12 @@ If Nginx/Apache:
   sudo systemctl stop nginx
   sudo systemctl disable nginx
 
+
+# Create an empty "real" file:
+sudo touch acme.json
+Set the strict permissions:
+sudo chmod 600 acme.json
+
 # Deploy
 cd ~/flowise-docker
 docker compose up -d
