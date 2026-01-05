@@ -52,34 +52,17 @@ docker run -e "ACCEPT_EULA=Y" \
    --restart always \
    -d mcr.microsoft.com/mssql/server:2025-latest
 
-   =======================================================================================================
-         This is the primary command used to create and start a new Docker container 
-         from a .sql MSSQL dump image.
-
-         Environment Variables (-e)
-         -e "ACCEPT_EULA=Y": Required by Microsoft. 
-         This confirms your acceptance of the End-User License Agreement for SQL Server.
-
-         -e "MSSQL_SA_PASSWORD=YourStrongPassword123!": 
-         Sets the password for the System Administrator (sa) account. 
-         Ensure this meets SQL Server's complexity requirements.
-
-         Connectivity and Identification
-         -p 1433:1433: 
-         Maps the container internal port (1433) to the VM port (1433). 
-         This allows external tools like Langflow or Python scripts 
-         to connect to the database via the VM IP address.
-
-         --name mssql_server: 
-         Assigns a human-readable name to the container 
-         so you can manage it (e.g., docker stop mssql_server) 
-         instead of using a random ID.
-
-         
-   =======================================================================================================
-
+   ==========================================================================================
+   Breakdown of the Bash shell command:
+         -e "ACCEPT_EULA=Y": Accepts the End-User License Agreement.
+         -e "MSSQL_SA_PASSWORD=...": Sets the system administrator SA password.
+         -p 1433:1433: Maps the container's port 1433 to your local machine's port 1433.
+         -v flag makes your SQL file available inside the container 
+            at the path /scripts/MSSQL-e1.0-Productie-NNNdb2021-v1.1.sql
+         --name mssql_server: Assigns a friendly name to the container.
+         -d: Runs the container in the background (detached mode).
+   ==========================================================================================
 ```
-
 ### 3. Verify the Environment
 
 Ensure the container is running and the volume mount is active:
