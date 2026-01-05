@@ -52,6 +52,30 @@ docker run -e "ACCEPT_EULA=Y" \
    --restart always \
    -d mcr.microsoft.com/mssql/server:2025-latest
 
+   =======================================================================================================
+         This is the primary command used to create and start a new Docker container 
+         from a .sql MSSQL dump image.
+
+         Environment Variables (-e)
+         -e "ACCEPT_EULA=Y": Required by Microsoft. 
+         This confirms your acceptance of the End-User License Agreement for SQL Server.
+
+         -e "MSSQL_SA_PASSWORD=YourStrongPassword123!": 
+         Sets the password for the System Administrator (sa) account. 
+         Ensure this meets SQL Server's complexity requirements.
+
+         Connectivity and Identification
+         -p 1433:1433: 
+         Maps the container's internal port (1433) to the VM's port (1433). 
+         This allows external tools like Langflow or Python scripts 
+         to connect to the database via the VM's IP address.
+
+         --name mssql_server: 
+         Assigns a human-readable name to the container 
+         so you can manage it (e.g., docker stop mssql_server) 
+         instead of using a random ID.
+   =======================================================================================================
+
 ```
 
 ### 3. Verify the Environment
