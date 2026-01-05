@@ -66,14 +66,16 @@ docker run -e "ACCEPT_EULA=Y" \
 
          Connectivity and Identification
          -p 1433:1433: 
-         Maps the container's internal port (1433) to the VM's port (1433). 
+         Maps the container internal port (1433) to the VM port (1433). 
          This allows external tools like Langflow or Python scripts 
-         to connect to the database via the VM's IP address.
+         to connect to the database via the VM IP address.
 
          --name mssql_server: 
          Assigns a human-readable name to the container 
          so you can manage it (e.g., docker stop mssql_server) 
          instead of using a random ID.
+
+         
    =======================================================================================================
 
 ```
