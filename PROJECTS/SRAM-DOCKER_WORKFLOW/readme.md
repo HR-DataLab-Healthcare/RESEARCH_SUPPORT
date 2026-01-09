@@ -143,7 +143,28 @@ Edit Traefik label:
 Use Account Settings
 <img width="1117" height="793" alt="image" src="https://github.com/user-attachments/assets/dc06ae9e-58e2-44b0-9002-57005d088d96" />
 
+The best course of action for managing user accounts in Flowise is indeed to use the account settings page in the GUI, 
+especially since environment variable setup for admin credentials is unreliable and often fails in recent versions. 
+After deploying Flowise, you should navigate to the GUI and set up your admin account through the account settings 
+or initial setup page, as this is the most consistent method currently supported.
+​
 
+Account Settings in the GUI
+Upon first access, Flowise will prompt you to create an admin account via the web interface.
+
+Use the account settings or setup page to configure your username and password securely.
+
+This approach ensures that the admin account is properly registered and avoids the issues associated with environment variable configuration.
+​
+
+Additional Notes
+If you encounter issues accessing the account settings or setup page, check for updates or consult the Flowise documentation and community forums for version-specific instructions.
+​
+
+For multi-user scenarios, Flowise currently only supports a single admin account per instance, so consider running separate instances if multiple isolated accounts are needed.
+​
+
+In summary, using the account settings page in the Flowise GUI is the recommended and most reliable way to set up and manage your admin account, especially given the current limitations with environment variables and automation
 
 
 ### Different Data Path
