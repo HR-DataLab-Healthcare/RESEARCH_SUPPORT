@@ -1,0 +1,79 @@
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    dns:
+      - 8.8.8.8
+    restart: unless-stopped
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      # Global redirect to HTTPS
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      # Let's Encrypt Configuration
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./acme.json:/letsencrypt/acme.json"
+
+  langflow:
+    # image: langflowai/langflow:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: langflow
+    restart: unless-stopped
+    environment:
+      # Updated to match the DB service credentials below
+      - LANGFLOW_DATABASE_URL=postgresql://langflow:langflow@db:5432/langflow
+      - LANGFLOW_AUTO_LOGIN=false
+      # Needed to create logins
+      - LANGFLOW_NEW_USER_SIGNUP=true
+      - LANGFLOW_SECRET_KEY=a_long_random_string_here_for_security
+      - LANGFLOW_LANGFLOW_USER_DEFAULT=false
+      - LANGFLOW_CACHE_DIR=/app/langflow/cache
+      - DO_NOT_TRACK=true
+    volumes:
+      - langflow_data:/app/langflow
+      - ./langflow_cache:/app/langflow/cache
+      - ./chroma_data:/app/chroma_data
+    user: "root"
+    depends_on:
+      db:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      # UPDATED DOMAIN
+      - "traefik.http.routers.langflow.rule=Host(`langflow01.cyber-secure-te.src.surf-hosted.nl`)"
+      - "traefik.http.routers.langflow.entrypoints=websecure"
+      - "traefik.http.routers.langflow.tls.certresolver=le"
+      - "traefik.http.services.langflow.loadbalancer.server.port=7860"
+
+  db:
+    image: postgres:16
+    container_name: langflow_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: langflow
+      POSTGRES_USER: langflow
+      POSTGRES_PASSWORD: langflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U langflow"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  langflow_data:
+  postgres_data:
