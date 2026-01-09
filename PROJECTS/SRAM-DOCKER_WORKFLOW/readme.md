@@ -63,7 +63,7 @@ docker compose up -d --force-recreate
 
 
 
-**Access Flowise:** https://docflow.betekenisvolle.src.surf-hosted.nl
+**Access Flowise:** https://xxxxxxxxx.src.surf-hosted.nl
 
 **Login:** `betekenisvollezorg@hr.nl` / `betekenisvolleZorg!2025`
 
@@ -108,7 +108,7 @@ services:
       - /home/rvanderwil/data:/root/.flowise
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.flowise.rule=Host(`docflow.betekenisvolle.src.surf-hosted.nl`)"
+      - "traefik.http.routers.flowise.rule=Host(`xxxx.xxxx.src.surf-hosted.nl`)"
       - "traefik.http.routers.flowise.entrypoints=websecure"
       - "traefik.http.routers.flowise.tls.certresolver=le"
       - "traefik.http.services.flowise.loadbalancer.server.port=3000"
