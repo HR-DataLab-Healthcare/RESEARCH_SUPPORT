@@ -98,8 +98,8 @@ services:
     restart: unless-stopped
     environment:
       - PORT=3000
-      - FLOWISE_EMAIL=betekenisvollezorg@hr.nl
-      - FLOWISE_PASSWORD=betekenisvolleZorg!2025
+      - FLOWISE_EMAIL=xxxx
+      - FLOWISE_PASSWORD=xxxx
       - DATABASE_PATH=/root/.flowise
       - LOG_PATH=/root/.flowise/logs
       - SECRETKEY_PATH=/root/.flowise
