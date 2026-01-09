@@ -17,7 +17,7 @@ This repository deploys **Flowise** (visual LLM workflow builder) on an Ubuntu V
 1. **Ubuntu VM** with public IP and ports **80/443** open in firewall
 2. **Domain** with A-record pointing to VM (e.g. `docflow.betekenisvolle.src.surf-hosted.nl`)
 3. **Docker + Docker Compose** installed
-4. SSH access as user `rvanderwil`
+4. SSH access as user:  ssh <user>@<IP number>
 
 ## Quick Start
 
@@ -31,7 +31,7 @@ mkdir -p ~/flowise-docker
 touch acme.json && chmod 600 acme.json
 
 # Add user to docker group (once)
-sudo usermod -aG docker rvanderwil # replace this with the appropiate user (whoami)
+sudo usermod -aG docker xxxxxx # replace this with the appropiate user (whoami)
 newgrp docker  # or logout/login
 
 # Create docker-compose.yml 
@@ -105,7 +105,7 @@ services:
       - SECRETKEY_PATH=/root/.flowise
       - BLOB_STORAGE_PATH=/root/.flowise/storage
     volumes:
-      - /home/rvanderwil/data:/root/.flowise
+      - ~/data:/root/.flowise  # cd ~  ===> home directory
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.flowise.rule=Host(`xxxx.xxxx.src.surf-hosted.nl`)"
