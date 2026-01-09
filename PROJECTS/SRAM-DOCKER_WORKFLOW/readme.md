@@ -65,7 +65,7 @@ docker compose up -d --force-recreate
 
 **Access Flowise:** https://xxxxxxxxx.src.surf-hosted.nl
 
-**Login:** `betekenisvollezorg@hr.nl` / `betekenisvolleZorg!2025`
+**Login:** `xxxxxg@hr.nl` / `xxxxxx`
 
 ## docker-compose.yml
 
