@@ -140,12 +140,10 @@ Edit Traefik label:
 
 ### Change Credentials
 
-Edit Flowise environment:
+Use Account Settings
+<img width="1117" height="793" alt="image" src="https://github.com/user-attachments/assets/dc06ae9e-58e2-44b0-9002-57005d088d96" />
 
-```yaml
-- FLOWISE_EMAIL=your@email.com
-- FLOWISE_PASSWORD=your-strong-password
-```
+
 
 
 ### Different Data Path
