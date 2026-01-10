@@ -40,7 +40,8 @@ RAW_NAME=$(python3 -c "import socket; print(socket.getfqdn())")
 # - Dash before 'src' becomes a dot
 # - Dash after 'src' becomes a dot
 # - Dash before 'surf' becomes a dot
-MY_FQDN=$(echo $RAW_NAME | sed 's/-/\./' | sed 's/-src-/\.src\./' | sed 's/-surf-hosted-/\.surf-hosted\./' | sed 's/-nl$/\.nl/')
+#  MY_FQDN=$(echo $RAW_NAME | sed 's/-/\./' | sed 's/-src-/\.src\./' | sed 's/-surf-hosted-/\.surf-hosted\./' | sed 's/-nl$/\.nl/')
+MY_FQDN=$(sudo docker inspect $(sudo docker ps -q) | grep -o 'Host(`[^`]*\.nl`)' | sed 's/Host(`\([^`]*\)`)/\1/' | head -1)
 # Write to .env
 echo "MY_FQDN=$MY_FQDN" > .env
 # Output the results to the console
