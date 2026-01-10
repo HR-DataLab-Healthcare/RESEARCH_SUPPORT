@@ -11,10 +11,8 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
-      # Global redirect to HTTPS
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
-      # Let's Encrypt Configuration
       - "--certificatesresolvers.le.acme.httpchallenge=true"
       - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
@@ -49,27 +47,24 @@ services:
         condition: service_healthy
     labels:
       - "traefik.enable=true"
-      # Ensure your environment variable MY_FQDN is set to: docoflo.cyber-secure-te.src.surf-hosted.nl
       - "traefik.http.routers.langflow.rule=Host(`${MY_FQDN}`)"
-      # FIXED: Only use websecure to avoid routing conflicts
       - "traefik.http.routers.langflow.entrypoints=websecure"
-      # FIXED: Added the certificate resolver so Traefik knows to use Let's Encrypt
+      # This line fetches the valid SSL certificate
       - "traefik.http.routers.langflow.tls.certresolver=le"
       - "traefik.http.services.langflow.loadbalancer.server.port=7860"
 
-db:
+  db:
     image: postgres:16
     container_name: langflow_db
-    restart: unless-stopped
     environment:
-      POSTGRES_DB: langflow
-      POSTGRES_USER: langflow
-      POSTGRES_PASSWORD: langflow
+      - POSTGRES_USER=langflow
+      - POSTGRES_PASSWORD=langflow
+      - POSTGRES_DB=langflow
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U langflow"]
-      interval: 10s
+      interval: 5s
       timeout: 5s
       retries: 5
 
