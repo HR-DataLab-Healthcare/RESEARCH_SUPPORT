@@ -28,6 +28,13 @@ else
     echo "✅ acme.json already exists; permissions reset to 600."
 fi
 
+# 2.5. Generate Environment Variables
+echo "Step 2.5: Automatically detecting FQDN and creating .env..."
+# This command converts dashes to dots specifically for the docoflo prefix
+# and the cloud-ict-surf-nl suffix to match valid DNS structure.
+echo "MY_FQDN=$(hostname --fqdn | sed 's/-cloud-ict-surf-nl/.cloud.ict.surf.nl/' | sed 's/docoflo-/docoflo./')" > .env
+echo "✅ .env file created with: $(cat .env)"
+
 # 3. Docker Permissions
 echo "Step 3: Checking Docker group membership for $USER..."
 if groups "$USER" | grep &>/dev/null "\bdocker\b"; then
@@ -40,7 +47,6 @@ fi
 # 4. Docker Compose Execution
 echo "Step 4: Building and starting containers with Traefik..."
 # We use 'sg' to ensure the 'docker' group permission is recognized 
-# in the current shell session without needing a logout/login.
 if sg docker -c "docker compose up -d --build"; then
     echo "-------------------------------------------------------"
     echo "🚀 SUCCESS: Containers are building/starting."
@@ -50,8 +56,10 @@ else
 fi
 
 echo "Step 5: Finalizing..."
-# Optional: List running containers to verify
+# Show running containers and the actual Host Rule being used
 sg docker -c "docker ps"
+echo "--- Traefik Routing Rule ---"
+sg docker -c "docker compose config | grep Host"
 
 echo "-------------------------------------------------------"
 echo "✨ SETUP COMPLETE!"
