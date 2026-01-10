@@ -1,66 +1,29 @@
-
-
-
-
-====================================================================================================================
-mkdir LANGFLOW
-cd LANGFLOW
-
-whoami
-echo "$PUBLIC_IP"
-
-scp -r "E:\github\RESEARCH_SUPPORT\PROJECTS\SRAM_DOCKER_LANGFLOW\*" rvanderwil@145.38.192.134:~/LANGFLOW/
-
-
-cd ~/LANGFLOW
-sudo systemctl stop nginx
-sudo systemctl disable nginx
-sudo touch acme.json
-sudo chmod 600 acme.json
-sudo usermod -aG docker $(whoami)
-newgrp docker 
-docker compose up -d build
-
-====================================================================================================================
-
-
-
-
-=====>
-nano setup_langflow.sh
-
-sudo chmod +x setup_langflow.sh
-./setup_langflow.sh
-
-
-
 #!/bin/bash
 
-# Navigate to the project directory
-cd ~/LANGFLOW || { echo "Directory ~/LANGFLOW not found"; exit 1; }
+# 1. Create and move into the target directory
+mkdir -p ~/LANGFLOW
+cd ~/LANGFLOW
 
-# Stop and disable Nginx to free up ports 80/443 for Traefik
-echo "Stopping Nginx..."
-sudo systemctl stop nginx
-sudo systemctl disable nginx
+# 2. Initialize a new git repo locally
+git init
 
-# Setup Traefik SSL storage file
-echo "Configuring acme.json..."
-sudo touch acme.json
-sudo chmod 600 acme.json
+# 3. Add the remote repository URL
+git remote add -f origin https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT.git
 
-# Add current user to Docker group
-echo "Adding $USER to docker group..."
-sudo usermod -aG docker "$USER"
+# 4. Enable Sparse Checkout feature
+git config core.sparseCheckout true
 
-# Run docker compose
-# Note: We use 'sg' to run the command as the docker group 
-# because 'newgrp' would stop the script execution.
-echo "Building and starting containers..."
-sg docker -c "docker compose up -d --build"
+# 5. Define the specific path you want to download
+echo "PROJECTS/SRAM_DOCKER_LANGFLOW/*" >> .git/info/sparse-checkout
 
-echo "Setup complete!"
+# 6. Pull the files from the main branch
+git pull origin main
 
+# 7. Move files up to the root of ~/LANGFLOW and clean up
+mv PROJECTS/SRAM_DOCKER_LANGFLOW/* .
+rm -rf PROJECTS
+rm -rf .git  # Removes git history so it's just a clean folder of files
 
-
-
+echo "------------------------------------------"
+echo "Success! Contents of SRAM_DOCKER_LANGFLOW are now in ~/LANGFLOW"
+ls -la
