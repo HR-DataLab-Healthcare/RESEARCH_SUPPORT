@@ -53,7 +53,10 @@ services:
     labels:
       - "traefik.enable=true"
       # UPDATED DOMAIN
+<<<<<<< HEAD
       # - "traefik.http.routers.langflow.rule=Host(`langflow01.cyber-secure-te.src.surf-hosted.nl`)"
+=======
+>>>>>>> 43014d6823243025310360b432afbdd883bfdbd3
       - "traefik.http.routers.langflow.rule=Host(`langflow01.${MY_FQDN}`)"
       - "traefik.http.routers.langflow.entrypoints=websecure"
       - "traefik.http.routers.langflow.tls.certresolver=le"
