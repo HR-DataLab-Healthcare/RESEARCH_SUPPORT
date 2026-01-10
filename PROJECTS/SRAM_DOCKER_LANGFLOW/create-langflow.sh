@@ -32,8 +32,20 @@ fi
 echo "Step 2.5: Automatically detecting FQDN and creating .env..."
 # This command converts dashes to dots specifically for the docoflo prefix
 # and the cloud-ict-surf-nl suffix to match valid DNS structure.
-echo "MY_FQDN=$(hostname --fqdn | sed 's/-cloud-ict-surf-nl/.cloud.ict.surf.nl/' | sed 's/docoflo-/docoflo./')" > .env
-echo "✅ .env file created with: $(cat .env)"
+# Create (or clear) the .env file
+touch .env
+
+# Generate the FQDN and write it to the .env file
+FQDN=$(hostname --fqdn)
+echo "MY_FQDN=$FQDN" > .env
+
+# Output the results to the console
+echo "--------------------------------"
+echo "Success: .env file has been created."
+echo "Current content of .env:"
+echo "--------------------------------"
+cat .env
+echo "--------------------------------"
 
 # 3. Docker Permissions
 echo "Step 3: Checking Docker group membership for $USER..."
