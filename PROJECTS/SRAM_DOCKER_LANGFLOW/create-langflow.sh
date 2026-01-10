@@ -30,15 +30,15 @@ fi
 
 # 2.5. Generate Environment Variables
 echo "Step 2.5: Automatically detecting FQDN and creating .env..."
-# This command converts dashes to dots specifically for the docoflo prefix
-# and the cloud-ict-surf-nl suffix to match valid DNS structure.
-# Create (or clear) the .env file
+# Create or overwrite the .env file
 touch .env
-
-# Generate the FQDN and write it to the .env file
-MY_FQDN=$(python3 -c "import socket; print(socket.getfqdn())")
-echo "MY_FQDN=$FQDN" > .env
-
+# Capture the system name (which has dashes)
+RAW_NAME=$(python3 -c "import socket; print(socket.getfqdn())")
+# Convert dashes to dots to make it a valid URL
+# This replaces dashes with dots
+MY_FQDN=$(echo $RAW_NAME | sed 's/-/./g')
+# Write it to .env (Using the CORRECT variable name)
+echo "MY_FQDN=$MY_FQDN" > .env
 # Output the results to the console
 echo "--------------------------------"
 echo "Success: .env file has been created."
