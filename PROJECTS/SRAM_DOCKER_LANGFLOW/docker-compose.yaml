@@ -11,8 +11,10 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
+      # Global redirect to HTTPS
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      # Let's Encrypt Configuration
       - "--certificatesresolvers.le.acme.httpchallenge=true"
       - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
@@ -49,22 +51,22 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.langflow.rule=Host(`${MY_FQDN}`)"
       - "traefik.http.routers.langflow.entrypoints=websecure"
-      # This line fetches the valid SSL certificate
       - "traefik.http.routers.langflow.tls.certresolver=le"
       - "traefik.http.services.langflow.loadbalancer.server.port=7860"
 
   db:
     image: postgres:16
     container_name: langflow_db
+    restart: unless-stopped
     environment:
-      - POSTGRES_USER=langflow
-      - POSTGRES_PASSWORD=langflow
-      - POSTGRES_DB=langflow
+      POSTGRES_DB: langflow
+      POSTGRES_USER: langflow
+      POSTGRES_PASSWORD: langflow
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U langflow"]
-      interval: 5s
+      interval: 10s
       timeout: 5s
       retries: 5
 
