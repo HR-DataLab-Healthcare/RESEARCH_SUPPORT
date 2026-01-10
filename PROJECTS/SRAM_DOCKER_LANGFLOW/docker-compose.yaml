@@ -52,10 +52,11 @@ services:
         condition: service_healthy
     labels:
       - "traefik.enable=true"
-      # UPDATED DOMAIN
-      - "traefik.http.routers.langflow.rule=Host(`langflow01.${MY_FQDN}`)"
-      - "traefik.http.routers.langflow.entrypoints=websecure"
-      - "traefik.http.routers.langflow.tls.certresolver=le"
+      - "traefik.http.routers.langflow.rule=Host(`${MY_FQDN}`)"
+      # Add websecure here:
+      - "traefik.http.routers.langflow.entrypoints=web,websecure"
+      # Since SSL failed earlier, tell Traefik to use a self-signed cert for now:
+      - "traefik.http.routers.langflow.tls=true"
       - "traefik.http.services.langflow.loadbalancer.server.port=7860"
 
   db:
