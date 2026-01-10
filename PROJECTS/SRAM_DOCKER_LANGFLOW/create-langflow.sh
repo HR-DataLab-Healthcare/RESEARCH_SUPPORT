@@ -31,12 +31,16 @@ fi
 # 2.5. Generate Environment Variables
 echo "Step 2.5: Automatically detecting FQDN and creating .env..."
 # Create or overwrite the .env file
+rm -rf .env
 touch .env
-# Get the raw name from the system
+# Get the raw string: docoty-cyber-secure-te-src-surf-hosted-nl
 RAW_NAME=$(python3 -c "import socket; print(socket.getfqdn())")
-# Use sed to replace ONLY the FIRST dash with a dot
-# 's/-/\./' (without the 'g' at the end) only targets the first occurrence
-MY_FQDN=$(echo $RAW_NAME | sed 's/-/\./')
+# Convert dashes to dots only at the critical domain boundaries
+# - First dash becomes a dot
+# - Dash before 'src' becomes a dot
+# - Dash after 'src' becomes a dot
+# - Dash before 'surf' becomes a dot
+MY_FQDN=$(echo $RAW_NAME | sed -E 's/^[^-]+-/&/; s/-/./; s/-src-/.src./; s/-surf/.surf/')
 # Write to .env
 echo "MY_FQDN=$MY_FQDN" > .env
 # Output the results to the console
