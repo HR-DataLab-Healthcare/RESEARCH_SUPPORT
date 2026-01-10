@@ -32,12 +32,12 @@ fi
 echo "Step 2.5: Automatically detecting FQDN and creating .env..."
 # Create or overwrite the .env file
 touch .env
-# Capture the system name (which has dashes)
+# Get the raw name from the system
 RAW_NAME=$(python3 -c "import socket; print(socket.getfqdn())")
-# Convert dashes to dots to make it a valid URL
-# This replaces dashes with dots
-MY_FQDN=$(echo $RAW_NAME | sed 's/-/./g')
-# Write it to .env (Using the CORRECT variable name)
+# Use sed to replace ONLY the FIRST dash with a dot
+# 's/-/\./' (without the 'g' at the end) only targets the first occurrence
+MY_FQDN=$(echo $RAW_NAME | sed 's/-/\./')
+# Write to .env
 echo "MY_FQDN=$MY_FQDN" > .env
 # Output the results to the console
 echo "--------------------------------"
