@@ -1,66 +1,59 @@
-
-
-
-
-====================================================================================================================
-mkdir LANGFLOW
-cd LANGFLOW
-
-whoami
-echo "$PUBLIC_IP"
-
-scp -r "E:\github\RESEARCH_SUPPORT\PROJECTS\SRAM_DOCKER_LANGFLOW\*" rvanderwil@145.38.192.134:~/LANGFLOW/
-
-
-cd ~/LANGFLOW
-sudo systemctl stop nginx
-sudo systemctl disable nginx
-sudo touch acme.json
-sudo chmod 600 acme.json
-sudo usermod -aG docker $(whoami)
-newgrp docker 
-docker compose up -d build
-
-====================================================================================================================
-
-
-
-
-=====>
-nano setup_langflow.sh
-
-sudo chmod +x setup_langflow.sh
-./setup_langflow.sh
-
-
-
 #!/bin/bash
 
-# Navigate to the project directory
-cd ~/LANGFLOW || { echo "Directory ~/LANGFLOW not found"; exit 1; }
+# Exit on any error to prevent partial setups
+set -e
 
-# Stop and disable Nginx to free up ports 80/443 for Traefik
-echo "Stopping Nginx..."
-sudo systemctl stop nginx
-sudo systemctl disable nginx
+echo "-------------------------------------------------------"
+echo "🛠️ Starting Deployment Script: $(date)"
+echo "-------------------------------------------------------"
 
-# Setup Traefik SSL storage file
-echo "Configuring acme.json..."
-sudo touch acme.json
-sudo chmod 600 acme.json
+# 1. Handle Nginx
+echo "Step 1: Stopping and disabling Nginx..."
+if systemctl is-active --quiet nginx; then
+    sudo systemctl stop nginx
+    sudo systemctl disable nginx
+    echo "✅ Nginx has been stopped and disabled."
+else
+    echo "ℹ️ Nginx was not running; skipping."
+fi
 
-# Add current user to Docker group
-echo "Adding $USER to docker group..."
-sudo usermod -aG docker "$USER"
+# 2. Setup Traefik SSL storage
+echo "Step 2: Configuring Traefik SSL storage (acme.json)..."
+if [ ! -f acme.json ]; then
+    sudo touch acme.json
+    sudo chmod 600 acme.json
+    echo "✅ acme.json created with secure permissions (600)."
+else
+    sudo chmod 600 acme.json
+    echo "✅ acme.json already exists; permissions reset to 600."
+fi
 
-# Run docker compose
-# Note: We use 'sg' to run the command as the docker group 
-# because 'newgrp' would stop the script execution.
-echo "Building and starting containers..."
-sg docker -c "docker compose up -d --build"
+# 3. Docker Permissions
+echo "Step 3: Checking Docker group membership for $USER..."
+if groups "$USER" | grep &>/dev/null "\bdocker\b"; then
+    echo "✅ User $USER is already in the docker group."
+else
+    sudo usermod -aG docker "$USER"
+    echo "✅ User $USER added to the docker group."
+fi
 
-echo "Setup complete!"
+# 4. Docker Compose Execution
+echo "Step 4: Building and starting containers with Traefik..."
+# We use 'sg' to ensure the 'docker' group permission is recognized 
+# in the current shell session without needing a logout/login.
+if sg docker -c "docker compose up -d --build"; then
+    echo "-------------------------------------------------------"
+    echo "🚀 SUCCESS: Containers are building/starting."
+else
+    echo "❌ ERROR: Docker compose failed to start."
+    exit 1
+fi
 
+echo "Step 5: Finalizing..."
+# Optional: List running containers to verify
+sg docker -c "docker ps"
 
-
-
+echo "-------------------------------------------------------"
+echo "✨ SETUP COMPLETE!"
+echo "Traefik should now be handling traffic on ports 80/443."
+echo "-------------------------------------------------------"
