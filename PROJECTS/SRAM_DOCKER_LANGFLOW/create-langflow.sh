@@ -36,7 +36,7 @@ echo "Step 2.5: Automatically detecting FQDN and creating .env..."
 touch .env
 
 # Generate the FQDN and write it to the .env file
-FQDN=$(hostname --fqdn)
+FQDN=$(dig +short -x $(curl -s https://ifconfig.me) | sed 's/\.$//')
 echo "MY_FQDN=$FQDN" > .env
 
 # Output the results to the console
