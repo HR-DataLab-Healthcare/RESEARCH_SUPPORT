@@ -57,6 +57,7 @@ if groups "$USER" | grep &>/dev/null "\bdocker\b"; then
     echo "✅ User $USER is already in the docker group."
 else
     sudo usermod -aG docker "$USER"
+    newgrp docker
     echo "✅ User $USER added to the docker group."
 fi
 
