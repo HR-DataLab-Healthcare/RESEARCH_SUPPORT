@@ -1,220 +1,83 @@
+# Langflow on SURF Research Cloud Ubuntu VM
 
-# Flowise on Ubuntu VM with Docker + Traefik HTTPS
-
-This repository deploys **Flowise** (visual LLM workflow builder) on an Ubuntu VM using Docker Compose with **persistent storage** and **automatic HTTPS** via Traefik + Let's Encrypt.
-
-## Features
-
-- ✅ Persistent storage (`/home/rvanderwil/data`)
-- ✅ HTTPS with free Let's Encrypt certificates
-- ✅ No sudo required for `docker compose`
-- ✅ Automatic Traefik TLS certificate renewal
-- ✅ Flowise admin login protection
-
+This repository provides a complete setup for deploying Langflow, a visual framework for building LLM applications, on a SURF Research Cloud Ubuntu VM. Tech leads of DataLabs can use these files to enable secure HTTPS access via the VM's domain name (FQDN). The stack uses Docker Compose with Traefik for reverse proxy and automatic Let's Encrypt SSL, PostgreSQL for persistence, and a custom Dockerfile for Langflow with Docling support.[^1][^2][^3]
 
 ## Prerequisites
 
-1. **Ubuntu VM** with public IP and ports **80/443** open in firewall
-2. **Domain** with A-record pointing to VM (e.g. `docflow.betekenisvolle.src.surf-hosted.nl`)
-3. **Docker + Docker Compose** installed
-4. SSH access as user:  ssh <user>@<IP number>
+Deploy on a SURF Research Cloud Ubuntu 22.04+ VM with public IP, ports 80/443/8080 open in the firewall, and a DNS A-record for the FQDN (e.g., langflow.datalab.src.surf-hosted.nl).[^4][^1]
+
+- Install Docker and Docker Compose: Follow official docs or SURF guides.
+- SSH access as a non-root user.
+- Python 3 for FQDN detection in setup script.
+- No conflicting services like Nginx or Apache running.[^1][^4]
+
 
 ## Quick Start
 
-```bash
-# Clone & enter repo
-git clone <this-repo>
-cd flowise-docker
+1. Clone or copy files to VM home directory: `git clone <repo> && cd langflow-docker` (or use `get-files.sh` to fetch from source).[^5]
+2. Run `./create-langflow.sh` – it handles setup automatically:
+    - Stops/disables Nginx.
+    - Creates/secures `acme.json`.
+    - Detects FQDN (e.g., from `socket.getfqdn()`) and generates `.env` with `MYFQDN=your.detected.src.surf-hosted.nl`.
+    - Adds user to docker group.
+    - Builds and starts `docker compose up -d --build`.[^1]
+3. Access https://your-fqdn.src.surf-hosted.nl – Traefik handles HTTPS redirect and certs.[^2][^1]
 
-# Create data & cert directories
-mkdir -p ~/flowise-docker
-touch acme.json && chmod 600 acme.json
+Langflow initializes with user signup enabled; create admin on first access.[^2]
 
-# Add user to docker group (once)
-sudo usermod -aG docker xxxxxx # replace this with the appropiate user (whoami)
-newgrp docker  # or logout/login
+## File Descriptions
 
-# Create docker-compose.yml 
-Save yml CODE + DOMEIN name as shown below as follows:
+- **docker-compose.yaml**: Orchestrates three services.[^2]
+    - **traefik**: v2.11 reverse proxy on ports 80/443/8080. Enables dashboard, Docker provider, HTTP-to-HTTPS redirect, Let's Encrypt ACME HTTP challenge. Volumes: `/var/run/docker.sock`, `acme.json`. DNS: 8.8.8.8 for cert validation.
+    - **langflow**: Built from local Dockerfile. Env vars from `.env` (e.g., `LANGFLOWDATABASE_URL=postgresql://langflow:langflow@langflowdb:5432/langflow`, `LANGFLOW_SECRET_KEY`, auto-login false, new user signup true). Volumes for data/cache/Chrome. Traefik labels route `Host(`\$MYFQDN`)` to port 7860. Depends on healthy DB.
+    - **db**: PostgreSQL 16 with DB/user/pass `langflow`. Healthcheck: `pg_isready`. Persistent volume `postgresdata`.
+- **Dockerfile**: Extends `langflowai/langflow:latest`, installs `libgl1 libglib2.0-0` and `langflow[docling]` via uv pip for document processing support.[^3]
+- **create-langflow.sh**: Automated deployment script with error handling (`set -e`). Detects FQDN via Python (`socket.getfqdn()` transformed to valid domain), creates `.env`, manages permissions, executes `docker compose`. Uses `sg docker` for non-sudo runs.[^1]
+- **get-files.sh**: Downloads specific path from GitHub repo (sparse-checkout `PROJECTS/SRAM/DOCKER/LANGFLOW`), cleans up for clean folder setup.[^5]
 
-  nano ~/flowise-docker/docker-compose.yml`
-  ====< copy paste content in nano editor >====
-  crl-X ===> shift-Y  to save the content
-
-# Stop Conflicting Services
-If Nginx/Apache:
-  sudo systemctl stop nginx
-  sudo systemctl disable nginx
-
-
-# Create an empty "real" file:
-sudo touch acme.json
-# Set the strict permissions:
-sudo chmod 600 acme.json
-
-# Deploy
-cd ~/flowise-docker
-docker compose up -d
-
-# After UDARING docker-compose.yml 
-docker compose up -d --force-recreate
-```
-
-
-
-
-**Access Flowise:** https://xxxxxxxxx.src.surf-hosted.nl
-
-**Login:** `xxxxxg@hr.nl` / `xxxxxx`
-
-## docker-compose.yml
-
-```yaml
-services:
-  traefik:
-    image: traefik:v2.11
-    container_name: traefik
-    restart: unless-stopped
-    command:
-      - "--api.dashboard=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.le.acme.httpchallenge=true"
-      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
-      - "--certificatesresolvers.le.acme.email=betekenisvollezorg@hr.nl"
-      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./acme.json:/letsencrypt/acme.json"
-
-  flowise:
-    image: flowiseai/flowise:latest
-    container_name: flowise
-    restart: unless-stopped
-    environment:
-      - PORT=3000
-      - FLOWISE_EMAIL=xxxx
-      - FLOWISE_PASSWORD=xxxx
-      - DATABASE_PATH=/root/.flowise
-      - LOG_PATH=/root/.flowise/logs
-      - SECRETKEY_PATH=/root/.flowise
-      - BLOB_STORAGE_PATH=/root/.flowise/storage
-    volumes:
-      - ~/data:/root/.flowise  # cd ~  ===> home directory
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.flowise.rule=Host(`xxxx.xxxx.src.surf-hosted.nl`)"
-      - "traefik.http.routers.flowise.entrypoints=websecure"
-      - "traefik.http.routers.flowise.tls.certresolver=le"
-      - "traefik.http.services.flowise.loadbalancer.server.port=3000"
-
-```
-
-
-## Directory Structure
-
-```
-flowise-docker/
-├── docker-compose.yml     # Traefik + Flowise
-├── acme.json             # Let's Encrypt certs (auto-generated)
-└── README.md             # This file
-```
-
-**Persistent data:** `/home/rvanderwil/data/` (SQLite DB, flows, uploads)
 
 ## Customization
 
-### Change Domain
-
-Edit Traefik label:
-
-```yaml
-- "traefik.http.routers.flowise.rule=Host(`your-new-domain.com`)"
-```
-
-
-### Change Credentials
-
-Upon first access, Flowise will prompt you to create an admin account via the web interface.
-
-Hereafter, use the Account Settings page.
-<img width="1117" height="793" alt="image" src="https://github.com/user-attachments/assets/dc06ae9e-58e2-44b0-9002-57005d088d96" />
-
-This approach ensures that the admin account is properly registered and avoids the issues associated with environment variable configuration.
-​
-Additional Notes
-For multi-user scenarios, Flowise currently only supports a single admin account per instance, 
-so consider running separate instances if multiple isolated accounts are needed.
-​
-
-
-
-### Different Data Path
-
-```yaml
-volumes:
-  - /your/custom/path:/root/.flowise
-```
-
+Edit `docker-compose.yaml` Traefik label: `- traefik.http.routers.langflow.rule=Host(\`\${MYFQDN}\`)` or override `MYFQDN` in `.env`. Generate new `LANGFLOW_SECRET_KEY` (e.g., `openssl rand -hex 32`). For custom domains, update DNS before running script.[^2][^1]
+Adjust volumes/paths as needed; restart with `docker compose up -d --force-recreate`.[^2]
 
 ## Troubleshooting
 
 | Issue | Solution |
 | :-- | :-- |
-| `address already in use (port 80)` | `sudo systemctl stop nginx && sudo systemctl disable nginx` |
-| `permission denied docker.sock` | `sudo usermod -aG docker $USER && newgrp docker` |
-| No HTTPS / cert error | Check DNS A-record \& ports 80/443 open |
-| Flows not saving | Verify `/home/rvanderwil/data/` contains `database.sqlite` |
-| Traefik logs | `docker logs traefik` |
+| Port 80 in use | Run script (stops Nginx) or `sudo systemctl stop apache2`.[^1][^4] |
+| Docker permission denied | Script adds user to group; `newgrp docker` or relogin.[^1] |
+| No HTTPS cert | Verify DNS A-record, ports open, Traefik logs: `docker compose logs traefik`.[^2][^4] |
+| Flows not persisting | Check `langflowdata` volume, DB health.[^2] |
+| FQDN wrong | Manually edit `.env` before compose.[^1] |
 
 ## Security Notes
 
-- ✅ Strong admin password required
-- ✅ HTTPS enforced (no HTTP)
-- ✅ Flowise not directly exposed (Traefik only)
-- ✅ Persistent encryption keys (`SECRETKEY_PATH`)
-- ⚠️ Change default credentials immediately
-- ⚠️ Keep `acme.json` permissions `600`
+- `acme.json` chmod 600 protects cert keys.[^1]
+- HTTPS enforced; no direct Langflow exposure.
+- Use strong secret key; enable auth on first login.
+- Volumes persist data securely.[^2]
 
 
 ## Maintenance
 
-```bash
-# Update & restart
-docker compose pull && docker compose up -d
+- Update: `docker compose pull && docker compose up -d`.[^4]
+- Logs: `docker compose logs -f langflow`.
+- Backup: `docker compose down; tar czf backup.tar.gz langflowdata postgresdata acme.json`.
+- SURF-specific: Monitor VM quotas; scale Postgres if needed.[^2]
+<span style="display:none">[^6]</span>
 
-# View logs
-docker compose logs -f flowise
-docker compose logs -f traefik
+<div align="center">⁂</div>
 
-# Backup data
-tar czf flowise-backup-$(date +%Y%m%d).tar.gz /home/rvanderwil/data
+[^1]: create-langflow.sh
 
-# Stop
-docker compose down
-```
+[^2]: docker-compose.yaml
 
+[^3]: Dockerfile
 
-## Architecture Diagram
+[^4]: readme.md
 
-```
-Internet → [DNS: docflow.betekenisvolle.src.surf-hosted.nl]
-         ↓ (80/443)
-[Traefik: HTTPS + Let's Encrypt] → [Flowise:3000]
-                                    ↓
-                              [/home/rvanderwil/data]
-```
+[^5]: get-files.sh
 
-**Flowise data persists** across updates/restarts. Templates from Marketplace save correctly after clicking **Save** (top bar).
-
-***
-
-⭐ **Star this repo** if helpful!
-🐛 **Issues?** Open a GitHub issue.
-📄 **License:** MIT
+[^6]: Creating-a-Docker-Compose-catalog-item-SURF-User-Knowledge-Base-SURF-User-Knowledge-Base.url
 
