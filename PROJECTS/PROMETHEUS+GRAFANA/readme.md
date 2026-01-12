@@ -357,3 +357,263 @@ taskkill /IM ssh.exe /F
 
 **Result**: Secure access to Grafana without opening port 3000 publicly. Perfect for your "local Grafana" setup! 🔒
 
+***
+
+# Extending Your Stack: ML Model Monitoring with Grafana Tutorial
+
+Your **current Prometheus + Grafana + Traefik stack is PERFECT** for implementing the DataCamp ML monitoring tutorial. Here's exactly how to adapt it:
+
+## Current Stack → ML Monitoring Stack
+
+```
+✅ Existing: Prometheus (scrapes metrics) + Grafana (dashboards) + Traefik (HTTPS)
+➡️ Add:     ML Model API (Flask/FastAPI) exposing Prometheus metrics
+```
+
+
+## Step-by-Step Implementation
+
+### 1. Create ML Model API Container
+
+Add this service to your existing `docker-compose.yml`:
+
+```yaml
+  ml-model:
+    build: ./ml-model
+    container_name: ml-model
+    ports:
+      - "5000:5000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mlmodel.rule=Host(`mlmodel.cyber-secure-te.src.surf-hosted.nl`)"
+      - "traefik.http.routers.mlmodel.entrypoints=websecure"
+      - "traefik.http.routers.mlmodel.tls.certresolver=letsencrypt"
+      - "traefik.http.services.mlmodel.loadbalancer.server.port=5000"
+    restart: unless-stopped
+    networks:
+      - monitoring
+```
+
+
+### 2. Create ML Model Directory Structure
+
+```bash
+mkdir -p ~/monitoring/ml-model/src ~/monitoring/ml-model/model-data
+cd ~/monitoring/ml-model
+```
+
+**`ml-model/Dockerfile`**:
+
+```dockerfile
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY src/ ./src/
+COPY model-data/ ./model-data/
+CMD ["python", "src/app.py"]
+```
+
+**`ml-model/requirements.txt`**:
+
+```
+flask==2.3.3
+scikit-learn==1.3.2
+prometheus-client==0.20.0
+pandas==2.1.4
+joblib==1.3.2
+seaborn==0.13.2
+scipy==1.11.4
+apscheduler==3.10.4
+```
+
+
+### 3. Train \& Save Model (DataCamp diamonds example)
+
+**`ml-model/src/train.py`** (run once):
+
+```python
+import seaborn as sns
+import joblib
+from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+
+# Load diamonds dataset
+diamonds = sns.load_dataset("diamonds")
+X = diamonds[["carat", "cut", "color", "clarity", "depth", "table"]]
+y = diamonds["price"]
+
+# Preprocessing pipeline
+preprocessor = ColumnTransformer(
+    transformers=[
+        ("num", StandardScaler(), ["carat", "depth", "table"]),
+        ("cat", OneHotEncoder(), ["cut", "color", "clarity"])
+    ])
+
+# Full pipeline
+model_pipeline = Pipeline([
+    ("preprocessor", preprocessor),
+    ("regressor", RandomForestRegressor(n_estimators=100, random_state=42))
+])
+
+# Train
+model_pipeline.fit(X, y)
+joblib.dump(model_pipeline, "../model-data/model_pipeline.joblib")
+print("✅ Model trained and saved!")
+```
+
+
+### 4. ML Model API with Drift Detection + Prometheus Metrics
+
+**`ml-model/src/app.py`**:
+
+```python
+from flask import Flask, request, jsonify
+import joblib, pandas as pd, numpy as np
+from prometheus_client import start_http_server, Gauge
+from apscheduler.schedulers.background import BackgroundScheduler
+import seaborn as sns
+from scipy.stats import ks_2samp
+from sklearn.metrics import mean_squared_error
+
+app = Flask(__name__)
+
+# Load model
+model_pipeline = joblib.load("../model-data/model_pipeline.joblib")
+
+# Prometheus metrics
+data_drift_gauge = Gauge('data_drift_score', 'Data drift detection score')
+concept_drift_gauge = Gauge('concept_drift_score', 'Concept drift score')
+prediction_count = Gauge('predictions_total', 'Total predictions')
+
+# Reference data (training data snapshot)
+diamonds = sns.load_dataset("diamonds")
+X_ref = diamonds[["carat", "cut", "color", "clarity", "depth", "table"]]
+y_ref = diamonds["price"]
+
+scheduler = BackgroundScheduler()
+scheduler.start()
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.json
+    df = pd.DataFrame([data])
+    prediction = model_pipeline.predict(df)[^0]
+    prediction_count.inc()
+    return jsonify({'prediction': float(prediction)})
+
+@app.route('/metrics')
+def metrics():
+    return make_wsgi_app()
+
+if __name__ == '__main__':
+    start_http_server(8000)  # Prometheus metrics endpoint
+    app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {'/metrics': make_wsgi_app()})
+    app.run(host='0.0.0.0', port=5000)
+```
+
+
+### 5. Update Prometheus Config
+
+Add to `~/monitoring/prometheus/prometheus.yml`:
+
+```yaml
+  - job_name: 'ml-model'
+    static_configs:
+      - targets: ['ml-model:8000']
+```
+
+
+### 6. Deploy ML Monitoring Stack
+
+```bash
+cd ~/monitoring
+
+# Train model
+docker run --rm -v $(pwd)/ml-model:/app ml-model python src/train.py
+
+# Deploy full stack
+sudo docker compose up -d --build
+```
+
+
+### 7. Grafana Dashboards (DataCamp Tutorial)
+
+**In Grafana** (`http://localhost:3000` via SSH tunnel):
+
+1. **Add Prometheus datasource** (already exists)
+2. **New Dashboard → Add Panel**:
+
+**Panel A - Data Drift**:
+
+```
+Query: data_drift_score
+Threshold: > 0.1 (red line)
+```
+
+**Panel B - Concept Drift**:
+
+```
+Query: concept_drift_score  
+Threshold: > 0.1 (red line)
+```
+
+**Panel C - Predictions**:
+
+```
+Query: predictions_total{job="ml-model"}
+```
+
+
+### 8. Alerts (Discord/Slack/Email)
+
+**Alert Rule** (Dashboard → Alert tab):
+
+```
+WHEN data_drift_score > 0.1
+FOR 2m
+NOTIFY Discord/Slack/Email
+```
+
+
+## Result: Complete ML Monitoring
+
+```
+✅ Your Stack NOW monitors:
+  - Data drift (KS test vs training data)
+  - Concept drift (MSE drop vs training)  
+  - Prediction volume
+  - Latency (add @timer decorator)
+  - Auto-alerts on drift detection
+
+🚀 URLs:
+  - Model API: https://mlmodel.cyber-secure-te.src.surf-hosted.nl/predict
+  - Metrics:  https://mlmodel.cyber-secure-te.src.surf-hosted.nl/metrics
+  - Grafana:  http://localhost:3000 (SSH tunnel)
+```
+
+**Your infrastructure is production-grade ML monitoring ready!** Just add your actual ML model to `train.py` and deploy.
+<span style="display:none">[^1][^2][^3][^4][^5][^6][^7][^8][^9]</span>
+
+<div align="center">⁂</div>
+
+[^1]: https://www.datacamp.com/tutorial/grafana-tutorial-monitoring-machine-learning-models
+
+[^2]: https://docs.mlrun.org/en/stable/model-monitoring/monitoring-models-grafana.html
+
+[^3]: https://grafana.com/blog/monitoring-machine-learning-models-in-production-with-grafana-and-clearml/
+
+[^4]: https://www.youtube.com/watch?v=eQoKK5KNGLY
+
+[^5]: https://grafana.com/tutorials/
+
+[^6]: https://grafana.com/docs/grafana-cloud/machine-learning/dynamic-alerting/forecasting/
+
+[^7]: https://www.youtube.com/watch?v=fX8dIy6zGH8
+
+[^8]: https://grafana.com/docs/grafana-cloud/machine-learning/
+
+[^9]: https://www.lakera.ai/blog/ml-model-monitoring
+
