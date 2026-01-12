@@ -277,9 +277,83 @@ sudo docker compose ps
 sudo systemctl status grafana-server
 curl -k https://prometheus.yourdomain.com
 ```
-
-
 ***
 
-**Ready for production!** Replace `prometheus.yourdomain.com` and `admin@yourdomain.com` with your actual values. 🚀
+## SSH Tunnel Access (Recommended)
+
+### How it works
+
+```
+Your Windows PC              SSH Tunnel                    Ubuntu VM
+----------------          -----------------             ----------------
+Browser: http://localhost:3000  ↔  Port 3000  ↔  ssh -L 3000:localhost:3000  ↔  Grafana: localhost:3000
+```
+
+**Step-by-step:**
+
+1. **On your Windows PC**, open **PowerShell** and run:
+
+```powershell
+ssh -L 3000:localhost:3000 rvanderwil@145.38.189.5
+```
+
+    - This creates an **encrypted tunnel** from your PC's port 3000 to the VM's port 3000
+    - Keep this PowerShell window **open** (the tunnel stays active)
+2. **On your Windows PC**, open your **web browser** and go to:
+
+```
+http://localhost:3000
+```
+
+    - **NOT** `http://145.38.189.5:3000`
+    - The `localhost:3000` on your PC gets **forwarded through the tunnel** to Grafana on the VM
+3. **Login**: `admin` / `admin` (change password on first login)
+
+### Visual flow
+
+```
+[Browser on PC] ----> localhost:3000 ----> [SSH Tunnel] ----> VM localhost:3000 ----> [Grafana]
+```
+
+
+### Why `localhost:3000` instead of VM IP?
+
+```
+❌ WRONG: http://145.38.189.5:3000
+  ↓
+  Goes directly to VM over the public internet (port 3000 must be open)
+
+✅ CORRECT: http://localhost:3000  
+  ↓
+  Goes through your secure SSH tunnel (port 3000 stays closed to the world)
+```
+
+
+### Keep tunnel alive
+
+The SSH session **must stay open** in PowerShell. To run tunnel in background:
+
+```powershell
+ssh -L 3000:localhost:3000 -N -f rvanderwil@145.38.189.5
+```
+
+- `-N`: No remote command
+- `-f`: Background (frees up terminal)
+
+**Close tunnel:**
+
+```powershell
+taskkill /IM ssh.exe /F
+```
+
+
+### Troubleshooting
+
+| Symptom | Fix |
+| :-- | :-- |
+| `http://localhost:3000` "connection refused" | SSH tunnel not running (`ssh -L ...`) |
+| SSH tunnel closes | VM rebooted, network dropped |
+| "Port already in use" | Kill old tunnel: `taskkill /IM ssh.exe /F` |
+
+**Result**: Secure access to Grafana without opening port 3000 publicly. Perfect for your "local Grafana" setup! 🔒
 
