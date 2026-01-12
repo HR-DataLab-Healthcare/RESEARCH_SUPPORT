@@ -7,7 +7,8 @@ PostgreSQL persistence, Docling support, and automation scripts.
 
 ## Prerequisites
 
-SURF Ubuntu 22.04+ VM: public IP, ports 80/443/8080 open, DNS A-record (e.g., langflow.src.surf-hosted.nl). Docker/Compose/Python3 installed, non-root SSH, no Nginx conflicts.[^4][^1]
+SURF Ubuntu 22.04+ VM: public IP, ports 80/443/8080 open, DNS A-record (e.g., langflow.src.surf-hosted.nl). 
+Docker/Compose/Python3 installed, non-root SSH, no Nginx conflicts.
 
 ## Setup Scripts
 
