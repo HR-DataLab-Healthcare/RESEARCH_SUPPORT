@@ -209,25 +209,6 @@ volumes:
   postgresdata:
 ```
 
-
-## Usage
-
-ssh user@ip
-
-`get-files.sh`
-
-`./create-langflow.sh` → https://\${MYFQDN}.src.surf-hosted.nl. Signup on first access.
-
-## Customization \& Troubleshooting
-
-| Issue | Solution |
-| :-- | :-- |
-| Cert fail | DNS/ports; `docker logs traefik` |
-| DB connect | Healthcheck passes; volumes persist |
-| Domain | Use cat .env to check if variable MYFQDN is displaying the DOMAIN name correctly|
-
-***
-
 # Langflow Deployment Sequence on SURF VM
 
 
@@ -256,10 +237,13 @@ https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/SRA
 #Exit: 
 Ctrl+X shift-Y
 
-# 3. Run script in terminal
+# Run script in terminal to retreive the required materials
 source  +x get-files.sh
+# outcome: Downloads Langflow files (docker-compose.yaml, etc.) into ./LANGFLOW dir + ls -al display's its content
 
-# outcome: Downloads Langflow files (docker-compose.yaml, etc.) into ./LANGFLOW dir, and 
+# Run script in terminal to create Langflow 
+source  +x create-langflow.sh
+# outcome:  installs ..............
 ​
 
 ```
