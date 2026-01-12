@@ -234,11 +234,11 @@ https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/SRA
 # In nano: right-click paste or Ctrl+Shift+V (terminal paste).
 
 # Verify content matches (scroll with arrows):
-#Exit: 
-Ctrl+X shift-Y
+#Exit: Ctrl+X shift-Y
 
 # Run script in terminal to retreive the required materials
-source  +x get-files.sh
+source  get-files.sh
+bash  get-files.sh
 # outcome: Downloads Langflow files (docker-compose.yaml, etc.) into ./LANGFLOW dir + ls -al display's its content
 
 # Run script in terminal to create Langflow 
