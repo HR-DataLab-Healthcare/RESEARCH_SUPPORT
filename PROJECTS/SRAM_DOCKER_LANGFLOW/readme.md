@@ -218,8 +218,6 @@ volumes:
 | DB connect | Healthcheck passes; volumes persist |
 | Domain | Use cat .env to check if variable MYFQDN is displaying the DOMAIN name correctly|
 
-Update: `docker compose up -d`. Backup volumes.[^4][^2]
-<span style="display:none">[^5][^6]</span>
 
 <div align="center">⁂</div>
 
