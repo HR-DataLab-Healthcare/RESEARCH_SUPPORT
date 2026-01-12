@@ -46,9 +46,17 @@ choco install winfsp -y
 
 **Note:** After installing WinFsp, your mount command will work as expected. Always use a drive letter (e.g., `X:`) as the mount point on Windows, not a folder path.
 
-### B. The Mounting Script
+### B. Mounting Script Example
 
-Create `C:\Scripts\mount_rd.bat`:
+Here <BACKUPS (Projectfolder)/DATASETS/>  is the targer direcory on Research Drive.<br>
+X is the mounting point on the Windows 11 PC. <br>
+
+`CMD CLI`:
+```batch
+rclone mount "RD:BACKUPS (Projectfolder)/DATASETS/" X: --links
+```
+Or laternatively 
+`C:\Scripts\mount_rd.bat`:
 
 ```batch
 @echo off
