@@ -1,5 +1,3 @@
-<img src="" style="height:64px;margin-right:32px"/>
-
 # Datalab Guide: Mounting Research Drive (RD)
 
 This guide provides technical instructions for mounting Research Drive (RD) directories on Windows 11 and Ubuntu VMs. This setup is optimized for handling datasets, SQL scripts, and Docker environments.
