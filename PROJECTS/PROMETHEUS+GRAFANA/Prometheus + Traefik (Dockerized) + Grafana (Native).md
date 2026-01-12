@@ -1,3 +1,5 @@
+<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
+
 # Prometheus + Traefik (Dockerized) + Grafana (Native) - Downsized Monitoring Stack
 
 A lightweight, production-ready monitoring stack for Ubuntu 22.04 VM with remote HTTPS Prometheus access via Traefik and local Grafana.
