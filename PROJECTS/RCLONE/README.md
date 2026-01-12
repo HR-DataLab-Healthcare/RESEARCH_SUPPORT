@@ -130,7 +130,19 @@ sudo systemctl start rclone-mount.service
 | Cache Mode | Always use `--vfs-cache-mode full` for SQL/Notebook work to support random access. |
 | Case Sensitivity | Windows is case-insensitive; Ubuntu is case-sensitive. Verify folder paths exactly. |
 | Unmounting | On Linux, use `fusermount -u [path]`. Do not kill the process manually. |
-| Docker | If using the mount for Docker volumes, ensure the VFS cache is enabled to prevent file-locking errors. |
+| Docker | If using the mount for Docker volumes, ensure the VFS cache is enabled to prevent file-locking errors. Docker Bind Mounts. <br> <br> Use bind mounts in `docker-compose.yml` to point to the host path: <br> `- /home/[user]/MyCloudDrive/data:/var/lib/mysql`. <br> Ensure VFS cache is enabled to prevent file-locking error <br> |
+
+```bash
+services:
+  db:
+    image: mysql:8.0
+    volumes:
+      # Map the host's mount point to the container's data directory
+      - /home/[your-username]/MyCloudDrive/mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: your_password
+```
+
 
 
 
