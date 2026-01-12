@@ -112,7 +112,7 @@ WantedBy=default.target
 ```
 
 
-### B. Activation Commands
+### C. Activation Commands
 
 ```bash
 sudo systemctl daemon-reload
