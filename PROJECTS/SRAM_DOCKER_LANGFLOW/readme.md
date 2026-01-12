@@ -212,6 +212,10 @@ volumes:
 
 ## Usage
 
+ssh user@ip
+
+`get-files.sh`
+
 `./create-langflow.sh` → https://\${MYFQDN}.src.surf-hosted.nl. Signup on first access.
 
 ## Customization \& Troubleshooting
@@ -222,6 +226,63 @@ volumes:
 | DB connect | Healthcheck passes; volumes persist |
 | Domain | Use cat .env to check if variable MYFQDN is displaying the DOMAIN name correctly|
 
+***
 
-<div align="center">⁂</div>
+# Langflow Deployment Sequence on SURF VM
+
+
+SSH into SURF Ubuntu VM as non-root user (ssh user@IP-address) and follow this exact terminal sequence to deploy Dockerized Langflow with HTTPS access via DOMAIN (FQDN).
+​
+
+OPEN TERMINAL on Local PC
+<br> Follow the Terminal command Sequence shown below: <br> 
+
+```yaml
+
+# 1. login to VM
+ssh user@IP-address  
+
+# 2. Open nano  text-editor to create a .sh script
+nano get-files.sh
+
+# Open GitHub URL in browser: 
+https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/blob/main/PROJECTS/SRAM_DOCKER_LANGFLOW/get-files.sh
+# Select all raw content (right-click > Select All or Ctrl+A).
+# Copy to clipboard (Ctrl+C).
+
+# In nano: right-click paste or Ctrl+Shift+V (terminal paste).
+
+# Verify content matches (scroll with arrows):
+#Exit: 
+Ctrl+X shift-Y
+
+# 3. Run script in terminal
+source  +x get-files.sh
+
+# outcome: Downloads Langflow files (docker-compose.yaml, etc.) into ./LANGFLOW dir, and 
+​
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
