@@ -47,11 +47,11 @@ choco install winfsp -y
 Here <BACKUPS (Projectfolder)/DATASETS/>  is the targer direcory on Research Drive.<br>
 X is the mounting point on the Windows 11 PC. <br>
 
-`CMD CLI`:
+`CMD command line`:
 ```batch
 rclone mount "RD:BACKUPS (Projectfolder)/DATASETS/" X: --links
 ```
-Or laternatively 
+Or alternatively
 `C:\Scripts\mount_rd.bat`:
 
 ```batch
@@ -79,20 +79,18 @@ Add a shortcut of the `.vbs` file to the Windows Startup folder (`shell:startup`
 ***
 
 ## 3. Ubuntu VM Configuration (Systemd Service)
-
 On Linux, utilize systemd to manage the mount as a system service, ensuring it restarts on failure and clears stale endpoints.
 
 ### A. Install Fuse
-
-
 ```bash
 sudo apt install fuse3
 ```
 
-
-### A. Create the Service File
-
+### B. Create the Service File
 Path: `/etc/systemd/system/rclone-mount.service`
+with the nano editor. 
+
+Here `~MyCloudDrive` is the Ubuntu VM's directory that points to Research Drive, with `"RD:BACKUPS (Projectfolder)/DATASETS"` as the target. 
 
 ```ini
 [Unit]
