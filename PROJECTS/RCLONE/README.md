@@ -6,6 +6,9 @@ This guide provides technical instructions for mounting Research Drive (RD) dire
 
 ## 1. Prerequisites
 
+
+- **[Rclone Configuration with Research Drive (RD)](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/117179081/RD+How+to+use+Rclone+with+Research+Drive#RD%3AHowtouseRclonewithResearchDrive-2.Rcloneconfiguration)**
+- **[How to Create (new) WebDAV Credentials with Research Drive GUI](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/117179045/RD+How+to+get+your+WEBDAV+credentials)**
 - **Rclone Installed:** Ensure Rclone is installed on the local or VM environment.
 - **Configured Remote:** A configured Rclone remote named `RD` pointing to the SURF WebDAV endpoint.
 - **FUSE (Linux Only):** Install FUSE on Ubuntu with:
