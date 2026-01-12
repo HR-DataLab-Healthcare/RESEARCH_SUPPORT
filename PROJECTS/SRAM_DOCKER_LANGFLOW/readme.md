@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # Langflow on SURF Research Cloud Ubuntu VM
 
 This GitHub repository enables DataLabs Tech Leads to deploy Langflow on SURF Research Cloud Ubuntu VMs with secure HTTPS via FQDN. Includes full Docker Compose stack with Traefik reverse proxy/Let's Encrypt, PostgreSQL persistence, Docling support, and automation scripts.[^1][^2][^3]
@@ -210,30 +208,18 @@ volumes:
 
 ## Usage
 
-`./create-langflow.sh` → https://\${MYFQDN}.src.surf-hosted.nl. Signup on first access.[^1][^2]
+`./create-langflow.sh` → https://\${MYFQDN}.src.surf-hosted.nl. Signup on first access.
 
 ## Customization \& Troubleshooting
 
 | Issue | Solution |
 | :-- | :-- |
-| Cert fail | DNS/ports; `docker logs traefik`[^2] |
-| DB connect | Healthcheck passes; volumes persist[^2] |
-| Domain | Edit .env MYFQDN[^1] |
+| Cert fail | DNS/ports; `docker logs traefik` |
+| DB connect | Healthcheck passes; volumes persist |
+| Domain | Use cat .env to check if variable MYFQDN is displaying the DOMAIN name correctly|
 
 Update: `docker compose up -d`. Backup volumes.[^4][^2]
 <span style="display:none">[^5][^6]</span>
 
 <div align="center">⁂</div>
-
-[^1]: create-langflow.sh
-
-[^2]: docker-compose.yaml
-
-[^3]: Dockerfile
-
-[^4]: readme.md
-
-[^5]: get-files.sh
-
-[^6]: Creating-a-Docker-Compose-catalog-item-SURF-User-Knowledge-Base-SURF-User-Knowledge-Base.url
 
