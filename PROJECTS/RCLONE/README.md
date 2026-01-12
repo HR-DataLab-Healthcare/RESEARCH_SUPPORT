@@ -22,11 +22,7 @@ It is possible to access your Research Drive account as a network drive on your 
     user = <user name>
     pass = <encrypted password>
     ```
-- **FUSE (Linux Only):** Install FUSE on Ubuntu with:
-
-    ```bash
-    sudo apt install fuse3
-    ```
+- **FUSE (Linux Only):** Required to use  'rclone mount' on Ubuntu
 
 - **WinFsp (Windows Only):** Required to use `rclone mount` on Windows.
 
@@ -68,9 +64,7 @@ rclone mount "RD:BACKUPS (Projectfolder)/DATASETS/" X: ^
 --no-console
 ```
 
-
 ### C. Silent Execution
-
 Create `C:\Scripts\mount_rd.vbs` to hide the command prompt:
 
 ```vbs
@@ -79,9 +73,7 @@ WinScriptHost.Run Chr(34) & "C:\Scripts\mount_rd.bat" & Chr(34), 0
 Set WinScriptHost = Nothing
 ```
 
-
 ### D. Persistence
-
 Add a shortcut of the `.vbs` file to the Windows Startup folder (`shell:startup`).
 
 ***
@@ -89,6 +81,14 @@ Add a shortcut of the `.vbs` file to the Windows Startup folder (`shell:startup`
 ## 3. Ubuntu VM Configuration (Systemd Service)
 
 On Linux, utilize systemd to manage the mount as a system service, ensuring it restarts on failure and clears stale endpoints.
+
+### A. Install Fuse
+
+
+```bash
+sudo apt install fuse3
+```
+
 
 ### A. Create the Service File
 
