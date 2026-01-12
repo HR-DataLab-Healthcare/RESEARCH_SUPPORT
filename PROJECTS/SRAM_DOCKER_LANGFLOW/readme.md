@@ -1,6 +1,8 @@
 # Langflow on SURF Research Cloud Ubuntu VM
 
-This GitHub repository enables DataLabs Tech Leads to deploy Langflow on SURF Research Cloud Ubuntu VMs with secure HTTPS via FQDN. Includes full Docker Compose stack with Traefik reverse proxy/Let's Encrypt, PostgreSQL persistence, Docling support, and automation scripts.[^1][^2][^3]
+This GitHub repository enables DataLabs Tech Leads to deploy Langflow 
+on SURF Research Cloud Ubuntu VMs with secure HTTPS via FQDN. Includes full Docker Compose 
+stack with Traefik reverse proxy/Let's Encrypt, PostgreSQL persistence, Docling support, and automation scripts.
 
 ## Prerequisites
 
