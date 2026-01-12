@@ -6,16 +6,27 @@ This guide provides technical instructions for mounting Research Drive (RD) dire
 
 ## 1. Prerequisites
 
+- **Rclone Installed:** Ensure Rclone is installed on the local  PC or Ubuntu VM environment.
 
-- **[Rclone Configuration with Research Drive (RD)](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/117179081/RD+How+to+use+Rclone+with+Research+Drive#RD%3AHowtouseRclonewithResearchDrive-2.Rcloneconfiguration)**
-- **[How to Create (new) WebDAV Credentials with Research Drive GUI](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/117179045/RD+How+to+get+your+WEBDAV+credentials)**
-- **Rclone Installed:** Ensure Rclone is installed on the local or VM environment.
-- **Configured Remote:** A configured Rclone remote named `RD` pointing to the SURF WebDAV endpoint.
+- **[Create (new) WebDAV Credentials with Research Drive GUI](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/117179045/RD+How+to+get+your+WEBDAV+credentials)** <br>
+It is possible to access your Research Drive account as a network drive on your PC, laptop, or mobile device. Clients other than ownCloud need additional credentials in order to connect to Research Drive. These usernames and passwords are called WebDAV credentials..
+
+    ```bash
+    [RD]
+    type = webdav
+    url = https://my-researchdrive.surf.nl/remote.php/webdav/
+    vendor = nextcloud
+    user = <user name>
+    pass = <encrypted password>
+    ```
+
+- **[Rclone Configuration with Research Drive (RD)](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/117179081/RD+How+to+use+Rclone+with+Research+Drive#RD%3AHowtouseRclonewithResearchDrive-2.Rcloneconfiguration)** <br> Configure a Rclone.conf file pointing to the SURF WebDAV endpoint.
+
 - **FUSE (Linux Only):** Install FUSE on Ubuntu with:
 
-```bash
-sudo apt install fuse3
-```
+    ```bash
+    sudo apt install fuse3
+    ```
 
 - **WinFsp (Windows Only):** Required to use `rclone mount` on Windows.
 
