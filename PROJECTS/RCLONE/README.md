@@ -11,6 +11,9 @@ This guide provides technical instructions for mounting Research Drive (RD) dire
 - **[Create (new) WebDAV Credentials with Research Drive GUI](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/117179045/RD+How+to+get+your+WEBDAV+credentials)** <br>
 It is possible to access your Research Drive account as a network drive on your PC, laptop, or mobile device. Clients other than ownCloud need additional credentials in order to connect to Research Drive. These usernames and passwords are called WebDAV credentials..
 
+    <img src="image.png" style="height:200px;margin-right:100px"/>
+
+- **[Rclone Configuration with Research Drive (RD)](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/117179081/RD+How+to+use+Rclone+with+Research+Drive#RD%3AHowtouseRclonewithResearchDrive-2.Rcloneconfiguration)** <br> Configure a Rclone.conf file pointing to the SURF WebDAV endpoint.
     ```bash
     [RD]
     type = webdav
@@ -19,9 +22,6 @@ It is possible to access your Research Drive account as a network drive on your 
     user = <user name>
     pass = <encrypted password>
     ```
-
-- **[Rclone Configuration with Research Drive (RD)](https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/117179081/RD+How+to+use+Rclone+with+Research+Drive#RD%3AHowtouseRclonewithResearchDrive-2.Rcloneconfiguration)** <br> Configure a Rclone.conf file pointing to the SURF WebDAV endpoint.
-
 - **FUSE (Linux Only):** Install FUSE on Ubuntu with:
 
     ```bash
@@ -80,7 +80,7 @@ Add a shortcut of the `.vbs` file to the Windows Startup folder (`shell:startup`
 
 ## 3. Ubuntu VM Configuration (Systemd Service)
 
-On Linux, we utilize systemd to manage the mount as a system service, ensuring it restarts on failure and clears stale endpoints.
+On Linux, utilize systemd to manage the mount as a system service, ensuring it restarts on failure and clears stale endpoints.
 
 ### A. Create the Service File
 
@@ -129,15 +129,5 @@ sudo systemctl start rclone-mount.service
 | Docker | If using the mount for Docker volumes, ensure the VFS cache is enabled to prevent file-locking errors. |
 
 
-***
 
-This guide is designed for easy setup and robust operation of Research Drive mounts on both Windows and Ubuntu systems.[^1][^2][^3]
-
-<div align="center">⁂</div>
-
-[^1]: https://www.rapidseedbox.com/blog/rclone-mount
-
-[^2]: https://ucr-research-computing.github.io/Knowledge_Base/how_to_mount_google_drive.html
-
-[^3]: https://ostechnix.com/mount-google-drive-using-rclone-in-linux/
 
