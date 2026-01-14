@@ -4,6 +4,9 @@ Epoch AI's database tracks over 3,200 notable machine learning models from 1950 
 
 This resource enables Tech Leads to benchmark infrastructure needs, forecast compute scaling, and align AI development strategies with industry frontiers.
 
+
+<img src="compute-trend-post-2010.png" style="height:400px;margin-right:200px"/>
+
 ## Usefulness for Tech Leads
 
 - **Infrastructure Planning**: Training compute has grown 4.4x/year since 2010; power needs double annually for frontier models, guiding cluster sizing and energy budgeting.[^1]
