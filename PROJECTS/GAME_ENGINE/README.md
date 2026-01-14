@@ -34,11 +34,36 @@ unreal-docker/
 ### 2. GitHub Token (REQUIRED for Epic Images)
 
 ```
-1. Go to https://github.com/settings/tokens
-2. Generate new token → Scopes: read:packages
-3. Run: docker login ghcr.io -u YOUR_USERNAME --password YOUR_TOKEN
+1. Login to GitHub → https://github.com/settings/tokens
+2. Click "Generate new token" → "Generate new token (classic)"
+3. Name: "Unreal Docker" (or anything)
+4. Expiration: 90 days (or "No expiration")
+5. Scopes → Check ONLY: ☑️ read:packages
+6. Click "Generate token"
+7. **CRITICAL**: COPY THE TOKEN (you won't see it again!)
 ```
 
+- REALWORLD EXAMPLE
+  ```
+  # Your GitHub: rvanderwil
+  # Your token:   ghp_XXX
+
+ bash:
+      echo "ghp_XXX" | \
+      docker login ghcr.io -u rvanderwil --password-stdin
+
+      WARNING! Your credentials are stored unencrypted in 
+      '/home/rvanderwil/.docker/config.json'.
+      Configure a credential helper to remove this warning. See
+      https://docs.docker.com/go/credential-store/
+
+bash:
+    docker pull ghcr.io/epicgames/unreal-engine:dev-5.4
+
+  [downloads 15GB successfully]
+  Status: Downloaded newer image for ghcr.io/epicgames/unreal-engine:dev-latest
+
+```
 
 ## 🚀 Quick Start (5 minutes)
 
@@ -86,18 +111,16 @@ https://unrealdock.cyber-secure-te.src.surf-hosted.nl  # UE5 HTTP interface
 ### `Dockerfile`
 
 ```dockerfile
-FROM ghcr.io/epicgames/unreal-engine:dev-latest
+# Save as Dockerfile - NO COPY command
+FROM ghcr.io/epicgames/unreal-engine:dev-5.4
 
 USER root
 RUN useradd -m ue4user -s /bin/bash && \
-    apt-get update && apt-get install -y curl net-tools wget
+    apt-get update && apt-get install -y curl net-tools
     
 WORKDIR /project
 
-# Copy your Unreal project
-COPY EPIC/ /project/
-
-# Expose ports
+# NO COPY - use volume mount instead (docker-compose.yml handles this)
 EXPOSE 8080 7777/udp 7778/udp 9000
 
 USER ue4user
@@ -123,7 +146,9 @@ services:
       - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
       - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
       - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.le.acme.email=YOUR-REAL-EMAIL@DOMAIN.COM"
+      # FIXED: TLS Challenge + Real Email Required
+      - "--certificatesresolvers.le.acme.tlschallenge=true"
+      - "--certificatesresolvers.le.acme.email=rvanderwil@your-real-domain.com" # ← real email
       - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
     ports:
       - "80:80"
@@ -135,18 +160,20 @@ services:
     networks:
       - web
 
-  unreal-editor:
+  unreal-editor:  # ← FIXED SERVICE NAME
     build: .
     container_name: unreal-editor
     restart: unless-stopped
     volumes:
-      - ./EPIC:/project
+      - ./EPIC:/project  # Host project → Container
     ports:
-      - "7777:7777/udp"
-      - "7778:7778/udp"
+      - "7777:7777/udp"  # Game server
+      - "7778:7778/udp"  # Game server
+      - "8080:8080"      # UE Editor HTTP
+      - "9000:9000"      # UE Editor WebSocket
     environment:
-      - DISPLAY=host.docker.internal:0
-      - NVIDIA_VISIBLE_DEVICES=all
+      - DISPLAY=host.docker.internal:0  # GUI forwarding
+      - NVIDIA_VISIBLE_DEVICES=all      # GPU (NVIDIA)
       - NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics
     labels:
       - "traefik.enable=true"
