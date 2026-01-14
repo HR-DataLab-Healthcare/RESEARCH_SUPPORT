@@ -48,21 +48,20 @@ unreal-docker/
   # Your GitHub: rvanderwil
   # Your token:   ghp_XXX
 
- bash:
-      echo "ghp_XXX" | \
-      docker login ghcr.io -u rvanderwil --password-stdin
+  bash:
+  echo "ghp_XXX" | \
+  docker login ghcr.io -u rvanderwil --password-stdin
 
-      WARNING! Your credentials are stored unencrypted in 
-      '/home/rvanderwil/.docker/config.json'.
-      Configure a credential helper to remove this warning. See
-      https://docs.docker.com/go/credential-store/
+  WARNING! Your credentials are stored unencrypted in 
+  '/home/rvanderwil/.docker/config.json'.
+  Configure a credential helper to remove this warning. See
+  https://docs.docker.com/go/credential-store/
 
-bash:
-    docker pull ghcr.io/epicgames/unreal-engine:dev-5.4
+  bash:
+  docker pull ghcr.io/epicgames/unreal-engine:dev-5.4
 
   [downloads 15GB successfully]
   Status: Downloaded newer image for ghcr.io/epicgames/unreal-engine:dev-latest
-
 ```
 
 ## 🚀 Quick Start (5 minutes)
