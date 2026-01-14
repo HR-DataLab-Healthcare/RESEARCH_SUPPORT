@@ -71,23 +71,8 @@ CC-BY: Credit Epoch AI. BibTeX available on site.
 
 * https://epoch.ai/data/ai-models
 
-* https://epoch.ai
-
-* https://github.com/epoch-research/ai-research-impact
-
 * https://epoch.ai/data
 
 * https://github.com/epoch-research
 
-* https://huggingface.co/datasets/meowterspace42/github-ai-project-docs/viewer
-
-* https://github.com/epoch-research/biology-ai-compute/blob/main/README.md
-
-* https://github.com/epoch-research/data-stock/blob/master/README.md
-
-* https://www.youtube.com/watch?v=5UhBnXWbCMY
-
-* https://gist.github.com/ruvnet/0020d02e9ce85a773412f8bf518737a0
-
-* https://www.facebook.com/groups/1083405790303889/posts/1112122534098881/
-
+* https://github.com/epoch-research/ai-research-impact
