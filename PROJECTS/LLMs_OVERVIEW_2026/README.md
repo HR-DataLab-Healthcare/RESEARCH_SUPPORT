@@ -68,7 +68,6 @@ CC-BY: Credit Epoch AI. BibTeX available on site.
  ---
 
 #### REFERENCES / USED ONLINE RECOURCES
-Last updated: January 13, 2026. Report issues: data@epochai.org.
 
 * https://epoch.ai/data/ai-models
 
