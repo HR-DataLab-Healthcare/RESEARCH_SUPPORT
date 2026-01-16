@@ -23,9 +23,9 @@ cd LANGFLOW
 git init
 git remote add -f origin https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT.git
 git config core.sparseCheckout true
-echo "PROJECTS/SRAM/DOCKER/LANGFLOW/" > .git/info/sparse-checkout
+echo "PROJECTS_SRAM/DOCKER_LANGFLOW/" > .git/info/sparse-checkout
 git pull origin main
-mv PROJECTS/SRAM/DOCKER/LANGFLOW/* .
+mv PROJECTS/SRAM_DOCKER_LANGFLOW/* .
 rm -rf PROJECTS
 rm -rf .git
 echo "------------------------------------------"
