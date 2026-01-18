@@ -10,6 +10,10 @@ We combineren praktische AI-ontwikkeling met inzichten over **Docker-gebaseerde 
 
 # Willma / SURF AI-Hub Agent
 
+
+[Click here to chat with Willma Live](https://hr-datalab-healthcare.github.io/RESEARCH_SUPPORT/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026/index.html)
+
+
 [![Chat with Willma](https://img.shields.io/badge/Chat_with-Willma-blue?style=for-the-badge&logo=openai)](https://samenaandeslag.cyber-secure-te.src.surf-hosted.nl/playground/162c4cf0-3648-47e2-b83c-d739047e27c2)
 
 ## 🤖 Live Demo
