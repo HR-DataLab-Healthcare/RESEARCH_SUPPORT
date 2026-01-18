@@ -42,9 +42,6 @@ Expected: Agent fetches, responds "No, Eastern Front mobile; Middle East fluid" 
 
 For full misconceptions (gas deaths, donkeys, Italy Central, instant peace), use systematic questions from paste.txt to expose gaps.
 
-## Setup for Local Runs
-
-Clone repo, run Langflow: `pip install langflow; langflow run`. Import flow JSON from image; set API keys. Customize system prompt for WWI: "Validate TEXT_ON_WWI.html myths using Wikipedia fetches only".[^2][^1]
 
 
 
