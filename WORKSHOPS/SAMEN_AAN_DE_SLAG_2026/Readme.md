@@ -142,6 +142,8 @@ A parametric test procedure varies one Langflow parameter at a time (holding oth
 - https://samenaandeslag.cyber-secure-te.src.surf-hosted.nl/playground/daaeb21e-04e1-423a-9e47-fe091e0d693e
  
 - https://hr-datalab-healthcare.github.io/RESEARCH_SUPPORT/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026/index.html
+
+- https://samenaandeslag.cyber-secure-te.src.surf-hosted.nl/
  
 - https://hr-datalab-healthcare.github.io/RESEARCH_SUPPORT/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026/TEXT_ON_WWI.html
  
