@@ -5,7 +5,7 @@ This workshop guides naive researchers through using a Langflow-based LLM agent 
 
 
 
-<img src="USER_INPUT_FLOW.png" style="height:300px;margin-right:32px"/>
+<img src="USER_INPUT_FLOW.png" style="height:600px;margin-right:800px"/>
 
 
 ## Flow Explanation
@@ -26,16 +26,22 @@ The agent operates in two modes: tool mode (user provides URL in chat, agent ext
 
 This table educates beginners: paste URL into chat, ask validation questions, get evidence-based replies.
 
-## Workshop Steps
+## Workshop 
 
-- **Access Playground**: Open [index.html](https://hr-datalab-healthcare.github.io/RESEARCH_SUPPORT/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026/index.html); no install needed.[^2]
-- **Load WWI Text**: Copy TEXT_ON_WWI.html content or URL into chat; note embedded myths (e.g., "trenches everywhere", "Spanish Flu from Spain").[^1]
+
+<img src="NO_INPUT_FLOW.png" style="height:600px;margin-right:800px"/>
+
+
+
+
+- **Access Playground**: Open [index.html](https://hr-datalab-healthcare.github.io/RESEARCH_SUPPORT/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026/index.html); no install needed.
+- **Load WWI Text**: Copy TEXT_ON_WWI.html content or URL into chat; note embedded myths (e.g., "trenches everywhere", "Spanish Flu from Spain").
 - **Validate Systematically**:
-    - Test trench scope: "Did all fronts use trenches only? Fetch https://en.wikipedia.org/wiki/World_War_I".[^1]
-    - Check flu origin: "Where did Spanish Flu start per page?" Expect correction to Kansas/France.[^1]
-    - Probe generals: "Did generals avoid front lines?" Agent reveals >200 casualties.[^1]
-    - Query US role: "Did US instantly win war?" Highlights prior Allied gains.[^1]
-- **Interpret Output**: Agent cites fetched text; if "not in content", myth unproven. Repeat with counter-sources.[^1]
+    - Test trench scope: "Did all fronts use trenches only? Fetch https://en.wikipedia.org/wiki/World_War_I".
+    - Check flu origin: "Where did Spanish Flu start per page?" Expect correction to Kansas/France.
+    - Probe generals: "Did generals avoid front lines?" Agent reveals >200 casualties.
+    - Query US role: "Did US instantly win war?" Highlights prior Allied gains.
+- **Interpret Output**: Agent cites fetched text; if "not in content", myth unproven. Repeat with counter-sources.
 
 
 ## Example Truth Mission
