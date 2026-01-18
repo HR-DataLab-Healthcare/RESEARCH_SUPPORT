@@ -5,6 +5,14 @@
 ## 🎯 Over deze workshop  
 In deze hands-on workshop leer je hoe je een **chatbot** bouwt met **Flowise AI** en deze veilig en schaalbaar deployt via **Hugging Face Spaces** en **inference endpoints**.    
 We combineren praktische AI-ontwikkeling met inzichten over **Docker-gebaseerde architecturen**, **API-beveiliging** en de **Europese AI-act** in de context van onderwijs en onderzoek.  
+
+---
+
+# Willma / SURF AI-Hub Agent
+
+[![Chat with Willma](https://img.shields.io/badge/Chat_with-Willma-blue?style=for-the-badge&logo=openai)](https://samenaandeslag.cyber-secure-te.src.surf-hosted.nl/playground/162c4cf0-3648-47e2-b83c-d739047e27c2)
+
+Click the badge above to launch the AI Agent playground.
   
 ---  
   
