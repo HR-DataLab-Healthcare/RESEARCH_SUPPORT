@@ -20,29 +20,19 @@ Static URL Loader requires pre-pasted URL; no path exists for chat-provided link
 
 ## Testing Procedure
 
-- **Deploy Flows**: Run Langflow playgrounds for each (local or hosted).[^1]
+- **Deploy Flows**: Run Langflow playgrounds for each (local or hosted).
 - **Test NO_INPUT**:
 
 1. Chat: Paste TEXT_ON_WWI.html URL + "Summarize myths."
-2. Expected: No fetch/response or generic error; static URL unchanged.[^2]
+2. Expected: No fetch/response or generic error; static URL unchanged.
 - **Test USER_INPUT**:
 
 1. Same chat input.
-2. Expected: Agent extracts URL, fetches HTML (e.g., detects trench/gas myths), responds grounded (e.g., "Per text: trenches everywhere—inaccurate per history").[^4][^3]
-- **Verify**: Check logs for tool calls; USER_INPUT shows URL fetch, NO_INPUT does not. Repeat with Wikipedia WWI for cross-validation.[^1]
+2. Expected: Agent extracts URL, fetches HTML (e.g., detects trench/gas myths), responds grounded (e.g., "Per text: trenches everywhere—inaccurate per history").
+- **Verify**: Check logs for tool calls; USER_INPUT shows URL fetch, NO_INPUT does not. Repeat with Wikipedia WWI for cross-validation.
 
 | Test Case | NO_INPUT Result | USER_INPUT Result |
 | :-- | :-- | :-- |
-| "Validate TEXT_ON_WWI.html" | Ignores URL; no fetch | Fetches, lists myths (e.g., Italy Central Powers) [^4] |
-| "https://en.wikipedia.org/wiki/World_War_I myths?" | Static fail | Dynamic fetch + debunk [^1] |
-
-<div align="center">⁂</div>
-
-[^1]: paste.txt
-
-[^2]: NO_INPUT_FLOW.jpg
-
-[^3]: USER_INPUT_FLOW.jpg
-
-[^4]: image.jpg
+| "Validate TEXT_ON_WWI.html" | Ignores URL; no fetch | Fetches, lists myths (e.g., Italy Central Powers)  |
+| "https://en.wikipedia.org/wiki/World_War_I myths?" | Static fail | Dynamic fetch + debunk  |
 

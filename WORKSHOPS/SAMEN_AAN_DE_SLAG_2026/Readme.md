@@ -1,4 +1,9 @@
-# LLM Truth-Finding Workshop for WWI Text Validation
+
+
+<img src="QR.png" style="height:600px;margin-right:800px"/>
+
+
+# LLM Truth-Finding Workshop for user supplied URL input
 
 This workshop guides naive researchers through using a Langflow-based LLM agent playground to perform fact-checking on the WWI text at [TEXT_ON_WWI.html](https://hr-datalab-healthcare.github.io/RESEARCH_SUPPORT/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026/TEXT_ON_WWI.html). The playground, accessible via [SAMEN_AAN_DE_SLAG_2026](https://hr-datalab-healthcare.github.io/RESEARCH_SUPPORT/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026/index.html), employs a retrieval-augmented agent grounded in fetched web content for truthful validation.
 
@@ -28,7 +33,11 @@ This table educates beginners: paste URL into chat, ask validation questions, ge
 
 ---
 
-## Workshop 
+# Workshop 
+
+
+---
+---
 
 ### Explain why NO_INPUT  flow cannot answers in response to a provided url <br> whereas the USER_INPUT can?
 
@@ -41,82 +50,85 @@ This table educates beginners: paste URL into chat, ask validation questions, ge
 
 ### USER INPUT
 
-```python
-[https://hr-datalab-healthcare.github.io/RESEARCH_SUPPORT/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026/TEXT_ON_WWI.html](https://hr-datalab-healthcare.github.io/RESEARCH_SUPPORT/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026/TEXT_ON_WWI.html)
-<br> <br> whereras <br>
-USER_INPUT flow shown previously can
-How can this be tested?
+---
+---
 
-**NO_INPUT flow lacks dynamic URL input, preventing it from fetching and responding to user-provided URLs like TEXT_ON_WWI.html, while USER_INPUT flow supports chat-based URL extraction for grounded responses.**
+## Langflow Components Parameters
 
-```
+Langflow nodes like URL Loader, LLM Agent, and OpenAI LLM expose tunable parameters for precision in truth-finding. Temperature controls creativity (0=deterministic, 1=random); model names select backends.[^1][^2][^3][^4]
 
+## URL Loader Settings
 
-
-
-### Key Flow Differences
-
-NO_INPUT flow uses a static URL Loader with fixed URL/text input, connected directly to Agent tools but missing Chat Input routing for new URLs.  
-
-USER_INPUT flow adds Chat Input connected to Agent, enabling the LLM to parse URLs from messages (e.g., "Validate https://...") and trigger the URL tool dynamically.
-
-Both share URL Loader (fetches web content), LLM Agent (tools-enabled reasoning), System Message ("must use URL tool"), and Language Model, but NO_INPUT bypasses user-supplied URLs via direct Epth/Chat Input absence.[^2][^3]
-<br><br>
-### Why NO_INPUT Fails on Provided URL
-
-Static URL Loader requires pre-pasted URL; no path exists for chat-provided links like TEXT_ON_WWI.html to reach the loader.  Agent sees no mechanism to extract/process dynamic URLs, defaulting to "waiting for input" or ignoring without tool call.  USER_INPUT routes chat (with URL) to Agent input, where system prompt forces "extract link, fetch via URL tool, answer from content."[^3][^1][^2]
-
-## Testing Procedure
-
-- **Deploy Flows**: Run Langflow playgrounds for each (local or hosted).
-- **Test NO_INPUT**:
-
-1. Chat: Paste TEXT_ON_WWI.html URL + "Summarize myths."
-2. Expected: No fetch/response or generic error; static URL unchanged.
-- **Test USER_INPUT**:
-
-1. Same chat input.
-2. Expected: Agent extracts URL, fetches HTML (e.g., detects trench/gas myths), responds grounded (e.g., "Per text: trenches everywhere—inaccurate per history").
-- **Verify**: Check logs for tool calls; USER_INPUT shows URL fetch, NO_INPUT does not. Repeat with Wikipedia WWI for cross-validation.
-
-| Test Case | NO_INPUT Result | USER_INPUT Result |
+| Parameter | Description | Example Values |
 | :-- | :-- | :-- |
-| "Validate TEXT_ON_WWI.html" | Ignores URL; no fetch | Fetches, lists myths (e.g., Italy Central Powers)  |
-| "https://en.wikipedia.org/wiki/World_War_I myths?" | Static fail | Dynamic fetch + debunk  |
+| URL | Target webpage to fetch | "https://en.wikipedia.org/wiki/World_War_I" (USER_INPUT); blank (NO_INPUT)  |
+| Tool Mode | Enables agent tool call vs. direct output | ON (chat-extractable); OFF (context inject)  |
+| Format | Output structure  | Text (clean read); HTML (raw); JSON (structured) |
+| Loader | Fetch backend  | Default WebLoader; RequestsLoader (custom headers) |
+
+## LLM Agent Settings
+
+| Parameter | Description | Example Values |
+| :-- | :-- | :-- |
+| System Message | Grounding prompt | "Fetch URL first; answer only from content; no hallucinations" (truth mode); "Summarize freely" (creative) |
+| Agent Instructions | Behavior rules ] | "You are a helpful assistant"; "Truthful fact-checker: cite text only"  |
+| Tools | Connected loaders  | URL Loader only; +Calculator (math checks) |
+| Language Model | Backend LLM  | OpenAI (GPT-4o); Ollama (local Llama3) [^1] |
+| Max Iterations | Tool call loops | 3 (efficient); 10 (deep reasoning) |
+
+## Language Model (OpenAI) Settings
+
+| Parameter | Description | Example Values |
+| :-- | :-- | :-- |
+| Model Name | LLM variant | gpt-4o-mini (fast/cheap); gpt-4-turbo (accurate); o1-preview (reasoning)  |
+| Temperature | Randomness (0-2) | 0.0 (factual, repeatable); 0.2 (balanced); 0.8 (creative summaries)  |
+| API Key | Auth token  | "sk-..." (Azure OpenAI); env var \$OPENAI_API_KEY |
+| Max Tokens | Output limit  | 1000 (concise); 4000 (detailed validation) |
+| Top P | Nucleus sampling | 0.9 (diverse); 1.0 (full) |
+
+## Chat Input/Output Settings
+
+| Parameter | Description | Example Values |
+| :-- | :-- | :-- |
+| Session ID | Chat history  | auto; "wwi-truth-1" (persistent) |
+| Placeholder | User prompt hint  | "Ask + URL: Validate trench myth" |
+| Temperature Override | Per-chat control | 0.1 (strict fact-check) |
+
+---
+---
 
 
+## Test Method
 
+A parametric test procedure varies one Langflow parameter at a time (holding others fixed) across known WWI myths from TEXT_ON_WWI.html, scoring agent accuracy/groundedness. Use baselines like Temp=0, LLM model , strict system prompt; test 3 runs per config for averages.[^1][^2]
 
+## Test Procedure
 
+1. Load USER_INPUT_FLOW; set target URL to TEXT_ON_WWI.html.
 
+- https://hr-datalab-healthcare.github.io/RESEARCH_SUPPORT/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026/TEXT_ON_WWI.html
 
+2. Define 6 myths: trenches everywhere, gas main killer, donkeys safe, flu from Spain, US instant win, Nov 11 total peace.
 
+3. Query: "Is [myth] true? Fetch https://en.wikipedia.org/wiki/World_War_I".
 
+4. Vary one parameter (e.g., Temp 0/0.3/0.7); score responses:
+    - 2: Correctly debunks with quote.
+    - 1: Partial (admits unsure but no hallucination).
+    - 0: Affirms myth/hallucinates.[^1]
+5. Metrics: Avg Score (higher better), Grounded % (cites fetch), Halluc % (external facts).
+6. Iterate params; best = max score, 100% grounded, 0% halluc.
 
+### Summary Table
 
-
-
-
-- **Access Playground**: Open [index.html](https://hr-datalab-healthcare.github.io/RESEARCH_SUPPORT/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026/index.html); no install needed.
-- **Load WWI Text**: Copy TEXT_ON_WWI.html content or URL into chat; note embedded myths (e.g., "trenches everywhere", "Spanish Flu from Spain").
-- **Validate Systematically**:
-    - Test trench scope: "Did all fronts use trenches only? Fetch https://en.wikipedia.org/wiki/World_War_I".
-    - Check flu origin: "Where did Spanish Flu start per page?" Expect correction to Kansas/France.
-    - Probe generals: "Did generals avoid front lines?" Agent reveals >200 casualties.
-    - Query US role: "Did US instantly win war?" Highlights prior Allied gains.
-- **Interpret Output**: Agent cites fetched text; if "not in content", myth unproven. Repeat with counter-sources.
-
-
-## Example Truth Mission
-
-Target myth from TEXT_ON_WWI.html: "War fought entirely in trenches." 
-
-Chat: "Check if WWI was only trenches: https://en.wikipedia.org/wiki/World_War_I". 
-
-Expected: Agent fetches, responds "No, Eastern Front mobile; Middle East fluid" with quotes.
-
-For full misconceptions (gas deaths, donkeys, Italy Central, instant peace), use systematic questions from paste.txt to expose gaps.
-
+| Parameter | Test Values | Expected Best | Rationale [Source] |
+| :-- | :-- | :-- | :-- |
+| Temperature | 0.0, 0.3, 0.7 | 0.0 | Low temp maximizes determinism; reduces myth affirmation |
+| Model Name | gpt-4o, o1-mini, llama3  | gpt-4o | Superior fact adherence; o1 good but pricier  |
+| URL Depth | 0.5, 1.0, 1.5  | 1.0 | Full page without overload; >1 risks noise  |
+| Tool Mode | ON, OFF  | ON | Enables dynamic Wikipedia fetches for cross-check  |
+| System Prompt Strength | Weak ("helpful"), Strict ("fetch only; no external")  | Strict | Forces grounding; weak allows hallucinations  |
+| Max Tokens | 500, 2000 | 2000 | Allows full quotes for proof; low truncates  |
 
 
 
