@@ -2,6 +2,11 @@
 
 <img src="QR.png" style="height:600px;margin-right:800px"/>
 
+- https://samenaandeslag.cyber-secure-te.src.surf-hosted.nl
+
+<img src="readme.png" style="height:600px;margin-right:800px"/>
+
+-https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026#readme
 
 # LLM Truth-Finding Workshop for user supplied URL input
 
