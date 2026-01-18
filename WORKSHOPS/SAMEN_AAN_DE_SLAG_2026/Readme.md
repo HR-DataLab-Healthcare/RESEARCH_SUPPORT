@@ -13,7 +13,7 @@ We combineren praktische AI-ontwikkeling met inzichten over **Docker-gebaseerde 
 [![Chat with Willma](https://img.shields.io/badge/Chat_with-Willma-blue?style=for-the-badge&logo=openai)](https://samenaandeslag.cyber-secure-te.src.surf-hosted.nl/playground/162c4cf0-3648-47e2-b83c-d739047e27c2)
 
 ## 🤖 Live Demo
-[Click here to chat with Willma Live](https://your-username.github.io/your-repo-name/)
+[Click here to chat with Willma Live](https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT/tree/main/WORKSHOPS/SAMEN_AAN_DE_SLAG_2026)
 
 Click the badge above to launch the AI Agent playground.
   
