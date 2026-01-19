@@ -36,28 +36,28 @@
         "className": "",
         "data": {
           "sourceHandle": {
-            "dataType": "CalculatorComponent",
-            "id": "CalculatorComponent-q1djj",
-            "name": "component_as_tool",
+            "dataType": "WillmaModel",
+            "id": "CustomComponent-yB7GB",
+            "name": "model_output",
             "output_types": [
-              "Tool"
+              "LanguageModel"
             ]
           },
           "targetHandle": {
-            "fieldName": "tools",
+            "fieldName": "agent_llm",
             "id": "Agent-SMQfL",
             "inputTypes": [
-              "Tool"
+              "LanguageModel"
             ],
-            "type": "other"
+            "type": "str"
           }
         },
-        "id": "reactflow__edge-CalculatorComponent-q1djj{œdataTypeœ:œCalculatorComponentœ,œidœ:œCalculatorComponent-q1djjœ,œnameœ:œcomponent_as_toolœ,œoutput_typesœ:[œToolœ]}-Agent-SMQfL{œfieldNameœ:œtoolsœ,œidœ:œAgent-SMQfLœ,œinputTypesœ:[œToolœ],œtypeœ:œotherœ}",
+        "id": "xy-edge__CustomComponent-yB7GB{œdataTypeœ:œWillmaModelœ,œidœ:œCustomComponent-yB7GBœ,œnameœ:œmodel_outputœ,œoutput_typesœ:[œLanguageModelœ]}-Agent-SMQfL{œfieldNameœ:œagent_llmœ,œidœ:œAgent-SMQfLœ,œinputTypesœ:[œLanguageModelœ],œtypeœ:œstrœ}",
         "selected": false,
-        "source": "CalculatorComponent-q1djj",
-        "sourceHandle": "{œdataTypeœ:œCalculatorComponentœ,œidœ:œCalculatorComponent-q1djjœ,œnameœ:œcomponent_as_toolœ,œoutput_typesœ:[œToolœ]}",
+        "source": "CustomComponent-yB7GB",
+        "sourceHandle": "{œdataTypeœ:œWillmaModelœ,œidœ:œCustomComponent-yB7GBœ,œnameœ:œmodel_outputœ,œoutput_typesœ:[œLanguageModelœ]}",
         "target": "Agent-SMQfL",
-        "targetHandle": "{œfieldNameœ:œtoolsœ,œidœ:œAgent-SMQfLœ,œinputTypesœ:[œToolœ],œtypeœ:œotherœ}"
+        "targetHandle": "{œfieldNameœ:œagent_llmœ,œidœ:œAgent-SMQfLœ,œinputTypesœ:[œLanguageModelœ],œtypeœ:œstrœ}"
       },
       {
         "animated": false,
@@ -80,7 +80,7 @@
             "type": "str"
           }
         },
-        "id": "reactflow__edge-ChatInput-CWEKd{œdataTypeœ:œChatInputœ,œidœ:œChatInput-CWEKdœ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}-Agent-SMQfL{œfieldNameœ:œinput_valueœ,œidœ:œAgent-SMQfLœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "id": "xy-edge__ChatInput-CWEKd{œdataTypeœ:œChatInputœ,œidœ:œChatInput-CWEKdœ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}-Agent-SMQfL{œfieldNameœ:œinput_valueœ,œidœ:œAgent-SMQfLœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
         "selected": false,
         "source": "ChatInput-CWEKd",
         "sourceHandle": "{œdataTypeœ:œChatInputœ,œidœ:œChatInput-CWEKdœ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}",
@@ -108,214 +108,15 @@
             "type": "other"
           }
         },
-        "id": "reactflow__edge-URLComponent-MSi5E{œdataTypeœ:œURLComponentœ,œidœ:œURLComponent-MSi5Eœ,œnameœ:œcomponent_as_toolœ,œoutput_typesœ:[œToolœ]}-Agent-SMQfL{œfieldNameœ:œtoolsœ,œidœ:œAgent-SMQfLœ,œinputTypesœ:[œToolœ],œtypeœ:œotherœ}",
+        "id": "xy-edge__URLComponent-MSi5E{œdataTypeœ:œURLComponentœ,œidœ:œURLComponent-MSi5Eœ,œnameœ:œcomponent_as_toolœ,œoutput_typesœ:[œToolœ]}-Agent-SMQfL{œfieldNameœ:œtoolsœ,œidœ:œAgent-SMQfLœ,œinputTypesœ:[œToolœ],œtypeœ:œotherœ}",
         "selected": false,
         "source": "URLComponent-MSi5E",
         "sourceHandle": "{œdataTypeœ:œURLComponentœ,œidœ:œURLComponent-MSi5Eœ,œnameœ:œcomponent_as_toolœ,œoutput_typesœ:[œToolœ]}",
         "target": "Agent-SMQfL",
         "targetHandle": "{œfieldNameœ:œtoolsœ,œidœ:œAgent-SMQfLœ,œinputTypesœ:[œToolœ],œtypeœ:œotherœ}"
-      },
-      {
-        "animated": false,
-        "className": "",
-        "data": {
-          "sourceHandle": {
-            "dataType": "WillmaModel",
-            "id": "CustomComponent-yB7GB",
-            "name": "model_output",
-            "output_types": [
-              "LanguageModel"
-            ]
-          },
-          "targetHandle": {
-            "fieldName": "agent_llm",
-            "id": "Agent-SMQfL",
-            "inputTypes": [
-              "LanguageModel"
-            ],
-            "type": "str"
-          }
-        },
-        "id": "xy-edge__CustomComponent-yB7GB{œdataTypeœ:œWillmaModelœ,œidœ:œCustomComponent-yB7GBœ,œnameœ:œmodel_outputœ,œoutput_typesœ:[œLanguageModelœ]}-Agent-SMQfL{œfieldNameœ:œagent_llmœ,œidœ:œAgent-SMQfLœ,œinputTypesœ:[œLanguageModelœ],œtypeœ:œstrœ}",
-        "selected": false,
-        "source": "CustomComponent-yB7GB",
-        "sourceHandle": "{œdataTypeœ:œWillmaModelœ,œidœ:œCustomComponent-yB7GBœ,œnameœ:œmodel_outputœ,œoutput_typesœ:[œLanguageModelœ]}",
-        "target": "Agent-SMQfL",
-        "targetHandle": "{œfieldNameœ:œagent_llmœ,œidœ:œAgent-SMQfLœ,œinputTypesœ:[œLanguageModelœ],œtypeœ:œstrœ}"
       }
     ],
     "nodes": [
-      {
-        "data": {
-          "id": "CalculatorComponent-q1djj",
-          "node": {
-            "base_classes": [
-              "Data"
-            ],
-            "beta": false,
-            "category": "tools",
-            "conditional_paths": [],
-            "custom_fields": {},
-            "description": "Perform basic arithmetic operations on a given expression.",
-            "display_name": "Calculator",
-            "documentation": "",
-            "edited": false,
-            "field_order": [
-              "expression"
-            ],
-            "frozen": false,
-            "icon": "calculator",
-            "key": "CalculatorComponent",
-            "last_updated": "2026-01-18T21:29:38.610Z",
-            "legacy": false,
-            "lf_version": "1.7.2",
-            "metadata": {
-              "code_hash": "acbe2603b034",
-              "dependencies": {
-                "dependencies": [
-                  {
-                    "name": "lfx",
-                    "version": "0.2.1"
-                  }
-                ],
-                "total_dependencies": 1
-              },
-              "module": "lfx.components.utilities.calculator_core.CalculatorComponent"
-            },
-            "minimized": false,
-            "output_types": [],
-            "outputs": [
-              {
-                "allows_loop": false,
-                "cache": true,
-                "display_name": "Toolset",
-                "group_outputs": false,
-                "hidden": false,
-                "loop_types": null,
-                "method": "to_toolkit",
-                "name": "component_as_tool",
-                "options": null,
-                "required_inputs": null,
-                "selected": "Tool",
-                "tool_mode": true,
-                "types": [
-                  "Tool"
-                ],
-                "value": "__UNDEFINED__"
-              }
-            ],
-            "pinned": false,
-            "score": 0.001,
-            "template": {
-              "_frontend_node_flow_id": {
-                "value": "162c4cf0-3648-47e2-b83c-d739047e27c2"
-              },
-              "_frontend_node_folder_id": {
-                "value": "01c5c54c-6f32-4566-b19d-3b9f0c9d10c8"
-              },
-              "_type": "Component",
-              "code": {
-                "advanced": true,
-                "dynamic": true,
-                "fileTypes": [],
-                "file_path": "",
-                "info": "",
-                "list": false,
-                "load_from_db": false,
-                "multiline": true,
-                "name": "code",
-                "password": false,
-                "placeholder": "",
-                "required": true,
-                "show": true,
-                "title_case": false,
-                "type": "code",
-                "value": "import ast\nimport operator\nfrom collections.abc import Callable\n\nfrom lfx.custom.custom_component.component import Component\nfrom lfx.inputs.inputs import MessageTextInput\nfrom lfx.io import Output\nfrom lfx.schema.data import Data\n\n\nclass CalculatorComponent(Component):\n    display_name = \"Calculator\"\n    description = \"Perform basic arithmetic operations on a given expression.\"\n    documentation: str = \"https://docs.langflow.org/calculator\"\n    icon = \"calculator\"\n\n    # Cache operators dictionary as a class variable\n    OPERATORS: dict[type[ast.operator], Callable] = {\n        ast.Add: operator.add,\n        ast.Sub: operator.sub,\n        ast.Mult: operator.mul,\n        ast.Div: operator.truediv,\n        ast.Pow: operator.pow,\n    }\n\n    inputs = [\n        MessageTextInput(\n            name=\"expression\",\n            display_name=\"Expression\",\n            info=\"The arithmetic expression to evaluate (e.g., '4*4*(33/22)+12-20').\",\n            tool_mode=True,\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"Data\", name=\"result\", type_=Data, method=\"evaluate_expression\"),\n    ]\n\n    def _eval_expr(self, node: ast.AST) -> float:\n        \"\"\"Evaluate an AST node recursively.\"\"\"\n        if isinstance(node, ast.Constant):\n            if isinstance(node.value, int | float):\n                return float(node.value)\n            error_msg = f\"Unsupported constant type: {type(node.value).__name__}\"\n            raise TypeError(error_msg)\n        if isinstance(node, ast.Num):  # For backwards compatibility\n            if isinstance(node.n, int | float):\n                return float(node.n)\n            error_msg = f\"Unsupported number type: {type(node.n).__name__}\"\n            raise TypeError(error_msg)\n\n        if isinstance(node, ast.BinOp):\n            op_type = type(node.op)\n            if op_type not in self.OPERATORS:\n                error_msg = f\"Unsupported binary operator: {op_type.__name__}\"\n                raise TypeError(error_msg)\n\n            left = self._eval_expr(node.left)\n            right = self._eval_expr(node.right)\n            return self.OPERATORS[op_type](left, right)\n\n        error_msg = f\"Unsupported operation or expression type: {type(node).__name__}\"\n        raise TypeError(error_msg)\n\n    def evaluate_expression(self) -> Data:\n        \"\"\"Evaluate the mathematical expression and return the result.\"\"\"\n        try:\n            tree = ast.parse(self.expression, mode=\"eval\")\n            result = self._eval_expr(tree.body)\n\n            formatted_result = f\"{float(result):.6f}\".rstrip(\"0\").rstrip(\".\")\n            self.log(f\"Calculation result: {formatted_result}\")\n\n            self.status = formatted_result\n            return Data(data={\"result\": formatted_result})\n\n        except ZeroDivisionError:\n            error_message = \"Error: Division by zero\"\n            self.status = error_message\n            return Data(data={\"error\": error_message, \"input\": self.expression})\n\n        except (SyntaxError, TypeError, KeyError, ValueError, AttributeError, OverflowError) as e:\n            error_message = f\"Invalid expression: {e!s}\"\n            self.status = error_message\n            return Data(data={\"error\": error_message, \"input\": self.expression})\n\n    def build(self):\n        \"\"\"Return the main evaluation function.\"\"\"\n        return self.evaluate_expression\n"
-              },
-              "expression": {
-                "_input_type": "MessageTextInput",
-                "advanced": false,
-                "display_name": "Expression",
-                "dynamic": false,
-                "info": "The arithmetic expression to evaluate (e.g., '4*4*(33/22)+12-20').",
-                "input_types": [
-                  "Message"
-                ],
-                "list": false,
-                "list_add_label": "Add More",
-                "load_from_db": false,
-                "name": "expression",
-                "placeholder": "",
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": true,
-                "trace_as_input": true,
-                "trace_as_metadata": true,
-                "type": "str",
-                "value": ""
-              },
-              "is_refresh": false,
-              "tools_metadata": {
-                "_input_type": "ToolsInput",
-                "advanced": false,
-                "display_name": "Actions",
-                "dynamic": false,
-                "info": "Modify tool names and descriptions to help agents understand when to use each tool.",
-                "is_list": true,
-                "list_add_label": "Add More",
-                "name": "tools_metadata",
-                "override_skip": false,
-                "placeholder": "",
-                "real_time_refresh": true,
-                "required": false,
-                "show": true,
-                "title_case": false,
-                "tool_mode": false,
-                "trace_as_metadata": true,
-                "track_in_telemetry": false,
-                "type": "tools",
-                "value": [
-                  {
-                    "args": {
-                      "expression": {
-                        "default": "",
-                        "description": "The arithmetic expression to evaluate (e.g., '4*4*(33/22)+12-20').",
-                        "title": "Expression",
-                        "type": "string"
-                      }
-                    },
-                    "description": "CalculatorComponent. evaluate_expression() - Perform basic arithmetic operations on a given expression.",
-                    "display_description": "CalculatorComponent. evaluate_expression() - Perform basic arithmetic operations on a given expression.",
-                    "display_name": "evaluate_expression",
-                    "name": "evaluate_expression",
-                    "status": true,
-                    "tags": [
-                      "evaluate_expression"
-                    ]
-                  }
-                ]
-              }
-            },
-            "tool_mode": true
-          },
-          "selected_output": "component_as_tool",
-          "showNode": true,
-          "type": "CalculatorComponent"
-        },
-        "dragging": false,
-        "id": "CalculatorComponent-q1djj",
-        "measured": {
-          "height": 216,
-          "width": 320
-        },
-        "position": {
-          "x": 1313.1498231193616,
-          "y": 156.9799585818216
-        },
-        "selected": false,
-        "type": "genericNode"
-      },
       {
         "data": {
           "id": "ChatInput-CWEKd",
@@ -488,7 +289,7 @@
                 "trace_as_input": true,
                 "trace_as_metadata": true,
                 "type": "str",
-                "value": "Hello, how are you?"
+                "value": "https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT"
               },
               "sender": {
                 "_input_type": "DropdownInput",
@@ -587,12 +388,12 @@
         "dragging": false,
         "id": "ChatInput-CWEKd",
         "measured": {
-          "height": 47,
+          "height": 48,
           "width": 192
         },
         "position": {
-          "x": 1769.5599287392336,
-          "y": 338.10693922176205
+          "x": 1655.0251648811338,
+          "y": 202.65343896129252
         },
         "selected": false,
         "type": "genericNode"
@@ -872,12 +673,12 @@
         "dragging": false,
         "id": "ChatOutput-EVnVV",
         "measured": {
-          "height": 47,
+          "height": 48,
           "width": 192
         },
         "position": {
-          "x": 2402.927607720925,
-          "y": 337.94455508427495
+          "x": 2488.156031667065,
+          "y": 178.34891421090538
         },
         "selected": false,
         "type": "genericNode"
@@ -920,7 +721,7 @@
             ],
             "frozen": false,
             "icon": "bot",
-            "last_updated": "2026-01-18T21:29:38.704Z",
+            "last_updated": "2026-01-19T04:44:30.736Z",
             "legacy": false,
             "lf_version": "1.7.2",
             "metadata": {
@@ -969,7 +770,7 @@
             "template": {
               "_frontend_node_flow_id": {
                 "input_types": [],
-                "value": "162c4cf0-3648-47e2-b83c-d739047e27c2"
+                "value": "e00eae0c-bdde-4c4e-b080-7c6f9d70f7b0"
               },
               "_frontend_node_folder_id": {
                 "input_types": [],
@@ -1319,7 +1120,7 @@
                 "trace_as_input": true,
                 "trace_as_metadata": true,
                 "type": "str",
-                "value": "You are a helpful assistant that can use tools to answer questions and perform tasks."
+                "value": "You are a helpful assistant. I have provided a specific URL in your toolset. \nYou must immediately use the URL tool to fetch content from the URL I provided in the configuration. \nAnswer all user questions truthfully based ONLY on that fetched content. \nNEVER ask the user for a link or a source. NEVER reveal the URL itself in your response.\n\n"
               },
               "tools": {
                 "_input_type": "HandleInput",
@@ -1370,12 +1171,12 @@
         "dragging": false,
         "id": "Agent-SMQfL",
         "measured": {
-          "height": 425,
+          "height": 429,
           "width": 320
         },
         "position": {
-          "x": 2031.9601940781433,
-          "y": -97.6057183582607
+          "x": 2037.3848250327073,
+          "y": -201.57781165407988
         },
         "selected": false,
         "type": "genericNode"
@@ -1412,7 +1213,7 @@
             "frozen": false,
             "icon": "layout-template",
             "key": "URLComponent",
-            "last_updated": "2026-01-18T21:29:38.611Z",
+            "last_updated": "2026-01-19T04:44:30.690Z",
             "legacy": false,
             "lf_version": "1.7.2",
             "metadata": {
@@ -1466,7 +1267,7 @@
             "score": 2.220446049250313e-16,
             "template": {
               "_frontend_node_flow_id": {
-                "value": "162c4cf0-3648-47e2-b83c-d739047e27c2"
+                "value": "e00eae0c-bdde-4c4e-b080-7c6f9d70f7b0"
               },
               "_frontend_node_folder_id": {
                 "value": "01c5c54c-6f32-4566-b19d-3b9f0c9d10c8"
@@ -1506,7 +1307,7 @@
                 "tool_mode": false,
                 "trace_as_metadata": true,
                 "type": "bool",
-                "value": false
+                "value": true
               },
               "code": {
                 "advanced": true,
@@ -1672,7 +1473,7 @@
                 "title_case": false,
                 "tool_mode": false,
                 "type": "slider",
-                "value": 1
+                "value": 2
               },
               "prevent_outside": {
                 "_input_type": "BoolInput",
@@ -1773,7 +1574,9 @@
                 "trace_as_input": true,
                 "trace_as_metadata": true,
                 "type": "str",
-                "value": ""
+                "value": [
+                  ""
+                ]
               },
               "use_async": {
                 "_input_type": "BoolInput",
@@ -1796,18 +1599,19 @@
             },
             "tool_mode": true
           },
+          "selected_output": "page_results",
           "showNode": true,
           "type": "URLComponent"
         },
         "dragging": false,
         "id": "URLComponent-MSi5E",
         "measured": {
-          "height": 288,
+          "height": 290,
           "width": 320
         },
         "position": {
-          "x": 1305.5120093045666,
-          "y": -189.8260445068412
+          "x": 1204.9689219285524,
+          "y": -88.03486964858234
         },
         "selected": false,
         "type": "genericNode"
@@ -2123,7 +1927,7 @@
                 "tool_mode": false,
                 "track_in_telemetry": false,
                 "type": "slider",
-                "value": 0.1
+                "value": 0.33
               },
               "willma_api_key": {
                 "_input_type": "SecretStrInput",
@@ -2154,29 +1958,29 @@
         "dragging": false,
         "id": "CustomComponent-yB7GB",
         "measured": {
-          "height": 633,
+          "height": 638,
           "width": 320
         },
         "position": {
-          "x": 1659.1719140214227,
-          "y": -575.9568448952448
+          "x": 1575.954937094962,
+          "y": -567.4516453420312
         },
         "selected": false,
         "type": "genericNode"
       }
     ],
     "viewport": {
-      "x": -1183.3297427615453,
-      "y": 689.384131937331,
-      "zoom": 1.1049163449964323
+      "x": -512.638742729355,
+      "y": 423.22690178259654,
+      "zoom": 0.4528239133803222
     }
   },
   "description": "A simple but powerful starter agent.",
   "endpoint_name": null,
-  "id": "162c4cf0-3648-47e2-b83c-d739047e27c2",
+  "id": "e00eae0c-bdde-4c4e-b080-7c6f9d70f7b0",
   "is_component": false,
   "last_tested_version": "1.7.2",
-  "name": "Willma  / SURF AI-Hub based Agent",
+  "name": "Willma  / SURF AI-Hub based  URL INPUT",
   "tags": [
     "assistants",
     "agents"
