@@ -14,6 +14,23 @@ Generate synthetic Dutch EHR free-text that preserves clinical meaning and writi
 ​
 
 * Intended value: enable scalable, transparent, reproducible unlocking of clinical documentation for research, innovation, and learning health systems while addressing privacy and quality concerns (hallucination, bias, opacity).
+
+### Data pipeline + Implemented Workflows
+
+Pipeline (DSI stack): FLOW01 converts anonymized clinical notes from PDF→Markdown, FLOW02 performs pseudonymization (GenAI-based NER), FLOW03/03_AGENT_BASED generates synthetic notes (standard prompting vs GA-based), and FLOW04 benchmarks synthetic vs anonymized vs real notes using corpus/document-level metrics (diversity, vocabulary similarity, semantic alignment, classifier-based “machine discernibility”).
+​
+
+Orchestration: implemented as a no-code multi-agent workflow in a rapid prototyping platform (Flowise; also cites Langflow/AutoGen as comparable), built from modular components that can be rearranged and shared/deployed as web-accessible inference endpoints.
+​
+
+Agent design: a supervisor agent orchestrates work and enforces documentation standards (e.g., ICF domains and Dutch KNGF guideline for low back pain), while worker agents generate specialized content (e.g., different physiotherapy profiles) under role-specific prompts.
+​
+
+RAG + memory: the Flowise workflow includes document ingestion with chunking, embedding generation, agent memory stored in SQLite, and retrieval via a vector store to reduce hallucination and keep outputs aligned with guidelines and source templates.
+​
+
+Model strategy: the proof-of-concept used GPT‑4.1 via Azure API for supervised reasoning and text generation, and also describes a privacy-first local alternative via Ollama for on-prem model execution.
+​
   
 ---  
   
