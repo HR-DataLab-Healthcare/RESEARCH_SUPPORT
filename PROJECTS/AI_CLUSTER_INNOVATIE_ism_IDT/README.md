@@ -1,7 +1,19 @@
 
   
 # Privacy-, linguistic-, and information-preserving synthesis of clinical documentation through generative agents    
-Source: https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2025.1644084/full  
+Source: https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2025.1644084/full 
+
+
+### USE CASE
+Generate synthetic Dutch EHR free-text that preserves clinical meaning and writing style while reducing privacy risk, using a protocolized multi-agent LLM workflow plus automated evaluation against real/anonymized notes.
+
+* Problem: access to high-quality, interoperable clinical documentation is limited by legal/ethical/technical barriers, yet free-text EHR narratives contain clinically valuable information not captured in structured fields.
+​
+
+* Proposed solution: a privacy-, linguistic-, and information-preserving synthetic health data generation (SHDG) protocol using multiple role-specific generative agents that collaborate in multi-turn interactions, guided by authentic EHRs as structural/linguistic templates.
+​
+
+* Intended value: enable scalable, transparent, reproducible unlocking of clinical documentation for research, innovation, and learning health systems while addressing privacy and quality concerns (hallucination, bias, opacity).
   
 ---  
   
