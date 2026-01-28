@@ -46,7 +46,7 @@ Model strategy: the proof-of-concept used GPT‑4.1 via Azure API for supervised
   
 ---  
   
-# Infra choices explained (succinct)  
+## Infra choices explained (succinct)  
   
 These numbers are sized to match the paper’s end-to-end **DSI stack** (warehousing → compute → container toolchain → workflow orchestration → deployment) and the PoC workflow composition: **ingestion → embeddings → agent memory → vector retrieval (RAG) → multi-agent synthesis → automated benchmarking**.  
   
@@ -57,27 +57,27 @@ These numbers are sized to match the paper’s end-to-end **DSI stack** (warehou
   
 ---  
   
-## Why a 3-node Nutanix cluster (HA baseline)  
+#### Why a 3-node Nutanix cluster (HA baseline)  
 - Smallest common topology that supports **N+1 availability** for K8s control/services and storage while tolerating a node failure or rolling upgrades.  
 - Aligns with the paper’s emphasis on **reproducible, containerized workflows** deployed consistently across environments.  
   
 ---  
   
-## Why 6×48GB total GPU for LLM inference  
+#### Why 6×48GB total GPU for LLM inference  
 - The synthesis is **multi-agent** (supervisor + workers). One user interaction often triggers **multiple LLM calls**, so concurrency multiplies quickly.  
 - 32B-class models (even quantized) are **VRAM-heavy**; with 4–6 concurrent users you want enough GPUs to avoid a single shared queue dominating latency.  
 - Supports running multiple models in parallel (text + vision + alternative baseline) without constant eviction/reload.  
   
 ---  
   
-## Why a dedicated embeddings GPU  
+#### Why a dedicated embeddings GPU  
 - The workflow is embedding- and retrieval-centric (continuous **indexing/re-indexing**, chunking changes, experiments).  
 - Separating embeddings prevents batch ingestion/index jobs from starving interactive synthesis GPUs.  
 - Enables independent scaling and predictable latency for both paths (ingest vs. generate).  
   
 ---  
   
-## Why Postgres/Redis/object storage (durable shared state)  
+#### Why Postgres/Redis/object storage (durable shared state)  
 Multi-user, multi-service pipelines need persistence beyond local container disks:  
 - **Postgres**: sessions, metadata, runs, auditability  
 - **Redis/queue/cache**: parallel worker coordination, rate limiting, short-lived state  
@@ -85,7 +85,7 @@ Multi-user, multi-service pipelines need persistence beyond local container disk
   
 ---  
   
-## Why “2 replicas” for workflow UIs/services (Flowise/Langflow)  
+#### Why “2 replicas” for workflow UIs/services (Flowise/Langflow)  
 - These components are primarily **stateless frontends**; run at least two replicas for:  
   - availability during deploys  
   - stable UX under bursts  
