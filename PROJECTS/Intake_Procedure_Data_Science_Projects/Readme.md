@@ -7,11 +7,13 @@ Het proces is ontworpen om **inhoudelijke**, **technische**, **juridische** en *
   
 ## 🌐 Overzicht  
   
-Het intakeproces start met een **online formulier** dat door de projectaanvrager wordt ingevuld:  
+Het intakeproces start met een **online formulier** dat door een data scientist verbonden aan een datalan in samensparaak met de projectaanvrager ingevuld:  
   
-🔗 [Intakeformulier (Microsoft Forms)](https://forms.office.com/Pages/DesignPageV2.aspx?origin=NeoPortalPage&subpage=design&id=zrpvyrp8U02GgaBihPf_Ro_UBdB0scVKmjPnS1OYmFhUOEY3OTRUS0RRNTYxT1BXSkNFN01COVFUQy4u)
+🔗 [Intakeformulier (URL voor de Data Scientist (Microsoft Forms)](https://forms.office.com/Pages/DesignPageV2.aspx?origin=NeoPortalPage&subpage=design&id=zrpvyrp8U02GgaBihPf_Ro_UBdB0scVKmjPnS1OYmFhUOEY3OTRUS0RRNTYxT1BXSkNFN01COVFUQy4u)
 
 ![alt text](image.png)
+
+🔗 [Intakeformulier (URL voor de projectaanvrager (Microsoft Forms)](https://forms.office.com/e/qUvxeDBGnu)
 
 Op basis van deze input organiseert HR Datalab een intakegesprek met alle relevante stakeholders, waaronder **IDT**, **RPS**, **CISO**, **Privacy Officer**, **Functionaris Gegevensbescherming (FG)** en indien nodig een **Jurist**.  
   
