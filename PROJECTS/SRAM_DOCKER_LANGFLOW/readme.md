@@ -7,6 +7,19 @@ It includes full Docker Compose  stack with Traefik reverse proxy/Let's Encrypt,
 PostgreSQL persistence, Docling support, and automation scripts. 
 An example of a custom-made Langflow flow SURF AI-Hub (Willma) implementation is provided.
 
+
+## VM on SURF RESEARCH CLOUD (SRC)
+
+When a VM is created in SCR take the following steps using the materials as provided in this repository.
+* open TERMINAL: ssh xxxxx@<ip-number>
+* ~$ touch get-files.sh
+* ~$ nano get-files.sh
+* ~$ bash get-files.sh
+* ~$ cd LANGFLOW/
+* bash create-langflow.sh
+* bash create-langflow.sh
+
+
 ## Prerequisites
 
 SURF Ubuntu 22.04+ VM: public IP, ports 80/443/8080 open, DNS A-record (e.g., langflow.src.surf-hosted.nl). 
