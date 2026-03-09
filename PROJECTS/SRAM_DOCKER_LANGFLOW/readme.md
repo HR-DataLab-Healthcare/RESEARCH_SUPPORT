@@ -19,6 +19,8 @@ When a VM is created in SCR take the following steps using the materials as prov
 * bash create-langflow.sh
 * bash create-langflow.sh
 
+<img width="1374" height="1132" alt="image" src="https://github.com/user-attachments/assets/09d75d1f-71c4-4529-bc38-de0aa995c01b" />
+
 
 ## Prerequisites
 
