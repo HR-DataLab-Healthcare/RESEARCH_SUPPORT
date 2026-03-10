@@ -247,7 +247,12 @@ bash  get-files.sh
 # outcome: Downloads Langflow files (docker-compose.yaml, etc.) into ./LANGFLOW dir + ls -al display's its content
 
 # Run script in terminal to create Langflow 
-source  +x create-langflow.sh
+ls -la create-langflow.sh  # Check current permissions
+chmod +x create-langflow.sh
+ls -la create-langflow.sh  # Should show -rwxr-xr-x
+./create-langflow.sh       # Now works
+sudo bash create-langflow.sh
+
 # outcome:  installs ..............
 ​
 ```
