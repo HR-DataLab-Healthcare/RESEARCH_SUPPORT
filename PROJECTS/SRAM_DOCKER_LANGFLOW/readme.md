@@ -114,12 +114,11 @@ FROM langflowai/langflow:latest
 
 USER root
 
-RUN apt-get update && \
-    apt-get install -y libgl1 libglib2.0-0
-# Install system dependencies for Docling (GUI/graphics libs)
+# Install ONLY docling - don't touch Langflow itself
+RUN pip install --no-cache-dir "docling"
 
-RUN uv pip install "langflow[docling]"
-# Install Langflow with Docling extra via uv (fast pip alternative)
+# Switch back to Langflow's default user
+USER 1000
 ```
 
 Used in `docker-compose.yaml` under `langflow: build: . dockerfile: Dockerfile`. Runs as root for deps. Enables advanced RAG/document flows relevant to DataLabs.[^2]
@@ -192,6 +191,7 @@ services:
       - traefik.http.routers.langflow.entrypoints=websecure
       - traefik.http.routers.langflow.tls.certresolver=le
       - traefik.http.services.langflow.loadbalancer.server.port=7860  # Langflow port
+      - traefik.docker.network=langflow_default
 
   db:
     image: postgres:16
