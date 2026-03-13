@@ -259,6 +259,235 @@ sudo bash create-langflow.sh
 
 
 
+# Bulk Create Users in Langflow (Docker + Ubuntu VM)
+
+This guide explains step-by-step how to create multiple user accounts in a **Langflow** instance running in **Docker** on an **Ubuntu VM**.
+
+---
+
+## 📋 Prerequisites
+
+- Ubuntu VM with **Docker** and **Docker Compose** installed
+- Langflow running in Docker (with authentication enabled)
+- Admin (superuser) account credentials for Langflow
+- Python 3.8+ installed on the VM
+- Internet access to install Python dependencies
+
+---
+
+## 1️⃣ Verify Langflow is Running
+
+Check your running containers:
+
+```bash
+docker ps
+```
+
+Example output:
+
+```
+CONTAINER ID   IMAGE                        COMMAND                  STATUS         PORTS
+bb41390d9720   langflow_docker-langflow     "python -m langflow …"   Up 10 days
+aac7058fb826   postgres:16                  "docker-entrypoint.s…"   Up 10 days
+19a79058fe68   traefik:v2.11                "/entrypoint.sh ..."     Up 10 days     0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp
+```
+
+If Langflow is behind **Traefik**, it will be accessible via your domain or server IP on port `80` or `443`.
+
+---
+
+## 2️⃣ Test API Access
+
+Replace `<your-domain>` with your actual domain or IP:
+
+```bash
+curl -k https://<your-domain>/api/docs
+```
+
+If you see the Langflow API docs HTML, the API is reachable.
+
+---
+
+## 3️⃣ Get an Admin Access Token
+
+Langflow’s API requires a **Bearer token** for user creation.
+
+Run the following command, replacing `admin` and `yourpassword` with your superuser credentials:
+
+```bash
+curl -k -X POST "https://<your-domain>/api/v1/login" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "username=admin&password=yourpassword"
+```
+
+Example with your actual credentials:
+
+```bash
+curl -k -X POST "https://langflow.betekenisvolle.src.surf-hosted.nl/api/v1/login" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "username=admin&password=30108188-26c4-497f-b7e1-e8014a324a9d"
+```
+
+Expected output:
+
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....",
+  "refresh_token": "...",
+  "token_type": "bearer"
+}
+```
+
+Copy the `access_token` — you’ll need it in the script.
+
+---
+
+## 4️⃣ Create `users.json`
+
+This file contains the list of users you want to create.
+
+```bash
+nano users.json
+```
+
+Paste the following example:
+
+```json
+[
+  {"username": "user01", "password": "User01", "is_superuser": false},
+  {"username": "user02", "password": "User02", "is_superuser": false},
+  {"username": "user03", "password": "User03", "is_superuser": false},
+  {"username": "user04", "password": "User04", "is_superuser": false},
+  {"username": "user05", "password": "User05", "is_superuser": false}
+]
+```
+
+Save and exit (`CTRL+O`, `ENTER`, `CTRL+X`).
+
+---
+
+## 5️⃣ Create `add_langflow_users.py`
+
+```bash
+nano add_langflow_users.py
+```
+
+Paste the following code:
+
+```python
+import requests
+import json
+import sys
+
+# ===== CONFIGURATION =====
+DOMAIN = "https://langflow.betekenisvolle.src.surf-hosted.nl"  # Change if needed
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "30108188-26c4-497f-b7e1-e8014a324a9d"
+USERS_FILE = "users.json"
+VERIFY_SSL = True  # Set to False if using self-signed certs
+# =========================
+
+def get_access_token():
+    """Login and return access token."""
+    login_url = f"{DOMAIN}/api/v1/login"
+    try:
+        resp = requests.post(
+            login_url,
+            data={"username": ADMIN_USERNAME, "password": ADMIN_PASSWORD},
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            verify=VERIFY_SSL
+        )
+        resp.raise_for_status()
+        token = resp.json().get("access_token")
+        if not token:
+            raise ValueError("No access token returned.")
+        print("✅ Logged in successfully.")
+        return token
+    except requests.RequestException as e:
+        print(f"❌ Network error during login: {e}")
+        sys.exit(1)
+
+def create_users(token):
+    """Create users from JSON file."""
+    try:
+        with open(USERS_FILE, "r") as f:
+            users_data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"❌ Error reading {USERS_FILE}: {e}")
+        sys.exit(1)
+
+    api_base = f"{DOMAIN}/api/v1"
+    for user in users_data:
+        try:
+            r = requests.post(
+                f"{api_base}/users/",
+                headers={
+                    "Authorization": f"Bearer {token}",
+                    "Content-Type": "application/json"
+                },
+                json=user,
+                verify=VERIFY_SSL
+            )
+            if r.status_code == 201:
+                print(f"✅ Created {user['username']}")
+            elif r.status_code == 409:
+                print(f"⚠️ {user['username']} already exists")
+            else:
+                print(f"❌ Failed to create {user['username']}: {r.status_code} {r.text}")
+        except requests.RequestException as e:
+            print(f"❌ Network error for {user['username']}: {e}")
+
+if __name__ == "__main__":
+    token = get_access_token()
+    create_users(token)
+```
+
+Save and exit.
+
+---
+
+## 6️⃣ Install Python Dependencies
+
+```bash
+pip install requests
+```
+
+---
+
+## 7️⃣ Run the Script
+
+```bash
+python3 add_langflow_users.py
+```
+
+Expected output:
+
+```
+✅ Logged in successfully.
+✅ Created user01
+✅ Created user02
+⚠️ user03 already exists
+...
+```
+
+---
+
+## 🔒 Security Notes
+
+- Never commit your **admin password** or **access token** to GitHub.
+- Use environment variables or a `.env` file for credentials in production.
+- Rotate admin passwords regularly.
+- If using self-signed certificates, set `VERIFY_SSL = False` only for testing.
+
+---
+
+## ✅ Summary
+
+You now have a working method to:
+1. Log in to Langflow’s API
+2. Retrieve an access token
+3. Create multiple users from a JSON file
+4. Run everything from an Ubuntu VM with Langflow in Docker
 
 
 
