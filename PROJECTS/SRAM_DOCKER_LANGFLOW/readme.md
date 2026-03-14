@@ -382,7 +382,7 @@ import sys
 # ===== CONFIGURATION =====
 DOMAIN = "https://langflow.betekenisvolle.src.surf-hosted.nl"  # Change if needed
 ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "30108188-26c4-497f-b7e1-e8014a324a9d"
+ADMIN_PASSWORD = "xxxxxxxxxxxx" # Id
 USERS_FILE = "users.json"
 VERIFY_SSL = True  # Set to False if using self-signed certs
 # =========================
