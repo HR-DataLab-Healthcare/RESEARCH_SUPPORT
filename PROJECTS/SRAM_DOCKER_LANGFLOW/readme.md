@@ -325,14 +325,14 @@ Example with your actual credentials:
 ```bash
 curl -k -X POST "https://langflow.betekenisvolle.src.surf-hosted.nl/api/v1/login" \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "username=admin&password=30108188-26c4-497f-b7e1-e8014a324a9d"
+  -d "username=admin&password=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
 
 Expected output:
 
 ```json
 {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....",
+  "access_token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx....",
   "refresh_token": "...",
   "token_type": "bearer"
 }
