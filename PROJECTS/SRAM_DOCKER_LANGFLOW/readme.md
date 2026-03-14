@@ -320,14 +320,6 @@ curl -k -X POST "https://<your-domain>/api/v1/login" \
   -d "username=admin&password=yourpassword"
 ```
 
-Example with your actual credentials:
-
-```bash
-curl -k -X POST "https://langflow.betekenisvolle.src.surf-hosted.nl/api/v1/login" \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "username=admin&password=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-```
-
 Expected output:
 
 ```json
