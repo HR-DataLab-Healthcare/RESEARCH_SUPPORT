@@ -397,7 +397,7 @@ if __name__ == "__main__":
     create_users(token)
 ```
 
-Save and exit.
+Save and exit (CTRL+O, ENTER, CTRL+X).
 
 ---
 
