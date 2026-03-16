@@ -272,6 +272,7 @@ This guide explains step-by-step how to create multiple user accounts in a **Lan
 - Admin (superuser) account credentials for Langflow
 - Python 3.8+ installed on the VM
 - Internet access to install Python dependencies
+- SSH access as user: ssh @
 
 ---
 
@@ -296,45 +297,7 @@ If Langflow is behind **Traefik**, it will be accessible via your domain or serv
 
 ---
 
-## 2️⃣ Test API Access
-
-Replace `<your-domain>` with your actual domain or IP:
-
-```bash
-curl -k https://<your-domain>/api/docs
-```
-
-If you see the Langflow API docs HTML, the API is reachable.
-
----
-
-## 3️⃣ Get an Admin Access Token
-
-Langflow’s API requires a **Bearer token** for user creation.
-
-Run the following command, replacing `admin` and `yourpassword` with your superuser credentials:
-
-```bash
-curl -k -X POST "https://<your-domain>/api/v1/login" \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "username=admin&password=yourpassword"
-```
-
-Expected output:
-
-```json
-{
-  "access_token": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx....",
-  "refresh_token": "...",
-  "token_type": "bearer"
-}
-```
-
-Copy the `access_token` — you’ll need it in the script.
-
----
-
-## 4️⃣ Create `users.json`
+## 2️⃣ Create `users.json`
 
 This file contains the list of users you want to create.
 
@@ -358,7 +321,7 @@ Save and exit (`CTRL+O`, `ENTER`, `CTRL+X`).
 
 ---
 
-## 5️⃣ Create `add_langflow_users.py`
+## 3️⃣ Create `add_langflow_users.py`
 
 ```bash
 nano add_langflow_users.py
@@ -438,7 +401,8 @@ Save and exit.
 
 ---
 
-## 6️⃣ Install Python Dependencies
+## 4️⃣ Install Python Dependencies
+#Pyhton Dependencies should already be installed. If so this step can be skipped.
 
 ```bash
 pip install requests
@@ -446,7 +410,7 @@ pip install requests
 
 ---
 
-## 7️⃣ Run the Script
+## 5️⃣ Run the Script
 
 ```bash
 python3 add_langflow_users.py
@@ -466,7 +430,7 @@ Expected output:
 
 ## 🔒 Security Notes
 
-- Never commit your **admin password** or **access token** to GitHub.
+- Never commit your **admin password** to GitHub.
 - Use environment variables or a `.env` file for credentials in production.
 - Rotate admin passwords regularly.
 - If using self-signed certificates, set `VERIFY_SSL = False` only for testing.
@@ -476,10 +440,8 @@ Expected output:
 ## ✅ Summary
 
 You now have a working method to:
-1. Log in to Langflow’s API
-2. Retrieve an access token
-3. Create multiple users from a JSON file
-4. Run everything from an Ubuntu VM with Langflow in Docker
+1. Create multiple users from a JSON file
+2. Run everything from an Ubuntu VM with Langflow in Docker
 
 
 
