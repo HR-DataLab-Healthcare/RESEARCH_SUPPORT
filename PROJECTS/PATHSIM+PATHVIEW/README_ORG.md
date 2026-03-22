@@ -63,55 +63,11 @@ CMD ["pathview", "serve", "--host", "0.0.0.0", "--port", "5000", "--no-browser"]
 
 ---
 
-## 👥 Step 2 — Generate User Password Hashes
+## ⚙️ Step 2 — Create the `docker-compose.yaml`
 
-PathView is protected by **HTTP Basic Authentication** managed by Traefik. Each user needs a bcrypt password hash generated on the VM before deployment.
-
-### Install `htpasswd`
-
-```bash
-sudo apt-get update && sudo apt-get install -y apache2-utils
-```
-
-### Generate a hash for each user
-
-```bash
-htpasswd -nbB rob rob01
-```
-
-Output example:
-```
-rob:$2y$05$CbrBDeaaPwAzyGh71jcjjepZpdZgmZ9Z9Y4cP1PeU9HzcLPZRoaHG
-```
-
-### Escape `$` signs for Docker Compose
-
-Every `$` in the hash **must be escaped as `$$`** when placed inside a Docker Compose label. Use this one-liner to get the escaped version ready to paste:
-
-```bash
-htpasswd -nbB rob rob01 | sed 's/\$/\$\$/g'
-```
-
-Output (ready to paste):
-```
-rob:$$2y$$05$$CbrBDeaaPwAzyGh71jcjjepZpdZgmZ9Z9Y4cP1PeU9HzcLPZRoaHG
-```
-
-### Adding multiple users
-
-Generate a hash per user and combine them comma-separated:
-
-```bash
-htpasswd -nbB rob rob01 | sed 's/\$/\$\$/g'
-htpasswd -nbB alice pass123 | sed 's/\$/\$\$/g'
-htpasswd -nbB bob secret99 | sed 's/\$/\$\$/g'
-```
-
----
-
-## ⚙️ Step 3 — Create the `docker-compose.yaml`
-
-Replace `$$2y$$05$$YOUR_HASH_HERE` with your actual escaped hash(es) from Step 2.
+This file configures two services:
+- **Traefik** — reverse proxy that handles HTTPS and auto-provisions the Let's Encrypt SSL certificate
+- **PathView** — the simulation application container
 
 ```yaml
 services:
@@ -148,21 +104,13 @@ services:
       - "traefik.http.routers.pathview.entrypoints=websecure"
       - "traefik.http.routers.pathview.tls.certresolver=myresolver"
       - "traefik.http.services.pathview.loadbalancer.server.port=5000"
-      # BasicAuth middleware
-      - "traefik.http.routers.pathview.middlewares=pathview-auth"
-      - "traefik.http.middlewares.pathview-auth.basicauth.users=rob:$$2y$$05$$CbrBDeaaPwAzyGh71jcjjepZpdZgmZ9Z9Y4cP1PeU9HzcLPZRoaHG"
 ```
 
-> **Multiple users** — extend the `basicauth.users` line with comma-separated entries:
-> ```yaml
-> - "traefik.http.middlewares.pathview-auth.basicauth.users=rob:$$2y$$05$$HASH1,alice:$$2y$$05$$HASH2"
-> ```
-
-> **Why Traefik v3.6.1?** Docker Engine v29 raised the minimum API version to 1.40. Traefik versions below v3.6.1 hardcode API v1.24 and fail silently, serving only a self-signed "TRAEFIK DEFAULT CERT" instead of requesting a valid Let's Encrypt certificate. Always use `traefik:v3.6.1` or higher.
+> **Why Traefik v3.6.1?** Docker Engine v29 raised the minimum API version to 1.40. Traefik versions below v3.6.1 hardcode API v1.24 and fail to connect to the Docker daemon. Always use `traefik:v3.6.1` or higher on modern Docker installations.
 
 ---
 
-## 🚀 Step 4 — Create the Deployment Script `create-pathview.sh`
+## 🚀 Step 3 — Create the Deployment Script `create-pathview.sh`
 
 This script automates the full deployment: stopping Nginx if present, generating `acme.json`, auto-detecting your SURF Research Cloud FQDN, and starting all containers.
 
@@ -195,8 +143,12 @@ fi
 echo "Step 2.5: Automatically detecting FQDN and creating .env..."
 rm -rf .env
 touch .env
-# socket.getfqdn() already returns the correct FQDN on SURF Research Cloud
-MYFQDN=$(python3 -c "import socket; print(socket.getfqdn())")
+RAWNAME=$(python3 -c "import socket; print(socket.getfqdn())")
+# Converts e.g. pathsim-cyber-secure-te-src-surf-hosted-nl
+# into: pathsim.cyber-secure-te.src.surf-hosted.nl
+MYFQDN=$(echo $RAWNAME \
+  | sed 's/-src-surf-hosted-nl/.src.surf-hosted.nl/' \
+  | sed 's/-/\./')
 echo "MYFQDN=$MYFQDN" >> .env
 echo "--------------------------------"
 echo "Success! .env file has been created."
@@ -233,7 +185,7 @@ echo "-------------------------------------------------------"
 
 ---
 
-## ▶️ Step 5 — Run the Deployment
+## ▶️ Step 4 — Run the Deployment
 
 Make the script executable and launch it:
 
@@ -242,48 +194,20 @@ chmod +x create-pathview.sh
 ./create-pathview.sh
 ```
 
-After the script completes, wait **15–30 seconds** for Traefik to request the Let's Encrypt certificate. Then open your browser at your FQDN, for example:
+After the script completes, wait **15–30 seconds** for Traefik to request the Let's Encrypt certificate. Then open your browser at:
 
+```
+https://<your-fqdn>
+```
+
+For example:
 ```
 https://pathsim.cyber-secure-te.src.surf-hosted.nl
 ```
 
 ---
 
-## 🔐 Step 6 — Logging In
-
-When you visit the URL, your browser will display a login dialog:
-
-```
-Username: rob
-Password: rob01
-```
-
-> The login is handled entirely by Traefik before the request reaches PathView.
-> Credentials are **never stored in plaintext** — only the bcrypt hash is used.
-
-### Changing a password
-
-Generate a new hash and update `docker-compose.yaml`, then restart:
-
-```bash
-htpasswd -nbB rob newpassword | sed 's/\$/\$\$/g'
-# Copy the output into the basicauth.users label
-docker compose down
-./create-pathview.sh
-```
-
-### Adding a new user
-
-```bash
-htpasswd -nbB alice pass123 | sed 's/\$/\$\$/g'
-```
-
-Add the escaped output to the `basicauth.users` label, comma-separated after the existing user, then restart with `./create-pathview.sh`.
-
----
-
-## 🔍 Step 7 — Verify & Troubleshoot
+## 🔍 Step 5 — Verify & Troubleshoot
 
 **Check running containers:**
 ```bash
@@ -317,9 +241,8 @@ sudo touch acme.json && sudo chmod 600 acme.json
 | `TRAEFIK DEFAULT CERT` in browser | Traefik cannot reach Docker daemon | Use `traefik:v3.6.1` or higher |
 | `client version 1.24 is too old` in logs | Docker Engine v29 broke older Traefik | Upgrade to `traefik:v3.6.1` |
 | `No such file or directory: requirements.txt` | Dockerfile points to wrong path | Use `pip install pathview==0.8.4` directly |
-| FQDN generates double dots e.g. `..src..` | Aggressive `sed` replacement | Use `socket.getfqdn()` directly — no `sed` needed on SURF Cloud |
+| FQDN generates double dots e.g. `..src..` | Aggressive `sed` replacement | Use targeted `sed` on `-src-surf-hosted-nl` suffix only |
 | `version` attribute warning in compose | Obsolete Docker Compose V2 field | Remove `version:` line from `docker-compose.yaml` |
-| Login prompt rejects correct password | `$` signs not escaped in hash | Run `htpasswd -nbB user pass \| sed 's/\$/\$\$/g'` |
 
 ---
 
@@ -330,7 +253,6 @@ Browser (HTTPS 443)
         │
         ▼
   [ Traefik v3.6.1 ]  ← Auto SSL via Let's Encrypt (HTTP Challenge)
-        │              ← BasicAuth login enforced here
         │
         ▼ internal Docker network (port 5000)
   [ PathView Container ]
@@ -349,7 +271,6 @@ Browser (HTTPS 443)
 | `pathsim` | latest | Differential equation simulation engine |
 | `traefik` | v3.6.1 | Reverse proxy + automatic HTTPS |
 | `python` | 3.11-slim | Container base image |
-| `apache2-utils` | host package | `htpasswd` tool for generating password hashes |
 
 ---
 
