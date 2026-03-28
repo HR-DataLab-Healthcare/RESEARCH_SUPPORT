@@ -214,6 +214,36 @@ volumes:
   postgresdata:
 ```
 
+In case of rate-limiting errors in Langflow (SystemError: (11, 'Resource temporarily unavailable')
+Add hard and soft limits to Langflowcode as follows:
+
+```limits
+  langflow:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: langflow
+    restart: unless-stopped
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    environment:
+      # Postgres connection (creds match DB service)
+      - LANGFLOW_DATABASE_URL=postgresql://langflow:langflow@langflowdb:5432/langflow
+      # Auth: disable auto-login, enable signup
+      - LANGFLOW_AUTOLOGIN=false
+      - LANGFLOW_NEW_USER_SIGNUP=true
+      # Security: replace with strong key
+      - LANGFLOW_SECRET_KEY=alongrandomstringhereforsecurity
+      - LANGFLOW_LANGFLOW_USER_DEFAULT=false
+      # Paths/caching
+      - LANGFLOW_CACHEDIR=/app/langflow/.cache
+      - DONOT_TRACK=true
+      - LANGFLOW_CAIO_MAX_REQUESTS=100
+
+```
+
 # Langflow Deployment Sequence on SURF VM
 
 
