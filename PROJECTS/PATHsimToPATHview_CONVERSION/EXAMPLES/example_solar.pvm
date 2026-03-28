@@ -1,0 +1,1113 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T12:46:57Z",
+    "modified": "2026-03-28T12:46:57Z",
+    "name": "example_solar"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "solar_system",
+        "type": "ODE",
+        "name": "solar_system",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "solar_system-input-0",
+            "nodeId": "solar_system",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "solar_system-output-0",
+            "nodeId": "solar_system",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-1",
+            "nodeId": "solar_system",
+            "name": "out 1",
+            "direction": "output",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-2",
+            "nodeId": "solar_system",
+            "name": "out 2",
+            "direction": "output",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-3",
+            "nodeId": "solar_system",
+            "name": "out 3",
+            "direction": "output",
+            "index": 3,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-4",
+            "nodeId": "solar_system",
+            "name": "out 4",
+            "direction": "output",
+            "index": 4,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-5",
+            "nodeId": "solar_system",
+            "name": "out 5",
+            "direction": "output",
+            "index": 5,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-6",
+            "nodeId": "solar_system",
+            "name": "out 6",
+            "direction": "output",
+            "index": 6,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-7",
+            "nodeId": "solar_system",
+            "name": "out 7",
+            "direction": "output",
+            "index": 7,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-8",
+            "nodeId": "solar_system",
+            "name": "out 8",
+            "direction": "output",
+            "index": 8,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-9",
+            "nodeId": "solar_system",
+            "name": "out 9",
+            "direction": "output",
+            "index": 9,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-10",
+            "nodeId": "solar_system",
+            "name": "out 10",
+            "direction": "output",
+            "index": 10,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-11",
+            "nodeId": "solar_system",
+            "name": "out 11",
+            "direction": "output",
+            "index": 11,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-12",
+            "nodeId": "solar_system",
+            "name": "out 12",
+            "direction": "output",
+            "index": 12,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-13",
+            "nodeId": "solar_system",
+            "name": "out 13",
+            "direction": "output",
+            "index": 13,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-14",
+            "nodeId": "solar_system",
+            "name": "out 14",
+            "direction": "output",
+            "index": 14,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-15",
+            "nodeId": "solar_system",
+            "name": "out 15",
+            "direction": "output",
+            "index": 15,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-16",
+            "nodeId": "solar_system",
+            "name": "out 16",
+            "direction": "output",
+            "index": 16,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-17",
+            "nodeId": "solar_system",
+            "name": "out 17",
+            "direction": "output",
+            "index": 17,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-18",
+            "nodeId": "solar_system",
+            "name": "out 18",
+            "direction": "output",
+            "index": 18,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-19",
+            "nodeId": "solar_system",
+            "name": "out 19",
+            "direction": "output",
+            "index": 19,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-20",
+            "nodeId": "solar_system",
+            "name": "out 20",
+            "direction": "output",
+            "index": 20,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-21",
+            "nodeId": "solar_system",
+            "name": "out 21",
+            "direction": "output",
+            "index": 21,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-22",
+            "nodeId": "solar_system",
+            "name": "out 22",
+            "direction": "output",
+            "index": 22,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-23",
+            "nodeId": "solar_system",
+            "name": "out 23",
+            "direction": "output",
+            "index": 23,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-24",
+            "nodeId": "solar_system",
+            "name": "out 24",
+            "direction": "output",
+            "index": 24,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-25",
+            "nodeId": "solar_system",
+            "name": "out 25",
+            "direction": "output",
+            "index": 25,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-26",
+            "nodeId": "solar_system",
+            "name": "out 26",
+            "direction": "output",
+            "index": 26,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-27",
+            "nodeId": "solar_system",
+            "name": "out 27",
+            "direction": "output",
+            "index": 27,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-28",
+            "nodeId": "solar_system",
+            "name": "out 28",
+            "direction": "output",
+            "index": 28,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-29",
+            "nodeId": "solar_system",
+            "name": "out 29",
+            "direction": "output",
+            "index": 29,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-30",
+            "nodeId": "solar_system",
+            "name": "out 30",
+            "direction": "output",
+            "index": 30,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-31",
+            "nodeId": "solar_system",
+            "name": "out 31",
+            "direction": "output",
+            "index": 31,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-32",
+            "nodeId": "solar_system",
+            "name": "out 32",
+            "direction": "output",
+            "index": 32,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-33",
+            "nodeId": "solar_system",
+            "name": "out 33",
+            "direction": "output",
+            "index": 33,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-34",
+            "nodeId": "solar_system",
+            "name": "out 34",
+            "direction": "output",
+            "index": 34,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-35",
+            "nodeId": "solar_system",
+            "name": "out 35",
+            "direction": "output",
+            "index": 35,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-36",
+            "nodeId": "solar_system",
+            "name": "out 36",
+            "direction": "output",
+            "index": 36,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-37",
+            "nodeId": "solar_system",
+            "name": "out 37",
+            "direction": "output",
+            "index": 37,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-38",
+            "nodeId": "solar_system",
+            "name": "out 38",
+            "direction": "output",
+            "index": 38,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-39",
+            "nodeId": "solar_system",
+            "name": "out 39",
+            "direction": "output",
+            "index": 39,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-40",
+            "nodeId": "solar_system",
+            "name": "out 40",
+            "direction": "output",
+            "index": 40,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-41",
+            "nodeId": "solar_system",
+            "name": "out 41",
+            "direction": "output",
+            "index": 41,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-42",
+            "nodeId": "solar_system",
+            "name": "out 42",
+            "direction": "output",
+            "index": 42,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-43",
+            "nodeId": "solar_system",
+            "name": "out 43",
+            "direction": "output",
+            "index": 43,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-44",
+            "nodeId": "solar_system",
+            "name": "out 44",
+            "direction": "output",
+            "index": 44,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-45",
+            "nodeId": "solar_system",
+            "name": "out 45",
+            "direction": "output",
+            "index": 45,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-46",
+            "nodeId": "solar_system",
+            "name": "out 46",
+            "direction": "output",
+            "index": 46,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-47",
+            "nodeId": "solar_system",
+            "name": "out 47",
+            "direction": "output",
+            "index": 47,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-48",
+            "nodeId": "solar_system",
+            "name": "out 48",
+            "direction": "output",
+            "index": 48,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-49",
+            "nodeId": "solar_system",
+            "name": "out 49",
+            "direction": "output",
+            "index": 49,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-50",
+            "nodeId": "solar_system",
+            "name": "out 50",
+            "direction": "output",
+            "index": 50,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-51",
+            "nodeId": "solar_system",
+            "name": "out 51",
+            "direction": "output",
+            "index": 51,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-52",
+            "nodeId": "solar_system",
+            "name": "out 52",
+            "direction": "output",
+            "index": 52,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-53",
+            "nodeId": "solar_system",
+            "name": "out 53",
+            "direction": "output",
+            "index": 53,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-54",
+            "nodeId": "solar_system",
+            "name": "out 54",
+            "direction": "output",
+            "index": 54,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-55",
+            "nodeId": "solar_system",
+            "name": "out 55",
+            "direction": "output",
+            "index": 55,
+            "color": "#969696"
+          },
+          {
+            "id": "solar_system-output-56",
+            "nodeId": "solar_system",
+            "name": "out 56",
+            "direction": "output",
+            "index": 56,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "solar_system_ode",
+          "initial_value": "x0"
+        }
+      },
+      {
+        "id": "block_2",
+        "type": "Scope",
+        "name": "block_2",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "block_2-input-0",
+            "nodeId": "block_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "block_2-input-1",
+            "nodeId": "block_2",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "block_2-input-2",
+            "nodeId": "block_2",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Sun_x', 'Sun_y', 'Sun_z']"
+        }
+      },
+      {
+        "id": "block_3",
+        "type": "Scope",
+        "name": "block_3",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "block_3-input-0",
+            "nodeId": "block_3",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "block_3-input-1",
+            "nodeId": "block_3",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "block_3-input-2",
+            "nodeId": "block_3",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Mercury_x', 'Mercury_y', 'Mercury_z']"
+        }
+      },
+      {
+        "id": "block_4",
+        "type": "Scope",
+        "name": "block_4",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "block_4-input-0",
+            "nodeId": "block_4",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "block_4-input-1",
+            "nodeId": "block_4",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "block_4-input-2",
+            "nodeId": "block_4",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Venus_x', 'Venus_y', 'Venus_z']"
+        }
+      },
+      {
+        "id": "block_5",
+        "type": "Scope",
+        "name": "block_5",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "block_5-input-0",
+            "nodeId": "block_5",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "block_5-input-1",
+            "nodeId": "block_5",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "block_5-input-2",
+            "nodeId": "block_5",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Earth_x', 'Earth_y', 'Earth_z']"
+        }
+      },
+      {
+        "id": "block_6",
+        "type": "Scope",
+        "name": "block_6",
+        "position": {
+          "x": 180,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "block_6-input-0",
+            "nodeId": "block_6",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "block_6-input-1",
+            "nodeId": "block_6",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "block_6-input-2",
+            "nodeId": "block_6",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Moon_x', 'Moon_y', 'Moon_z']"
+        }
+      },
+      {
+        "id": "block_7",
+        "type": "Scope",
+        "name": "block_7",
+        "position": {
+          "x": 400,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "block_7-input-0",
+            "nodeId": "block_7",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "block_7-input-1",
+            "nodeId": "block_7",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "block_7-input-2",
+            "nodeId": "block_7",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Mars_x', 'Mars_y', 'Mars_z']"
+        }
+      },
+      {
+        "id": "block_8",
+        "type": "Scope",
+        "name": "block_8",
+        "position": {
+          "x": 620,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "block_8-input-0",
+            "nodeId": "block_8",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "block_8-input-1",
+            "nodeId": "block_8",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "block_8-input-2",
+            "nodeId": "block_8",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Jupiter_x', 'Jupiter_y', 'Jupiter_z']"
+        }
+      },
+      {
+        "id": "block_9",
+        "type": "Scope",
+        "name": "block_9",
+        "position": {
+          "x": 840,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "block_9-input-0",
+            "nodeId": "block_9",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "block_9-input-1",
+            "nodeId": "block_9",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "block_9-input-2",
+            "nodeId": "block_9",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Saturn_x', 'Saturn_y', 'Saturn_z']"
+        }
+      },
+      {
+        "id": "block_10",
+        "type": "Scope",
+        "name": "block_10",
+        "position": {
+          "x": 1060,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "block_10-input-0",
+            "nodeId": "block_10",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "block_10-input-1",
+            "nodeId": "block_10",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "block_10-input-2",
+            "nodeId": "block_10",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Uranus_x', 'Uranus_y', 'Uranus_z']"
+        }
+      },
+      {
+        "id": "block_11",
+        "type": "Scope",
+        "name": "block_11",
+        "position": {
+          "x": 180,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "block_11-input-0",
+            "nodeId": "block_11",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "block_11-input-1",
+            "nodeId": "block_11",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "block_11-input-2",
+            "nodeId": "block_11",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Neptune_x', 'Neptune_y', 'Neptune_z']"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 0,
+        "targetNodeId": "block_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 1,
+        "targetNodeId": "block_2",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 2,
+        "targetNodeId": "block_2",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 6,
+        "targetNodeId": "block_3",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 7,
+        "targetNodeId": "block_3",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 8,
+        "targetNodeId": "block_3",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 12,
+        "targetNodeId": "block_4",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 13,
+        "targetNodeId": "block_4",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 14,
+        "targetNodeId": "block_4",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 18,
+        "targetNodeId": "block_5",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 19,
+        "targetNodeId": "block_5",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 20,
+        "targetNodeId": "block_5",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0013",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 24,
+        "targetNodeId": "block_6",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0014",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 25,
+        "targetNodeId": "block_6",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0015",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 26,
+        "targetNodeId": "block_6",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0016",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 30,
+        "targetNodeId": "block_7",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0017",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 31,
+        "targetNodeId": "block_7",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0018",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 32,
+        "targetNodeId": "block_7",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0019",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 36,
+        "targetNodeId": "block_8",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0020",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 37,
+        "targetNodeId": "block_8",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0021",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 38,
+        "targetNodeId": "block_8",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0022",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 42,
+        "targetNodeId": "block_9",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0023",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 43,
+        "targetNodeId": "block_9",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0024",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 44,
+        "targetNodeId": "block_9",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0025",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 48,
+        "targetNodeId": "block_10",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0026",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 49,
+        "targetNodeId": "block_10",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0027",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 50,
+        "targetNodeId": "block_10",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0028",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 54,
+        "targetNodeId": "block_11",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0029",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 55,
+        "targetNodeId": "block_11",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0030",
+        "sourceNodeId": "solar_system",
+        "sourcePortIndex": 56,
+        "targetNodeId": "block_11",
+        "targetPortIndex": 2
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nG = 4 * np.pi ** 2 / 365 ** 2\n\nclass Body:\n\n    def __init__(self, name, mass, pos, vel):\n        self.name = name\n        self.mass = mass\n        self.pos = pos\n        self.vel = vel\n        self.scope = Scope(labels=[f'{name}_x', f'{name}_y', f'{name}_z'])\n\n    def acceleration(self, others):\n        acc = 0.0\n        for other in others:\n            if self == other:\n                continue\n            r = other.pos - self.pos\n            acc += G * other.mass * r / np.linalg.norm(r) ** 3\n        return acc\n\n    def set_state(self, x):\n        self.pos, self.vel = np.split(x, 2)\n\nbodies = [Body('Sun', 1.0, np.array([-0.007953295388406003, -0.002927365330787842, 0.0002101676755805344]), np.array([4.895790326265684e-06, -7.031130993046038e-06, -4.608199080172032e-08])), Body('Mercury', 1.6601e-07, np.array([-0.3402449827894693, 0.1270778296493449, 0.04131347894005659]), np.array([-0.01605040287977755, -0.02501076003142073, -0.0005707201750753626])), Body('Venus', 2.4478383e-06, np.array([-0.714568173260523, -0.1397795793060785, 0.0391029721650349]), np.array([0.0037220462718276, -0.01995491285165146, -0.0004884816665833027])), Body('Earth', 3.00348959632e-06, np.array([-0.2252729645653915, 0.9560667628227153, 0.0001577009263320669]), np.array([-0.0170553960270948, -0.003867848205935779, 8.659435473035585e-07])), Body('Moon', 1.23000383e-08, np.array([-0.227905488266257, 0.9555472591607231, 0.0001966883909702569]), np.array([-0.01692842706672744, -0.004413215938363101, -4.814510536207644e-05])), Body('Mars', 3.227151e-07, np.array([-0.2584550024643773, -1.458170543308088, -0.02414302778676946]), np.array([0.01432301013565291, -0.001180131804284778, -0.0003758404643770721])), Body('Jupiter', 0.00095479194, np.array([3.468750430010888, 3.569029893989959, -0.09241237573403982]), np.array([-0.005494699932030809, 0.005617278671368608, 9.965559179501148e-05])), Body('Saturn', 0.000285886, np.array([8.993559415482203, -3.703623931688067, -0.2936792504543212]), np.array([0.00181359511936561, 0.005147794035913646, -0.0001618510392848537])), Body('Uranus', 4.366244e-05, np.array([12.25372655349175, 15.30421738450486, -0.1019092411813474]), np.array([-0.003099119844130931, 0.002274987396511312, 4.859903652849407e-05])), Body('Neptune', 5.151389e-05, np.array([29.83551610844023, -1.784353951224969, -0.6508462844445427]), np.array([0.0001665857900509985, 0.00315221963798833, -6.863577717527224e-05]))]\n\ndef solar_system_ode(x, u, t):\n    for s, b in zip(np.split(x, len(bodies)), bodies):\n        b.set_state(s)\n    return np.hstack([np.hstack([b.vel, b.acceleration(bodies)]) for b in bodies])\n\nx0 = np.hstack([np.hstack([b.pos, b.vel]) for b in bodies])\n\nfor i, b in enumerate(bodies):\n    connections.extend([Connection(solar_system[6 * i], b.scope[0]), Connection(solar_system[6 * i + 1], b.scope[1]), Connection(solar_system[6 * i + 2], b.scope[2])])"
+  },
+  "simulationSettings": {
+    "duration": "1825",
+    "dt": "0.1",
+    "solver": "RKF78",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

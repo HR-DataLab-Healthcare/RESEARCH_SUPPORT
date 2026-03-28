@@ -1,0 +1,443 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T12:46:57Z",
+    "modified": "2026-03-28T12:46:57Z",
+    "name": "example_kalman_filter"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "vel",
+        "type": "Constant",
+        "name": "vel",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "vel-output-0",
+            "nodeId": "vel",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "value": "v_true"
+        }
+      },
+      {
+        "id": "pos",
+        "type": "Integrator",
+        "name": "pos",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "pos-input-0",
+            "nodeId": "pos",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "pos-output-0",
+            "nodeId": "pos",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "initial_value": "x0_true"
+        }
+      },
+      {
+        "id": "noise",
+        "type": "WhiteNoise",
+        "name": "noise",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "noise-output-0",
+            "nodeId": "noise",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "spectral_density": "measurement_std ** 2 * dt"
+        }
+      },
+      {
+        "id": "measured_pos",
+        "type": "Adder",
+        "name": "measured_pos",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "measured_pos-input-0",
+            "nodeId": "measured_pos",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "measured_pos-input-1",
+            "nodeId": "measured_pos",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "measured_pos-output-0",
+            "nodeId": "measured_pos",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {}
+      },
+      {
+        "id": "kf",
+        "type": "KalmanFilter",
+        "name": "kf",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "kf-input-0",
+            "nodeId": "kf",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "kf-output-0",
+            "nodeId": "kf",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "kf-output-1",
+            "nodeId": "kf",
+            "name": "out 1",
+            "direction": "output",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "F": "F",
+          "H": "H",
+          "Q": "Q",
+          "R": "R",
+          "x0": "x0_kf",
+          "P0": "P0_kf"
+        }
+      },
+      {
+        "id": "sc_pos",
+        "type": "Scope",
+        "name": "sc_pos",
+        "position": {
+          "x": 180,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sc_pos-input-0",
+            "nodeId": "sc_pos",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sc_pos-input-1",
+            "nodeId": "sc_pos",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "sc_pos-input-2",
+            "nodeId": "sc_pos",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['true position', 'measured position', 'estimated position']"
+        }
+      },
+      {
+        "id": "sc_vel",
+        "type": "Scope",
+        "name": "sc_vel",
+        "position": {
+          "x": 400,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sc_vel-input-0",
+            "nodeId": "sc_vel",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sc_vel-input-1",
+            "nodeId": "sc_vel",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['true velocity', 'estimated velocity']"
+        }
+      },
+      {
+        "id": "vel_scalar_0",
+        "type": "Function",
+        "name": "vel_scalar_0",
+        "position": {
+          "x": 290,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "vel_scalar_0-input-0",
+            "nodeId": "vel_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "vel_scalar_0-output-0",
+            "nodeId": "vel_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "pos_scalar_0",
+        "type": "Function",
+        "name": "pos_scalar_0",
+        "position": {
+          "x": 290,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "pos_scalar_0-input-0",
+            "nodeId": "pos_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "pos_scalar_0-output-0",
+            "nodeId": "pos_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "measured_pos_scalar_1",
+        "type": "Function",
+        "name": "measured_pos_scalar_1",
+        "position": {
+          "x": 510,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "measured_pos_scalar_1-input-0",
+            "nodeId": "measured_pos_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "measured_pos_scalar_1-output-0",
+            "nodeId": "measured_pos_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "vel",
+        "sourcePortIndex": 0,
+        "targetNodeId": "pos",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "vel",
+        "sourcePortIndex": 0,
+        "targetNodeId": "vel_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "vel_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc_vel",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "pos",
+        "sourcePortIndex": 0,
+        "targetNodeId": "measured_pos",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "pos",
+        "sourcePortIndex": 0,
+        "targetNodeId": "pos_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "pos_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc_pos",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "noise",
+        "sourcePortIndex": 0,
+        "targetNodeId": "measured_pos",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "measured_pos",
+        "sourcePortIndex": 0,
+        "targetNodeId": "kf",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "measured_pos",
+        "sourcePortIndex": 0,
+        "targetNodeId": "measured_pos_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "measured_pos_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc_pos",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "kf",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc_pos",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "kf",
+        "sourcePortIndex": 1,
+        "targetNodeId": "sc_vel",
+        "targetPortIndex": 1
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\ndt = 0.05\n\nv_true = 2.0\n\nx0_true = 0.0\n\nmeasurement_std = 0.2\n\nF = np.array([[1, dt], [0, 1]])\n\nH = np.array([[1, 0]])\n\nq = 0.1\n\nQ = np.array([[dt ** 3 / 3, dt ** 2 / 2], [dt ** 2 / 2, dt]]) * q\n\nR = np.array([[measurement_std ** 2]])\n\nx0_kf = np.array([0, 0])\n\nP0_kf = np.diag([1.0, 1.0])"
+  },
+  "simulationSettings": {
+    "duration": "10",
+    "dt": "0.05",
+    "solver": "SSPRK22",
+    "adaptive": false,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

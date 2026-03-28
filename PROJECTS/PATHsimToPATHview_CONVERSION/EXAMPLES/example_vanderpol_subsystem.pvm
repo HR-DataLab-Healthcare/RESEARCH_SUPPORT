@@ -1,0 +1,134 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T15:49:09Z",
+    "modified": "2026-03-28T15:49:09Z",
+    "name": "example_vanderpol_subsystem"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "VDP",
+        "type": "Subsystem",
+        "name": "VDP",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "VDP-input-0",
+            "nodeId": "VDP",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "VDP-output-0",
+            "nodeId": "VDP",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "blocks": "sub_blocks",
+          "connections": "sub_connections"
+        }
+      },
+      {
+        "id": "Sco",
+        "type": "Scope",
+        "name": "Sco",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Sco-input-0",
+            "nodeId": "Sco",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['$x_1$', '$x_2$']"
+        }
+      },
+      {
+        "id": "VDP_scalar_0",
+        "type": "Function",
+        "name": "VDP_scalar",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "VDP_scalar_0-input-0",
+            "nodeId": "VDP_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "VDP_scalar_0-output-0",
+            "nodeId": "VDP_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "VDP",
+        "sourcePortIndex": 0,
+        "targetNodeId": "VDP_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "VDP_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 0
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\n# --- START MONKEY PATCH SUBSYSTEM --- \n# Resolves ValueError: Subsystem expects list, but PathView worker converts string.\ntry:\n    import inspect\n    from pathsim.subsystem import Subsystem\n    if not hasattr(Subsystem, '_pv_patched'):\n        _orig_sub_init = Subsystem.__init__\n        def _pv_sub_init(self, blocks=None, connections=None, events=None, solver_args=None, **kwargs):\n            # PathView JSON parameters arrive as strings. Sometimes they are repr-encoded twice (e.g. '\"[p1]\"').\n            while isinstance(blocks, str):\n                try:\n                    new_blocks = eval(blocks, globals())\n                    if new_blocks == blocks: break\n                    blocks = new_blocks\n                except Exception: break\n            while isinstance(connections, str):\n                try:\n                    new_connections = eval(connections, globals())\n                    if new_connections == connections: break\n                    connections = new_connections\n                except Exception: break\n            while isinstance(events, str):\n                try:\n                    new_events = eval(events, globals())\n                    if new_events == events: break\n                    events = new_events\n                except Exception: break\n            _orig_sub_init(self, blocks, connections, events, solver_args, **kwargs)\n        Subsystem.__init__ = _pv_sub_init\n        Subsystem._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH SUBSYSTEM --- \n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nfrom pathsim import Simulation, Connection, Interface, Subsystem\n\nfrom pathsim.blocks import Integrator, Scope, Adder, Multiplier, Amplifier, Function\n\nfrom pathsim.solvers import ESDIRK32, ESDIRK43, GEAR52A\n\nx1_0 = 2\n\nx2_0 = 0\n\nmu = 1000\n\nIf = Interface()\n\nI1 = Integrator(x1_0)\n\nI2 = Integrator(x2_0)\n\nFn = Function(lambda a: 1 - a ** 2)\n\nPr = Multiplier()\n\nAd = Adder('-+')\n\nAm = Amplifier(mu)\n\nsub_blocks = [If, I1, I2, Fn, Pr, Ad, Am]\n\nsub_connections = [Connection(I2, I1, Pr[0], If[1]), Connection(I1, Fn, Ad[0], If[0]), Connection(Fn, Pr[1]), Connection(Pr, Am), Connection(Am, Ad[1]), Connection(Ad, I2)]"
+  },
+  "simulationSettings": {
+    "duration": "3000",
+    "dt": "0.01",
+    "solver": "GEAR52A",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-08",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

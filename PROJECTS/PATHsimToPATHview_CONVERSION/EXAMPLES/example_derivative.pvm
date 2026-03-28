@@ -1,0 +1,464 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T17:35:56Z",
+    "modified": "2026-03-28T17:35:56Z",
+    "name": "example_derivative"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "Src",
+        "type": "Source",
+        "name": "Src",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "Src-output-0",
+            "nodeId": "Src",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda t: np.sin(omega * t)"
+        }
+      },
+      {
+        "id": "Sri",
+        "type": "Source",
+        "name": "Sri",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "Sri-output-0",
+            "nodeId": "Sri",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda t: -1 / omega * np.cos(omega * t)"
+        }
+      },
+      {
+        "id": "Srd",
+        "type": "Source",
+        "name": "Srd",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "Srd-output-0",
+            "nodeId": "Srd",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda t: omega * np.cos(omega * t)"
+        }
+      },
+      {
+        "id": "Int",
+        "type": "Integrator",
+        "name": "Int",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Int-input-0",
+            "nodeId": "Int",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Int-output-0",
+            "nodeId": "Int",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "initial_value": "-1 / omega"
+        }
+      },
+      {
+        "id": "Dif",
+        "type": "Differentiator",
+        "name": "Dif",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Dif-input-0",
+            "nodeId": "Dif",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Dif-output-0",
+            "nodeId": "Dif",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "f_max": "100"
+        }
+      },
+      {
+        "id": "Sco",
+        "type": "Scope",
+        "name": "Sco",
+        "position": {
+          "x": 180,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "Sco-input-0",
+            "nodeId": "Sco",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco-input-1",
+            "nodeId": "Sco",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco-input-2",
+            "nodeId": "Sco",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco-input-3",
+            "nodeId": "Sco",
+            "name": "in 3",
+            "direction": "input",
+            "index": 3,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco-input-4",
+            "nodeId": "Sco",
+            "name": "in 4",
+            "direction": "input",
+            "index": 4,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['sin', 'integrator', 'differentiator', 'reference integral', 'reference derivative']"
+        }
+      },
+      {
+        "id": "Src_scalar_0",
+        "type": "Function",
+        "name": "Src_scalar_0",
+        "position": {
+          "x": 180,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Src_scalar_0-input-0",
+            "nodeId": "Src_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Src_scalar_0-output-0",
+            "nodeId": "Src_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Int_scalar_1",
+        "type": "Function",
+        "name": "Int_scalar_1",
+        "position": {
+          "x": 510,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Int_scalar_1-input-0",
+            "nodeId": "Int_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Int_scalar_1-output-0",
+            "nodeId": "Int_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Dif_scalar_2",
+        "type": "Function",
+        "name": "Dif_scalar_2",
+        "position": {
+          "x": 620,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Dif_scalar_2-input-0",
+            "nodeId": "Dif_scalar_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Dif_scalar_2-output-0",
+            "nodeId": "Dif_scalar_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Sri_scalar_3",
+        "type": "Function",
+        "name": "Sri_scalar_3",
+        "position": {
+          "x": 290,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Sri_scalar_3-input-0",
+            "nodeId": "Sri_scalar_3",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Sri_scalar_3-output-0",
+            "nodeId": "Sri_scalar_3",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Srd_scalar_4",
+        "type": "Function",
+        "name": "Srd_scalar_4",
+        "position": {
+          "x": 400,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Srd_scalar_4-input-0",
+            "nodeId": "Srd_scalar_4",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Srd_scalar_4-output-0",
+            "nodeId": "Srd_scalar_4",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "Src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Int",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "Src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Dif",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "Src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Src_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "Src_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "Int",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Int_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "Int_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "Dif",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Dif_scalar_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "Dif_scalar_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "Sri",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sri_scalar_3",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "Sri_scalar_3",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 3
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "Srd",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Srd_scalar_4",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "Srd_scalar_4",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 4
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\n# --- START MONKEY PATCH BLOCK CALL ---\n# Some PathSim versions call block(t) instead of block.update(t).\n# Block.__call__(self) only accepts self, so redirect to update.\ntry:\n    from pathsim.blocks._block import Block as _Block\n    if not hasattr(_Block, '_pv_call_patched'):\n        _orig_block_call = _Block.__call__\n        def _pv_safe_block_call(self, *args, **kwargs):\n            if args or kwargs:\n                return self.update(*args, **kwargs)\n            return _orig_block_call(self)\n        _Block.__call__ = _pv_safe_block_call\n        _Block._pv_call_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH BLOCK CALL ---\n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nfrom pathsim import Simulation, Connection\n\nfrom pathsim.blocks import Source, Integrator, Differentiator, Adder, Scope\n\nfrom pathsim.solvers import SSPRK33, RKCK54\n\ndt = 0.02\n\nf = 1\n\nomega = 2 * np.pi * f"
+  },
+  "simulationSettings": {
+    "duration": "20.0",
+    "dt": "0.02",
+    "solver": "RKCK54",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

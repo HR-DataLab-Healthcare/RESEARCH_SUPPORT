@@ -1,0 +1,829 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T12:46:57Z",
+    "modified": "2026-03-28T12:46:57Z",
+    "name": "example_abs_braking"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "omg_raw",
+        "type": "Integrator",
+        "name": "omg_raw",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "omg_raw-input-0",
+            "nodeId": "omg_raw",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "omg_raw-output-0",
+            "nodeId": "omg_raw",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "initial_value": "omega0"
+        }
+      },
+      {
+        "id": "omg_clp",
+        "type": "Clip",
+        "name": "omg_clp",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "omg_clp-input-0",
+            "nodeId": "omg_clp",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "omg_clp-output-0",
+            "nodeId": "omg_clp",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "min_val": "0",
+          "max_val": "1000"
+        }
+      },
+      {
+        "id": "omg_acc",
+        "type": "Amplifier",
+        "name": "omg_acc",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "omg_acc-input-0",
+            "nodeId": "omg_acc",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "omg_acc-output-0",
+            "nodeId": "omg_acc",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "gain": "1 / J_w"
+        }
+      },
+      {
+        "id": "vel",
+        "type": "Integrator",
+        "name": "vel",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "vel-input-0",
+            "nodeId": "vel",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "vel-output-0",
+            "nodeId": "vel",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "initial_value": "v0"
+        }
+      },
+      {
+        "id": "vel_acc",
+        "type": "Amplifier",
+        "name": "vel_acc",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "vel_acc-input-0",
+            "nodeId": "vel_acc",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "vel_acc-output-0",
+            "nodeId": "vel_acc",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "gain": "-1 / M"
+        }
+      },
+      {
+        "id": "slp",
+        "type": "Function",
+        "name": "slp",
+        "position": {
+          "x": 180,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "slp-input-0",
+            "nodeId": "slp",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "slp-input-1",
+            "nodeId": "slp",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "slp-output-0",
+            "nodeId": "slp",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "calculate_slip"
+        }
+      },
+      {
+        "id": "frc",
+        "type": "Function",
+        "name": "frc",
+        "position": {
+          "x": 400,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "frc-input-0",
+            "nodeId": "frc",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "frc-output-0",
+            "nodeId": "frc",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "friction_force"
+        }
+      },
+      {
+        "id": "frc_cof",
+        "type": "Function",
+        "name": "frc_cof",
+        "position": {
+          "x": 620,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "frc_cof-input-0",
+            "nodeId": "frc_cof",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "frc_cof-output-0",
+            "nodeId": "frc_cof",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "friction_coefficient"
+        }
+      },
+      {
+        "id": "brk",
+        "type": "Constant",
+        "name": "brk",
+        "position": {
+          "x": 840,
+          "y": 260
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "brk-output-0",
+            "nodeId": "brk",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "value": "T_brake"
+        }
+      },
+      {
+        "id": "brk_neg",
+        "type": "Amplifier",
+        "name": "brk_neg",
+        "position": {
+          "x": 1060,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "brk_neg-input-0",
+            "nodeId": "brk_neg",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "brk_neg-output-0",
+            "nodeId": "brk_neg",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "gain": "-1"
+        }
+      },
+      {
+        "id": "whl_trq",
+        "type": "Amplifier",
+        "name": "whl_trq",
+        "position": {
+          "x": 180,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "whl_trq-input-0",
+            "nodeId": "whl_trq",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "whl_trq-output-0",
+            "nodeId": "whl_trq",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "gain": "R"
+        }
+      },
+      {
+        "id": "trq_sum",
+        "type": "Adder",
+        "name": "trq_sum",
+        "position": {
+          "x": 400,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "trq_sum-input-0",
+            "nodeId": "trq_sum",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "trq_sum-input-1",
+            "nodeId": "trq_sum",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "trq_sum-output-0",
+            "nodeId": "trq_sum",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'++'"
+        }
+      },
+      {
+        "id": "whl_vel",
+        "type": "Amplifier",
+        "name": "whl_vel",
+        "position": {
+          "x": 620,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "whl_vel-input-0",
+            "nodeId": "whl_vel",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "whl_vel-output-0",
+            "nodeId": "whl_vel",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "gain": "R"
+        }
+      },
+      {
+        "id": "sco1",
+        "type": "Scope",
+        "name": "sco1",
+        "position": {
+          "x": 840,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "sco1-input-0",
+            "nodeId": "sco1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sco1-input-1",
+            "nodeId": "sco1",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Vehicle Speed [m/s]', 'Wheel Speed [m/s]']"
+        }
+      },
+      {
+        "id": "sco2",
+        "type": "Scope",
+        "name": "sco2",
+        "position": {
+          "x": 1060,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "sco2-input-0",
+            "nodeId": "sco2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sco2-input-1",
+            "nodeId": "sco2",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Slip Ratio', 'Friction Coeff']"
+        }
+      },
+      {
+        "id": "vel_scalar_0",
+        "type": "Function",
+        "name": "vel_scalar_0",
+        "position": {
+          "x": 840,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "vel_scalar_0-input-0",
+            "nodeId": "vel_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "vel_scalar_0-output-0",
+            "nodeId": "vel_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "slp_scalar_0",
+        "type": "Function",
+        "name": "slp_scalar_0",
+        "position": {
+          "x": 620,
+          "y": 330
+        },
+        "inputs": [
+          {
+            "id": "slp_scalar_0-input-0",
+            "nodeId": "slp_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "slp_scalar_0-output-0",
+            "nodeId": "slp_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "frc_cof_scalar_1",
+        "type": "Function",
+        "name": "frc_cof_scalar_1",
+        "position": {
+          "x": 840,
+          "y": 330
+        },
+        "inputs": [
+          {
+            "id": "frc_cof_scalar_1-input-0",
+            "nodeId": "frc_cof_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "frc_cof_scalar_1-output-0",
+            "nodeId": "frc_cof_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "whl_vel_scalar_1",
+        "type": "Function",
+        "name": "whl_vel_scalar_1",
+        "position": {
+          "x": 730,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "whl_vel_scalar_1-input-0",
+            "nodeId": "whl_vel_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "whl_vel_scalar_1-output-0",
+            "nodeId": "whl_vel_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "omg_acc",
+        "sourcePortIndex": 0,
+        "targetNodeId": "omg_raw",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "omg_raw",
+        "sourcePortIndex": 0,
+        "targetNodeId": "omg_clp",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "omg_clp",
+        "sourcePortIndex": 0,
+        "targetNodeId": "whl_vel",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "trq_sum",
+        "sourcePortIndex": 0,
+        "targetNodeId": "omg_acc",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "vel_acc",
+        "sourcePortIndex": 0,
+        "targetNodeId": "vel",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "vel",
+        "sourcePortIndex": 0,
+        "targetNodeId": "vel_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "vel_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "vel",
+        "sourcePortIndex": 0,
+        "targetNodeId": "slp",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "omg_clp",
+        "sourcePortIndex": 0,
+        "targetNodeId": "slp",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "slp",
+        "sourcePortIndex": 0,
+        "targetNodeId": "slp_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "slp_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "slp",
+        "sourcePortIndex": 0,
+        "targetNodeId": "frc",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0013",
+        "sourceNodeId": "frc",
+        "sourcePortIndex": 0,
+        "targetNodeId": "whl_trq",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0014",
+        "sourceNodeId": "frc",
+        "sourcePortIndex": 0,
+        "targetNodeId": "vel_acc",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0015",
+        "sourceNodeId": "slp",
+        "sourcePortIndex": 0,
+        "targetNodeId": "frc_cof",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0016",
+        "sourceNodeId": "frc_cof",
+        "sourcePortIndex": 0,
+        "targetNodeId": "frc_cof_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0017",
+        "sourceNodeId": "frc_cof_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco2",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0018",
+        "sourceNodeId": "brk",
+        "sourcePortIndex": 0,
+        "targetNodeId": "brk_neg",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0019",
+        "sourceNodeId": "brk_neg",
+        "sourcePortIndex": 0,
+        "targetNodeId": "trq_sum",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0020",
+        "sourceNodeId": "whl_trq",
+        "sourcePortIndex": 0,
+        "targetNodeId": "trq_sum",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0021",
+        "sourceNodeId": "whl_vel",
+        "sourcePortIndex": 0,
+        "targetNodeId": "whl_vel_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0022",
+        "sourceNodeId": "whl_vel_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco1",
+        "targetPortIndex": 1
+      }
+    ],
+    "annotations": []
+  },
+  "events": [
+    {
+      "id": "evt-001",
+      "type": "pathsim.events.ZeroCrossing",
+      "name": "evt_high",
+      "position": {
+        "x": 220,
+        "y": 80
+      },
+      "params": {
+        "func_evt": "evt_slip_high",
+        "func_act": "act_release_brake",
+        "tolerance": "0.0001"
+      }
+    },
+    {
+      "id": "evt-002",
+      "type": "pathsim.events.ZeroCrossing",
+      "name": "evt_low",
+      "position": {
+        "x": 440,
+        "y": 80
+      },
+      "params": {
+        "func_evt": "evt_slip_low",
+        "func_act": "act_apply_brake",
+        "tolerance": "0.0001"
+      }
+    }
+  ],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nM = 1500\n\nR = 0.3\n\nJ_w = 1.0\n\nF_z = M * 9.81 / 4\n\nB_coef = 10.0\n\nC_coef = 1.9\n\nD_coef = 1.0\n\nlambda_opt = 0.15\n\nabs_threshold = 0.02\n\nT_brake = 2000\n\nv0 = 30\n\nomega0 = v0 / R\n\ndef friction_coefficient(slip):\n    \"\"\"Pacejka tire friction model\"\"\"\n    return D_coef * np.sin(C_coef * np.arctan(B_coef * slip))\n\ndef calculate_slip(v, omega):\n    \"\"\"Calculate slip ratio: lambda = (v - R*omega) / v\"\"\"\n    omega_actual = max(0, omega)\n    if v < 0.1:\n        return 0.0\n    slip = (v - R * omega_actual) / v\n    return np.clip(slip, 0, 1)\n\ndef friction_force(slip_ratio):\n    \"\"\"Tire friction force\"\"\"\n    return friction_coefficient(slip_ratio) * F_z\n\nabs_state = {'apply_brake': True}\n\ndef abs_control():\n    \"\"\"ABS bang-bang controller using state\"\"\"\n    return T_brake if abs_state['apply_brake'] else 0\n\ndef evt_slip_high(t):\n    \"\"\"Detects when slip exceeds upper threshold\"\"\"\n    slip_val = slp.outputs[0]\n    return slip_val - (lambda_opt + abs_threshold)\n\ndef act_release_brake(t):\n    \"\"\"Release brake when slip is too high\"\"\"\n    abs_state['apply_brake'] = False\n    brk.value = 0\n\ndef evt_slip_low(t):\n    \"\"\"Detects when slip falls below lower threshold\"\"\"\n    slip_val = slp.outputs[0]\n    return lambda_opt - abs_threshold - slip_val\n\ndef act_apply_brake(t):\n    \"\"\"Apply brake when slip is too low\"\"\"\n    abs_state['apply_brake'] = True\n    brk.value = T_brake"
+  },
+  "simulationSettings": {
+    "duration": "5",
+    "dt": "0.001",
+    "solver": "RKCK54",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

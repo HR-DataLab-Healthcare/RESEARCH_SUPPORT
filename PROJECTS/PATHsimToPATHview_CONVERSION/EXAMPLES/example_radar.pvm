@@ -1,0 +1,727 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T13:18:02Z",
+    "modified": "2026-03-28T13:18:02Z",
+    "name": "example_radar"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "Src",
+        "type": "ChirpPhaseNoiseSource",
+        "name": "Src",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "Src-output-0",
+            "nodeId": "Src",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "f0": "f_min",
+          "BW": "B",
+          "T": "T"
+        }
+      },
+      {
+        "id": "Add",
+        "type": "Adder",
+        "name": "Add",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Add-input-0",
+            "nodeId": "Add",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Add-output-0",
+            "nodeId": "Add",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {}
+      },
+      {
+        "id": "Dly",
+        "type": "Delay",
+        "name": "Dly",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Dly-input-0",
+            "nodeId": "Dly",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Dly-output-0",
+            "nodeId": "Dly",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "tau": "tau"
+        }
+      },
+      {
+        "id": "Mul",
+        "type": "Multiplier",
+        "name": "Mul",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Mul-input-0",
+            "nodeId": "Mul",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Mul-input-1",
+            "nodeId": "Mul",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Mul-output-0",
+            "nodeId": "Mul",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {}
+      },
+      {
+        "id": "Lpf",
+        "type": "ButterworthLowpassFilter",
+        "name": "Lpf",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Lpf-input-0",
+            "nodeId": "Lpf",
+            "name": "in",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Lpf-output-0",
+            "nodeId": "Lpf",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "Fc": "f_trg * 3",
+          "n": "2"
+        }
+      },
+      {
+        "id": "Spc",
+        "type": "Spectrum",
+        "name": "Spc",
+        "position": {
+          "x": 180,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "Spc-input-0",
+            "nodeId": "Spc",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Spc-input-1",
+            "nodeId": "Spc",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "Spc-input-2",
+            "nodeId": "Spc",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "Spc-input-3",
+            "nodeId": "Spc",
+            "name": "in 3",
+            "direction": "input",
+            "index": 3,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "freq": "np.logspace(6, 10.5, 500)",
+          "labels": "['chirp', 'delay', 'mixer', 'lpf']"
+        }
+      },
+      {
+        "id": "Sco",
+        "type": "Scope",
+        "name": "Sco",
+        "position": {
+          "x": 400,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "Sco-input-0",
+            "nodeId": "Sco",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco-input-1",
+            "nodeId": "Sco",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco-input-2",
+            "nodeId": "Sco",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco-input-3",
+            "nodeId": "Sco",
+            "name": "in 3",
+            "direction": "input",
+            "index": 3,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['chirp', 'delay', 'mixer', 'lpf']"
+        }
+      },
+      {
+        "id": "Src_scalar_out",
+        "type": "Function",
+        "name": "Src_scalar_out",
+        "position": {
+          "x": 320,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Src_scalar_out-input-0",
+            "nodeId": "Src_scalar_out",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Src_scalar_out-output-0",
+            "nodeId": "Src_scalar_out",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Add_scalar_0",
+        "type": "Function",
+        "name": "Add_scalar_0",
+        "position": {
+          "x": 400,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Add_scalar_0-input-0",
+            "nodeId": "Add_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Add_scalar_0-output-0",
+            "nodeId": "Add_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Add_scalar_0_2",
+        "type": "Function",
+        "name": "Add_scalar_0",
+        "position": {
+          "x": 290,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Add_scalar_0_2-input-0",
+            "nodeId": "Add_scalar_0_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Add_scalar_0_2-output-0",
+            "nodeId": "Add_scalar_0_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Dly_scalar_1",
+        "type": "Function",
+        "name": "Dly_scalar_1",
+        "position": {
+          "x": 510,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Dly_scalar_1-input-0",
+            "nodeId": "Dly_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Dly_scalar_1-output-0",
+            "nodeId": "Dly_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Dly_scalar_1_2",
+        "type": "Function",
+        "name": "Dly_scalar_1",
+        "position": {
+          "x": 400,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Dly_scalar_1_2-input-0",
+            "nodeId": "Dly_scalar_1_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Dly_scalar_1_2-output-0",
+            "nodeId": "Dly_scalar_1_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Mul_scalar_2",
+        "type": "Function",
+        "name": "Mul_scalar_2",
+        "position": {
+          "x": 620,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Mul_scalar_2-input-0",
+            "nodeId": "Mul_scalar_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Mul_scalar_2-output-0",
+            "nodeId": "Mul_scalar_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Mul_scalar_2_2",
+        "type": "Function",
+        "name": "Mul_scalar_2",
+        "position": {
+          "x": 510,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Mul_scalar_2_2-input-0",
+            "nodeId": "Mul_scalar_2_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Mul_scalar_2_2-output-0",
+            "nodeId": "Mul_scalar_2_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Lpf_scalar_3",
+        "type": "Function",
+        "name": "Lpf_scalar_3",
+        "position": {
+          "x": 730,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Lpf_scalar_3-input-0",
+            "nodeId": "Lpf_scalar_3",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Lpf_scalar_3-output-0",
+            "nodeId": "Lpf_scalar_3",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Lpf_scalar_3_2",
+        "type": "Function",
+        "name": "Lpf_scalar_3",
+        "position": {
+          "x": 620,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Lpf_scalar_3_2-input-0",
+            "nodeId": "Lpf_scalar_3_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Lpf_scalar_3_2-output-0",
+            "nodeId": "Lpf_scalar_3_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "Src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Src_scalar_out",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "Src_scalar_out",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Add",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "Add",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Dly",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "Add",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Mul",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "Add",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Add_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "Add_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "Add",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Add_scalar_0_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "Add_scalar_0_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Spc",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "Dly",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Mul",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "Dly",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Dly_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "Dly_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "Dly",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Dly_scalar_1_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0013",
+        "sourceNodeId": "Dly_scalar_1_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Spc",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0014",
+        "sourceNodeId": "Mul",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Lpf",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0015",
+        "sourceNodeId": "Mul",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Mul_scalar_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0016",
+        "sourceNodeId": "Mul_scalar_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0017",
+        "sourceNodeId": "Mul",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Mul_scalar_2_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0018",
+        "sourceNodeId": "Mul_scalar_2_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Spc",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0019",
+        "sourceNodeId": "Lpf",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Lpf_scalar_3",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0020",
+        "sourceNodeId": "Lpf_scalar_3",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 3
+      },
+      {
+        "id": "conn-0021",
+        "sourceNodeId": "Lpf",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Lpf_scalar_3_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0022",
+        "sourceNodeId": "Lpf_scalar_3_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Spc",
+        "targetPortIndex": 3
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport matplotlib.pyplot as plt\n\nimport numpy as np\n\nc0 = 300000000.0\n\nB = 4000000000.0\n\nT = 5e-07\n\nf_min = 1000000000.0\n\ndt = 1e-11\n\ntau = 2e-09\n\nR = c0 * tau / 2\n\nf_trg = 4 * R * B / (T * c0)"
+  },
+  "simulationSettings": {
+    "duration": "5e-07",
+    "dt": "1e-11",
+    "solver": "SSPRK22",
+    "adaptive": false,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

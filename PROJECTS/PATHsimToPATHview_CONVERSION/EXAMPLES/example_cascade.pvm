@@ -1,0 +1,904 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T17:36:42Z",
+    "modified": "2026-03-28T17:36:42Z",
+    "name": "example_cascade"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "stp",
+        "type": "Source",
+        "name": "stp",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "stp-output-0",
+            "nodeId": "stp",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "f_s"
+        }
+      },
+      {
+        "id": "plant",
+        "type": "Subsystem",
+        "name": "plant",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "plant-input-0",
+            "nodeId": "plant",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "plant-output-0",
+            "nodeId": "plant",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "plant-output-1",
+            "nodeId": "plant",
+            "name": "out 1",
+            "direction": "output",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "params": {},
+        "graph": {
+          "nodes": [
+            {
+              "id": "in1",
+              "type": "Interface",
+              "name": "in1",
+              "position": {
+                "x": 100,
+                "y": 100
+              },
+              "inputs": [
+                {
+                  "id": "in1-input-0",
+                  "nodeId": "in1",
+                  "name": "in 0",
+                  "direction": "input",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "outputs": [
+                {
+                  "id": "in1-output-0",
+                  "nodeId": "in1",
+                  "name": "out 0",
+                  "direction": "output",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "params": {}
+            },
+            {
+              "id": "p1",
+              "type": "TransferFunctionZPG",
+              "name": "p1",
+              "position": {
+                "x": 320,
+                "y": 100
+              },
+              "inputs": [
+                {
+                  "id": "p1-input-0",
+                  "nodeId": "p1",
+                  "name": "in",
+                  "direction": "input",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "outputs": [
+                {
+                  "id": "p1-output-0",
+                  "nodeId": "p1",
+                  "name": "out",
+                  "direction": "output",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "params": {
+                "Poles": "[-1, -1, -1]",
+                "Gain": 10
+              }
+            },
+            {
+              "id": "p2",
+              "type": "TransferFunctionZPG",
+              "name": "p2",
+              "position": {
+                "x": 540,
+                "y": 100
+              },
+              "inputs": [
+                {
+                  "id": "p2-input-0",
+                  "nodeId": "p2",
+                  "name": "in",
+                  "direction": "input",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "outputs": [
+                {
+                  "id": "p2-output-0",
+                  "nodeId": "p2",
+                  "name": "out",
+                  "direction": "output",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "params": {
+                "Poles": "[-2]",
+                "Gain": 3
+              }
+            },
+            {
+              "id": "a1",
+              "type": "Adder",
+              "name": "a1",
+              "position": {
+                "x": 760,
+                "y": 100
+              },
+              "inputs": [
+                {
+                  "id": "a1-input-0",
+                  "nodeId": "a1",
+                  "name": "in 0",
+                  "direction": "input",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "outputs": [
+                {
+                  "id": "a1-output-0",
+                  "nodeId": "a1",
+                  "name": "out",
+                  "direction": "output",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "params": {}
+            },
+            {
+              "id": "a2",
+              "type": "Adder",
+              "name": "a2",
+              "position": {
+                "x": 980,
+                "y": 100
+              },
+              "inputs": [
+                {
+                  "id": "a2-input-0",
+                  "nodeId": "a2",
+                  "name": "in 0",
+                  "direction": "input",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "outputs": [
+                {
+                  "id": "a2-output-0",
+                  "nodeId": "a2",
+                  "name": "out",
+                  "direction": "output",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "params": {}
+            },
+            {
+              "id": "d1",
+              "type": "WhiteNoise",
+              "name": "d1",
+              "position": {
+                "x": 100,
+                "y": 240
+              },
+              "inputs": [],
+              "outputs": [
+                {
+                  "id": "d1-output-0",
+                  "nodeId": "d1",
+                  "name": "out",
+                  "direction": "output",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "params": {
+                "standard_deviation": 0.001,
+                "sampling_period": 0.1
+              }
+            },
+            {
+              "id": "d2",
+              "type": "WhiteNoise",
+              "name": "d2",
+              "position": {
+                "x": 320,
+                "y": 240
+              },
+              "inputs": [],
+              "outputs": [
+                {
+                  "id": "d2-output-0",
+                  "nodeId": "d2",
+                  "name": "out",
+                  "direction": "output",
+                  "index": 0,
+                  "color": "#969696"
+                }
+              ],
+              "params": {
+                "standard_deviation": 0.001,
+                "sampling_period": 0.1
+              }
+            }
+          ],
+          "connections": [
+            {
+              "id": "sub-conn-0001",
+              "sourceNodeId": "in1",
+              "sourcePortIndex": 0,
+              "targetNodeId": "p2",
+              "targetPortIndex": 0
+            },
+            {
+              "id": "sub-conn-0002",
+              "sourceNodeId": "p2",
+              "sourcePortIndex": 0,
+              "targetNodeId": "a2",
+              "targetPortIndex": 0
+            },
+            {
+              "id": "sub-conn-0003",
+              "sourceNodeId": "d2",
+              "sourcePortIndex": 0,
+              "targetNodeId": "a2",
+              "targetPortIndex": 1
+            },
+            {
+              "id": "sub-conn-0004",
+              "sourceNodeId": "a2",
+              "sourcePortIndex": 0,
+              "targetNodeId": "p1",
+              "targetPortIndex": 0
+            },
+            {
+              "id": "sub-conn-0005",
+              "sourceNodeId": "a2",
+              "sourcePortIndex": 0,
+              "targetNodeId": "in1",
+              "targetPortIndex": 1
+            },
+            {
+              "id": "sub-conn-0006",
+              "sourceNodeId": "p1",
+              "sourcePortIndex": 0,
+              "targetNodeId": "a1",
+              "targetPortIndex": 0
+            },
+            {
+              "id": "sub-conn-0007",
+              "sourceNodeId": "d1",
+              "sourcePortIndex": 0,
+              "targetNodeId": "a1",
+              "targetPortIndex": 1
+            },
+            {
+              "id": "sub-conn-0008",
+              "sourceNodeId": "a1",
+              "sourcePortIndex": 0,
+              "targetNodeId": "in1",
+              "targetPortIndex": 0
+            }
+          ],
+          "events": []
+        }
+      },
+      {
+        "id": "c1",
+        "type": "PID",
+        "name": "c1",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "c1-input-0",
+            "nodeId": "c1",
+            "name": "in",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "c1-output-0",
+            "nodeId": "c1",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "Kp": "0.015",
+          "Ki": "0.015 / 0.716",
+          "Kd": "0.0",
+          "f_max": "10.0"
+        }
+      },
+      {
+        "id": "c2",
+        "type": "PID",
+        "name": "c2",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "c2-input-0",
+            "nodeId": "c2",
+            "name": "in",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "c2-output-0",
+            "nodeId": "c2",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "Kp": "0.244",
+          "Ki": "0.244 / 0.134",
+          "Kd": "0.0",
+          "f_max": "10.0"
+        }
+      },
+      {
+        "id": "e1",
+        "type": "Adder",
+        "name": "e1",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "e1-input-0",
+            "nodeId": "e1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "e1-input-1",
+            "nodeId": "e1",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "e1-output-0",
+            "nodeId": "e1",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'+-'"
+        }
+      },
+      {
+        "id": "e2",
+        "type": "Adder",
+        "name": "e2",
+        "position": {
+          "x": 180,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "e2-input-0",
+            "nodeId": "e2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "e2-input-1",
+            "nodeId": "e2",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "e2-output-0",
+            "nodeId": "e2",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'+-'"
+        }
+      },
+      {
+        "id": "sc0",
+        "type": "Scope",
+        "name": "sc0",
+        "position": {
+          "x": 400,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sc0-input-0",
+            "nodeId": "sc0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sc0-input-1",
+            "nodeId": "sc0",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "sc0-input-2",
+            "nodeId": "sc0",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['setpoint', 'plant 1', 'plant 2']"
+        }
+      },
+      {
+        "id": "sc1",
+        "type": "Scope",
+        "name": "sc1",
+        "position": {
+          "x": 620,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sc1-input-0",
+            "nodeId": "sc1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sc1-input-1",
+            "nodeId": "sc1",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['err 1', 'pid 1']"
+        }
+      },
+      {
+        "id": "sc2",
+        "type": "Scope",
+        "name": "sc2",
+        "position": {
+          "x": 840,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sc2-input-0",
+            "nodeId": "sc2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sc2-input-1",
+            "nodeId": "sc2",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['err 2', 'pid 2']"
+        }
+      },
+      {
+        "id": "stp_scalar_0",
+        "type": "Function",
+        "name": "stp_scalar_0",
+        "position": {
+          "x": 290,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "stp_scalar_0-input-0",
+            "nodeId": "stp_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "stp_scalar_0-output-0",
+            "nodeId": "stp_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "e1_scalar_0",
+        "type": "Function",
+        "name": "e1_scalar_0",
+        "position": {
+          "x": 840,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "e1_scalar_0-input-0",
+            "nodeId": "e1_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "e1_scalar_0-output-0",
+            "nodeId": "e1_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "c1_scalar_1",
+        "type": "Function",
+        "name": "c1_scalar_1",
+        "position": {
+          "x": 620,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "c1_scalar_1-input-0",
+            "nodeId": "c1_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "c1_scalar_1-output-0",
+            "nodeId": "c1_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "e2_scalar_0",
+        "type": "Function",
+        "name": "e2_scalar_0",
+        "position": {
+          "x": 510,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "e2_scalar_0-input-0",
+            "nodeId": "e2_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "e2_scalar_0-output-0",
+            "nodeId": "e2_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "c2_scalar_1",
+        "type": "Function",
+        "name": "c2_scalar_1",
+        "position": {
+          "x": 840,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "c2_scalar_1-input-0",
+            "nodeId": "c2_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "c2_scalar_1-output-0",
+            "nodeId": "c2_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "stp",
+        "sourcePortIndex": 0,
+        "targetNodeId": "e1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "stp",
+        "sourcePortIndex": 0,
+        "targetNodeId": "stp_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "stp_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "plant",
+        "sourcePortIndex": 0,
+        "targetNodeId": "e1",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "plant",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc0",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "e1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "c1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "e1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "e1_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "e1_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "c1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "e2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "c1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "c1_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "c1_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc1",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "plant",
+        "sourcePortIndex": 1,
+        "targetNodeId": "e2",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0013",
+        "sourceNodeId": "plant",
+        "sourcePortIndex": 1,
+        "targetNodeId": "sc0",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0014",
+        "sourceNodeId": "e2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "c2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0015",
+        "sourceNodeId": "e2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "e2_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0016",
+        "sourceNodeId": "e2_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0017",
+        "sourceNodeId": "c2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "plant",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0018",
+        "sourceNodeId": "c2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "c2_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0019",
+        "sourceNodeId": "c2_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc2",
+        "targetPortIndex": 1
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\n# --- START MONKEY PATCH BLOCK CALL ---\n# Some PathSim versions call block(t) instead of block.update(t).\n# Block.__call__(self) only accepts self, so redirect to update.\ntry:\n    from pathsim.blocks._block import Block as _Block\n    if not hasattr(_Block, '_pv_call_patched'):\n        _orig_block_call = _Block.__call__\n        def _pv_safe_block_call(self, *args, **kwargs):\n            if args or kwargs:\n                return self.update(*args, **kwargs)\n            return _orig_block_call(self)\n        _Block.__call__ = _pv_safe_block_call\n        _Block._pv_call_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH BLOCK CALL ---\n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nfrom pathsim import Simulation, Connection, Subsystem, Interface\n\nfrom pathsim.blocks import Source, TransferFunctionZPG, Adder, Scope, PID, WhiteNoise\n\nfrom pathsim.solvers import RKCK54\n\ndef f_s(t):\n    if t > 60:\n        return 0.5\n    elif t > 20:\n        return 1\n    else:\n        return 0"
+  },
+  "simulationSettings": {
+    "duration": "100",
+    "dt": "0.01",
+    "solver": "RKCK54",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

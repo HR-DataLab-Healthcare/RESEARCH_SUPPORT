@@ -1,0 +1,901 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T18:02:33Z",
+    "modified": "2026-03-28T18:02:33Z",
+    "name": "example_sar"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "src",
+        "type": "Source",
+        "name": "src",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "src-output-0",
+            "nodeId": "src",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda t: np.sin(2 * np.pi * t) * np.cos(5 * np.pi * t)"
+        }
+      },
+      {
+        "id": "cpt",
+        "type": "Comparator",
+        "name": "cpt",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "cpt-input-0",
+            "nodeId": "cpt",
+            "name": "in",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "cpt-output-0",
+            "nodeId": "cpt",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "span": "[0, 1]"
+        }
+      },
+      {
+        "id": "dac1",
+        "type": "DAC",
+        "name": "dac1",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "dac1-input-0",
+            "nodeId": "dac1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "dac1-input-1",
+            "nodeId": "dac1",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "dac1-input-2",
+            "nodeId": "dac1",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "dac1-input-3",
+            "nodeId": "dac1",
+            "name": "in 3",
+            "direction": "input",
+            "index": 3,
+            "color": "#969696"
+          },
+          {
+            "id": "dac1-input-4",
+            "nodeId": "dac1",
+            "name": "in 4",
+            "direction": "input",
+            "index": 4,
+            "color": "#969696"
+          },
+          {
+            "id": "dac1-input-5",
+            "nodeId": "dac1",
+            "name": "in 5",
+            "direction": "input",
+            "index": 5,
+            "color": "#969696"
+          },
+          {
+            "id": "dac1-input-6",
+            "nodeId": "dac1",
+            "name": "in 6",
+            "direction": "input",
+            "index": 6,
+            "color": "#969696"
+          },
+          {
+            "id": "dac1-input-7",
+            "nodeId": "dac1",
+            "name": "in 7",
+            "direction": "input",
+            "index": 7,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "dac1-output-0",
+            "nodeId": "dac1",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "n_bits": "n",
+          "T": "T_clk / n",
+          "tau": "T_clk * 0.002"
+        }
+      },
+      {
+        "id": "dac2",
+        "type": "DAC",
+        "name": "dac2",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "dac2-input-0",
+            "nodeId": "dac2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "dac2-input-1",
+            "nodeId": "dac2",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "dac2-input-2",
+            "nodeId": "dac2",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "dac2-input-3",
+            "nodeId": "dac2",
+            "name": "in 3",
+            "direction": "input",
+            "index": 3,
+            "color": "#969696"
+          },
+          {
+            "id": "dac2-input-4",
+            "nodeId": "dac2",
+            "name": "in 4",
+            "direction": "input",
+            "index": 4,
+            "color": "#969696"
+          },
+          {
+            "id": "dac2-input-5",
+            "nodeId": "dac2",
+            "name": "in 5",
+            "direction": "input",
+            "index": 5,
+            "color": "#969696"
+          },
+          {
+            "id": "dac2-input-6",
+            "nodeId": "dac2",
+            "name": "in 6",
+            "direction": "input",
+            "index": 6,
+            "color": "#969696"
+          },
+          {
+            "id": "dac2-input-7",
+            "nodeId": "dac2",
+            "name": "in 7",
+            "direction": "input",
+            "index": 7,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "dac2-output-0",
+            "nodeId": "dac2",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "n_bits": "n",
+          "T": "T_clk",
+          "tau": "T_clk"
+        }
+      },
+      {
+        "id": "lpf",
+        "type": "ButterworthLowpassFilter",
+        "name": "lpf",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "lpf-input-0",
+            "nodeId": "lpf",
+            "name": "in",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "lpf-output-0",
+            "nodeId": "lpf",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "Fc": "f_clk / 5",
+          "n": "3"
+        }
+      },
+      {
+        "id": "sar",
+        "type": "SAR",
+        "name": "sar",
+        "position": {
+          "x": 180,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sar-input-0",
+            "nodeId": "sar",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "sar-output-0",
+            "nodeId": "sar",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sar-output-1",
+            "nodeId": "sar",
+            "name": "out 1",
+            "direction": "output",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "sar-output-2",
+            "nodeId": "sar",
+            "name": "out 2",
+            "direction": "output",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "sar-output-3",
+            "nodeId": "sar",
+            "name": "out 3",
+            "direction": "output",
+            "index": 3,
+            "color": "#969696"
+          },
+          {
+            "id": "sar-output-4",
+            "nodeId": "sar",
+            "name": "out 4",
+            "direction": "output",
+            "index": 4,
+            "color": "#969696"
+          },
+          {
+            "id": "sar-output-5",
+            "nodeId": "sar",
+            "name": "out 5",
+            "direction": "output",
+            "index": 5,
+            "color": "#969696"
+          },
+          {
+            "id": "sar-output-6",
+            "nodeId": "sar",
+            "name": "out 6",
+            "direction": "output",
+            "index": 6,
+            "color": "#969696"
+          },
+          {
+            "id": "sar-output-7",
+            "nodeId": "sar",
+            "name": "out 7",
+            "direction": "output",
+            "index": 7,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "n_bits": "n",
+          "T": "T_clk",
+          "tau": "T_clk * 0.001"
+        }
+      },
+      {
+        "id": "sah",
+        "type": "SampleHold",
+        "name": "sah",
+        "position": {
+          "x": 400,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sah-input-0",
+            "nodeId": "sah",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "sah-output-0",
+            "nodeId": "sah",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "T": "T_clk"
+        }
+      },
+      {
+        "id": "sub",
+        "type": "Adder",
+        "name": "sub",
+        "position": {
+          "x": 620,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sub-input-0",
+            "nodeId": "sub",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sub-input-1",
+            "nodeId": "sub",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "sub-output-0",
+            "nodeId": "sub",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'+-'"
+        }
+      },
+      {
+        "id": "sco",
+        "type": "Scope",
+        "name": "sco",
+        "position": {
+          "x": 840,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sco-input-0",
+            "nodeId": "sco",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-1",
+            "nodeId": "sco",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-2",
+            "nodeId": "sco",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-3",
+            "nodeId": "sco",
+            "name": "in 3",
+            "direction": "input",
+            "index": 3,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-4",
+            "nodeId": "sco",
+            "name": "in 4",
+            "direction": "input",
+            "index": 4,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['src', 'sah', 'dac1', 'dac2', 'lpf']"
+        }
+      },
+      {
+        "id": "src_scalar_0",
+        "type": "Function",
+        "name": "src_scalar_0",
+        "position": {
+          "x": 510,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "src_scalar_0-input-0",
+            "nodeId": "src_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "src_scalar_0-output-0",
+            "nodeId": "src_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "sah_scalar_1",
+        "type": "Function",
+        "name": "sah_scalar_1",
+        "position": {
+          "x": 620,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sah_scalar_1-input-0",
+            "nodeId": "sah_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "sah_scalar_1-output-0",
+            "nodeId": "sah_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "dac1_scalar_2",
+        "type": "Function",
+        "name": "dac1_scalar_2",
+        "position": {
+          "x": 730,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "dac1_scalar_2-input-0",
+            "nodeId": "dac1_scalar_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "dac1_scalar_2-output-0",
+            "nodeId": "dac1_scalar_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "dac2_scalar_3",
+        "type": "Function",
+        "name": "dac2_scalar_3",
+        "position": {
+          "x": 840,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "dac2_scalar_3-input-0",
+            "nodeId": "dac2_scalar_3",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "dac2_scalar_3-output-0",
+            "nodeId": "dac2_scalar_3",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "lpf_scalar_4",
+        "type": "Function",
+        "name": "lpf_scalar_4",
+        "position": {
+          "x": 950,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "lpf_scalar_4-input-0",
+            "nodeId": "lpf_scalar_4",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "lpf_scalar_4-output-0",
+            "nodeId": "lpf_scalar_4",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sah",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "src_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "src_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "sah",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sub",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "sah",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sah_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "sah_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "dac1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sub",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "dac1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "dac1_scalar_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "dac1_scalar_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "dac2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "lpf",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "dac2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "dac2_scalar_3",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "dac2_scalar_3",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 3
+      },
+      {
+        "id": "conn-0013",
+        "sourceNodeId": "lpf",
+        "sourcePortIndex": 0,
+        "targetNodeId": "lpf_scalar_4",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0014",
+        "sourceNodeId": "lpf_scalar_4",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 4
+      },
+      {
+        "id": "conn-0015",
+        "sourceNodeId": "sub",
+        "sourcePortIndex": 0,
+        "targetNodeId": "cpt",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0016",
+        "sourceNodeId": "cpt",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sar",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0017",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 0,
+        "targetNodeId": "dac1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0018",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 0,
+        "targetNodeId": "dac2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0019",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 1,
+        "targetNodeId": "dac1",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0020",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 1,
+        "targetNodeId": "dac2",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0021",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 2,
+        "targetNodeId": "dac1",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0022",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 2,
+        "targetNodeId": "dac2",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0023",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 3,
+        "targetNodeId": "dac1",
+        "targetPortIndex": 3
+      },
+      {
+        "id": "conn-0024",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 3,
+        "targetNodeId": "dac2",
+        "targetPortIndex": 3
+      },
+      {
+        "id": "conn-0025",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 4,
+        "targetNodeId": "dac1",
+        "targetPortIndex": 4
+      },
+      {
+        "id": "conn-0026",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 4,
+        "targetNodeId": "dac2",
+        "targetPortIndex": 4
+      },
+      {
+        "id": "conn-0027",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 5,
+        "targetNodeId": "dac1",
+        "targetPortIndex": 5
+      },
+      {
+        "id": "conn-0028",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 5,
+        "targetNodeId": "dac2",
+        "targetPortIndex": 5
+      },
+      {
+        "id": "conn-0029",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 6,
+        "targetNodeId": "dac1",
+        "targetPortIndex": 6
+      },
+      {
+        "id": "conn-0030",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 6,
+        "targetNodeId": "dac2",
+        "targetPortIndex": 6
+      },
+      {
+        "id": "conn-0031",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 7,
+        "targetNodeId": "dac1",
+        "targetPortIndex": 7
+      },
+      {
+        "id": "conn-0032",
+        "sourceNodeId": "sar",
+        "sourcePortIndex": 7,
+        "targetNodeId": "dac2",
+        "targetPortIndex": 7
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\n# --- START MONKEY PATCH BLOCK CALL ---\n# Some PathSim versions call block(t) instead of block.update(t).\n# Block.__call__(self) only accepts self, so redirect to update.\ntry:\n    from pathsim.blocks._block import Block as _Block\n    if not hasattr(_Block, '_pv_call_patched'):\n        _orig_block_call = _Block.__call__\n        def _pv_safe_block_call(self, *args, **kwargs):\n            if args or kwargs:\n                return self.update(*args, **kwargs)\n            return _orig_block_call(self)\n        _Block.__call__ = _pv_safe_block_call\n        _Block._pv_call_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH BLOCK CALL ---\n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nfrom pathsim import Simulation, Connection\n\nfrom pathsim.blocks import Adder, Scope, Source, ButterworthLowpassFilter, SampleHold, Comparator, DAC\n\nfrom pathsim.solvers import RKBS32\n\nfrom pathsim.blocks._block import Block\n\nfrom pathsim.events import Schedule\n\nclass SAR(Block):\n\n    def __init__(self, n_bits=4, T=1, tau=0):\n        super().__init__()\n        self.n_bits = n_bits\n        self.T = T\n        self.tau = tau\n        self.register = 0\n        self.trial_weight = 1 << self.n_bits - 1\n\n        def _step(t):\n            comparator_result = self.inputs[0]\n            previous_weight = self.trial_weight << 1 if self.trial_weight > 0 else 1\n            if previous_weight <= 1 << self.n_bits - 1 and comparator_result == 0:\n                self.register &= ~previous_weight\n            self.register |= self.trial_weight\n            for i in range(self.n_bits):\n                self.outputs[i] = self.register >> i & 1\n            if self.trial_weight == 1:\n                self.trial_weight = 1 << self.n_bits - 1\n                self.register = 0\n            else:\n                self.trial_weight >>= 1\n        self.events = [Schedule(t_start=self.tau, t_period=self.T / self.n_bits, func_act=_step)]\n\n    def __len__(self):\n        return 0\n\nn = 8\n\nf_clk = 50\n\nT_clk = 1.0 / f_clk"
+  },
+  "simulationSettings": {
+    "duration": "1",
+    "dt": "0.01",
+    "solver": "RKBS32",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

@@ -1,0 +1,341 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T12:46:57Z",
+    "modified": "2026-03-28T12:46:57Z",
+    "name": "example_elastic_pendulum"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "rad",
+        "type": "ODE",
+        "name": "rad",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "rad-input-0",
+            "nodeId": "rad",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "rad-input-1",
+            "nodeId": "rad",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "rad-output-0",
+            "nodeId": "rad",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "rad-output-1",
+            "nodeId": "rad",
+            "name": "out 1",
+            "direction": "output",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "rad_ode",
+          "initial_value": "np.array([r0, vr0])"
+        }
+      },
+      {
+        "id": "ang",
+        "type": "ODE",
+        "name": "ang",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "ang-input-0",
+            "nodeId": "ang",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "ang-input-1",
+            "nodeId": "ang",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "ang-output-0",
+            "nodeId": "ang",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "ang-output-1",
+            "nodeId": "ang",
+            "name": "out 1",
+            "direction": "output",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "ang_ode",
+          "initial_value": "np.array([phi0, omega0])"
+        }
+      },
+      {
+        "id": "crt",
+        "type": "Function",
+        "name": "crt",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "crt-input-0",
+            "nodeId": "crt",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "crt-input-1",
+            "nodeId": "crt",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "crt-output-0",
+            "nodeId": "crt",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "crt-output-1",
+            "nodeId": "crt",
+            "name": "out 1",
+            "direction": "output",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "crt"
+        }
+      },
+      {
+        "id": "sc1",
+        "type": "Scope",
+        "name": "sc1",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "sc1-input-0",
+            "nodeId": "sc1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sc1-input-1",
+            "nodeId": "sc1",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "sc1-input-2",
+            "nodeId": "sc1",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "sc1-input-3",
+            "nodeId": "sc1",
+            "name": "in 3",
+            "direction": "input",
+            "index": 3,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['r [m]', 'vr [m/s]', 'phi [rad]', 'omega [rad/s]']"
+        }
+      },
+      {
+        "id": "sc2",
+        "type": "Scope",
+        "name": "sc2",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "sc2-input-0",
+            "nodeId": "sc2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sc2-input-1",
+            "nodeId": "sc2",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "sampling_period": "0.005",
+          "labels": "['x [m]', 'y [m]']"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "ang",
+        "sourcePortIndex": 1,
+        "targetNodeId": "rad",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "ang",
+        "sourcePortIndex": 0,
+        "targetNodeId": "rad",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "ang",
+        "sourcePortIndex": 0,
+        "targetNodeId": "crt",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "rad",
+        "sourcePortIndex": 0,
+        "targetNodeId": "ang",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "rad",
+        "sourcePortIndex": 0,
+        "targetNodeId": "crt",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "rad",
+        "sourcePortIndex": 1,
+        "targetNodeId": "ang",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "rad",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "rad",
+        "sourcePortIndex": 1,
+        "targetNodeId": "sc1",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "ang",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc1",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "ang",
+        "sourcePortIndex": 1,
+        "targetNodeId": "sc1",
+        "targetPortIndex": 3
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "crt",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sc2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "crt",
+        "sourcePortIndex": 1,
+        "targetNodeId": "sc2",
+        "targetPortIndex": 1
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nr0, vr0 = (2, 0.0)\n\nphi0, omega0 = (0.3 * np.pi, 0.0)\n\ng = 9.81\n\nl0 = 1.0\n\nk = 50.0\n\nm = 1.0\n\nc_r = 0.3\n\nc_phi = 0.1\n\ndef rad_ode(x, u, t):\n    r, vr = x\n    omega, phi = u\n    centrifugal = r * omega ** 2\n    spring = -(k / m) * (r - l0)\n    gravity_rad = g * np.cos(phi)\n    damping = -(c_r / m) * vr\n    accel_r = centrifugal + spring + gravity_rad + damping\n    return np.array([vr, accel_r])\n\ndef ang_ode(x, u, t):\n    phi, omega = x\n    r, vr = u\n    gravity_torque = -(g / r) * np.sin(phi)\n    coriolis = -(2 / r) * vr * omega\n    damping = -(c_phi / (m * r ** 2)) * omega\n    accel_phi = gravity_torque + coriolis + damping\n    return np.array([omega, accel_phi])\n\n@Function\ndef crt(r, phi):\n    return (r * np.sin(phi), -r * np.cos(phi))"
+  },
+  "simulationSettings": {
+    "duration": "10",
+    "dt": "0.01",
+    "solver": "RKBS32",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

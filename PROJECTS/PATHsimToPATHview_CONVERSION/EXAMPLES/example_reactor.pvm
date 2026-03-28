@@ -1,0 +1,209 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T12:46:57Z",
+    "modified": "2026-03-28T12:46:57Z",
+    "name": "example_reactor"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "CSTR",
+        "type": "ODE",
+        "name": "CSTR",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "CSTR-input-0",
+            "nodeId": "CSTR",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "CSTR-input-1",
+            "nodeId": "CSTR",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "CSTR-output-0",
+            "nodeId": "CSTR",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "CSTR-output-1",
+            "nodeId": "CSTR",
+            "name": "out 1",
+            "direction": "output",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "CSTR-output-2",
+            "nodeId": "CSTR",
+            "name": "out 2",
+            "direction": "output",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "reaction_rates",
+          "initial_value": "np.array([Ca_0, Cb_0, T_0])"
+        }
+      },
+      {
+        "id": "Src_Ca",
+        "type": "Source",
+        "name": "Src_Ca",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "Src_Ca-output-0",
+            "nodeId": "Src_Ca",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda t: 2.0 + np.sin(0.5 * t)"
+        }
+      },
+      {
+        "id": "Src_T",
+        "type": "Source",
+        "name": "Src_T",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "Src_T-output-0",
+            "nodeId": "Src_T",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda t: 280.0 * (1 - 0.8 * np.exp(-0.6 * t))"
+        }
+      },
+      {
+        "id": "Sco",
+        "type": "Scope",
+        "name": "Sco",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Sco-input-0",
+            "nodeId": "Sco",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco-input-1",
+            "nodeId": "Sco",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco-input-2",
+            "nodeId": "Sco",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Ca', 'Cb', 'T']"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "CSTR",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "CSTR",
+        "sourcePortIndex": 1,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "CSTR",
+        "sourcePortIndex": 2,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "Src_Ca",
+        "sourcePortIndex": 0,
+        "targetNodeId": "CSTR",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "Src_T",
+        "sourcePortIndex": 0,
+        "targetNodeId": "CSTR",
+        "targetPortIndex": 1
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nCa_0 = 1.0\n\nCb_0 = 0.0\n\nT_0 = 300.0\n\nTc = 280.0\n\ntau = 1.0\n\nk1_0 = 10000.0\n\nk2_0 = 1000.0\n\nE1 = 50000.0\n\nE2 = 55000.0\n\ndH1 = -50000.0\n\ndH2 = -52000.0\n\nrho = 1000.0\n\nCp = 4.184\n\nU = 1000.0\n\nV = 0.1\n\nA = 0.1\n\nR = 8.314\n\ndef reaction_rates(x, u, t):\n    Ca, Cb, T = x\n    Ca_in, T_in = u\n    dCa_dt = (Ca_in - Ca) / tau - k1_0 * np.exp(-E1 / (R * T)) * Ca\n    dCb_dt = -Cb / tau + k1_0 * np.exp(-E1 / (R * T)) * Ca - k2_0 * np.exp(-E2 / (R * T)) * Cb\n    dT_dt = (T_in - T) / tau + -dH1 / (rho * Cp) * k1_0 * np.exp(-E1 / (R * T)) * Ca + -dH2 / (rho * Cp) * k2_0 * np.exp(-E2 / (R * T)) * Cb - U * A * (T - Tc) / (V * rho * Cp)\n    return np.array([dCa_dt, dCb_dt, dT_dt])"
+  },
+  "simulationSettings": {
+    "duration": "20",
+    "dt": "0.001",
+    "solver": "GEAR52A",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

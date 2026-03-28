@@ -1,0 +1,579 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T12:46:57Z",
+    "modified": "2026-03-28T12:46:57Z",
+    "name": "example_dualslope"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "src",
+        "type": "Source",
+        "name": "src",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "src-output-0",
+            "nodeId": "src",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda t: 0.3 * np.sin(2 * np.pi * t) + 0.5"
+        }
+      },
+      {
+        "id": "sub",
+        "type": "Adder",
+        "name": "sub",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "sub-input-0",
+            "nodeId": "sub",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sub-input-1",
+            "nodeId": "sub",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "sub-output-0",
+            "nodeId": "sub",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'+-'"
+        }
+      },
+      {
+        "id": "ref",
+        "type": "Constant",
+        "name": "ref",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "ref-output-0",
+            "nodeId": "ref",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "value": "v_ref"
+        }
+      },
+      {
+        "id": "swt",
+        "type": "Switch",
+        "name": "swt",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "swt-input-0",
+            "nodeId": "swt",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "swt-input-1",
+            "nodeId": "swt",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "swt-output-0",
+            "nodeId": "swt",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "switch_state": "None"
+        }
+      },
+      {
+        "id": "fbk",
+        "type": "Amplifier",
+        "name": "fbk",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "fbk-input-0",
+            "nodeId": "fbk",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "fbk-output-0",
+            "nodeId": "fbk",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "gain": "K"
+        }
+      },
+      {
+        "id": "itg",
+        "type": "Integrator",
+        "name": "itg",
+        "position": {
+          "x": 180,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "itg-input-0",
+            "nodeId": "itg",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "itg-output-0",
+            "nodeId": "itg",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {}
+      },
+      {
+        "id": "sah",
+        "type": "SampleHold",
+        "name": "sah",
+        "position": {
+          "x": 400,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sah-input-0",
+            "nodeId": "sah",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "sah-output-0",
+            "nodeId": "sah",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "T": "T_clk"
+        }
+      },
+      {
+        "id": "sco",
+        "type": "Scope",
+        "name": "sco",
+        "position": {
+          "x": 620,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sco-input-0",
+            "nodeId": "sco",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-1",
+            "nodeId": "sco",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-2",
+            "nodeId": "sco",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-3",
+            "nodeId": "sco",
+            "name": "in 3",
+            "direction": "input",
+            "index": 3,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['src', 'sah', 'swt', 'itg']"
+        }
+      },
+      {
+        "id": "src_scalar_0",
+        "type": "Function",
+        "name": "src_scalar_0",
+        "position": {
+          "x": 400,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "src_scalar_0-input-0",
+            "nodeId": "src_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "src_scalar_0-output-0",
+            "nodeId": "src_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "sah_scalar_1",
+        "type": "Function",
+        "name": "sah_scalar_1",
+        "position": {
+          "x": 510,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sah_scalar_1-input-0",
+            "nodeId": "sah_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "sah_scalar_1-output-0",
+            "nodeId": "sah_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "swt_scalar_2",
+        "type": "Function",
+        "name": "swt_scalar_2",
+        "position": {
+          "x": 730,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "swt_scalar_2-input-0",
+            "nodeId": "swt_scalar_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "swt_scalar_2-output-0",
+            "nodeId": "swt_scalar_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "itg_scalar_3",
+        "type": "Function",
+        "name": "itg_scalar_3",
+        "position": {
+          "x": 400,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "itg_scalar_3-input-0",
+            "nodeId": "itg_scalar_3",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "itg_scalar_3-output-0",
+            "nodeId": "itg_scalar_3",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sah",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "src_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "src_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "sah",
+        "sourcePortIndex": 0,
+        "targetNodeId": "swt",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "sah",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sah_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "sah_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "ref",
+        "sourcePortIndex": 0,
+        "targetNodeId": "swt",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "swt",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sub",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "swt",
+        "sourcePortIndex": 0,
+        "targetNodeId": "swt_scalar_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "swt_scalar_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "fbk",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sub",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "sub",
+        "sourcePortIndex": 0,
+        "targetNodeId": "itg",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0013",
+        "sourceNodeId": "itg",
+        "sourcePortIndex": 0,
+        "targetNodeId": "fbk",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0014",
+        "sourceNodeId": "itg",
+        "sourcePortIndex": 0,
+        "targetNodeId": "itg_scalar_3",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0015",
+        "sourceNodeId": "itg_scalar_3",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 3
+      }
+    ],
+    "annotations": []
+  },
+  "events": [
+    {
+      "id": "evt-001",
+      "type": "pathsim.events.ZeroCrossingDown",
+      "name": "event_1",
+      "position": {
+        "x": 220,
+        "y": 80
+      },
+      "params": {
+        "func_evt": "lambda *_: itg.engine.get(),",
+        "func_act": "lambda *_: [itg.reset(), swt.select(None)]",
+        "tolerance": 0.0001
+      }
+    },
+    {
+      "id": "evt-002",
+      "type": "pathsim.events.Schedule",
+      "name": "event_2",
+      "position": {
+        "x": 440,
+        "y": 80
+      },
+      "params": {
+        "t_start": 0,
+        "t_end": "",
+        "t_period": 0.05,
+        "func_act": "lambda *_: swt.select(0),",
+        "tolerance": 1e-16
+      }
+    },
+    {
+      "id": "evt-003",
+      "type": "pathsim.events.Schedule",
+      "name": "event_3",
+      "position": {
+        "x": 660,
+        "y": 80
+      },
+      "params": {
+        "t_start": 0.010000000000000002,
+        "t_end": "",
+        "t_period": 0.05,
+        "func_act": "lambda *_: swt.select(1),",
+        "tolerance": 1e-16
+      }
+    }
+  ],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nv_ref = -0.5\n\nf_clk = 20\n\nT_clk = 1.0 / f_clk\n\nK = 0.1"
+  },
+  "simulationSettings": {
+    "duration": "1",
+    "dt": "0.01",
+    "solver": "RKBS32",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "T_clk * 0.01",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

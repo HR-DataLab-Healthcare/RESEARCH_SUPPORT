@@ -1,0 +1,514 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T15:21:37Z",
+    "modified": "2026-03-28T15:21:37Z",
+    "name": "example_adc"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "src",
+        "type": "Source",
+        "name": "src",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "src-output-0",
+            "nodeId": "src",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda t: np.sin(omega*t))"
+        }
+      },
+      {
+        "id": "dac",
+        "type": "DAC",
+        "name": "dac",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "dac-input-0",
+            "nodeId": "dac",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "dac-input-1",
+            "nodeId": "dac",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "dac-input-2",
+            "nodeId": "dac",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "dac-input-3",
+            "nodeId": "dac",
+            "name": "in 3",
+            "direction": "input",
+            "index": 3,
+            "color": "#969696"
+          },
+          {
+            "id": "dac-input-4",
+            "nodeId": "dac",
+            "name": "in 4",
+            "direction": "input",
+            "index": 4,
+            "color": "#969696"
+          },
+          {
+            "id": "dac-input-5",
+            "nodeId": "dac",
+            "name": "in 5",
+            "direction": "input",
+            "index": 5,
+            "color": "#969696"
+          },
+          {
+            "id": "dac-input-6",
+            "nodeId": "dac",
+            "name": "in 6",
+            "direction": "input",
+            "index": 6,
+            "color": "#969696"
+          },
+          {
+            "id": "dac-input-7",
+            "nodeId": "dac",
+            "name": "in 7",
+            "direction": "input",
+            "index": 7,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "dac-output-0",
+            "nodeId": "dac",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "n_bits": 8,
+          "T": 0.02,
+          "tau": 0.002
+        }
+      },
+      {
+        "id": "adc",
+        "type": "ADC",
+        "name": "adc",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "adc-input-0",
+            "nodeId": "adc",
+            "name": "in",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "adc-output-0",
+            "nodeId": "adc",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "adc-output-1",
+            "nodeId": "adc",
+            "name": "out 1",
+            "direction": "output",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "adc-output-2",
+            "nodeId": "adc",
+            "name": "out 2",
+            "direction": "output",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "adc-output-3",
+            "nodeId": "adc",
+            "name": "out 3",
+            "direction": "output",
+            "index": 3,
+            "color": "#969696"
+          },
+          {
+            "id": "adc-output-4",
+            "nodeId": "adc",
+            "name": "out 4",
+            "direction": "output",
+            "index": 4,
+            "color": "#969696"
+          },
+          {
+            "id": "adc-output-5",
+            "nodeId": "adc",
+            "name": "out 5",
+            "direction": "output",
+            "index": 5,
+            "color": "#969696"
+          },
+          {
+            "id": "adc-output-6",
+            "nodeId": "adc",
+            "name": "out 6",
+            "direction": "output",
+            "index": 6,
+            "color": "#969696"
+          },
+          {
+            "id": "adc-output-7",
+            "nodeId": "adc",
+            "name": "out 7",
+            "direction": "output",
+            "index": 7,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "n_bits": 8,
+          "T": 0.02
+        }
+      },
+      {
+        "id": "lpf",
+        "type": "ButterworthLowpassFilter",
+        "name": "lpf",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "lpf-input-0",
+            "nodeId": "lpf",
+            "name": "in",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "lpf-output-0",
+            "nodeId": "lpf",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "Fc": 10.0,
+          "n": 1
+        }
+      },
+      {
+        "id": "sco",
+        "type": "Scope",
+        "name": "sco",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "sco-input-0",
+            "nodeId": "sco",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-1",
+            "nodeId": "sco",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-2",
+            "nodeId": "sco",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['src', 'dac', 'lpf']"
+        }
+      },
+      {
+        "id": "src_scalar_0",
+        "type": "Function",
+        "name": "src_scalar_0",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "src_scalar_0-input-0",
+            "nodeId": "src_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "src_scalar_0-output-0",
+            "nodeId": "src_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "dac_scalar_1",
+        "type": "Function",
+        "name": "dac_scalar_1",
+        "position": {
+          "x": 730,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "dac_scalar_1-input-0",
+            "nodeId": "dac_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "dac_scalar_1-output-0",
+            "nodeId": "dac_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "lpf_scalar_2",
+        "type": "Function",
+        "name": "lpf_scalar_2",
+        "position": {
+          "x": 950,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "lpf_scalar_2-input-0",
+            "nodeId": "lpf_scalar_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "lpf_scalar_2-output-0",
+            "nodeId": "lpf_scalar_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "adc",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "src_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "src_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "dac",
+        "sourcePortIndex": 0,
+        "targetNodeId": "lpf",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "dac",
+        "sourcePortIndex": 0,
+        "targetNodeId": "dac_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "dac_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "lpf",
+        "sourcePortIndex": 0,
+        "targetNodeId": "lpf_scalar_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "lpf_scalar_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "adc",
+        "sourcePortIndex": 0,
+        "targetNodeId": "dac",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "adc",
+        "sourcePortIndex": 1,
+        "targetNodeId": "dac",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "adc",
+        "sourcePortIndex": 2,
+        "targetNodeId": "dac",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "adc",
+        "sourcePortIndex": 3,
+        "targetNodeId": "dac",
+        "targetPortIndex": 3
+      },
+      {
+        "id": "conn-0013",
+        "sourceNodeId": "adc",
+        "sourcePortIndex": 4,
+        "targetNodeId": "dac",
+        "targetPortIndex": 4
+      },
+      {
+        "id": "conn-0014",
+        "sourceNodeId": "adc",
+        "sourcePortIndex": 5,
+        "targetNodeId": "dac",
+        "targetPortIndex": 5
+      },
+      {
+        "id": "conn-0015",
+        "sourceNodeId": "adc",
+        "sourcePortIndex": 6,
+        "targetNodeId": "dac",
+        "targetPortIndex": 6
+      },
+      {
+        "id": "conn-0016",
+        "sourceNodeId": "adc",
+        "sourcePortIndex": 7,
+        "targetNodeId": "dac",
+        "targetPortIndex": 7
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport matplotlib.pyplot as plt\n\nimport numpy as np\n\nfrom pathsim import Simulation, Connection\n\nfrom pathsim.blocks import Scope, Source, ButterworthLowpassFilter, ADC, DAC\n\nfrom pathsim.solvers import RKBS32\n\nn = 8\n\nfs = 50\n\nomega = 2.0 * np.pi"
+  },
+  "simulationSettings": {
+    "duration": "2",
+    "dt": "0.01",
+    "solver": "RKBS32",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

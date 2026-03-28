@@ -1,0 +1,404 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-28T12:46:57Z",
+    "modified": "2026-03-28T12:46:57Z",
+    "name": "example_pid"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "spt",
+        "type": "Source",
+        "name": "spt",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "spt-output-0",
+            "nodeId": "spt",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "f_s"
+        }
+      },
+      {
+        "id": "err",
+        "type": "Adder",
+        "name": "err",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "err-input-0",
+            "nodeId": "err",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "err-input-1",
+            "nodeId": "err",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "err-output-0",
+            "nodeId": "err",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'+-'"
+        }
+      },
+      {
+        "id": "pid",
+        "type": "PID",
+        "name": "pid",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "pid-input-0",
+            "nodeId": "pid",
+            "name": "in",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "pid-output-0",
+            "nodeId": "pid",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "Kp": "Kp",
+          "Ki": "Ki",
+          "Kd": "Kd",
+          "f_max": "10"
+        }
+      },
+      {
+        "id": "pnt",
+        "type": "Integrator",
+        "name": "pnt",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "pnt-input-0",
+            "nodeId": "pnt",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "pnt-output-0",
+            "nodeId": "pnt",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {}
+      },
+      {
+        "id": "pgn",
+        "type": "Amplifier",
+        "name": "pgn",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "pgn-input-0",
+            "nodeId": "pgn",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "pgn-output-0",
+            "nodeId": "pgn",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "gain": "K"
+        }
+      },
+      {
+        "id": "sco",
+        "type": "Scope",
+        "name": "sco",
+        "position": {
+          "x": 180,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "sco-input-0",
+            "nodeId": "sco",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-1",
+            "nodeId": "sco",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-2",
+            "nodeId": "sco",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['s(t)', 'x(t)', '$\\\\epsilon(t)$']"
+        }
+      },
+      {
+        "id": "spt_scalar_0",
+        "type": "Function",
+        "name": "spt_scalar_0",
+        "position": {
+          "x": 180,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "spt_scalar_0-input-0",
+            "nodeId": "spt_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "spt_scalar_0-output-0",
+            "nodeId": "spt_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "pgn_scalar_1",
+        "type": "Function",
+        "name": "pgn_scalar_1",
+        "position": {
+          "x": 620,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "pgn_scalar_1-input-0",
+            "nodeId": "pgn_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "pgn_scalar_1-output-0",
+            "nodeId": "pgn_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "err_scalar_2",
+        "type": "Function",
+        "name": "err_scalar_2",
+        "position": {
+          "x": 290,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "err_scalar_2-input-0",
+            "nodeId": "err_scalar_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "err_scalar_2-output-0",
+            "nodeId": "err_scalar_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "spt",
+        "sourcePortIndex": 0,
+        "targetNodeId": "err",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "spt",
+        "sourcePortIndex": 0,
+        "targetNodeId": "spt_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "spt_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "pgn",
+        "sourcePortIndex": 0,
+        "targetNodeId": "err",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "pgn",
+        "sourcePortIndex": 0,
+        "targetNodeId": "pgn_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "pgn_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "err",
+        "sourcePortIndex": 0,
+        "targetNodeId": "pid",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "err",
+        "sourcePortIndex": 0,
+        "targetNodeId": "err_scalar_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "err_scalar_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "pid",
+        "sourcePortIndex": 0,
+        "targetNodeId": "pnt",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "pnt",
+        "sourcePortIndex": 0,
+        "targetNodeId": "pgn",
+        "targetPortIndex": 0
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nK = 0.4\n\nKp, Ki, Kd = (1.5, 0.5, 0.1)\n\ndef f_s(t):\n    if t > 60:\n        return 0.5\n    elif t > 20:\n        return 1\n    else:\n        return 0"
+  },
+  "simulationSettings": {
+    "duration": "100",
+    "dt": "0.01",
+    "solver": "RKCK54",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}
