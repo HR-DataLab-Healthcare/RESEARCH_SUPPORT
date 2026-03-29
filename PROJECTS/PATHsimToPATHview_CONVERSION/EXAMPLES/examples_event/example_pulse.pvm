@@ -1,0 +1,233 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-29T02:02:32Z",
+    "modified": "2026-03-29T02:02:32Z",
+    "name": "example_pulse"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "Src",
+        "type": "Source",
+        "name": "Src",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "Src-output-0",
+            "nodeId": "Src",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda t: int(t - tau1 >= 0) - int(t - tau2 >= 0)"
+        }
+      },
+      {
+        "id": "Lpf",
+        "type": "ButterworthLowpassFilter",
+        "name": "Lpf",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Lpf-input-0",
+            "nodeId": "Lpf",
+            "name": "in",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Lpf-output-0",
+            "nodeId": "Lpf",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "Fc": "B",
+          "n": "n"
+        }
+      },
+      {
+        "id": "Sco",
+        "type": "Scope",
+        "name": "Sco",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Sco-input-0",
+            "nodeId": "Sco",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco-input-1",
+            "nodeId": "Sco",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['source', 'output']"
+        }
+      },
+      {
+        "id": "Src_scalar_0",
+        "type": "Function",
+        "name": "Src_scalar_0",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Src_scalar_0-input-0",
+            "nodeId": "Src_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Src_scalar_0-output-0",
+            "nodeId": "Src_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Lpf_scalar_1",
+        "type": "Function",
+        "name": "Lpf_scalar_1",
+        "position": {
+          "x": 510,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Lpf_scalar_1-input-0",
+            "nodeId": "Lpf_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Lpf_scalar_1-output-0",
+            "nodeId": "Lpf_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "Src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Lpf",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "Src",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Src_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "Src_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "Lpf",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Lpf_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "Lpf_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco",
+        "targetPortIndex": 1
+      }
+    ],
+    "annotations": []
+  },
+  "events": [
+    {
+      "id": "evt-001",
+      "type": "pathsim.events.Schedule",
+      "name": "E",
+      "position": {
+        "x": 220,
+        "y": 80
+      },
+      "params": {
+        "t_start": "tau1",
+        "t_end": "tau2",
+        "t_period": "tau2 - tau1"
+      }
+    }
+  ],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\n# --- START MONKEY PATCH BLOCK CALL ---\n# Some PathSim versions call block(t) instead of block.update(t).\n# Block.__call__(self) only accepts self, so redirect to update.\ntry:\n    from pathsim.blocks._block import Block as _Block\n    if not hasattr(_Block, '_pv_call_patched'):\n        _orig_block_call = _Block.__call__\n        def _pv_safe_block_call(self, *args, **kwargs):\n            if args or kwargs:\n                return self.update(*args, **kwargs)\n            return _orig_block_call(self)\n        _Block.__call__ = _pv_safe_block_call\n        _Block._pv_call_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH BLOCK CALL ---\n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport matplotlib.pyplot as plt\n\nimport numpy as np\n\nfrom pathsim import Simulation, Connection\n\nfrom pathsim.blocks import Scope, Source, ButterworthLowpassFilter\n\nfrom pathsim.solvers import SSPRK33, RKCK54\n\nfrom pathsim.events import Schedule\n\ndt = 0.1\n\nB, n = (5, 4)\n\ntau1 = 1.0\n\ntau2 = 1.05"
+  },
+  "simulationSettings": {
+    "duration": "2",
+    "dt": "0.1",
+    "solver": "RKCK54",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

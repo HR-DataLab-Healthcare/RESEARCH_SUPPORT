@@ -1,0 +1,172 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-29T02:02:32Z",
+    "modified": "2026-03-29T02:02:32Z",
+    "name": "example_volterralotka_event"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "VL",
+        "type": "ODE",
+        "name": "VL",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "VL-input-0",
+            "nodeId": "VL",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "VL-output-0",
+            "nodeId": "VL",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "VL-output-1",
+            "nodeId": "VL",
+            "name": "out 1",
+            "direction": "output",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "_f",
+          "initial_value": "x0"
+        }
+      },
+      {
+        "id": "Sc",
+        "type": "Scope",
+        "name": "Sc",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Sc-input-0",
+            "nodeId": "Sc",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Sc-input-1",
+            "nodeId": "Sc",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['predators', 'prey']"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "VL",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sc",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "VL",
+        "sourcePortIndex": 1,
+        "targetNodeId": "Sc",
+        "targetPortIndex": 1
+      }
+    ],
+    "annotations": []
+  },
+  "events": [
+    {
+      "id": "evt-001",
+      "type": "pathsim.events.ZeroCrossingUp",
+      "name": "E1",
+      "position": {
+        "x": 220,
+        "y": 80
+      },
+      "params": {
+        "func_evt": "func_evt_1",
+        "tolerance": "0.0001"
+      }
+    },
+    {
+      "id": "evt-002",
+      "type": "pathsim.events.ZeroCrossingUp",
+      "name": "E2",
+      "position": {
+        "x": 440,
+        "y": 80
+      },
+      "params": {
+        "func_evt": "func_evt_2",
+        "func_act": "lambda _: Sim.stop()",
+        "tolerance": "0.0001"
+      }
+    },
+    {
+      "id": "evt-003",
+      "type": "pathsim.events.ZeroCrossingDown",
+      "name": "E3",
+      "position": {
+        "x": 660,
+        "y": 80
+      },
+      "params": {
+        "func_evt": "func_evt_1",
+        "tolerance": "0.0001"
+      }
+    },
+    {
+      "id": "evt-004",
+      "type": "pathsim.events.ZeroCrossingDown",
+      "name": "E4",
+      "position": {
+        "x": 880,
+        "y": 80
+      },
+      "params": {
+        "func_evt": "func_evt_2",
+        "tolerance": "0.0001"
+      }
+    }
+  ],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\n# --- START MONKEY PATCH BLOCK CALL ---\n# Some PathSim versions call block(t) instead of block.update(t).\n# Block.__call__(self) only accepts self, so redirect to update.\ntry:\n    from pathsim.blocks._block import Block as _Block\n    if not hasattr(_Block, '_pv_call_patched'):\n        _orig_block_call = _Block.__call__\n        def _pv_safe_block_call(self, *args, **kwargs):\n            if args or kwargs:\n                return self.update(*args, **kwargs)\n            return _orig_block_call(self)\n        _Block.__call__ = _pv_safe_block_call\n        _Block._pv_call_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH BLOCK CALL ---\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nfrom pathsim import Simulation, Connection\n\nfrom pathsim.blocks import Scope, ODE\n\nfrom pathsim.solvers import RKBS32\n\nfrom pathsim.events import ZeroCrossingUp, ZeroCrossingDown\n\ndt = 0.1\n\nalpha = 1.0\n\nbeta = 0.1\n\ndelta = 0.5\n\ngamma = 1.2\n\ndef _f(x, u, t):\n    x1, x2 = x\n    return np.array([x1 * (alpha - beta * x2), x2 * (delta * x1 - gamma)])\n\nx0 = np.array([5, 10])"
+  },
+  "simulationSettings": {
+    "duration": "10",
+    "dt": "0.1",
+    "solver": "RKBS32",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

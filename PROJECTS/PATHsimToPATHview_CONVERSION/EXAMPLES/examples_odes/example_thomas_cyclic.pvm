@@ -1,0 +1,141 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-29T02:02:32Z",
+    "modified": "2026-03-29T02:02:32Z",
+    "name": "example_thomas_cyclic"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "tcs",
+        "type": "ODE",
+        "name": "tcs",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "tcs-input-0",
+            "nodeId": "tcs",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "tcs-output-0",
+            "nodeId": "tcs",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "tcs-output-1",
+            "nodeId": "tcs",
+            "name": "out 1",
+            "direction": "output",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "tcs-output-2",
+            "nodeId": "tcs",
+            "name": "out 2",
+            "direction": "output",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "f_tcs",
+          "initial_value": "xyz_0"
+        }
+      },
+      {
+        "id": "sco",
+        "type": "Scope",
+        "name": "sco",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "sco-input-0",
+            "nodeId": "sco",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-1",
+            "nodeId": "sco",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-2",
+            "nodeId": "sco",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['x', 'y', 'z']"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "tcs",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "tcs",
+        "sourcePortIndex": 1,
+        "targetNodeId": "sco",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "tcs",
+        "sourcePortIndex": 2,
+        "targetNodeId": "sco",
+        "targetPortIndex": 2
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\n# --- START MONKEY PATCH BLOCK CALL ---\n# Some PathSim versions call block(t) instead of block.update(t).\n# Block.__call__(self) only accepts self, so redirect to update.\ntry:\n    from pathsim.blocks._block import Block as _Block\n    if not hasattr(_Block, '_pv_call_patched'):\n        _orig_block_call = _Block.__call__\n        def _pv_safe_block_call(self, *args, **kwargs):\n            if args or kwargs:\n                return self.update(*args, **kwargs)\n            return _orig_block_call(self)\n        _Block.__call__ = _pv_safe_block_call\n        _Block._pv_call_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH BLOCK CALL ---\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nfrom pathsim import Simulation, Connection\n\nfrom pathsim.blocks import ODE, Scope\n\nfrom pathsim.solvers import SSPRK33, RKCK54\n\nb = 0.22\n\nxyz_0 = np.array([1, 1, -3])\n\ndef f_tcs(_x, u, t):\n    x, y, z = _x\n    dxdt = np.sin(y) - b * x\n    dydt = np.sin(z) - b * y\n    dzdt = np.sin(x) - b * z\n    return np.array([dxdt, dydt, dzdt])"
+  },
+  "simulationSettings": {
+    "duration": "500",
+    "dt": "0.01",
+    "solver": "RKCK54",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

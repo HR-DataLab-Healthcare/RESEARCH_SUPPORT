@@ -1,0 +1,747 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-29T02:02:32Z",
+    "modified": "2026-03-29T02:02:32Z",
+    "name": "example_lorenz"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "itg_x",
+        "type": "Integrator",
+        "name": "itg_x",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "itg_x-input-0",
+            "nodeId": "itg_x",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "itg_x-output-0",
+            "nodeId": "itg_x",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "initial_value": "x0"
+        }
+      },
+      {
+        "id": "itg_y",
+        "type": "Integrator",
+        "name": "itg_y",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "itg_y-input-0",
+            "nodeId": "itg_y",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "itg_y-output-0",
+            "nodeId": "itg_y",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "initial_value": "y0"
+        }
+      },
+      {
+        "id": "itg_z",
+        "type": "Integrator",
+        "name": "itg_z",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "itg_z-input-0",
+            "nodeId": "itg_z",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "itg_z-output-0",
+            "nodeId": "itg_z",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "initial_value": "z0"
+        }
+      },
+      {
+        "id": "amp_sigma",
+        "type": "Amplifier",
+        "name": "amp_sigma",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "amp_sigma-input-0",
+            "nodeId": "amp_sigma",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "amp_sigma-output-0",
+            "nodeId": "amp_sigma",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "gain": "sigma"
+        }
+      },
+      {
+        "id": "add_x",
+        "type": "Adder",
+        "name": "add_x",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "add_x-input-0",
+            "nodeId": "add_x",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "add_x-input-1",
+            "nodeId": "add_x",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "add_x-output-0",
+            "nodeId": "add_x",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'+-'"
+        }
+      },
+      {
+        "id": "cns_rho",
+        "type": "Constant",
+        "name": "cns_rho",
+        "position": {
+          "x": 180,
+          "y": 260
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "cns_rho-output-0",
+            "nodeId": "cns_rho",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "value": "rho"
+        }
+      },
+      {
+        "id": "add_rho_z",
+        "type": "Adder",
+        "name": "add_rho_z",
+        "position": {
+          "x": 400,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "add_rho_z-input-0",
+            "nodeId": "add_rho_z",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "add_rho_z-input-1",
+            "nodeId": "add_rho_z",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "add_rho_z-output-0",
+            "nodeId": "add_rho_z",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'+-'"
+        }
+      },
+      {
+        "id": "mul_x_rho_z",
+        "type": "Multiplier",
+        "name": "mul_x_rho_z",
+        "position": {
+          "x": 620,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "mul_x_rho_z-input-0",
+            "nodeId": "mul_x_rho_z",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "mul_x_rho_z-input-1",
+            "nodeId": "mul_x_rho_z",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "mul_x_rho_z-output-0",
+            "nodeId": "mul_x_rho_z",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {}
+      },
+      {
+        "id": "add_y",
+        "type": "Adder",
+        "name": "add_y",
+        "position": {
+          "x": 840,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "add_y-input-0",
+            "nodeId": "add_y",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "add_y-input-1",
+            "nodeId": "add_y",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "add_y-output-0",
+            "nodeId": "add_y",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'-+'"
+        }
+      },
+      {
+        "id": "mul_xy",
+        "type": "Multiplier",
+        "name": "mul_xy",
+        "position": {
+          "x": 1060,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "mul_xy-input-0",
+            "nodeId": "mul_xy",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "mul_xy-input-1",
+            "nodeId": "mul_xy",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "mul_xy-output-0",
+            "nodeId": "mul_xy",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {}
+      },
+      {
+        "id": "amp_beta",
+        "type": "Amplifier",
+        "name": "amp_beta",
+        "position": {
+          "x": 180,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "amp_beta-input-0",
+            "nodeId": "amp_beta",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "amp_beta-output-0",
+            "nodeId": "amp_beta",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "gain": "beta"
+        }
+      },
+      {
+        "id": "add_z",
+        "type": "Adder",
+        "name": "add_z",
+        "position": {
+          "x": 400,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "add_z-input-0",
+            "nodeId": "add_z",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "add_z-input-1",
+            "nodeId": "add_z",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "add_z-output-0",
+            "nodeId": "add_z",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'+-'"
+        }
+      },
+      {
+        "id": "sco",
+        "type": "Scope",
+        "name": "sco",
+        "position": {
+          "x": 620,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "sco-input-0",
+            "nodeId": "sco",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-1",
+            "nodeId": "sco",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "sco-input-2",
+            "nodeId": "sco",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['x', 'y', 'z']"
+        }
+      },
+      {
+        "id": "itg_x_scalar_0",
+        "type": "Function",
+        "name": "itg_x_scalar_0",
+        "position": {
+          "x": 400,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "itg_x_scalar_0-input-0",
+            "nodeId": "itg_x_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "itg_x_scalar_0-output-0",
+            "nodeId": "itg_x_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "itg_y_scalar_1",
+        "type": "Function",
+        "name": "itg_y_scalar_1",
+        "position": {
+          "x": 510,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "itg_y_scalar_1-input-0",
+            "nodeId": "itg_y_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "itg_y_scalar_1-output-0",
+            "nodeId": "itg_y_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "itg_z_scalar_2",
+        "type": "Function",
+        "name": "itg_z_scalar_2",
+        "position": {
+          "x": 620,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "itg_z_scalar_2-input-0",
+            "nodeId": "itg_z_scalar_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "itg_z_scalar_2-output-0",
+            "nodeId": "itg_z_scalar_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "itg_x",
+        "sourcePortIndex": 0,
+        "targetNodeId": "add_x",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "itg_x",
+        "sourcePortIndex": 0,
+        "targetNodeId": "mul_x_rho_z",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "itg_x",
+        "sourcePortIndex": 0,
+        "targetNodeId": "mul_xy",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "itg_x",
+        "sourcePortIndex": 0,
+        "targetNodeId": "itg_x_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "itg_x_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "itg_y",
+        "sourcePortIndex": 0,
+        "targetNodeId": "add_x",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "itg_y",
+        "sourcePortIndex": 0,
+        "targetNodeId": "add_y",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "itg_y",
+        "sourcePortIndex": 0,
+        "targetNodeId": "mul_xy",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "itg_y",
+        "sourcePortIndex": 0,
+        "targetNodeId": "itg_y_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "itg_y_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "itg_z",
+        "sourcePortIndex": 0,
+        "targetNodeId": "add_rho_z",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "itg_z",
+        "sourcePortIndex": 0,
+        "targetNodeId": "amp_beta",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0013",
+        "sourceNodeId": "itg_z",
+        "sourcePortIndex": 0,
+        "targetNodeId": "itg_z_scalar_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0014",
+        "sourceNodeId": "itg_z_scalar_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "sco",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0015",
+        "sourceNodeId": "add_x",
+        "sourcePortIndex": 0,
+        "targetNodeId": "amp_sigma",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0016",
+        "sourceNodeId": "amp_sigma",
+        "sourcePortIndex": 0,
+        "targetNodeId": "itg_x",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0017",
+        "sourceNodeId": "cns_rho",
+        "sourcePortIndex": 0,
+        "targetNodeId": "add_rho_z",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0018",
+        "sourceNodeId": "add_rho_z",
+        "sourcePortIndex": 0,
+        "targetNodeId": "mul_x_rho_z",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0019",
+        "sourceNodeId": "mul_x_rho_z",
+        "sourcePortIndex": 0,
+        "targetNodeId": "add_y",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0020",
+        "sourceNodeId": "add_y",
+        "sourcePortIndex": 0,
+        "targetNodeId": "itg_y",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0021",
+        "sourceNodeId": "mul_xy",
+        "sourcePortIndex": 0,
+        "targetNodeId": "add_z",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0022",
+        "sourceNodeId": "amp_beta",
+        "sourcePortIndex": 0,
+        "targetNodeId": "add_z",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0023",
+        "sourceNodeId": "add_z",
+        "sourcePortIndex": 0,
+        "targetNodeId": "itg_z",
+        "targetPortIndex": 0
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\n# --- START MONKEY PATCH BLOCK CALL ---\n# Some PathSim versions call block(t) instead of block.update(t).\n# Block.__call__(self) only accepts self, so redirect to update.\ntry:\n    from pathsim.blocks._block import Block as _Block\n    if not hasattr(_Block, '_pv_call_patched'):\n        _orig_block_call = _Block.__call__\n        def _pv_safe_block_call(self, *args, **kwargs):\n            if args or kwargs:\n                return self.update(*args, **kwargs)\n            return _orig_block_call(self)\n        _Block.__call__ = _pv_safe_block_call\n        _Block._pv_call_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH BLOCK CALL ---\n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nfrom pathsim import Simulation, Connection\n\nfrom pathsim.blocks import Scope, Integrator, Constant, Adder, Amplifier, Multiplier\n\nfrom pathsim.solvers import RKCK54, RKBS32, GEAR52A, RKF21, ESDIRK43\n\nsigma, rho, beta = (10, 28, 8 / 3)\n\nx0, y0, z0 = (1.0, 1.0, 1.0)"
+  },
+  "simulationSettings": {
+    "duration": "50",
+    "dt": "0.01",
+    "solver": "RKBS32",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-06",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

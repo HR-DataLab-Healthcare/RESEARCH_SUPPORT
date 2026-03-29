@@ -1,0 +1,247 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-29T05:20:00Z",
+    "modified": "2026-03-29T05:20:00Z",
+    "name": "example_heat-pump"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "Tevap",
+        "type": "Source",
+        "name": "Tevap",
+        "position": {
+          "x": 120,
+          "y": 220
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "Tevap-output-0",
+            "nodeId": "Tevap",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda t: 258.15 + t"
+        }
+      },
+      {
+        "id": "COP_fn",
+        "type": "Function",
+        "name": "COP_fn",
+        "position": {
+          "x": 440,
+          "y": 80
+        },
+        "inputs": [
+          {
+            "id": "COP_fn-input-0",
+            "nodeId": "COP_fn",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_fn-output-0",
+            "nodeId": "COP_fn",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: compute_cop(x)"
+        }
+      },
+      {
+        "id": "Carnot_fn",
+        "type": "Function",
+        "name": "Carnot_fn",
+        "position": {
+          "x": 440,
+          "y": 220
+        },
+        "inputs": [
+          {
+            "id": "Carnot_fn-input-0",
+            "nodeId": "Carnot_fn",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Carnot_fn-output-0",
+            "nodeId": "Carnot_fn",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: t_cond / (t_cond - x)"
+        }
+      },
+      {
+        "id": "Pwr_fn",
+        "type": "Function",
+        "name": "Pwr_fn",
+        "position": {
+          "x": 440,
+          "y": 380
+        },
+        "inputs": [
+          {
+            "id": "Pwr_fn-input-0",
+            "nodeId": "Pwr_fn",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Pwr_fn-output-0",
+            "nodeId": "Pwr_fn",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: compute_power_kw(x)"
+        }
+      },
+      {
+        "id": "Sco_COP",
+        "type": "Scope",
+        "name": "Sco_COP",
+        "position": {
+          "x": 760,
+          "y": 140
+        },
+        "inputs": [
+          {
+            "id": "Sco_COP-input-0",
+            "nodeId": "Sco_COP",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco_COP-input-1",
+            "nodeId": "Sco_COP",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['COP (R290)', 'COP (Carnot)']"
+        }
+      },
+      {
+        "id": "Sco_Pwr",
+        "type": "Scope",
+        "name": "Sco_Pwr",
+        "position": {
+          "x": 760,
+          "y": 380
+        },
+        "inputs": [
+          {
+            "id": "Sco_Pwr-input-0",
+            "nodeId": "Sco_Pwr",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Power (kW)']"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "Tevap",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_fn",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "Tevap",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Carnot_fn",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "Tevap",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Pwr_fn",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "COP_fn",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco_COP",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "Carnot_fn",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco_COP",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "Pwr_fn",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco_Pwr",
+        "targetPortIndex": 0
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "from CoolProp.CoolProp import PropsSI\nimport numpy as np\n\n# Heat pump cycle (R290 refrigerant) -- parametric study\n# Source: fwitte.github.io/intro-to-thermal-engineering/model/exercise-sm.html\n# Time axis maps to evaporation temperature: t=0 -> -15 deg C, t=30 -> +15 deg C\nfluid = \"R290\"\nt_cond = 333.15  # Condenser outlet temperature [K] (60 deg C)\neta_s = 0.8      # Compressor isentropic efficiency\nq_cond = -1e6    # Condenser heat production [W] (1 MW)\n\ndef compute_cop(t_evap):\n    p_cond = PropsSI(\"P\", \"T\", t_cond, \"Q\", 0, fluid)\n    h_2 = PropsSI(\"H\", \"T\", t_evap, \"Q\", 1, fluid)\n    s_2 = PropsSI(\"S\", \"T\", t_evap, \"Q\", 1, fluid)\n    h_3s = PropsSI(\"H\", \"S\", s_2, \"P\", p_cond, fluid)\n    h_3 = h_2 + (h_3s - h_2) / eta_s\n    h_4 = PropsSI(\"H\", \"T\", t_cond, \"Q\", 0, fluid)\n    m = q_cond / (h_4 - h_3)\n    power = m * (h_3 - h_2)\n    return abs(q_cond) / power\n\ndef compute_power_kw(t_evap):\n    p_cond = PropsSI(\"P\", \"T\", t_cond, \"Q\", 0, fluid)\n    h_2 = PropsSI(\"H\", \"T\", t_evap, \"Q\", 1, fluid)\n    s_2 = PropsSI(\"S\", \"T\", t_evap, \"Q\", 1, fluid)\n    h_3s = PropsSI(\"H\", \"S\", s_2, \"P\", p_cond, fluid)\n    h_3 = h_2 + (h_3s - h_2) / eta_s\n    h_4 = PropsSI(\"H\", \"T\", t_cond, \"Q\", 0, fluid)\n    m = q_cond / (h_4 - h_3)\n    return m * (h_3 - h_2) / 1e3"
+  },
+  "simulationSettings": {
+    "duration": "30.0",
+    "dt": "1.0",
+    "solver": "SSPRK22",
+    "adaptive": false,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

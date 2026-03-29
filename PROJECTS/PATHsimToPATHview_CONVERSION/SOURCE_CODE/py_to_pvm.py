@@ -218,12 +218,31 @@ def find_simulation(module: types.ModuleType, sim_var: Optional[str], Simulation
     return sims[0][1], sims[0][0]
 
 
+# Names that become Python builtins/keywords when lowercased by PathView's Or()
+# function. Using these as PVM node IDs causes variable shadowing at runtime.
+_PATHVIEW_RESERVED_LOWER = frozenset({
+    # Python keywords
+    "true", "false", "none", "and", "or", "not", "in", "is", "if", "else",
+    "elif", "for", "while", "def", "class", "return", "yield", "import",
+    "from", "as", "try", "except", "finally", "with", "lambda", "pass",
+    "break", "continue", "raise", "global", "nonlocal", "assert", "del",
+    # Python builtins commonly used in generated code
+    "print", "len", "range", "list", "dict", "set", "tuple", "str", "int",
+    "float", "bool", "type", "abs", "min", "max", "sum", "any", "all",
+    "map", "filter", "zip", "enumerate", "log", "exp", "sqrt", "sin",
+    "cos", "tan", "pi", "np", "numpy", "math",
+})
+
+
 def safe_name(s: str) -> str:
     s = re.sub(r"\W+", "_", s)
     if not s:
         s = "node"
     if s[0].isdigit():
         s = f"n_{s}"
+    # PathView lowercases variable names; avoid shadowing Python builtins
+    if s.lower() in _PATHVIEW_RESERVED_LOWER:
+        s = f"{s}_"
     return s
 
 
@@ -298,6 +317,18 @@ def callable_to_expr(fn: Any) -> str:
         pass
 
     return "lambda *args, **kwargs: 0"
+
+
+def _expr_references_names(expr_str: str, names: set) -> bool:
+    """Return True if *expr_str* contains a reference to any name in *names*."""
+    try:
+        tree = ast.parse(expr_str, mode="eval")
+    except Exception:
+        return False
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Name) and node.id in names:
+            return True
+    return False
 
 
 def value_to_expr(value: Any) -> Any:
@@ -931,7 +962,7 @@ def detect_duration_expr(source: str, sim_var: str) -> Optional[str]:
         def visit_Call(self, node: ast.Call) -> Any:
             if isinstance(node.func, ast.Attribute) and node.func.attr == "run":
                 if isinstance(node.func.value, ast.Name) and node.func.value.id == sim_var:
-                    if node.args:
+                    if node.args and self.found is None:
                         try:
                             self.found = ast.unparse(node.args[0])
                             return
@@ -1071,6 +1102,7 @@ def build_subsystem_graph(
         out_labels = infer_label_map(blk, "output")
 
         params: Dict[str, Any] = {}
+        _sub_block_var_names = set(int_var_map.values())
         # Skip params for Interface (none) and nested Subsystem (handled via recursion)
         if ntype not in ("Interface", "Subsystem"):
             src_name = int_var_map[id(blk)]
@@ -1078,7 +1110,15 @@ def build_subsystem_graph(
             defaults = get_block_param_defaults(blk)
             for p in get_block_param_names(blk):
                 if p in src_kw:
-                    params[p] = src_kw[p]
+                    expr = src_kw[p]
+                    if _expr_references_names(expr, _sub_block_var_names - {int_var_map[id(blk)]}):
+                        if hasattr(blk, p):
+                            v = value_to_expr(getattr(blk, p))
+                            params[p] = str(v) if not isinstance(v, str) else v
+                        else:
+                            params[p] = expr
+                    else:
+                        params[p] = expr
                 elif not src_kw and hasattr(blk, p):
                     value = getattr(blk, p)
                     default = defaults.get(p)
@@ -1240,11 +1280,27 @@ def build_pvm(
                 )
                 cidx += 1
 
+    # Collect all block variable names so we can detect cross-block param
+    # references (e.g. f_max=rfntwk.network.frequency.stop) and fall back to
+    # serialising the runtime value, which the PathView validator can evaluate
+    # without the block object being present in the codeContext namespace.
+    _all_block_var_names = set(block_var_map.values())
+
     pvm_nodes: List[Dict[str, Any]] = []
     vector_len_hints: Dict[str, int] = {}
     for i, block in enumerate(blocks):
         node_id = block_id_map[id(block)]
         node_type = block.__class__.__name__
+
+        # PathView 0.8.4 does not know the RFNetwork block type.  When it
+        # encounters an unregistered type it silently drops the node, so the
+        # simulation runs without it.  RFNetwork internally computes a
+        # state-space model (A, B, C, D) via scikit-rf vector-fitting, so we
+        # can transparently emit a StateSpace node instead.
+        _rfntwk_replaced = False
+        if node_type == "RFNetwork" and all(hasattr(block, m) for m in ("A", "B", "C", "D")):
+            node_type = "StateSpace"
+            _rfntwk_replaced = True
 
         base_in = infer_base_port_count(block, "input")
         base_out = infer_base_port_count(block, "output")
@@ -1273,7 +1329,18 @@ def build_pvm(
         defaults = get_block_param_defaults(block)
         for p in get_block_param_names(block):
             if p in src_kw:
-                params[p] = src_kw[p]
+                expr = src_kw[p]
+                # If the expression references another block variable, the
+                # PathView validator cannot resolve it (the block object only
+                # exists at simulation time).  Fall back to the runtime value.
+                if _expr_references_names(expr, _all_block_var_names - {block_var_map[id(block)]}):
+                    if hasattr(block, p):
+                        v = value_to_expr(getattr(block, p))
+                        params[p] = str(v) if not isinstance(v, str) else v
+                    else:
+                        params[p] = expr
+                else:
+                    params[p] = expr
             elif not src_kw and hasattr(block, p):
                 # Fallback only when constructor args couldn't be recovered.
                 # Avoid serializing defaults/internal state that can break runtime behavior.
@@ -1291,6 +1358,16 @@ def build_pvm(
 
                 if different:
                     params[p] = value_to_expr(value)
+
+        # Override params for RFNetwork → StateSpace conversion
+        if _rfntwk_replaced:
+            import numpy as _np
+            params = {
+                "A": f"np.array({_np.array(block.A).tolist()!r})",
+                "B": f"np.array({_np.array(block.B).tolist()!r})",
+                "C": f"np.array({_np.array(block.C).tolist()!r})",
+                "D": f"np.array({_np.array(block.D).tolist()!r})",
+            }
 
         pvm_node = {
                 "id": node_id,

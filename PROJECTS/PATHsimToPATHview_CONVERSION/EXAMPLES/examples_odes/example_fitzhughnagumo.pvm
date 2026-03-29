@@ -1,0 +1,545 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-29T02:02:32Z",
+    "modified": "2026-03-29T02:02:32Z",
+    "name": "example_fitzhughnagumo"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "Iv",
+        "type": "Integrator",
+        "name": "Iv",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Iv-input-0",
+            "nodeId": "Iv",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Iv-output-0",
+            "nodeId": "Iv",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {}
+      },
+      {
+        "id": "Iw",
+        "type": "Integrator",
+        "name": "Iw",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "Iw-input-0",
+            "nodeId": "Iw",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Iw-output-0",
+            "nodeId": "Iw",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {}
+      },
+      {
+        "id": "F3",
+        "type": "Function",
+        "name": "F3",
+        "position": {
+          "x": 620,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "F3-input-0",
+            "nodeId": "F3",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "F3-output-0",
+            "nodeId": "F3",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: 1 / 3 * x ** 3"
+        }
+      },
+      {
+        "id": "Ca",
+        "type": "Constant",
+        "name": "Ca",
+        "position": {
+          "x": 840,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "Ca-output-0",
+            "nodeId": "Ca",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "value": "a"
+        }
+      },
+      {
+        "id": "CR",
+        "type": "Constant",
+        "name": "CR",
+        "position": {
+          "x": 1060,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "CR-output-0",
+            "nodeId": "CR",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "value": "R * I_ext"
+        }
+      },
+      {
+        "id": "Gb",
+        "type": "Amplifier",
+        "name": "Gb",
+        "position": {
+          "x": 180,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "Gb-input-0",
+            "nodeId": "Gb",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Gb-output-0",
+            "nodeId": "Gb",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "gain": "b"
+        }
+      },
+      {
+        "id": "Gt",
+        "type": "Amplifier",
+        "name": "Gt",
+        "position": {
+          "x": 400,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "Gt-input-0",
+            "nodeId": "Gt",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Gt-output-0",
+            "nodeId": "Gt",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "gain": "1 / tau"
+        }
+      },
+      {
+        "id": "Av",
+        "type": "Adder",
+        "name": "Av",
+        "position": {
+          "x": 620,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "Av-input-0",
+            "nodeId": "Av",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Av-input-1",
+            "nodeId": "Av",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "Av-input-2",
+            "nodeId": "Av",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "Av-input-3",
+            "nodeId": "Av",
+            "name": "in 3",
+            "direction": "input",
+            "index": 3,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Av-output-0",
+            "nodeId": "Av",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'+--+'"
+        }
+      },
+      {
+        "id": "Aw",
+        "type": "Adder",
+        "name": "Aw",
+        "position": {
+          "x": 840,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "Aw-input-0",
+            "nodeId": "Aw",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Aw-input-1",
+            "nodeId": "Aw",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "Aw-input-2",
+            "nodeId": "Aw",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Aw-output-0",
+            "nodeId": "Aw",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "operations": "'++-'"
+        }
+      },
+      {
+        "id": "Sc",
+        "type": "Scope",
+        "name": "Sc",
+        "position": {
+          "x": 1060,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "Sc-input-0",
+            "nodeId": "Sc",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Sc-input-1",
+            "nodeId": "Sc",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['v', 'w']"
+        }
+      },
+      {
+        "id": "Iv_scalar_0",
+        "type": "Function",
+        "name": "Iv_scalar_0",
+        "position": {
+          "x": 620,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Iv_scalar_0-input-0",
+            "nodeId": "Iv_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Iv_scalar_0-output-0",
+            "nodeId": "Iv_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "Iw_scalar_1",
+        "type": "Function",
+        "name": "Iw_scalar_1",
+        "position": {
+          "x": 730,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "Iw_scalar_1-input-0",
+            "nodeId": "Iw_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Iw_scalar_1-output-0",
+            "nodeId": "Iw_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "Av",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Iv",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "Gt",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Iw",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "Aw",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Gt",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "Iv",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Av",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "Iv",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Aw",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "Iv",
+        "sourcePortIndex": 0,
+        "targetNodeId": "F3",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "Iv",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Iv_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "Iv_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sc",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "Iw",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Av",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "Iw",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Gb",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "Iw",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Iw_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "Iw_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sc",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0013",
+        "sourceNodeId": "F3",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Av",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0014",
+        "sourceNodeId": "CR",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Av",
+        "targetPortIndex": 3
+      },
+      {
+        "id": "conn-0015",
+        "sourceNodeId": "Ca",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Aw",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0016",
+        "sourceNodeId": "Gb",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Aw",
+        "targetPortIndex": 2
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\n# --- START MONKEY PATCH BLOCK CALL ---\n# Some PathSim versions call block(t) instead of block.update(t).\n# Block.__call__(self) only accepts self, so redirect to update.\ntry:\n    from pathsim.blocks._block import Block as _Block\n    if not hasattr(_Block, '_pv_call_patched'):\n        _orig_block_call = _Block.__call__\n        def _pv_safe_block_call(self, *args, **kwargs):\n            if args or kwargs:\n                return self.update(*args, **kwargs)\n            return _orig_block_call(self)\n        _Block.__call__ = _pv_safe_block_call\n        _Block._pv_call_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH BLOCK CALL ---\n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport numpy as np\n\nimport matplotlib.pyplot as plt\n\nfrom pathsim import Simulation, Connection\n\nfrom pathsim.blocks import Scope, Integrator, Adder, Amplifier, Constant, Function\n\nfrom pathsim.solvers import RKCK54, RKBS32\n\na, b, tau, R, I_ext = (0.7, 0.8, 12.5, 1.0, 0.5)"
+  },
+  "simulationSettings": {
+    "duration": "200",
+    "dt": "0.01",
+    "solver": "RKCK54",
+    "adaptive": true,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": "",
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}

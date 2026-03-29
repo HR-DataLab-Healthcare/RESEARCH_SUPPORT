@@ -13,6 +13,7 @@ The `py_to_pvm.py` converter transforms PathSim Python model scripts (`.py`) int
 | Python | 3.11+ | Server runs 3.11; local can be 3.12 |
 | PathSim | 0.20.0+ | Must be importable or use `--pathsim-root` |
 | NumPy | any | Required by PathSim |
+| CoolProp | 7.x | Optional — only needed for `example_heat-pump` |
 
 ### Install PathSim
 
@@ -338,6 +339,7 @@ This directory contains the following pre-built PVM files:
 | `example_feedback.pvm` | Feedback system | — |
 | `example_filters.pvm` | Filter examples | — |
 | `example_harmonic_oscillator.pvm` | Harmonic oscillator | — |
+| `example_heat-pump.pvm` | R290 heat-pump COP & compressor power ([CoolProp](https://pypi.org/project/CoolProp/)) | — |
 | `example_kalman_filter.pvm` | Kalman filter | — |
 | `example_nested_subsystems.pvm` | Nested subsystems | — |
 | `example_noise.pvm` | Noise source | — |
@@ -393,6 +395,105 @@ The script does not create a `Simulation` instance, or creates it conditionally 
 - The simulation may have diverged (NaN/Inf values)
 - Try reducing `duration` or `dt`
 - Check if the solver is appropriate for the model (stiff systems need implicit solvers)
+
+---
+
+## Docker Deployment
+
+Self-host PathView behind a Traefik reverse proxy with automatic HTTPS (Let's Encrypt).
+
+### Dockerfile
+
+Builds a minimal image with PathView and any Python packages your models need.
+Add extra dependencies (e.g. `CoolProp`) to the `pip install` line.
+
+```dockerfile
+FROM python:3.11-slim
+
+# Minimal OS-level tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        curl git && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Python packages — add model dependencies here
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir pathview==0.8.4 scikit-rf CoolProp
+
+EXPOSE 5000
+
+CMD ["pathview", "serve", "--host", "0.0.0.0", "--port", "5000", "--no-browser"]
+```
+
+### docker-compose.yml
+
+Two services:
+
+| Service | Purpose |
+|---------|---------|
+| **traefik** | Reverse proxy — terminates TLS, obtains Let's Encrypt certificates, routes `pathview.yourdomain.com` to the PathView container. |
+| **pathview** | The PathView server — serves the editor UI and runs simulations. The volume mount exposes your local `examples/` directory so `.pvm` files are available inside the container. |
+
+```yaml
+services:
+  # --- Reverse proxy (HTTPS + routing) ---
+  traefik:
+    image: traefik:v3.6.1
+    container_name: sram_traefik
+    restart: unless-stopped
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.email=you@example.com"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"    # Traefik dashboard (optional)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./letsencrypt:/letsencrypt
+
+  # --- PathView application ---
+  pathview:
+    build: .
+    container_name: sram_pathview
+    restart: unless-stopped
+    volumes:
+      - /home/user/pathsim:/pathsim:rw          # mount your examples directory
+    environment:
+      - PATHVIEW_EXAMPLES=/pathsim/examples
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pathview.rule=Host(`pathview.yourdomain.com`)"
+      - "traefik.http.routers.pathview.entrypoints=websecure"
+      - "traefik.http.routers.pathview.tls.certresolver=letsencrypt"
+      - "traefik.http.services.pathview.loadbalancer.server.port=5000"
+```
+
+### Build & run
+
+```bash
+docker compose down
+docker compose up -d --build
+```
+
+This stops any running containers, rebuilds the image with the latest `Dockerfile` changes, and starts everything in the background. After a few seconds Traefik obtains a certificate and PathView is reachable at `https://pathview.yourdomain.com`.
+
+### Adding Python packages
+
+To make additional packages available (e.g. `CoolProp` for the heat-pump example), add them to the `pip install` line in the `Dockerfile`, then rebuild:
+
+```bash
+docker compose down
+docker compose up -d --build
+```
 
 ---
 
