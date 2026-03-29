@@ -13,8 +13,7 @@ The `py_to_pvm.py` converter transforms PathSim Python model scripts (`.py`) int
 | Python | 3.11+ | Server runs 3.11; local can be 3.12 |
 | PathSim | 0.20.0+ | Must be importable or use `--pathsim-root` |
 | NumPy | any | Required by PathSim |
-| CoolProp | 7.x | Optional — needed for heat-pump examples |
-| fluprodia | 4.x | Optional — local T-s / log-p-h diagrams for `example_isentropic_efficiency_heat_pump` |
+| CoolProp | 7.x | Optional — only needed for `example_heat-pump` |
 
 ### Install PathSim
 
@@ -341,7 +340,6 @@ This directory contains the following pre-built PVM files:
 | `example_filters.pvm` | Filter examples | — |
 | `example_harmonic_oscillator.pvm` | Harmonic oscillator | — |
 | `example_heat-pump.pvm` | R290 heat-pump COP & compressor power ([CoolProp](https://pypi.org/project/CoolProp/)) | — |
-| `example_isentropic_efficiency_heat_pump.pvm` | R290 heat-pump with isentropic efficiency — 7-trace COP parametric surface + compressor power ([CoolProp](https://pypi.org/project/CoolProp/)) | — |
 | `example_kalman_filter.pvm` | Kalman filter | — |
 | `example_nested_subsystems.pvm` | Nested subsystems | — |
 | `example_noise.pvm` | Noise source | — |
