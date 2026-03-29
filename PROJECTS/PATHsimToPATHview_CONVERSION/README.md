@@ -421,7 +421,7 @@ WORKDIR /app
 
 # Python packages — add model dependencies here
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir pathview==0.8.4 scikit-rf CoolProp
+    pip install --no-cache-dir pathview==0.8.4 scikit-rf CoolProp fluprodia
 
 EXPOSE 5000
 
