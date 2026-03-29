@@ -1,0 +1,829 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "created": "2026-03-29T12:44:49.186Z",
+    "modified": "2026-03-29T12:44:49.186Z",
+    "name": "example_isentropic_efficiency_heat_pump"
+  },
+  "graph": {
+    "nodes": [
+      {
+        "id": "Tevap",
+        "type": "Source",
+        "name": "Tevap",
+        "position": {
+          "x": 180,
+          "y": 120
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "Tevap-output-0",
+            "nodeId": "Tevap",
+            "name": "out",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda t: 258.15 + t"
+        }
+      },
+      {
+        "id": "COP_40",
+        "type": "Function",
+        "name": "COP_40",
+        "position": {
+          "x": 400,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "COP_40-input-0",
+            "nodeId": "COP_40",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_40-output-0",
+            "nodeId": "COP_40",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: cop_at(x, t_cond_40)"
+        }
+      },
+      {
+        "id": "COP_45",
+        "type": "Function",
+        "name": "COP_45",
+        "position": {
+          "x": 400,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "COP_45-input-0",
+            "nodeId": "COP_45",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_45-output-0",
+            "nodeId": "COP_45",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: cop_at(x, t_cond_45)"
+        }
+      },
+      {
+        "id": "COP_50",
+        "type": "Function",
+        "name": "COP_50",
+        "position": {
+          "x": 400,
+          "y": 250
+        },
+        "inputs": [
+          {
+            "id": "COP_50-input-0",
+            "nodeId": "COP_50",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_50-output-0",
+            "nodeId": "COP_50",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: cop_at(x, t_cond_50)"
+        }
+      },
+      {
+        "id": "COP_55",
+        "type": "Function",
+        "name": "COP_55",
+        "position": {
+          "x": 400,
+          "y": 300
+        },
+        "inputs": [
+          {
+            "id": "COP_55-input-0",
+            "nodeId": "COP_55",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_55-output-0",
+            "nodeId": "COP_55",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: cop_at(x, t_cond_55)"
+        }
+      },
+      {
+        "id": "COP_60",
+        "type": "Function",
+        "name": "COP_60",
+        "position": {
+          "x": 400,
+          "y": 350
+        },
+        "inputs": [
+          {
+            "id": "COP_60-input-0",
+            "nodeId": "COP_60",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_60-output-0",
+            "nodeId": "COP_60",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: cop_at(x, t_cond_60)"
+        }
+      },
+      {
+        "id": "COP_65",
+        "type": "Function",
+        "name": "COP_65",
+        "position": {
+          "x": 400,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "COP_65-input-0",
+            "nodeId": "COP_65",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_65-output-0",
+            "nodeId": "COP_65",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: cop_at(x, t_cond_65)"
+        }
+      },
+      {
+        "id": "COP_70",
+        "type": "Function",
+        "name": "COP_70",
+        "position": {
+          "x": 400,
+          "y": 450
+        },
+        "inputs": [
+          {
+            "id": "COP_70-input-0",
+            "nodeId": "COP_70",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_70-output-0",
+            "nodeId": "COP_70",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: cop_at(x, t_cond_70)"
+        }
+      },
+      {
+        "id": "Pwr_60",
+        "type": "Function",
+        "name": "Pwr_60",
+        "position": {
+          "x": 400,
+          "y": 40
+        },
+        "inputs": [
+          {
+            "id": "Pwr_60-input-0",
+            "nodeId": "Pwr_60",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Pwr_60-output-0",
+            "nodeId": "Pwr_60",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: power_at(x, t_cond_60)"
+        }
+      },
+      {
+        "id": "Sco_COP",
+        "type": "Scope",
+        "name": "Sco_COP",
+        "position": {
+          "x": 1060,
+          "y": 260
+        },
+        "inputs": [
+          {
+            "id": "Sco_COP-input-0",
+            "nodeId": "Sco_COP",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco_COP-input-1",
+            "nodeId": "Sco_COP",
+            "name": "in 1",
+            "direction": "input",
+            "index": 1,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco_COP-input-2",
+            "nodeId": "Sco_COP",
+            "name": "in 2",
+            "direction": "input",
+            "index": 2,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco_COP-input-3",
+            "nodeId": "Sco_COP",
+            "name": "in 3",
+            "direction": "input",
+            "index": 3,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco_COP-input-4",
+            "nodeId": "Sco_COP",
+            "name": "in 4",
+            "direction": "input",
+            "index": 4,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco_COP-input-5",
+            "nodeId": "Sco_COP",
+            "name": "in 5",
+            "direction": "input",
+            "index": 5,
+            "color": "#969696"
+          },
+          {
+            "id": "Sco_COP-input-6",
+            "nodeId": "Sco_COP",
+            "name": "in 6",
+            "direction": "input",
+            "index": 6,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['COP @ Tcond=40C', 'COP @ Tcond=45C', 'COP @ Tcond=50C', 'COP @ Tcond=55C', 'COP @ Tcond=60C', 'COP @ Tcond=65C', 'COP @ Tcond=70C']"
+        }
+      },
+      {
+        "id": "Sco_Pwr",
+        "type": "Scope",
+        "name": "Sco_Pwr",
+        "position": {
+          "x": 1050,
+          "y": 40
+        },
+        "inputs": [
+          {
+            "id": "Sco_Pwr-input-0",
+            "nodeId": "Sco_Pwr",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [],
+        "params": {
+          "labels": "['Power (kW) @ Tcond=60C']"
+        }
+      },
+      {
+        "id": "Pwr_60_scalar_0",
+        "type": "Function",
+        "name": "Pwr_60_scalar",
+        "position": {
+          "x": 550,
+          "y": 40
+        },
+        "inputs": [
+          {
+            "id": "Pwr_60_scalar_0-input-0",
+            "nodeId": "Pwr_60_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "Pwr_60_scalar_0-output-0",
+            "nodeId": "Pwr_60_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "COP_40_scalar_0",
+        "type": "Function",
+        "name": "COP_40_scalar_0",
+        "position": {
+          "x": 640,
+          "y": 120
+        },
+        "inputs": [
+          {
+            "id": "COP_40_scalar_0-input-0",
+            "nodeId": "COP_40_scalar_0",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_40_scalar_0-output-0",
+            "nodeId": "COP_40_scalar_0",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "COP_45_scalar_1",
+        "type": "Function",
+        "name": "COP_45_scalar_1",
+        "position": {
+          "x": 640,
+          "y": 190
+        },
+        "inputs": [
+          {
+            "id": "COP_45_scalar_1-input-0",
+            "nodeId": "COP_45_scalar_1",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_45_scalar_1-output-0",
+            "nodeId": "COP_45_scalar_1",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "COP_50_scalar_2",
+        "type": "Function",
+        "name": "COP_50_scalar_2",
+        "position": {
+          "x": 640,
+          "y": 250
+        },
+        "inputs": [
+          {
+            "id": "COP_50_scalar_2-input-0",
+            "nodeId": "COP_50_scalar_2",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_50_scalar_2-output-0",
+            "nodeId": "COP_50_scalar_2",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "COP_55_scalar_3",
+        "type": "Function",
+        "name": "COP_55_scalar_3",
+        "position": {
+          "x": 640,
+          "y": 300
+        },
+        "inputs": [
+          {
+            "id": "COP_55_scalar_3-input-0",
+            "nodeId": "COP_55_scalar_3",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_55_scalar_3-output-0",
+            "nodeId": "COP_55_scalar_3",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "COP_60_scalar_4",
+        "type": "Function",
+        "name": "COP_60_scalar_4",
+        "position": {
+          "x": 640,
+          "y": 350
+        },
+        "inputs": [
+          {
+            "id": "COP_60_scalar_4-input-0",
+            "nodeId": "COP_60_scalar_4",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_60_scalar_4-output-0",
+            "nodeId": "COP_60_scalar_4",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "COP_65_scalar_5",
+        "type": "Function",
+        "name": "COP_65_scalar_5",
+        "position": {
+          "x": 640,
+          "y": 400
+        },
+        "inputs": [
+          {
+            "id": "COP_65_scalar_5-input-0",
+            "nodeId": "COP_65_scalar_5",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_65_scalar_5-output-0",
+            "nodeId": "COP_65_scalar_5",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      },
+      {
+        "id": "COP_70_scalar_6",
+        "type": "Function",
+        "name": "COP_70_scalar_6",
+        "position": {
+          "x": 640,
+          "y": 450
+        },
+        "inputs": [
+          {
+            "id": "COP_70_scalar_6-input-0",
+            "nodeId": "COP_70_scalar_6",
+            "name": "in 0",
+            "direction": "input",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "COP_70_scalar_6-output-0",
+            "nodeId": "COP_70_scalar_6",
+            "name": "out 0",
+            "direction": "output",
+            "index": 0,
+            "color": "#969696"
+          }
+        ],
+        "params": {
+          "func": "lambda x: _pv_scalar(x, 0)"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "conn-0001",
+        "sourceNodeId": "Tevap",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_40",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0002",
+        "sourceNodeId": "Tevap",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_45",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0003",
+        "sourceNodeId": "Tevap",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_50",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0004",
+        "sourceNodeId": "Tevap",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_55",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0005",
+        "sourceNodeId": "Tevap",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_60",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0006",
+        "sourceNodeId": "Tevap",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_65",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0007",
+        "sourceNodeId": "Tevap",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_70",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0008",
+        "sourceNodeId": "Tevap",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Pwr_60",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0009",
+        "sourceNodeId": "COP_40",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_40_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0010",
+        "sourceNodeId": "COP_40_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco_COP",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0011",
+        "sourceNodeId": "COP_45",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_45_scalar_1",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0012",
+        "sourceNodeId": "COP_45_scalar_1",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco_COP",
+        "targetPortIndex": 1
+      },
+      {
+        "id": "conn-0013",
+        "sourceNodeId": "COP_50",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_50_scalar_2",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0014",
+        "sourceNodeId": "COP_50_scalar_2",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco_COP",
+        "targetPortIndex": 2
+      },
+      {
+        "id": "conn-0015",
+        "sourceNodeId": "COP_55",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_55_scalar_3",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0016",
+        "sourceNodeId": "COP_55_scalar_3",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco_COP",
+        "targetPortIndex": 3
+      },
+      {
+        "id": "conn-0017",
+        "sourceNodeId": "COP_60",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_60_scalar_4",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0018",
+        "sourceNodeId": "COP_60_scalar_4",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco_COP",
+        "targetPortIndex": 4
+      },
+      {
+        "id": "conn-0019",
+        "sourceNodeId": "COP_65",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_65_scalar_5",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0020",
+        "sourceNodeId": "COP_65_scalar_5",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco_COP",
+        "targetPortIndex": 5
+      },
+      {
+        "id": "conn-0021",
+        "sourceNodeId": "COP_70",
+        "sourcePortIndex": 0,
+        "targetNodeId": "COP_70_scalar_6",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0022",
+        "sourceNodeId": "COP_70_scalar_6",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco_COP",
+        "targetPortIndex": 6
+      },
+      {
+        "id": "conn-0023",
+        "sourceNodeId": "Pwr_60",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Pwr_60_scalar_0",
+        "targetPortIndex": 0
+      },
+      {
+        "id": "conn-0024",
+        "sourceNodeId": "Pwr_60_scalar_0",
+        "sourcePortIndex": 0,
+        "targetNodeId": "Sco_Pwr",
+        "targetPortIndex": 0
+      }
+    ],
+    "annotations": []
+  },
+  "events": [],
+  "codeContext": {
+    "code": "# --- START MONKEY PATCH REGISTER --- \n# Resolves ValueError: setting an array element with a sequence for PathView engine.\ntry:\n    from pathsim.utils.register import Register\n    import numpy as np\n    if not hasattr(Register, '_pv_patched'):\n        _orig_setitem = Register.__setitem__\n        def _pv_safe_setitem(self, key, value):\n            if isinstance(value, (list, tuple)) and len(value) == 1:\n                value = value[0]\n            if isinstance(value, np.ndarray) and getattr(value, 'size', 0) == 1:\n                value = float(np.real(value.item()))\n            _orig_setitem(self, key, value)\n        Register.__setitem__ = _pv_safe_setitem\n        \n        _orig_update = Register.update_from_array\n        def _pv_safe_update(self, arr):\n            if isinstance(arr, (list, tuple)):\n                arr = [float(np.real(x.item())) if isinstance(x, np.ndarray) and getattr(x, 'size', 0) == 1 else x for x in arr]\n            _orig_update(self, arr)\n        Register.update_from_array = _pv_safe_update\n        Register._pv_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH REGISTER --- \n\n# --- START MONKEY PATCH BLOCK CALL ---\n# Some PathSim versions call block(t) instead of block.update(t).\n# Block.__call__(self) only accepts self, so redirect to update.\ntry:\n    from pathsim.blocks._block import Block as _Block\n    if not hasattr(_Block, '_pv_call_patched'):\n        _orig_block_call = _Block.__call__\n        def _pv_safe_block_call(self, *args, **kwargs):\n            if args or kwargs:\n                return self.update(*args, **kwargs)\n            return _orig_block_call(self)\n        _Block.__call__ = _pv_safe_block_call\n        _Block._pv_call_patched = True\nexcept Exception:\n    pass\n# --- END MONKEY PATCH BLOCK CALL ---\n\ndef _pv_scalar(x, idx=0):\n    # Robustly extract one scalar from nested arrays/lists/tuples.\n    v = x\n    target = int(idx)\n    for _ in range(8):\n        if isinstance(v, np.ndarray):\n            if v.size == 0:\n                return 0.0\n            flat = np.ravel(v)\n            pick = target if target < flat.size else 0\n            v = flat[pick]\n            target = 0\n            continue\n        if isinstance(v, (list, tuple)):\n            if not v:\n                return 0.0\n            pick = target if target < len(v) else 0\n            v = v[pick]\n            target = 0\n            continue\n        break\n    # Final hard cast to scalar float for Register(dtype=float64).\n    arr = np.asarray(v)\n    if arr.size == 0:\n        return 0.0\n    elem = arr.reshape(-1)[0]\n    try:\n        return float(elem)\n    except Exception:\n        try:\n            return float(np.real(elem))\n        except Exception:\n            return 0.0\n\nimport numpy as np\n\nfrom CoolProp.CoolProp import PropsSI\n\nfrom pathsim import Simulation, Connection\n\nfrom pathsim.blocks import Source, Function, Scope\n\nfrom pathsim.solvers import SSPRK22\n\nfluid = 'R290'\n\neta_s = 0.8\n\nheat = -1000000.0\n\nt_cond_40 = 313.15\n\nt_cond_45 = 318.15\n\nt_cond_50 = 323.15\n\nt_cond_55 = 328.15\n\nt_cond_60 = 333.15\n\nt_cond_65 = 338.15\n\nt_cond_70 = 343.15\n\ndef run_forward(fluid, t_2, t_4, eta_s, heat):\n    \"\"\"Full cycle: returns (mass_flow, power, COP, heat_evap).\"\"\"\n    p_2 = PropsSI('P', 'T', t_2, 'Q', 1, fluid)\n    p_4 = PropsSI('P', 'T', t_4, 'Q', 0, fluid)\n    h_2 = PropsSI('H', 'T', t_2, 'Q', 1, fluid)\n    s_2 = PropsSI('S', 'T', t_2, 'Q', 1, fluid)\n    p_3 = p_4\n    h_3s = PropsSI('H', 'S', s_2, 'P', p_3, fluid)\n    h_3 = h_2 + (h_3s - h_2) / eta_s\n    h_4 = PropsSI('H', 'T', t_4, 'Q', 0, fluid)\n    m = heat / (h_4 - h_3)\n    power = m * (h_3 - h_2)\n    cop = abs(heat) / power\n    heat_evap = abs(heat) - power\n    return (m, power, cop, heat_evap)\n\ndef cop_at(t_evap, t_cond):\n    \"\"\"COP for given evaporation and condensation temperatures [K].\"\"\"\n    return run_forward(fluid, t_evap, t_cond, eta_s, heat)[2]\n\ndef power_at(t_evap, t_cond):\n    \"\"\"Compressor power [kW] for given temperatures [K].\"\"\"\n    return run_forward(fluid, t_evap, t_cond, eta_s, heat)[1] / 1000.0\n\ndt = 1.0"
+  },
+  "simulationSettings": {
+    "duration": "30.0",
+    "dt": "1.0",
+    "solver": "SSPRK22",
+    "adaptive": false,
+    "atol": "1e-08",
+    "rtol": "0.0001",
+    "ftol": "1e-10",
+    "dt_min": "1e-16",
+    "dt_max": null,
+    "ghostTraces": 0,
+    "plotResults": true
+  }
+}
