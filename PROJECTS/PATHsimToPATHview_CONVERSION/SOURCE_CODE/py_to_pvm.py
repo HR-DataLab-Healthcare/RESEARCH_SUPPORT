@@ -828,11 +828,22 @@ def normalize_source_like_scalar_outputs(
     return made_changes
 
 
-def extract_code_context_auto(source: str, excluded_names: set[str], ctor_names: set[str]) -> str:
+def extract_code_context_auto(source: str, excluded_names: set[str], ctor_names: set[str], sim_var: str = "sim") -> str:
     try:
         tree = ast.parse(source)
     except Exception:
         return source
+
+    # Find the index of sim_var.run() — everything from that point on is
+    # post-simulation analysis / plotting and must NOT appear in codeContext.
+    cutoff_index = len(tree.body)
+    for idx, node in enumerate(tree.body):
+        if isinstance(node, ast.Expr) and isinstance(node.value, ast.Call):
+            fn = node.value.func
+            if (isinstance(fn, ast.Attribute) and fn.attr == "run"
+                    and isinstance(fn.value, ast.Name) and fn.value.id == sim_var):
+                cutoff_index = idx
+                break
 
     kept: List[ast.stmt] = []
 
@@ -866,7 +877,11 @@ def extract_code_context_auto(source: str, excluded_names: set[str], ctor_names:
             return True
         return False
 
-    for node in tree.body:
+    for body_idx, node in enumerate(tree.body):
+        # Skip everything at or after sim.run() — post-simulation code
+        if body_idx >= cutoff_index:
+            continue
+
         if isinstance(node, ast.If):
             if isinstance(node.test, ast.Compare):
                 left = node.test.left
@@ -1346,7 +1361,7 @@ def build_pvm(
         code_context = source_text
     else:
         # Use the comprehensive ctor_names_for_extract we built earlier
-        code_context = extract_code_context_auto(source_text, excluded_names, ctor_names_for_extract)
+        code_context = extract_code_context_auto(source_text, excluded_names, ctor_names_for_extract, sim_var=sim_var_name)
 
     # Inject imports for event classes used inside Subsystem graphs.
     # PathView's frontend generates e.g. Schedule(...) from graph.events
