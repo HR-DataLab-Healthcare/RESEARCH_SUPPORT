@@ -4,7 +4,7 @@ Geactualiseerde versie: 8 april 2026
 
 NB een ledger m.b.t. Het mandaat en de onstaans geschiedenis van dit statuut ontbreekt nog.
 Zo is bijvoorbeeld nog niet beschreven dat het onderhavige statuut dient als blauwdruk voor 
-het MT & bedrijfsbureau zodat het kan worden opgenomem in het kwaliteitshandboek.
+het MT & bedrijfsbureau zodat het kan worden opgenomen in het kwaliteitshandboek.
 
 
 Centrale uitgangspunten:
