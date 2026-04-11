@@ -1,0 +1,24 @@
+flowchart TD
+	A(["Start aanvraag"]) --> B["1. Formuleer vraag, doel en gewenste output<br/>Gebruik hoofdstuk 1 en 4.1"]
+	B --> C["2. Bepaal type traject<br/>Data, software, analyse, AI of combinatie"]
+	C --> D["3. Doe intake en triage<br/>Gebruik hoofdstuk 2.3, 3 en 4"]
+	D --> E{"Persoonsgegevens,<br/>gevoelige data of externe partners?"}
+	E -- Ja --> F["4A. Classificeer data en bepaal grondslag<br/>Gebruik hoofdstuk 6.1 en 6.2"]
+	E -- Nee --> G["4B. Volg standaard DataLab-route<br/>Met minimale documentatie"]
+	F --> H{"Wordt AI gebruikt<br/>of ontwikkeld?"}
+	G --> H
+	H -- Ja --> I["5A. Toets AI-geletterdheid, menselijk toezicht,<br/>transparantie en risicocategorie<br/>Gebruik hoofdstuk 6.3 en 7"]
+	H -- Nee --> J["5B. Beperk route tot data- en workflowgovernance"]
+	I --> K{"Is extra bestuurlijke,<br/>privacy- of security-escalatie nodig?"}
+	J --> K
+	K -- Ja --> L["6A. Escaleer naar bevoegde rollen<br/>Gebruik hoofdstuk 3.3 en 7"]
+	K -- Nee --> M["6B. Kies passende omgeving<br/>Lokaal, SURF, cloud of TRE via hoofdstuk 5.3"]
+	L --> M
+	M --> N["7. Leg rollen, toegang, tooling,<br/>documentatie en werkafspraken vast<br/>Gebruik hoofdstuk 3, 8, 9 en 10"]
+	N --> O["8. Voer traject gefaseerd uit<br/>Met logging, review en reproduceerbaarheid"]
+	O --> P{"Verandert scope,<br/>data of AI-functionaliteit?"}
+	P -- Ja --> Q["9A. Herbeoordeel project<br/>Gebruik hoofdstuk 9.2 en hoofdstuk 7"]
+	P -- Nee --> R["9B. Rond project af"]
+	Q --> M
+	R --> S["10. Regel overdracht, archivering,<br/>publicatie en intrekken toegang<br/>Gebruik hoofdstuk 9.3, 10 en 12"]
+	S --> T(["Einde: traject bestuurlijk en methodologisch afgerond"])

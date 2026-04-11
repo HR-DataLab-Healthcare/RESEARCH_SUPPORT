@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="$lang$">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <meta name="generator" content="Pandoc" />
+    <title>$if(title-prefix)$$title-prefix$ - $endif$$pagetitle$</title>
+    <link rel="stylesheet" href="respec/style/HR-AI-HUB.css" />
+    <link rel="icon" type="image/png" href="respec/style/logos/hr-ai-hub-data-stack.png" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/ai-scenario-guide-v80.css" />
+$for(header-includes)$
+    $header-includes$
+$endfor$
+  </head>
+  <body class="h-entry ai-scenario-guide-v80 datalab-statuut-v03">
+    <div class="head">
+      <a href="./DATALAB_STATUUT_GENERIC_FORMAT_2026_V03.html" class="logo">
+        <img id="hr-ai-hub" alt="hr-ai-hub-STACK" src="respec/style/logos/hr-ai-hub-data-stack.png" width="130" height="60" />
+      </a>
+      <hr title="Separator for header" />
+    </div>
+
+    <nav id="toc">
+      <h2 class="introductory" id="inhoudsopgave-sidebar">Inhoudsopgave</h2>
+      <ol class="toc"></ol>
+    </nav>
+
+    <main>
+$body$
+    </main>
+
+    <script>
+      (function () {
+        const tocRoot = document.querySelector("#toc .toc");
+        if (tocRoot && tocRoot.children.length === 0) {
+          const excluded = new Set(["Inhoudsopgave"]);
+
+          const headings = Array.from(document.querySelectorAll("main h2")).filter((heading) => {
+            const text = heading.textContent.trim();
+            return heading.id && !excluded.has(text);
+          });
+
+          headings.forEach((heading, index) => {
+            const item = document.createElement("li");
+            item.className = "tocline";
+
+            const link = document.createElement("a");
+            link.className = "tocxref";
+            link.href = "#" + heading.id;
+
+            const secno = document.createElement("span");
+            secno.className = "secno";
+            secno.textContent = String(index + 1) + ". ";
+
+            link.appendChild(secno);
+            link.append(document.createTextNode(heading.textContent.trim()));
+            item.appendChild(link);
+            tocRoot.appendChild(item);
+          });
+        }
+
+        document.querySelectorAll("main a[href^='http']").forEach((link) => {
+          if (!link.target) {
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

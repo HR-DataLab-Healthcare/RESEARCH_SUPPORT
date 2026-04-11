@@ -1,0 +1,12 @@
+Buildinstructie voor de wiki-HTML van het statuut
+
+1. Open PowerShell in deze map.
+2. Voer uit:
+   .\build_datalab_statuut_generic_format_2026_v03.ps1
+3. Resultaat:
+   DATALAB_STATUUT_GENERIC_FORMAT_2026_V03.html
+
+De build gebruikt:
+- DATALAB_STATUUT_GENERIC_FORMAT_2026_V03.md als bron
+- Mermaid CLI voor diagrammen
+- Pandoc met de lokale HTML-template
