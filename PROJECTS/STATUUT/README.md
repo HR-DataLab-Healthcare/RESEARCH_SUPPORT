@@ -601,7 +601,7 @@ Dit statuut is bedoeld als werkbaar bestuurs- en uitvoeringskader. Waar dit docu
 Onderstaande referenties vormen de centrale uitgangspunten en ondersteunende kaders voor deze geactualiseerde versie van het statuut. DOI's of URL's beginnen steeds op een nieuwe regel.
 
 <a id="ref-1"></a>
-[1]  CMI / Hogeschool Rotterdam. (z.d.). *Waarom een DATA-LAB?*<br>
+[1]  CMI / Hogeschool Rotterdam. (z.d., 2019). *Waarom een DATA-LAB?*<br>
 <https://docent.cmi.hro.nl/willi/HC_DATALAB/waarom-een-data-lab/>
 
 <a id="ref-2"></a>
