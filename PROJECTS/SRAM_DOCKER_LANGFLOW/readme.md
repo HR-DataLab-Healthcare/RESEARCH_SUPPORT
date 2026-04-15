@@ -346,7 +346,7 @@ Paste the following example:
   {"username": "user05", "password": "User05", "is_superuser": false}
 ]
 ```
-
+Make sure the last line is not followed by a comma.
 Save and exit (`CTRL+O`, `ENTER`, `CTRL+X`).
 
 ---
