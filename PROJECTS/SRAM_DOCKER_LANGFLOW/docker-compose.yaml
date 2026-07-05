@@ -49,8 +49,8 @@ services:
         condition: service_healthy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.langflow.rule=Host(`marlang.betekenisvolle.src.surf-hosted.nl`)"
-      ##### - "traefik.http.routers.langflow.rule=Host(`${MY_FQDN}`)"
+      ######## - "traefik.http.routers.langflow.rule=Host(`xxxxxx.xxxxxxx.src.surf-hosted.nl`)"
+      - "traefik.http.routers.langflow.rule=Host(`${MY_FQDN}`)"
       - "traefik.http.routers.langflow.entrypoints=websecure"
       - "traefik.http.routers.langflow.tls.certresolver=le"
       - "traefik.http.services.langflow.loadbalancer.server.port=7860"
