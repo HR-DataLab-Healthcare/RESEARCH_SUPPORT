@@ -12,6 +12,299 @@ At the end of this readmefile a step-by-step DIY recipy is decribed.
 
 ## Prerequisites
 
+
+==========================================================================================
+==========================================================================================
+
+
+
+# Langflow on SURF Research Cloud Ubuntu VM
+
+This repository guides Tech Leads to deploy Langflow on SURF Research Cloud (SRC) Ubuntu VMs with secure HTTPS via a DOMAIN name, using SURF Research Access Management (SRAM) as the authorisation portal.
+It includes a full Docker Compose stack with Traefik reverse proxy/Let's Encrypt, PostgreSQL persistence, Docling support, and automation scripts.
+
+> **Corrections in this version:** the original `create-langflow.sh` FQDN-detection sed chain could corrupt domains containing multiple hyphens (e.g., `surf-hosted` was mis-parsed into `surf.hosted`). The `docker-compose.yaml` Traefik label also referenced a hardcoded example domain instead of consuming the `.env` variable. Both issues are fixed below.
+
+## Prerequisites
+
+- SURF Ubuntu 22.04+ VM: public IP, ports 80/443/8080 open, DNS A-record (e.g., `zorglang.betekenisvolle.src.surf-hosted.nl`).
+- Docker, Docker Compose, and Python3 installed.
+- Non-root SSH access, no conflicting Nginx service.
+
+## Setup Scripts
+
+### get-files.sh
+
+Fetches all project files via git sparse-checkout into `~/LANGFLOW`.
+
+```bash
+#!/bin/bash
+set -e
+
+mkdir -p ~/LANGFLOW
+cd ~/LANGFLOW
+
+git init
+git remote add -f origin https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT.git
+git config core.sparseCheckout true
+echo "PROJECTS/SRAM_DOCKER_LANGFLOW/*" >> .git/info/sparse-checkout
+git pull origin main
+
+mv PROJECTS/SRAM_DOCKER_LANGFLOW/* .
+rm -rf PROJECTS
+rm -rf .git
+
+echo "------------------------------------------"
+echo "Success! Contents of SRAM_DOCKER_LANGFLOW are now in ~/LANGFLOW"
+ls -la
+```
+
+### create-langflow.sh (corrected)
+
+The FQDN-detection logic below replaces the previous chained `sed` substitutions, which could break domains with multiple hyphens (e.g., `surf-hosted`). It now splits the raw hostname by hyphen and rebuilds the FQDN by fixed position, so `surf-hosted` stays joined correctly.
+
+```bash
+#!/bin/bash
+set -e
+echo "-------------------------------------------------------"
+echo "Starting Deployment Script $(date)"
+echo "-------------------------------------------------------"
+
+echo "Step 1: Stopping and disabling Nginx..."
+if systemctl is-active --quiet nginx; then
+  sudo systemctl stop nginx
+  sudo systemctl disable nginx
+  echo "Nginx has been stopped and disabled."
+else
+  echo "Nginx was not running, skipping."
+fi
+
+echo "Step 2: Configuring Traefik SSL storage acme.json..."
+if [ ! -f acme.json ]; then
+  sudo touch acme.json
+  sudo chmod 600 acme.json
+  echo "acme.json created with secure permissions 600."
+else
+  sudo chmod 600 acme.json
+  echo "acme.json already exists, permissions reset to 600."
+fi
+
+echo "Step 2.5: Automatically detecting FQDN and creating .env..."
+rm -f .env
+touch .env
+
+RAWNAME=$(python3 -c "import socket; print(socket.getfqdn())")
+
+# Rebuild FQDN by position instead of fragile sequential sed substitutions.
+# Expected pattern: name-org-src-surf-hosted-nl
+MYFQDN=$(python3 -c "
+raw = '$RAWNAME'
+parts = raw.split('-')
+if len(parts) == 6:
+    print(f'{parts}.{parts}.{parts}.{parts}-{parts}.{parts}')[1][2][3][4][5]
+else:
+    print(raw)
+")
+
+echo "MYFQDN=$MYFQDN" >> .env
+echo "--------------------------------"
+echo "Success! .env file has been created."
+echo "Current content of .env:"
+cat .env
+echo "--------------------------------"
+
+echo "Step 3: Checking Docker group membership for $USER..."
+if groups $USER | grep -q docker; then
+  echo "User $USER is already in the docker group."
+else
+  sudo usermod -aG docker $USER
+  newgrp docker
+  echo "User $USER added to the docker group."
+fi
+
+echo "Step 4: Building and starting containers with Traefik..."
+if sg docker -c "docker compose up -d --build"; then
+  echo "-------------------------------------------------------"
+  echo "SUCCESS! Containers are building/starting."
+else
+  echo "ERROR: Docker compose failed to start."
+  exit 1
+fi
+
+echo "Step 5: Finalizing..."
+sg docker -c "docker ps"
+echo "--- Traefik Routing Rule ---"
+sg docker -c "docker compose config | grep -i Host"
+echo "-------------------------------------------------------"
+echo "SETUP COMPLETE! Traefik on ports 80/443."
+echo "-------------------------------------------------------"
+```
+
+## Docker Files
+
+### Dockerfile
+
+Builds the Langflow image with Docling extras for document parsing in healthcare/AI workflows.
+
+```dockerfile
+FROM langflowai/langflow:latest
+
+USER root
+
+# Install ONLY docling - don't touch Langflow itself
+RUN pip install --no-cache-dir "docling"
+
+# Switch back to Langflow's default user
+USER 1000
+```
+
+### docker-compose.yaml (corrected)
+
+Defines the stack: Traefik (proxy/SSL), Langflow (app), Postgres (DB). The Traefik label now always reads the domain from `${MYFQDN}` in `.env` — the previous hardcoded example domain has been removed so the stack is portable across any SURF VM.
+
+```yaml
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    dns:
+      - 8.8.8.8
+    restart: unless-stopped
+    command:
+      - --api.dashboard=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.web.http.redirections.entryPoint.to=websecure
+      - --entrypoints.web.http.redirections.entryPoint.scheme=https
+      - --certificatesresolvers.le.acme.httpchallenge=true
+      - --certificatesresolvers.le.acme.httpchallenge.entrypoint=web
+      - --certificatesresolvers.le.acme.storage=/letsencrypt/acme.json
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./acme.json:/letsencrypt/acme.json
+
+  langflow:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: langflow
+    restart: unless-stopped
+    environment:
+      - LANGFLOW_DATABASE_URL=postgresql://langflow:langflow@db:5432/langflow
+      - LANGFLOW_AUTO_LOGIN=false
+      - LANGFLOW_NEW_USER_SIGNUP=true
+      - LANGFLOW_SECRET_KEY=a_long_random_string_here_for_security
+      - LANGFLOW_LANGFLOW_USER_DEFAULT=false
+      - LANGFLOW_CACHE_DIR=/app/langflow/cache
+      - DO_NOT_TRACK=true
+    volumes:
+      - langflow_data:/app/langflow
+      - ./langflow_cache:/app/langflow/cache
+      - ./chroma_data:/app/chroma_data
+    user: root
+    depends_on:
+      db:
+        condition: service_healthy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.langflow.rule=Host(`${MYFQDN}`)
+      - traefik.http.routers.langflow.entrypoints=websecure
+      - traefik.http.routers.langflow.tls.certresolver=le
+      - traefik.http.services.langflow.loadbalancer.server.port=7860
+      - traefik.docker.network=langflow_default
+
+  db:
+    image: postgres:16
+    container_name: langflow_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: langflow
+      POSTGRES_USER: langflow
+      POSTGRES_PASSWORD: langflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U langflow"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  langflow_data:
+  postgres_data:
+```
+
+> **Security note:** replace `LANGFLOW_SECRET_KEY` and the default `langflow` Postgres credentials with strong, unique values (e.g., via `openssl rand -hex 32`) before running in production. Do not commit real secrets to version control.
+
+### Optional: rate-limit fix
+
+If Langflow throws `SystemError: (11, 'Resource temporarily unavailable')`, add `ulimits` to the `langflow` service:
+
+```yaml
+  langflow:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: langflow
+    restart: unless-stopped
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+```
+
+## Deployment Sequence
+
+SSH into the SURF Ubuntu VM as a non-root user, then run:
+
+```bash
+# 1. Login to VM
+ssh user@IP-address
+
+# 2. Retrieve project files
+nano get-files.sh
+# paste get-files.sh content, save (Ctrl+X, Y, Enter)
+chmod +x get-files.sh
+./get-files.sh
+
+# 3. Deploy Langflow
+chmod +x create-langflow.sh
+./create-langflow.sh
+```
+
+After deployment, verify the Traefik routing rule resolves to your actual domain:
+
+```bash
+docker compose config | grep -i Host
+```
+
+This should output `Host(\`zorglang.betekenisvolle.src.surf-hosted.nl\`)` exactly, confirming the corrected FQDN logic and the `${MYFQDN}` variable in `docker-compose.yaml` are working together correctly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===========================================================================================
+===========================================================================================
+
 SURF Ubuntu 22.04+ VM: public IP, ports 80/443/8080 open, DNS A-record (e.g., langflow.src.surf-hosted.nl). 
 Docker/Compose/Python3 installed, non-root SSH, no Nginx conflicts.
 
