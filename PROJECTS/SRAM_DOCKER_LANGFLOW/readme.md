@@ -270,26 +270,11 @@ After deployment, verify the Traefik routing rule resolves to your actual domain
 docker compose config | grep -i Host
 ```
 
-This should output `Host(\`zorglang.betekenisvolle.src.surf-hosted.nl\`)` exactly, confirming the corrected FQDN logic and the `${MYFQDN}` variable in `docker-compose.yaml` are working together correctly.
+This should output `Host(\`xxxxxxx.betekenisvolle.src.surf-hosted.nl\`)` exactly, confirming the corrected FQDN logic and the `${MYFQDN}` variable in `docker-compose.yaml` are working together correctly.
 
+Here  xxxxxxx is the name of the workspace
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-===========================================================================================
-===========================================================================================
+<img width="661" height="574" alt="image" src="https://github.com/user-attachments/assets/b163f668-2107-4f29-8a8e-a67188291c9c" />
 
 
 ---
