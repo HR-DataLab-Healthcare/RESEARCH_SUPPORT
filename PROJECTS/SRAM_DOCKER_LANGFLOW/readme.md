@@ -22,20 +22,46 @@ Docker/Compose/Python3 installed, non-root SSH, no Nginx conflicts.
 Fetches files via sparse-checkout.
 
 ```bash
-#!/bin/bash
-mkdir -p LANGFLOW
-cd LANGFLOW
-git init
-git remote add -f origin https://github.com/HR-DataLab-Healthcare/RESEARCH_SUPPORT.git
-git config core.sparseCheckout true
-echo "PROJECTS/SRAM_DOCKER_LANGFLOW/" > .git/info/sparse-checkout
-git pull origin main
-mv PROJECTS/SRAM_DOCKER_LANGFLOW/* .
-rm -rf PROJECTS
-rm -rf .git
-echo "------------------------------------------"
-echo "Success! Contents of SRAM/DOCKER/LANGFLOW are now in LANGFLOW"
-ls -la
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Target directory
+TARGET_DIR="$HOME/LANGFLOW"
+mkdir -p "$TARGET_DIR"
+cd "$TARGET_DIR"
+
+# Base raw URL for the repo folder (space encoded as %20)
+BASE_URL="https://raw.githubusercontent.com/HR-AI-HUB/hr-ai-hub.github.io/main/UbiOps%20SHDG%20Pipeline"
+
+FILES=(
+  "Dockerfile"
+  "docker-compose.yaml"
+  "create-langflow.sh"
+)
+
+echo "Downloading Langflow deployment files into: $TARGET_DIR"
+
+for f in "${FILES[@]}"; do
+  # URL-encode any spaces in the filename itself, then download
+  encoded_f=$(echo "$f" | sed 's/ /%20/g')
+  echo "-> Fetching $f"
+  if curl -fsSL "$BASE_URL/$encoded_f" -o "$TARGET_DIR/$f"; then
+    echo "   Saved to $TARGET_DIR/$f"
+  else
+    echo "   ERROR: Failed to download $f from $BASE_URL/$encoded_f" >&2
+    exit 1
+  fi
+done
+
+# Make the install script executable
+if [ -f "$TARGET_DIR/create-langflow.sh" ]; then
+  chmod +x "$TARGET_DIR/create-langflow.sh"
+  echo "Made create-langflow.sh executable."
+fi
+
+echo "All files downloaded successfully."
+echo "Contents of $TARGET_DIR:"
+ls -la "$TARGET_DIR"
 ```
 
 
