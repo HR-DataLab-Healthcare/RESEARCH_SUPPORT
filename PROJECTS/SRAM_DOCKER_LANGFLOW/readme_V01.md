@@ -473,14 +473,302 @@ You now have a working method to:
 
 
 
+---
+---
+---
+## ADDENDUM: <br> Langflow on SRAM Docker <br> with Traefik and PostgreSQL
+
+This setup deploys Langflow behind Traefik with PostgreSQL for persistence and optional direct access on port `7860`. It reflects the working configuration validated during troubleshooting, including the fix for the Langflow startup failure caused by using the legacy default superuser password. 
 
 
+> Notes to resolve bad GATEWAY error
+Implemented is the explicit 7860:7860 port mapping, the use of .env for MY_FQDN and secrets, and the warning not to use LANGFLOW_SUPERUSER_PASSWORD=langflow, because that exact value caused the boot failure in your logs. The final verified state in your session was a healthy Langflow startup with a successful 200 OK response from curl http://localhost:7860/
 
+## Overview
 
+The stack contains three services:
 
+- `traefik` for HTTPS reverse proxy and certificate management.
+- `langflow` for the application service.
+- `db` for PostgreSQL 16 persistence.
 
+In the validated deployment, Langflow started successfully, printed the welcome banner, and responded with `HTTP/1.1 200 OK` on `http://localhost:7860/`. 
 
+## Resolved issues
 
+During deployment, Langflow failed to boot because `LANGFLOW_SUPERUSER_PASSWORD` was set to the legacy default password (`langflow`), which Langflow rejects at startup. The crash manifested as repeated worker boot failures and `curl` returning `Recv failure: Connection reset by peer` on port `7860`. 
 
+The issue was resolved by:
 
+- Publishing port `7860:7860` for direct debugging access.
+- Replacing the legacy default superuser password with a strong non-default password.
+- Recreating the stack with the updated Compose file.
 
+After that change, Langflow completed startup and served the UI successfully on port `7860`. 
+
+## Directory structure
+
+Suggested project structure:
+
+```text
+SRAM_DOCKER_LANGFLOW/
+├── docker-compose.yaml
+├── Dockerfile
+├── .env
+├── acme.json
+├── chroma_data/
+└── langflow_cache/
+```
+
+## Prerequisites
+
+- Docker Engine with Compose plugin
+- A reachable hostname for Traefik, stored as `MY_FQDN`
+- Ports `80` and `443` open on the host
+- A writable `acme.json` file for Traefik certificates
+
+Create `acme.json` and secure it:
+
+```bash
+touch acme.json
+chmod 600 acme.json
+```
+
+## Environment file
+
+Create a `.env` file in the same directory as `docker-compose.yaml`:
+
+```env
+MY_FQDN=your-hostname.src.surf-hosted.nl
+LANGFLOW_SUPERUSER=admin
+LANGFLOW_SUPERUSER_PASSWORD=ReplaceThisWithALongRandomPassword_2026
+LANGFLOW_SECRET_KEY=ReplaceThisTooWithALongRandomSecretKey_2026
+```
+
+Do not use `langflow` as the superuser password, because that exact legacy default value caused Langflow to abort during startup in the tested deployment. 
+
+## Docker Compose
+
+Use the following `docker-compose.yaml`:
+
+```yaml
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    dns:
+      - 8.8.8.8
+    restart: unless-stopped
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./acme.json:/letsencrypt/acme.json"
+
+  langflow:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: langflow
+    restart: unless-stopped
+    ports:
+      - "7860:7860"
+    environment:
+      - LANGFLOW_DATABASE_URL=postgresql://langflow:langflow@db:5432/langflow
+      - LANGFLOW_AUTO_LOGIN=false
+      - LANGFLOW_SUPERUSER=${LANGFLOW_SUPERUSER}
+      - LANGFLOW_SUPERUSER_PASSWORD=${LANGFLOW_SUPERUSER_PASSWORD}
+      - LANGFLOW_SECRET_KEY=${LANGFLOW_SECRET_KEY}
+      - LANGFLOW_NEW_USER_IS_ACTIVE=true
+      - LANGFLOW_CACHE_DIR=/app/langflow/cache
+      - DO_NOT_TRACK=true
+    volumes:
+      - langflow_data:/app/langflow
+      - ./langflow_cache:/app/langflow/cache
+      - ./chroma_data:/app/chroma_data
+    user: "root"
+    depends_on:
+      db:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.langflow.rule=Host(`${MY_FQDN}`)"
+      - "traefik.http.routers.langflow.entrypoints=websecure"
+      - "traefik.http.routers.langflow.tls.certresolver=le"
+      - "traefik.http.services.langflow.loadbalancer.server.port=7860"
+
+  db:
+    image: postgres:16
+    container_name: langflow_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: langflow
+      POSTGRES_USER: langflow
+      POSTGRES_PASSWORD: langflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U langflow"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  langflow_data:
+  postgres_data:
+```
+
+## Dockerfile
+
+If you are building locally, use a simple Dockerfile such as:
+
+```dockerfile
+FROM langflowai/langflow:latest
+```
+
+If your project already uses a custom Dockerfile, keep that file and only apply the Compose and environment changes described here.
+
+## Deployment
+
+Start the stack with:
+
+```bash
+docker compose down
+docker compose up -d
+```
+
+Then follow the Langflow logs until startup completes:
+
+```bash
+docker logs -f langflow
+```
+
+A successful startup includes the Langflow welcome banner and the message indicating that Langflow is available at `http://localhost:7860`. 
+
+## Verification
+
+### Direct access
+
+Test the application directly on the host:
+
+```bash
+curl -v http://localhost:7860/
+```
+
+In the validated run, this returned `HTTP/1.1 200 OK` and the Langflow HTML entry page. 
+
+### Reverse proxy access
+
+Test through Traefik:
+
+```bash
+curl -vk https://${MY_FQDN}/
+```
+
+If direct access works but the FQDN does not, inspect Traefik logs and the applied container labels:
+
+```bash
+docker logs traefik --tail 100
+docker inspect langflow --format '{{json .Config.Labels}}'
+```
+
+## Troubleshooting
+
+### 1. `Connection reset by peer` on `localhost:7860`
+
+If `curl http://localhost:7860/` connects and then resets, Langflow is usually crashing during startup rather than failing at networking. In the resolved case, the root cause was the rejected legacy default superuser password. 
+
+Check:
+
+```bash
+docker logs langflow --tail 200
+```
+
+Look for:
+
+```text
+ValueError: LANGFLOW_SUPERUSER_PASSWORD cannot use the legacy default password
+```
+
+Fix by changing `LANGFLOW_SUPERUSER_PASSWORD` to a strong non-default value and recreating the stack.
+
+### 2. Langflow crash loop
+
+Symptoms:
+
+- `docker ps` shows `Up` only for a few seconds.
+- `docker logs` ends with `Worker failed to boot`.
+- `curl` to port `7860` resets or fails.
+
+The confirmed startup blocker in this deployment was the legacy password policy for the superuser. 
+
+### 3. Traefik route does not work
+
+If `http://localhost:7860/` works but `https://${MY_FQDN}/` does not:
+
+- Verify `MY_FQDN` is set in `.env`
+- Confirm DNS points to the host
+- Confirm Traefik labels are applied
+- Check Traefik logs
+
+Useful commands:
+
+```bash
+echo "$MY_FQDN"
+docker inspect langflow --format '{{json .Config.Labels}}'
+docker logs traefik --tail 100
+```
+
+### 4. CORS warnings
+
+Langflow may warn that permissive CORS defaults are enabled. These warnings do not prevent startup, but you should set explicit origins in production. 
+
+Example:
+
+```yaml
+environment:
+  - LANGFLOW_CORS_ORIGINS=https://${MY_FQDN}
+```
+
+## Operational notes
+
+- PostgreSQL 16 worked correctly in the validated deployment.
+- Direct port publishing on `7860` is useful for debugging even when Traefik is the main entrypoint.
+- Keep secrets out of version control by storing them in `.env` or another secret management mechanism.
+
+## Quick start
+
+```bash
+touch acme.json
+chmod 600 acme.json
+
+cat > .env << 'EOF'
+MY_FQDN=your-hostname.src.surf-hosted.nl
+LANGFLOW_SUPERUSER=admin
+LANGFLOW_SUPERUSER_PASSWORD=ReplaceThisWithALongRandomPassword_2026
+LANGFLOW_SECRET_KEY=ReplaceThisTooWithALongRandomSecretKey_2026
+EOF
+
+docker compose down
+docker compose up -d
+docker logs -f langflow
+curl -v http://localhost:7860/
+```
+
+Expected result:
+
+- Langflow finishes startup cleanly.
+- `curl http://localhost:7860/` returns `HTTP/1.1 200 OK`.
+- The UI is reachable locally and, after Traefik and DNS are correct, via `https://${MY_FQDN}/`.
