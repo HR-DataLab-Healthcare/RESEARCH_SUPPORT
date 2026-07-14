@@ -194,6 +194,9 @@ services:
       - LANGFLOW_LANGFLOW_USER_DEFAULT=false
       - LANGFLOW_CACHE_DIR=/app/langflow/cache
       - DO_NOT_TRACK=true
+      # ADD THESE TWO LINES:
+      - LANGFLOW_SUPERUSER=admin
+      - LANGFLOW_SUPERUSER_PASSWORD=ChangeThisPassword123! #### REPLACE BY WORKSPACE ID 
     volumes:
       - langflow_data:/app/langflow
       - ./langflow_cache:/app/langflow/cache
